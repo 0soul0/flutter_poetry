@@ -1,0 +1,4 @@
+#Tue Nov 08 11:30:27 CST 2022
+base.0=/Users/liushuya/Desktop/code/flutter/flutter_poetry/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
