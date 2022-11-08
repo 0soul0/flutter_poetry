@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RecordPage extends StatelessWidget {
-  const RecordPage({super.key});
+class RecordFragment extends StatelessWidget {
+  const RecordFragment({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MinePage extends StatelessWidget {
-  const MinePage({super.key});
+class MineFragment extends StatelessWidget {
+  const MineFragment({super.key});
 
   @override
   Widget build(BuildContext context) {

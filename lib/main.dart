@@ -4,9 +4,9 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
 import 'package:flutter_poetry/resource/style.dart';
-import 'presentation/views/record/recordPage.dart';
-import 'presentation/views/search/searchPage.dart';
-import 'presentation/views/mine/minePage.dart';
+import 'presentation/views/record/recordFragment.dart';
+import 'presentation/views/search/searchFragment.dart';
+import 'presentation/views/mine/mineFragment.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
@@ -44,8 +44,8 @@ class BottomNavigationController extends StatefulWidget {
 class _BottomNavigationControllerState
     extends State<BottomNavigationController> {
   //目前選擇頁索引值
-  int _currentIndex = 0; //預設值
-  final pages = [const SearchPage(), const RecordPage(), const MinePage()];
+  int _currentIndex = 1; //預設值
+  final pages = [const RecordFragment(),const SearchFragment(), const MineFragment()];
 
   @override
   Widget build(BuildContext context) {

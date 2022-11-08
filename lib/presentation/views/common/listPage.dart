@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'poetryPage.dart';
 
-class basePageView extends StatelessWidget {
-  const basePageView({super.key});
+class ListPage extends StatelessWidget {
+  const ListPage({super.key});
 
   // List<Widget> getCatalogList() {
   //   List<Widget> list = [];
@@ -52,10 +52,8 @@ class basePageView extends StatelessWidget {
         // transformer: new ThreeDTransformer(),
         itemCount: 2,
         itemBuilder: (context, index) {
-          return Container(
-            child: const PoetryPageController(
-              key: Key('search_poetry_1'),
-            )
+          return const PoetryPageController(
+            key: Key('search_poetry_1'),
           );
         },
       ),
