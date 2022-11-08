@@ -3,10 +3,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
+import 'package:flutter_poetry/resource/style.dart';
 import 'presentation/views/record/recordPage.dart';
 import 'presentation/views/search/searchPage.dart';
 import 'presentation/views/mine/minePage.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -16,20 +18,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const MaterialApp(
-    localizationsDelegates: [
-      AppLocalizations.delegate, // Add this line
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-    ],
-    supportedLocales: L10n.all,
-
-    home: Scaffold(
-        body: BottomNavigationController(
-          key: Key('main_bottom'),
+        localizationsDelegates: [
+          AppLocalizations.delegate, // Add this line
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: L10n.all,
+        home: Scaffold(
+          body: BottomNavigationController(
+            key: Key('main_bottom'),
+          ),
         ),
-      ),
-  );
+      );
 }
 
 class BottomNavigationController extends StatefulWidget {
@@ -51,17 +52,35 @@ class _BottomNavigationControllerState
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.banner)),
       body: pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.history_edu,size: Dimens.iconSize), label: AppLocalizations.of(context)!.record),
-          BottomNavigationBarItem(icon: Icon(Icons.search,size: Dimens.iconSize), label: AppLocalizations.of(context)!.search),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle,size: Dimens.iconSize), label: AppLocalizations.of(context)!.mine),
-        ],
-        currentIndex: _currentIndex, //目前選擇頁索引值
-        fixedColor: AppColor.mainColor, //選擇頁顏色
-        onTap: _onItemClick, //BottomNavigationBar 按下處理事件
+      bottomNavigationBar: SizedBox(
+        height: 56,
+        child: Row(
+          children: [
+            Expanded(
+                child: _bottomNavigationItem(
+                    AppLocalizations.of(context)!.record,
+                    0,
+                    Icons.history_edu)),
+            Expanded(
+                child: _bottomNavigationItemCenter(
+                    AppLocalizations.of(context)!.search, 1, Icons.search)),
+            Expanded(
+                child: _bottomNavigationItem(AppLocalizations.of(context)!.mine,
+                    2, Icons.account_circle)),
+          ],
+        ),
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: [
+      //     BottomNavigationBarItem(icon: Icon(Icons.history_edu,size: Dimens.iconSize), label: AppLocalizations.of(context)!.record),
+      //     BottomNavigationBarItem(icon: Icon(Icons.search,size: Dimens.iconSize), label: AppLocalizations.of(context)!.search),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.account_circle,size: Dimens.iconSize), label: AppLocalizations.of(context)!.mine),
+      //   ],
+      //   currentIndex: _currentIndex, //目前選擇頁索引值
+      //   fixedColor: AppColor.mainColor, //選擇頁顏色
+      //   onTap: _onItemClick, //BottomNavigationBar 按下處理事件
+      // ),
     );
   }
 
@@ -70,5 +89,93 @@ class _BottomNavigationControllerState
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  _bottomNavigationItem(String label, int index, IconData icon) {
+    return InkWell(
+      onTap: () {
+        _onItemClick(index);
+      },
+      child: _currentIndex == index
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  icon,
+                  size: Dimens.iconSizeSelected,
+                  color: AppColor.mainColor,
+                ),
+                Text(label, style: Styles.homeTextStyleSelected)
+              ],
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  icon,
+                  size: Dimens.iconSize,
+                  color: AppColor.gray,
+                ),
+                Text(
+                  label,
+                  style: Styles.homeTextStyleUnSelect,
+                )
+              ],
+            ),
+    );
+  }
+
+  _bottomNavigationItemCenter(String label, int index, IconData icon) {
+    return InkWell(
+        onTap: () {
+          _onItemClick(index);
+        },
+        child: _currentIndex == index
+            ? Container(
+                margin: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                    color: AppColor.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                          color: AppColor.mainColor,
+                          blurRadius: 4,
+                          offset: const Offset(0, 0))
+                    ]),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      icon,
+                      size: Dimens.iconSizeSelected,
+                      color: AppColor.mainColor,
+                    ),
+                    Text(label, style: Styles.homeTextStyleSelected)
+                  ],
+                ),
+              )
+            : Container(
+                margin: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                    color: AppColor.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                          color: AppColor.gray,
+                          blurRadius: 4,
+                          offset: const Offset(0, 0))
+                    ]),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      icon,
+                      size: Dimens.iconSize,
+                      color: AppColor.gray,
+                    ),
+                    Text(label, style: Styles.homeTextStyleUnSelect)
+                  ],
+                ),
+              ));
   }
 }
