@@ -1,11 +1,15 @@
 [
     {
-        "merged": "com.example.flutter_poetry.app-merged_res-11:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.example.flutter_poetry.app-main-5:/mipmap-hdpi/ic_launcher.png"
+        "merged": "com.example.flutter_poetry.app-merged_res-11:/drawable-xxhdpi_splash.png.flat",
+        "source": "com.example.flutter_poetry.app-main-5:/drawable-xxhdpi/splash.png"
     },
     {
-        "merged": "com.example.flutter_poetry.app-merged_res-11:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.example.flutter_poetry.app-main-5:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "com.example.flutter_poetry.app-merged_res-11:/drawable-xxxhdpi_splash.png.flat",
+        "source": "com.example.flutter_poetry.app-main-5:/drawable-xxxhdpi/splash.png"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-11:/drawable-xhdpi_splash.png.flat",
+        "source": "com.example.flutter_poetry.app-main-5:/drawable-xhdpi/splash.png"
     },
     {
         "merged": "com.example.flutter_poetry.app-merged_res-11:/drawable-v21_launch_background.xml.flat",
@@ -20,11 +24,35 @@
         "source": "com.example.flutter_poetry.app-main-5:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.flutter_poetry.app-merged_res-11:/drawable_launch_background.xml.flat",
-        "source": "com.example.flutter_poetry.app-main-5:/drawable/launch_background.xml"
+        "merged": "com.example.flutter_poetry.app-merged_res-11:/drawable-mdpi_splash.png.flat",
+        "source": "com.example.flutter_poetry.app-main-5:/drawable-mdpi/splash.png"
     },
     {
         "merged": "com.example.flutter_poetry.app-merged_res-11:/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "com.example.flutter_poetry.app-main-5:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-11:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.flutter_poetry.app-main-5:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-11:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.flutter_poetry.app-main-5:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-11:/drawable-hdpi_splash.png.flat",
+        "source": "com.example.flutter_poetry.app-main-5:/drawable-hdpi/splash.png"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-11:/drawable_background.png.flat",
+        "source": "com.example.flutter_poetry.app-main-5:/drawable/background.png"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-11:/drawable_launch_background.xml.flat",
+        "source": "com.example.flutter_poetry.app-main-5:/drawable/launch_background.xml"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-11:/drawable-v21_background.png.flat",
+        "source": "com.example.flutter_poetry.app-main-5:/drawable-v21/background.png"
     }
 ]
