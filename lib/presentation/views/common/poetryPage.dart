@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PoetryPageController extends StatefulWidget {
   const PoetryPageController({required Key key}) : super(key: key);
@@ -16,13 +16,74 @@ class PoetryPageState extends State<PoetryPageController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(
-          Dimens.backgroundMarginLeft, Dimens.backgroundMarginTop, Dimens.backgroundMarginRight, 0),
+      color: AppColor.backgroundColor,
       child: Column(children: [
         Container(
+            padding: EdgeInsets.fromLTRB(
+                Dimens.backgroundMarginLeft,
+                Dimens.backgroundMarginTop,
+                Dimens.backgroundMarginRight,
+                Dimens.space),
             width: MediaQuery.of(context).size.width,
             child: _subTitle()),
-        // _catalogueState(),
+        Divider(
+            height: 0,
+            thickness: Dimens.lineDividing,
+            color: AppColor.dividerColor),
+        Container(
+            padding: EdgeInsets.fromLTRB(
+                Dimens.backgroundMarginLeft,
+                Dimens.textSpace,
+                Dimens.backgroundMarginRight,
+                Dimens.textSpace),
+            height: 96,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.catalogue,
+                      style: Styles.textStyleBlack,
+                    ),
+                    Expanded(child: Container()),
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        AppLocalizations.of(context)!.seeMore,
+                        style: Styles.helperStyle,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: Dimens.space,
+                ),
+                Expanded(child: _catalogueList()),
+              ],
+            )),
+        Divider(
+            height: Dimens.moduleDividing,
+            thickness: Dimens.moduleDividing,
+            color: AppColor.dividerColor),
+        Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: Dimens.textSpace),
+              child: _searchResult(),
+            )),
+        Divider(
+            height: Dimens.moduleDividing,
+            thickness: Dimens.moduleDividing,
+            color: AppColor.dividerColor),
+        Container(
+          height: 32,
+          decoration: BoxDecoration(color: AppColor.dividerColor),
+          child: _search(),
+        ),
+        Divider(
+            height: Dimens.moduleDividing,
+            thickness: Dimens.moduleDividing,
+            color: AppColor.dividerColor),
         // _search()
       ]),
     );
@@ -32,38 +93,18 @@ class PoetryPageState extends State<PoetryPageController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Icon(Icons.menu_book,size: Dimens.iconSize,),
+        Icon(
+          Icons.menu_book,
+          size: Dimens.iconSize,
+        ),
         Container(
             margin: EdgeInsets.only(left: Dimens.textSpace),
-            child: Text("詩歌",
-              style: Styles.textStyleBlack,
+            child: Text(
+              AppLocalizations.of(context)!.poetry,
+              style: Styles.subTitleStyleBlack,
               textAlign: TextAlign.center,
             ))
       ],
-    );
-  }
-
-
-
-  _catalogueState() {
-    return Container(
-      height: 80,
-      child: Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(color: AppColor.helperColor),
-                left: BorderSide(color: AppColor.helperColor),
-                right: BorderSide(color: AppColor.helperColor),
-                bottom: BorderSide(color: AppColor.helperColor),
-              ),
-              borderRadius: BorderRadius.circular(Dimens.stockRadius)),
-          padding: EdgeInsets.fromLTRB(
-              0,
-              Dimens.itemPaddingSpace,
-              0,
-              Dimens.itemPaddingSpace),
-          child: Expanded(child: _catalogueList())),
     );
   }
 
@@ -76,17 +117,16 @@ class PoetryPageState extends State<PoetryPageController> {
       itemCount: 20,
       itemBuilder: (context, index) {
         return Container(
+          alignment: Alignment.center,
           padding: EdgeInsets.fromLTRB(
-              Dimens.itemPaddingSpace,
-              Dimens.itemPaddingSpace_4,
-              Dimens.itemPaddingSpace,
-              Dimens.itemPaddingSpace_4),
+              Dimens.itemPaddingSpace, 0, Dimens.itemPaddingSpace, 0),
           decoration: BoxDecoration(
-              color: AppColor.mainColor,
+              color: AppColor.white,
+              border: Border.all(color: AppColor.gray),
               borderRadius: BorderRadius.circular(Dimens.itemRadius)),
           child: Text(
             "羨慕200-250",
-            style: Styles.textStyleWhite,
+            style: Styles.textStyleGray,
             textAlign: TextAlign.center,
           ),
         );
@@ -94,21 +134,74 @@ class PoetryPageState extends State<PoetryPageController> {
     );
   }
 
+  _searchResult() {
+    return AlignedGridView.count(
+      scrollDirection: Axis.vertical,
+      crossAxisCount: 1,
+      crossAxisSpacing: Dimens.itemSpace,
+      mainAxisSpacing: Dimens.itemSpace,
+      itemCount: 20,
+      itemBuilder: (context, index) {
+        return Container(
+          alignment: Alignment.topLeft,
+          margin: EdgeInsets.fromLTRB(Dimens.itemSpace, 2, Dimens.itemSpace, 2),
+          padding: EdgeInsets.all(Dimens.itemSpace),
+          decoration: BoxDecoration(
+              color: AppColor.white,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColor.gray,
+                  blurRadius: 2,
+                  offset: const Offset(0, 0), // Shadow position
+                ),
+              ],
+              borderRadius: BorderRadius.circular(Dimens.itemRadius / 2)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "羨慕200-250",
+                style: Styles.textStyleBlack,
+              ),
+              Text(
+                "歌詞",
+                style: Styles.helperStyle,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   _search() {
-    return Container(
-      height: 32,
-      child: TextField(
-        textAlign: TextAlign.left,
-        onChanged: (value) {},
-        decoration: InputDecoration(
-            labelText: "輸入詩歌編號/標題/內容/分類",
-            labelStyle: Styles.helperStyle,
-            contentPadding: EdgeInsets.all(Dimens.itemPaddingSpace_4),
-            prefixIcon: Icon(Icons.search),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Dimens.stockRadius),
-            )),
-      ),
+    return TextField(
+      textAlign: TextAlign.left,
+      onChanged: (value) {},
+      decoration: InputDecoration(
+          filled: true,
+          fillColor: AppColor.backgroundColor,
+          hintText: AppLocalizations.of(context)!.searchHelper,
+          hintStyle: Styles.helperStyle,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(Dimens.moduleRadius),
+                  bottomRight: Radius.circular(Dimens.moduleRadius))
+          ),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 0, color: AppColor.dividerColor),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(Dimens.moduleRadius),
+                  bottomRight: Radius.circular(Dimens.moduleRadius))
+          ),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 1, color: AppColor.secondColor),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(Dimens.moduleRadius),
+                  bottomRight: Radius.circular(Dimens.moduleRadius))
+          ),
+          contentPadding: EdgeInsets.all(Dimens.itemPaddingSpace_4),
+          prefixIcon: const Icon(Icons.search)),
     );
   }
 }

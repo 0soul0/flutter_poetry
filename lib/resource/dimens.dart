@@ -19,4 +19,8 @@ class Dimens {
   static double homeSize = 12;
   static double itemRadius =20;
   static double stockRadius =20;
+  static double moduleRadius =10;
+  static double moduleDividing=4;
+  static double space =8;
+  static double lineDividing =0.5;
 }

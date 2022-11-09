@@ -13,6 +13,16 @@ class Styles {
       fontSize: Dimens.textSize,
       color: AppColor.textColor);
 
+  static TextStyle textStyleGray = TextStyle(
+      fontWeight: FontWeight.w600,
+      fontSize: Dimens.textSize,
+      color: AppColor.gray);
+
+  static TextStyle subTitleStyleBlack = TextStyle(
+      fontWeight: FontWeight.w600,
+      fontSize: Dimens.subTitleSize,
+      color: AppColor.textColor);
+
   static TextStyle helperStyle = TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: Dimens.helperSize,
@@ -28,3 +38,5 @@ class Styles {
       fontSize: Dimens.homeSize,
       color: AppColor.gray);
 }
+
+

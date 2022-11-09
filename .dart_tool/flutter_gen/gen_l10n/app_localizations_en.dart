@@ -21,4 +21,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get poetry => 'Poetry';
+
+  @override
+  String get searchHelper => 'input??';
+
+  @override
+  String get seeMore => 'more';
+
+  @override
+  String get catalogue => 'catalogue';
 }

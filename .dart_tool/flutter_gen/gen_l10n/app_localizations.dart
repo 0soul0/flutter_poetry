@@ -128,6 +128,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Poetry'**
   String get poetry;
+
+  /// No description provided for @searchHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'input??'**
+  String get searchHelper;
+
+  /// No description provided for @seeMore.
+  ///
+  /// In en, this message translates to:
+  /// **'more'**
+  String get seeMore;
+
+  /// No description provided for @catalogue.
+  ///
+  /// In en, this message translates to:
+  /// **'catalogue'**
+  String get catalogue;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

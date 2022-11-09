@@ -4,5 +4,8 @@
      "record": "紀錄",
      "search": "搜尋",
      "mine": "我的",
-     "poetry": "詩歌"
+     "poetry": "詩歌",
+     "searchHelper":"輸入詩歌編號/標題/內容/分類",
+     "seeMore":"查看更多",
+     "catalogue":"目錄"
 }

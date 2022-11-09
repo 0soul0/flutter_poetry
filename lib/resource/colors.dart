@@ -9,6 +9,7 @@ class AppColor {
   static Color homePageBackground = white;
   static Color gradientFirst = const Color(0xff0f17ad);
   static Color textColor = const Color(0xff393939);
+  static Color dividerColor =gray;
   static Color helperColor = gray;
   static Color borderColor = helperColor;
   static Color backgroundColor = white;

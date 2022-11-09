@@ -7,5 +7,8 @@
      "record": "Record",
      "search": "Search",
      "mine": "Mine",
-     "poetry": "Poetry"
+     "poetry": "Poetry",
+     "searchHelper":"input??",
+     "seeMore":"more",
+     "catalogue":"catalogue"
 }

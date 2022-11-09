@@ -21,4 +21,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get poetry => '詩歌';
+
+  @override
+  String get searchHelper => '輸入詩歌編號/標題/內容/分類';
+
+  @override
+  String get seeMore => '查看更多';
+
+  @override
+  String get catalogue => '目錄';
 }
