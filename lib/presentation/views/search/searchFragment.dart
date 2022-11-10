@@ -11,6 +11,19 @@ class SearchFragment extends StatefulWidget {
 class _SearchFragmentState extends State<SearchFragment> {
   @override
   Widget build(BuildContext context) {
-    return const ListPage();
+    return Scaffold(
+      body: PageView.builder(
+        scrollDirection: Axis.horizontal,
+        // curve: Curves.easeInBack,
+        // loop: true,
+        // transformer: new ThreeDTransformer(),
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          return const ListPage(
+            key: Key('search_poetry_1'),
+          );
+        },
+      ),
+    );
   }
 }

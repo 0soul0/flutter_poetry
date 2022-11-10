@@ -5,6 +5,7 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
 import 'package:flutter_poetry/resource/style.dart';
+import 'package:get/get.dart';
 import 'presentation/views/record/recordFragment.dart';
 import 'presentation/views/search/searchFragment.dart';
 import 'presentation/views/mine/mineFragment.dart';
@@ -15,14 +16,14 @@ void main() {
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
-  // FlutterNativeSplash.remove();
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => const MaterialApp(
+  Widget build(BuildContext context) => const GetMaterialApp(
         localizationsDelegates: [
           AppLocalizations.delegate, // Add this line
           GlobalMaterialLocalizations.delegate,
