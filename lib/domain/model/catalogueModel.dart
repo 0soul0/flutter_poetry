@@ -1,15 +1,22 @@
-class CatalogueModel{
-  CatalogueModel({
-      this.text="",
-      this.selected=false
-  });
+import 'dart:ffi';
 
+class CatalogueModel {
+  CatalogueModel({this.id = 1, this.text = "", this.type = "0"});
+
+  final int id;
   final String text;
-  final bool selected;
+  String type; //0:unselected 1:selected
 
-  // factory User.fromJson(Map<String, dynamic> json) => User(
-  //   name: json["name"],
-  // );
+  static String constSELECTED ="1";
+  static String constUNSELECTED ="0";
 
+  bool get selected => (type == constSELECTED);
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'text': text,
+      'type': type,
+    };
+  }
 }

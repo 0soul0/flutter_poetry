@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poetry/domain/db/catalogueDb.dart';
+import 'package:flutter_poetry/presentation/views/search/searchController.dart';
+import 'package:get/get.dart';
 import '../common/listPage.dart';
 
-class SearchFragment extends StatefulWidget {
-  const SearchFragment({Key? key}) : super(key: key);
+class SearchFragment extends StatelessWidget {
+  SearchFragment({Key? key}) : super(key: key);
 
-  @override
-  State<SearchFragment> createState() => _SearchFragmentState();
-}
+  late SearchController controller;
+  late PageController pageController;
 
-class _SearchFragmentState extends State<SearchFragment> {
+  init() {
+    controller = Get.put(SearchController());
+    pageController = PageController(initialPage: 2);
+  }
+
   @override
   Widget build(BuildContext context) {
+    init();
+
     return Scaffold(
       body: PageView.builder(
+        controller: pageController,
         scrollDirection: Axis.horizontal,
         // curve: Curves.easeInBack,
         // loop: true,
         // transformer: new ThreeDTransformer(),
         itemCount: 2,
         itemBuilder: (context, index) {
-          return const ListPage(
-            key: Key('search_poetry_1'),
-          );
+          return ListPage(controller: controller);
         },
       ),
     );

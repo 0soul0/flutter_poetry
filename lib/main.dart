@@ -6,6 +6,7 @@ import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:get/get.dart';
+import 'domain/model/catalogueModel.dart';
 import 'presentation/views/record/recordFragment.dart';
 import 'presentation/views/search/searchFragment.dart';
 import 'presentation/views/mine/mineFragment.dart';
@@ -51,7 +52,7 @@ class _BottomNavigationControllerState
     extends State<BottomNavigationController> {
   //目前選擇頁索引值
   int _currentIndex = 1; //預設值
-  final pages = [const RecordFragment(),const SearchFragment(), const MineFragment()];
+  final pages = [const RecordFragment(),SearchFragment(), const MineFragment()];
 
   @override
   Widget build(BuildContext context) {

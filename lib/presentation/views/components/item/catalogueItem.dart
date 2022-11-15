@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../../../domain/model/catalogueModel.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
@@ -29,7 +28,7 @@ class CatalogueItem extends StatelessWidget {
           decoration: BoxDecoration(
               color: item.selected ? AppColor.mainColor : AppColor.white,
               border:
-              item.selected ? Border.all(color: AppColor.gray) : null,
+              item.selected ? Border.all(color: AppColor.mainColor) : Border.all(color: AppColor.gray),
               borderRadius: BorderRadius.circular(Dimens.itemRadius)),
           child: Text(
             item.text,
