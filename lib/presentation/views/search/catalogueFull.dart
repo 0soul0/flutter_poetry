@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_poetry/presentation/views/search/searchController.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 import '../../../domain/model/catalogueModel.dart';
 import '../../../resource/dimens.dart';
 import '../components/item/catalogueItem.dart';
 import '../components/subIconTitle.dart';
 
-class CatalogueFull extends StatefulWidget {
-  const CatalogueFull({Key? key}) : super(key: key);
 
-  @override
-  State<CatalogueFull> createState() => _CatalogueFullState();
-}
+class CatalogueFull extends StatelessWidget {
+  const CatalogueFull({this.controller, Key? key}) : super(key: key);
 
-class _CatalogueFullState extends State<CatalogueFull> {
+  final SearchController? controller;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,19 +31,26 @@ class _CatalogueFullState extends State<CatalogueFull> {
           )),
     );
   }
-
   _catalogueList() {
-    return AlignedGridView.count(
+    return Obx(()=>AlignedGridView.count(
       scrollDirection: Axis.vertical,
       crossAxisCount: 3,
       crossAxisSpacing: Dimens.itemSpace,
       mainAxisSpacing: Dimens.itemSpace,
-      itemCount: 200,
+      itemCount: controller?.items.length,
       itemBuilder: (context, index) {
-        return CatalogueItem(CatalogueModel(text: "羨慕200-250"), () {
+        var item = controller?.items[index];
+        return CatalogueItem(item, () {
+          if (item == null) return;
+          controller?.resetCatalogueModelList();
 
+          item.type = CatalogueModel.constSELECTED;
+          controller?.updateCatalogueModelList(index, item);
+
+          Get.back();
         });
       },
-    );
+    ));
   }
 }
+
