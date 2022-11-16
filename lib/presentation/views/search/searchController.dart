@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../domain/db/catalogueDb.dart';
 
 class SearchController extends GetxController {
+
   RxList<CatalogueModel> items = List<CatalogueModel>.from([]).obs;
   late CatalogueDb db;
 

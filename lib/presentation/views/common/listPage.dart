@@ -56,7 +56,7 @@ class ListPage extends StatelessWidget {
                             Expanded(child: Container()),
                             InkWell(
                               onTap: () {
-                                Get.to(const CatalogueFull());
+                                Get.to(CatalogueFull(controller: controller));
                               },
                               child: Text(
                                 AppLocalizations.of(context)!.seeMore,
@@ -163,6 +163,7 @@ class ListPage extends StatelessWidget {
   }
 
   _search(BuildContext context) {
+
     return TextField(
       controller: textController,
       textAlign: TextAlign.left,
