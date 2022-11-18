@@ -24,8 +24,12 @@ class FontFragment extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("ssss")),
       body: Stack(children: [
-        Expanded(
-          child: _list(),
+        Column(
+          children: [
+            Expanded(
+              child: _list(),
+            ),
+          ],
         ),
         const BackIcon()
       ]),
