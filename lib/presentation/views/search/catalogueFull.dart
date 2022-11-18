@@ -4,53 +4,61 @@ import 'package:flutter_poetry/presentation/views/search/searchController.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import '../../../domain/model/catalogueModel.dart';
+import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
-import '../components/item/catalogueItem.dart';
-import '../components/subIconTitle.dart';
-
+import '../widget/backIcon.dart';
+import '../widget/subIconTitle.dart';
+import '../item/catalogue_item.dart';
 
 class CatalogueFull extends StatelessWidget {
-  const CatalogueFull({this.controller, Key? key}) : super(key: key);
-
-  final SearchController? controller;
+  CatalogueFull({Key? key}) : super(key: key);
+  final SearchController? controllers = Get.find<SearchController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.banner)),
       body: Container(
-          padding: EdgeInsets.fromLTRB(Dimens.backgroundMarginLeft,
+          padding: const EdgeInsets.fromLTRB(Dimens.backgroundMarginLeft,
               Dimens.textSpace, Dimens.backgroundMarginRight, Dimens.textSpace),
           width: MediaQuery.of(context).size.width,
-          child: Column(
+          child: Stack(
             children: [
-              SubIconTitle(
-                  AppLocalizations.of(context)!.catalogue, Icons.checklist_rtl),
-              Expanded(child: _catalogueList()),
+              Column(
+                children: [
+                  SubIconTitle(AppLocalizations.of(context)!.catalogue,
+                      Icons.checklist_rtl),
+                  Expanded(child: _catalogueList()),
+                ],
+              ),
+              const BackIcon()
             ],
           )),
     );
   }
+
   _catalogueList() {
-    return Obx(()=>AlignedGridView.count(
-      scrollDirection: Axis.vertical,
-      crossAxisCount: 3,
-      crossAxisSpacing: Dimens.itemSpace,
-      mainAxisSpacing: Dimens.itemSpace,
-      itemCount: controller?.items.length,
-      itemBuilder: (context, index) {
-        var item = controller?.items[index];
-        return CatalogueItem(item, () {
-          if (item == null) return;
-          controller?.resetCatalogueModelList();
+    return Obx(() => AlignedGridView.count(
+          scrollDirection: Axis.vertical,
+          crossAxisCount: 3,
+          crossAxisSpacing: Dimens.itemSpace,
+          mainAxisSpacing: Dimens.itemSpace,
+          itemCount: controllers?.catalogueItems.length,
+          itemBuilder: (context, index) {
+            var item = controllers?.catalogueItems[index];
+            return Catalogue_item(item, () {
+              if (item == null) return;
+              controllers?.resetCatalogueModelList();
 
-          item.type = CatalogueModel.constSELECTED;
-          controller?.updateCatalogueModelList(index, item);
+              item.type = CatalogueModel.constSELECTED;
+              controllers?.updateCatalogueModelList(index, item);
 
-          Get.back();
-        });
-      },
-    ));
+              //change search text
+              controllers?.setSearchText(item.text);
+
+              Get.back();
+            });
+          },
+        ));
   }
 }
-

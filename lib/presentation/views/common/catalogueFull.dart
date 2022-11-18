@@ -3,8 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../../domain/model/catalogueModel.dart';
 import '../../../resource/dimens.dart';
-import '../components/item/catalogueItem.dart';
-import '../components/subIconTitle.dart';
+import '../widget/subIconTitle.dart';
+import '../item/catalogue_item.dart';
 
 class CatalogueFull extends StatefulWidget {
   const CatalogueFull({Key? key}) : super(key: key);
@@ -40,7 +40,7 @@ class _CatalogueFullState extends State<CatalogueFull> {
       mainAxisSpacing: Dimens.itemSpace,
       itemCount: 200,
       itemBuilder: (context, index) {
-        return CatalogueItem(CatalogueModel(text: "羨慕200-250"), () {
+        return Catalogue_item(CatalogueModel(text: "羨慕200-250"), () {
 
         });
       },

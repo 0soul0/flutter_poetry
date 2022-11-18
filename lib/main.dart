@@ -20,6 +20,11 @@ void main() {
   FlutterNativeSplash.remove();
 }
 
+init(){
+
+}
+
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -51,8 +56,8 @@ class BottomNavigationController extends StatefulWidget {
 class _BottomNavigationControllerState
     extends State<BottomNavigationController> {
   //目前選擇頁索引值
-  int _currentIndex = 1; //預設值
-  final pages = [const RecordFragment(),SearchFragment(), const MineFragment()];
+  int _currentIndex = 2; //預設值
+  final pages = [RecordFragment(),SearchFragment(), MineFragment()];
 
   @override
   Widget build(BuildContext context) {
@@ -140,14 +145,14 @@ class _BottomNavigationControllerState
         child: _currentIndex == index
             ? Container(
                 margin: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: AppColor.white,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
                           color: AppColor.mainColor,
                           blurRadius: 4,
-                          offset: const Offset(0, 0))
+                          offset: Offset(0, 0))
                     ]),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -163,14 +168,14 @@ class _BottomNavigationControllerState
               )
             : Container(
                 margin: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: AppColor.white,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
                           color: AppColor.gray,
                           blurRadius: 4,
-                          offset: const Offset(0, 0))
+                          offset: Offset(0, 0))
                     ]),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

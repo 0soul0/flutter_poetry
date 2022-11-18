@@ -3,37 +3,47 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
 class Styles {
-  static TextStyle textStyleWhite = TextStyle(
+  static const TextStyle textStyleWhite = TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: Dimens.textSize,
       color: AppColor.white);
 
-  static TextStyle textStyleBlack = TextStyle(
+  static const TextStyle textStyleBlack = TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: Dimens.textSize,
       color: AppColor.textColor);
 
-  static TextStyle textStyleGray = TextStyle(
+  static const TextStyle subTextStyleSecondColor = TextStyle(
+      fontWeight: FontWeight.w600,
+      fontSize: Dimens.subTitleSize,
+      color: AppColor.secondColor);
+
+  static const TextStyle textStyleGray = TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: Dimens.textSize,
       color: AppColor.gray);
 
-  static TextStyle subTitleStyleBlack = TextStyle(
+  static const TextStyle subTitleStyleBlack = TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: Dimens.subTitleSize,
       color: AppColor.textColor);
 
-  static TextStyle helperStyle = TextStyle(
+  static const TextStyle subTitleStyleWhite = TextStyle(
+      fontWeight: FontWeight.w600,
+      fontSize: Dimens.subTitleSize,
+      color: AppColor.white);
+
+  static const TextStyle helperStyle = TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: Dimens.helperSize,
       color: AppColor.helperColor);
 
-  static TextStyle homeTextStyleSelected = TextStyle(
+  static const TextStyle homeTextStyleSelected = TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: Dimens.homeSize,
       color: AppColor.mainColor);
 
-  static TextStyle homeTextStyleUnSelect = TextStyle(
+  static const TextStyle homeTextStyleUnSelect = TextStyle(
       fontWeight: FontWeight.w300,
       fontSize: Dimens.homeSize,
       color: AppColor.gray);

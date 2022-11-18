@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_poetry/domain/db/catalogueDb.dart';
 import 'package:flutter_poetry/presentation/views/search/searchController.dart';
 import 'package:get/get.dart';
-import '../common/listPage.dart';
+import 'listPage.dart';
 
 class SearchFragment extends StatelessWidget {
   SearchFragment({Key? key}) : super(key: key);
@@ -18,7 +18,6 @@ class SearchFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     init();
-
     return Scaffold(
       body: PageView.builder(
         controller: pageController,
