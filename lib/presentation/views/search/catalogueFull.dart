@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../../../domain/model/catalogueModel.dart';
 import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
-import '../widget/backIcon.dart';
+import '../widget/backIconButton.dart';
 import '../widget/subIconTitle.dart';
 import '../item/catalogue_item.dart';
 
@@ -31,7 +31,7 @@ class CatalogueFull extends StatelessWidget {
                   Expanded(child: _catalogueList()),
                 ],
               ),
-              const BackIcon()
+              const BackIconButton()
             ],
           )),
     );

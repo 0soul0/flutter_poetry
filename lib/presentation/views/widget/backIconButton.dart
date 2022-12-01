@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
 
-class BackIcon extends StatelessWidget {
-  const BackIcon({Key? key}) : super(key: key);
+class BackIconButton extends StatelessWidget {
+  const BackIconButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

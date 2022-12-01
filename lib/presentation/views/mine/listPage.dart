@@ -21,14 +21,15 @@ class ListPage<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.fromLTRB(
+          Dimens.backgroundMarginLeft,
+          Dimens.backgroundMarginTop,
+          Dimens.backgroundMarginRight,
+          Dimens.space),
       color: AppColor.backgroundColor,
       child: Column(children: [
-        const SizedBox(
-          height: Dimens.space,
-        ),
         Expanded(
             child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.textSpace),
           child: _mineList(),
         )),
       ]),

@@ -7,10 +7,11 @@ import '../../../../domain/model/item.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../item/selectedItem.dart';
-import '../../widget/backIcon.dart';
+import '../../widget/backIconButton.dart';
 
-class FontFragment extends StatelessWidget {
-  FontFragment({Key? key}) : super(key: key);
+
+class LanguageFragment extends StatelessWidget {
+  LanguageFragment({Key? key}) : super(key: key);
 
   late MineController controller;
 
@@ -22,7 +23,6 @@ class FontFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     init();
     return Scaffold(
-      appBar: AppBar(title: Text("ssss")),
       body: Stack(children: [
         Column(
           children: [
@@ -31,7 +31,7 @@ class FontFragment extends StatelessWidget {
             ),
           ],
         ),
-        const BackIcon()
+        const BackIconButton()
       ]),
     );
   }

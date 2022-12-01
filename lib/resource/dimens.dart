@@ -26,4 +26,6 @@ class Dimens {
   static const double space =8;
   static const double lineDividing =0.5;
   static const double backIconPositionBottom =96;
+  static const double bigButtonMargin =space*2;
+
 }

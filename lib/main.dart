@@ -17,7 +17,7 @@ void main() {
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
-  FlutterNativeSplash.remove();
+  // FlutterNativeSplash.remove();
 }
 
 init(){
