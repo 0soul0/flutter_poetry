@@ -9,9 +9,8 @@ import '../../../../resource/dimens.dart';
 import '../../item/selectedItem.dart';
 import '../../widget/backIcon.dart';
 
-
-class LanguageFragment extends StatelessWidget {
-  LanguageFragment({Key? key}) : super(key: key);
+class FontFragment extends StatelessWidget {
+  FontFragment({Key? key}) : super(key: key);
 
   late MineController controller;
 
@@ -23,6 +22,7 @@ class LanguageFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     init();
     return Scaffold(
+      appBar: AppBar(title: Text("ssss")),
       body: Stack(children: [
         Column(
           children: [
