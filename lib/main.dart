@@ -7,6 +7,7 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
 import 'package:flutter_poetry/resource/style.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'presentation/views/record/recordFragment.dart';
 import 'presentation/views/search/searchFragment.dart';
@@ -35,21 +36,27 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => GetMaterialApp(
-        localizationsDelegates: const [
-          AppLocalizations.delegate, // Add this line
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: L10n.all,
-        getPages: AppPages.pages,
-        home: const Scaffold(
-          body: BottomNavigationController(
-            key: Key('main_bottom'),
-          ),
-        ),
-      );
+  Widget build(BuildContext context) => ScreenUtilInit(
+    builder: (BuildContext context, Widget? child) {
+        return GetMaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate, // Add this line
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: L10n.all,
+          getPages: AppPages.pages,
+          home: child,
+        );
+
+    },
+    child: const Scaffold(
+      body: BottomNavigationController(
+        key: Key('main_bottom'),
+      ),
+    ),
+  );
 }
 
 class BottomNavigationController extends StatefulWidget {

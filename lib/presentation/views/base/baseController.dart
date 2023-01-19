@@ -1,6 +1,9 @@
+import 'package:flutter_poetry/tool/extension.dart';
 import 'package:get/get.dart';
 
-abstract class BaseController<T> extends GetxController {
+
+
+abstract class BaseController<T> extends FullLifeCycleController  {
   late T arguments;
 
   @override
@@ -9,11 +12,17 @@ abstract class BaseController<T> extends GetxController {
     if (Get.arguments != null) {
       arguments = Get.arguments;
     }
+    myLog('HomeController - onInit called');
   }
 
   @override
-  void onClose() {}
+  void onClose() {
+    myLog('HomeController - onClose called');
+  }
 
   @override
-  void onReady() {}
+  void onReady() {
+    myLog('HomeController - onReady called');
+  }
+
 }

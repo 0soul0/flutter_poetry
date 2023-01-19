@@ -10,11 +10,11 @@ import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
 import '../../../resource/style.dart';
+import '../../../routes/appRoutes.dart';
 import '../widget/backIconButton.dart';
 import '../widget/touchUnitWidget.dart';
 
 /// A class representing show detail of poetry
-
 class PoetryDetail extends GetView<PoetryDetailController> {
   const PoetryDetail({Key? key}) : super(key: key);
 
@@ -50,15 +50,20 @@ class PoetryDetail extends GetView<PoetryDetailController> {
           _slider(),
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.all(Dimens.itemSpace * 1.5),
-                decoration: BoxDecoration(
-                  color: AppColor.secondColor,
-                  borderRadius: BorderRadius.circular(Dimens.itemSpace),
-                ),
-                child: const Icon(
-                  Icons.queue_music_outlined,
-                  color: AppColor.white,
+              TouchUnitWidget(
+                onTapDelay: () {
+                  Get.toNamed(AppRoutes.poetrySpectrum);
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(Dimens.itemSpace * 1.5),
+                  decoration: BoxDecoration(
+                    color: AppColor.secondColor,
+                    borderRadius: BorderRadius.circular(Dimens.itemSpace),
+                  ),
+                  child: const Icon(
+                    Icons.queue_music_outlined,
+                    color: AppColor.white,
+                  ),
                 ),
               ),
               Expanded(
@@ -121,20 +126,22 @@ class PoetryDetail extends GetView<PoetryDetailController> {
 
   _slider() {
     return Obx(() => Container(
-          margin: const EdgeInsets.fromLTRB(Dimens.space, 0,Dimens.space, 0),
+          margin: const EdgeInsets.fromLTRB(Dimens.space, 0, Dimens.space, 0),
           child: Row(
             children: [
               Text("${controller.getDurationTime(controller.position.value)}"),
               Expanded(
                   child: SizedBox(
-                    height: 20,
-                    child: Slider(
-                value: controller.getPosition(),
-                onChanged: (double value) {
+                height: 20,
+                child: Slider(
+                  thumbColor: AppColor.secondColor,
+                  activeColor: AppColor.secondColor,
+                  value: controller.getPosition(),
+                  onChanged: (double value) {
                     controller.setPosition(value);
-                },
-              ),
-                  )),
+                  },
+                ),
+              )),
               Text("${controller.getDurationTime(controller.duration.value)}"),
             ],
           ),

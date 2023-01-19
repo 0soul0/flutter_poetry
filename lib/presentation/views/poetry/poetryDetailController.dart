@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_poetry/domain/model/fileModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/tool/extension.dart';
@@ -32,7 +33,6 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     super.onInit();
     setPoetryItemToList(arguments);
     setRefrain(arguments);
-
     initMusicPlayer();
     selectMusicPlayer(0);
   }
@@ -43,6 +43,8 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     for (var element in players) {
       element.release();
     }
+
+    setVerticalScreen();
   }
 
   /// init music player
@@ -176,4 +178,19 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     final symbolsRegex = RegExp(r'^[,，：；;、。:！]+$');
     return symbolsRegex.hasMatch(str);
   }
+
+  /// set horizontal of screen
+  setHorizontalScreen(){
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+  }
+
+  /// set Vertical of screen
+  setVerticalScreen(){
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  }
+
 }

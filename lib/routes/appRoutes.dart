@@ -4,4 +4,5 @@ import 'package:get/get.dart';
 abstract class AppRoutes {
   static const myApp = '/MyApp';
   static const poetryDetail = '/poetryDetail';
+  static const poetrySpectrum = '/poetrySpectrum';
 }
