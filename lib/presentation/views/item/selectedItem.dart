@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
-import '../../../domain/model/item.dart';
+import '../../../domain/model/itemModel.dart';
 import '../../../resource/style.dart';
 
 class SelectedItem extends StatelessWidget {
   const SelectedItem(this.onTapFunction, this.item, {Key? key})
       : super(key: key);
 
-  final Item item;
+  final ItemModel item;
   final Function onTapFunction;
 
   @override

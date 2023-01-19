@@ -11,7 +11,7 @@ import '../../../resource/style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:developer';
 import '../widget/subIconTitle.dart';
-import '../item/dateItem.dart';
+import '../item/splitItem.dart';
 import '../item/searchResultItem.dart';
 
 class ListPage<T> extends StatelessWidget {
@@ -63,17 +63,18 @@ class ListPage<T> extends StatelessWidget {
           itemBuilder: (context, index) {
             var item = controller?.recordItems[index] ?? RecordModel(-1);
             if (false) {
-              return Column(
-                children: [
-                  DateItem(date: item.createTime),
-                  SearchResultItem(
-                    title: item.title,
-                    description: item.description,
-                  )
-                ],
-              );
+              // return Column(
+              //   children: [
+              //     SplitItem(date: item.createTime),
+              //     SearchResultItem(
+              //       title: item.title,
+              //       description: item.description,
+              //     )
+              //   ],
+              // );
             } else {
               return SearchResultItem(
+                (){},
                 title: item.title,
                 description: item.description,
               );

@@ -3,13 +3,19 @@ import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/presentation/views/search/catalogueFull.dart';
 import 'package:flutter_poetry/resource/colors.dart';
+import 'package:flutter_poetry/routes/appPages.dart';
+import 'package:flutter_poetry/routes/appRoutes.dart';
+import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../item/catalogue_item.dart';
+import '../item/splitItem.dart';
 import '../item/searchResultItem.dart';
+import '../item/utils/moduleUntils.dart';
+import '../poetry/poetryDetail.dart';
 import '../widget/subIconTitle.dart';
 import 'searchController.dart';
 
@@ -117,6 +123,7 @@ class ListPage<T> extends StatelessWidget {
         ));
   }
 
+  /// show search result
   _searchResult() {
     return Obx(() => AlignedGridView.count(
           scrollDirection: Axis.vertical,
@@ -125,15 +132,28 @@ class ListPage<T> extends StatelessWidget {
           mainAxisSpacing: Dimens.itemSpace,
           itemCount: controller?.poetryItems.length,
           itemBuilder: (context, index) {
+            var lastItem = PoetryModel();
+            if (index > 0) {
+              lastItem = controller?.poetryItems[index - 1] ?? PoetryModel();
+            }
             var item = controller?.poetryItems[index] ?? PoetryModel();
-            return SearchResultItem(
-              title: item.title,
-              description: item.song,
-            );
+
+            if (index == 0 || lastItem.type != item.type) {
+              return ModuleUtils.bindPoetryItemByModel(
+                  item, ModuleUtils.poetryModelWithType, onTapFunction: () {
+                controller?.onTapPoetry(item);
+              });
+            }
+
+            return ModuleUtils.bindPoetryItemByModel(
+                item, ModuleUtils.poetryModel, onTapFunction: () {
+              controller?.onTapPoetry(item);
+            });
           },
         ));
   }
 
+  /// search data
   _search(BuildContext context) {
     return TextField(
       controller: controller?.textController,
@@ -160,7 +180,7 @@ class ListPage<T> extends StatelessWidget {
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(Dimens.moduleRadius),
                   bottomRight: Radius.circular(Dimens.moduleRadius))),
-          contentPadding: EdgeInsets.all(Dimens.itemPaddingSpace_4),
+          contentPadding: const EdgeInsets.all(Dimens.itemPaddingSpace_4),
           prefixIcon: const Icon(Icons.search)),
     );
   }

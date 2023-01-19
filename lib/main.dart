@@ -1,18 +1,25 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_poetry/mainController.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:get/get.dart';
-import 'domain/model/catalogueModel.dart';
 import 'presentation/views/record/recordFragment.dart';
 import 'presentation/views/search/searchFragment.dart';
 import 'presentation/views/mine/mineFragment.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:storage_view/storage_view.dart';
 
-void main() {
+import 'routes/appPages.dart';
+
+late MainController controller;
+
+Future<void> main() async {
+  init();
   //啟動launch page
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -20,24 +27,24 @@ void main() {
   // FlutterNativeSplash.remove();
 }
 
-init(){
-
+init() {
+  controller = Get.put(MainController());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => const GetMaterialApp(
-        localizationsDelegates: [
+  Widget build(BuildContext context) => GetMaterialApp(
+        localizationsDelegates: const [
           AppLocalizations.delegate, // Add this line
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: L10n.all,
-        home: Scaffold(
+        getPages: AppPages.pages,
+        home: const Scaffold(
           body: BottomNavigationController(
             key: Key('main_bottom'),
           ),
@@ -49,15 +56,15 @@ class BottomNavigationController extends StatefulWidget {
   const BottomNavigationController({required Key key}) : super(key: key);
 
   @override
-  _BottomNavigationControllerState createState() =>
-      _BottomNavigationControllerState();
+  BottomNavigationControllerState createState() =>
+      BottomNavigationControllerState();
 }
 
-class _BottomNavigationControllerState
+class BottomNavigationControllerState
     extends State<BottomNavigationController> {
   //目前選擇頁索引值
-  int _currentIndex = 2; //預設值
-  final pages = [RecordFragment(),SearchFragment(), MineFragment()];
+  int _currentIndex = 1; //預設值
+  final pages = [RecordFragment(), SearchFragment(), MineFragment()];
 
   @override
   Widget build(BuildContext context) {

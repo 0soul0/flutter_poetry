@@ -7,7 +7,7 @@ import 'package:flutter_poetry/presentation/views/search/catalogueFull.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import '../../../domain/model/item.dart';
+import '../../../domain/model/itemModel.dart';
 import '../../../domain/model/recordModel.dart';
 import '../../../resource/dimens.dart';
 import '../item/listSmallItem.dart';
@@ -42,7 +42,7 @@ class ListPage<T> extends StatelessWidget {
           crossAxisCount: 1,
           itemCount: controller?.items.length,
           itemBuilder: (context, index) {
-            var item = controller?.items[index] ?? Item();
+            var item = controller?.items[index] ?? ItemModel();
             return ModuleUtils.bindItemByModule(item);
           },
         ));

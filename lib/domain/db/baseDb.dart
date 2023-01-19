@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/domain/db/sqliteHelper.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
+import 'package:flutter_poetry/tool/extension.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../model/poetryModel.dart';
@@ -9,7 +10,7 @@ class BaseDb {
   BaseDb(this.table);
 
   late String table;
-  late SqliteHelper _sql;
+  final SqliteHelper _sql = SqliteHelper();
   late Database db;
 
   // static final BaseDb _instance = BaseDb.internal();
@@ -21,11 +22,14 @@ class BaseDb {
   // }
 
   Future open() async {
-    _sql = SqliteHelper();
     db = await _sql.db;
+    await myDbQuery(this, "before");
   }
 
-  Future close() async => _sql.close();
+  Future close() async {
+    // await myDbQuery(this, "after");
+    _sql.close();
+  }
 
   insert(Map<String, dynamic> m) async {
     return await db.insert(table, m);
@@ -36,7 +40,16 @@ class BaseDb {
   }
 
   update(Map<String, dynamic> m) async {
-    return await db.update(table, m, where: 'id = ?', whereArgs: [m["id"]]);
+    return await db.update(table, m, where: 'id = ?', whereArgs: [m['id']]);
+  }
+
+  autoCheckInsertOrUpdate(Map<String, dynamic> m) async {
+    var map = await query('id = ?', [m['id']]);
+    if (map.length > 0) {
+      await update(m);
+    } else {
+      await insert(m);
+    }
   }
 
   delete({String? where, List<Object?>? whereArgs}) async {

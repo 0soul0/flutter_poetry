@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/domain/db/catalogueDb.dart';
 import 'package:flutter_poetry/presentation/views/search/searchController.dart';
 import 'package:get/get.dart';
 import 'listPage.dart';

@@ -14,8 +14,8 @@ class Dimens {
   static const double iconSizeSelected = 28;
   static const double itemPaddingSpace_4 = 4;
   static const double titleSize = 22;
-  static const double subTitleSize = 16;
-  static const double textSize = 14;
+  static const double subTitleSize = 20;
+  static const double textSize = 18;
   static const double subTextSize = 12;
   static const double helperSize = 11;
   static const double homeSize = 12;

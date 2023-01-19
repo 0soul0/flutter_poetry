@@ -3,7 +3,7 @@ import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../domain/model/item.dart';
+import '../../../../domain/model/itemModel.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../item/selectedItem.dart';
@@ -58,7 +58,7 @@ class LanguageFragment extends StatelessWidget {
             if (snapshot.hasError) {
               return Text("Error: ${snapshot.error}");
             } else {
-              List<Item> list = snapshot.data;
+              List<ItemModel> list = snapshot.data;
               return AlignedGridView.count(
                 scrollDirection: Axis.vertical,
                 crossAxisCount: 1,
@@ -80,11 +80,11 @@ class LanguageFragment extends StatelessWidget {
         });
   }
 
-  Future<List<Item>> getLanguages() async {
+  Future<List<ItemModel>> getLanguages() async {
     var list = [
-      Item(id: 0, title: "中文"),
-      Item(id: 1, title: "English"),
-      Item(id: 2, title: "French"),
+      ItemModel(id: 0, title: "中文"),
+      ItemModel(id: 1, title: "English"),
+      ItemModel(id: 2, title: "French"),
     ];
     var index = await controller.read(MineController.constLanguageSelected);
     if (index != -1) {

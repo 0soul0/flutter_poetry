@@ -6,7 +6,7 @@ import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../domain/model/item.dart';
+import '../../../../domain/model/itemModel.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../item/selectedItem.dart';
