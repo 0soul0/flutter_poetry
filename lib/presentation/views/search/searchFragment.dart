@@ -24,7 +24,7 @@ class SearchFragment extends StatelessWidget {
         // curve: Curves.easeInBack,
         // loop: true,
         // transformer: new ThreeDTransformer(),
-        itemCount: 2,
+        itemCount: 1,
         itemBuilder: (context, index) {
           return ListPage(controller: controller);
         },

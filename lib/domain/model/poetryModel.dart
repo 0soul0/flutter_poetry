@@ -1,23 +1,24 @@
 import 'dart:ffi';
 
 class PoetryModel {
-  PoetryModel({this.id = "",
-    this.number = -1,
-    this.type = 0,
-    this.title = "",
-    this.content = "",
-    this.refrain = "",
-    this.author = "",
-    this.category = "",
-    this.subCategory = "",
-    this.url = "",
-    this.pianoSpectrum = "",
-    this.guitarSpectrum = "",
-    this.pianoMedia = "",
-    this.pianoMedia2 = "",
-    this.singMedia = "",
-    this.guitarMedia="",
-    this.description = ""});
+  PoetryModel(
+      {this.id = "",
+      this.number = -1,
+      this.type = 0,
+      this.title = "",
+      this.content = "",
+      this.refrain = "",
+      this.author = "",
+      this.category = "",
+      this.subCategory = "",
+      this.url = "",
+      this.pianoSpectrum = "",
+      this.guitarSpectrum = "",
+      this.pianoMedia = "",
+      this.pianoMedia2 = "",
+      this.singMedia = "",
+      this.guitarMedia = "",
+      this.description = ""});
 
   late String id;
   late int number;
@@ -43,24 +44,32 @@ class PoetryModel {
     return number.toString() + title;
   }
 
-  getPianoMedia(){
-    if(pianoMedia.isEmpty){
+  getPianoMedia() {
+    if (pianoMedia.isEmpty) {
       return pianoMedia2;
     }
     return pianoMedia;
   }
 
   getMedia() {
-    List<SpectrumModel> list =[];
-
-    if(singMedia.isNotEmpty){
-        list.add(SpectrumModel(name: "歌唱",media:singMedia,spectrum: "" ));
+    List<SpectrumModel> list = [];
+    list.add(SpectrumModel(
+        index:4,
+        name: "吉他", media: guitarMedia ?? "", spectrum: guitarSpectrum,nameV: "吉\n他"));
+    list.add(SpectrumModel(
+        index:3,
+        name: "吉他", media: guitarMedia ?? "", spectrum: guitarSpectrum,nameV: "吉\n他"));
+    if (singMedia.isNotEmpty) {
+      list.add(SpectrumModel( index:0,name: "歌唱", media: singMedia, spectrum: "",nameV: "歌\n唱"));
     }
-    if(guitarMedia.isNotEmpty){
-      list.add(SpectrumModel(name: "吉他",media:guitarMedia??"",spectrum: guitarSpectrum??"" ));
+    if (guitarMedia.isNotEmpty) {
+      list.add(SpectrumModel(
+          index:1,
+          name: "吉他", media: guitarMedia, spectrum: guitarSpectrum,nameV: "吉\n他"));
     }
-    if (getPianoMedia().isNotEmpty){
-      list.add(SpectrumModel(name: "吉他",media:getPianoMedia()??"",spectrum: pianoSpectrum??""));
+    if (getPianoMedia().isNotEmpty) {
+      list.add(SpectrumModel(index:2,
+          name: "鋼琴", media: getPianoMedia() , spectrum: pianoSpectrum,nameV: "鋼\n琴"));
     }
     return list;
   }
@@ -109,12 +118,15 @@ class PoetryModel {
 
 class SpectrumModel {
   SpectrumModel({
+    this.index=0,
     this.spectrum = "",
     this.media = "",
     this.name = "",
+    this.nameV = "",
   });
-
+  late int index;
   late String spectrum;
   late String media;
   late String name;
+  late String nameV;
 }

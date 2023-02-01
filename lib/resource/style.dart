@@ -38,6 +38,11 @@ class Styles {
       fontSize: Dimens.helperSize,
       color: AppColor.helperColor);
 
+  static const TextStyle subTitleStyleMainColor = TextStyle(
+      fontWeight: FontWeight.w600,
+      fontSize: Dimens.textSize,
+      color: AppColor.mainColor);
+
   static const TextStyle homeTextStyleSelected = TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: Dimens.homeSize,

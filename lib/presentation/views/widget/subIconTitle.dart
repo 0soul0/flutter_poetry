@@ -10,12 +10,10 @@ class SubIconTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.fromLTRB(
-            Dimens.backgroundMarginLeft,
-            Dimens.backgroundMarginTop,
-            Dimens.backgroundMarginRight,
-            Dimens.space),
-        width: MediaQuery.of(context).size.width,
+        margin: const EdgeInsets.only(
+            left:Dimens.backgroundMarginLeft,
+            top:Dimens.backgroundMarginTop,
+            bottom:Dimens.backgroundMarginBottom),
         child: _subTitle());
   }
 
@@ -28,7 +26,7 @@ class SubIconTitle extends StatelessWidget {
           size: Dimens.iconSize,
         ),
         Container(
-            margin: EdgeInsets.only(left: Dimens.textSpace),
+            margin: const EdgeInsets.only(left: Dimens.textSpace),
             child: Text(
               text,
               style: Styles.subTitleStyleBlack,

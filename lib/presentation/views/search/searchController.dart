@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_poetry/data/settingParameters.dart';
 import 'package:flutter_poetry/domain/db/baseDb.dart';
+import 'package:flutter_poetry/domain/db/categoryDb.dart';
 import 'package:flutter_poetry/domain/db/poetryDb.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ import '../base/baseController.dart';
 ///  search controller
 class SearchController extends BaseController {
   late PoetryDb _poetryDb;
+  late CategoryDb _categoryDb;
   late TextEditingController textController;
 
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
@@ -24,14 +26,14 @@ class SearchController extends BaseController {
   Future<void> onInit() async {
     init();
     await _poetryDb.open();
-    // await _catalogDb.open();
+    await _categoryDb.open();
 
     // var catalogData = await _catalogDb.queryAll(limit: 20);
     // var poetryData = await _poetryDb.queryAll();
 
-    // _catalogDb.close();
-    _poetryDb.close();
 
+    _poetryDb.close();
+    _categoryDb.close();
     // addCatalogueModelList(List.generate(catalogData.length, (index) {
     //   return CatalogueModel.fromMap(catalogData[index]);
     // }));

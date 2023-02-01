@@ -3,7 +3,7 @@ import 'dart:ui';
 class Dimens {
   static const double backgroundMarginLeft = 8;
   static const double backgroundMarginRight = 8;
-  static const double backgroundMarginTop = 16;
+  static const double backgroundMarginTop = 8;
   static const double backgroundMarginBottom = 8;
   static const double textSpace = 8;
   static const double itemSpace = 8;
@@ -26,6 +26,7 @@ class Dimens {
   static const double space =8;
   static const double lineDividing =0.5;
   static const double backIconPositionBottom =96;
+  static const double backIconPositionRight=32;
   static const double bigButtonMargin =space*2;
 
 }

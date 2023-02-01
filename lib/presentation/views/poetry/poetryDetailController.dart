@@ -15,9 +15,11 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   RxList<String> items = List<String>.from([]).obs;
   Rx<String> refrain = "".obs;
   RxList<SpectrumModel> spectrum = List<SpectrumModel>.from([]).obs;
+  Rx<SpectrumModel> selectSpectrum = SpectrumModel().obs;
   Rx<Duration> duration = const Duration(seconds: 0).obs;
   Rx<Duration> position = const Duration(seconds: 0).obs;
   Rx<PlayerState> playState = PlayerState.stopped.obs;
+  RxBool playerUIStatus = false.obs;
   RxDouble ddd = 0.0.obs;
 
   late List<AudioPlayer> players;
@@ -47,9 +49,17 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     setVerticalScreen();
   }
 
+
+
+  /// toggle play status
+  togglePlayerUI(){
+    playerUIStatus.value=!playerUIStatus.value;
+  }
+
   /// init music player
   initMusicPlayer() {
     spectrum.value = arguments.getMedia();
+    selectSpectrum.value=spectrum.first;
     players = List.generate(spectrum.length,
         (_) => AudioPlayer()..setReleaseMode(ReleaseMode.stop));
   }
@@ -62,6 +72,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
       players[index].setSourceUrl(spectrum[index].media);
     }
     selectPlayer = players[index];
+    selectSpectrum.value= spectrum[index];
     selectPlayer.onDurationChanged.listen((d) => duration.value = d);
     selectPlayer.onPositionChanged.listen((d) => position.value = d);
     selectPlayer.onPlayerStateChanged.listen((d) => playState.value = d);
@@ -92,6 +103,8 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   }
 
   /// forward or replay music
+  ///
+  /// ＠param milliSeconds time
   seekMusic(int milliSeconds) async {
     int time = position.value.inMilliseconds;
     time += milliSeconds;

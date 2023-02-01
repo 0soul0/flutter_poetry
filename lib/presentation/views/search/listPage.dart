@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/presentation/views/search/catalogueFull.dart';
+import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/routes/appPages.dart';
 import 'package:flutter_poetry/routes/appRoutes.dart';
@@ -31,48 +32,65 @@ class ListPage<T> extends StatelessWidget {
     return Container(
       color: AppColor.backgroundColor,
       child: Column(children: [
-        SubIconTitle(AppLocalizations.of(context)!.poetry, Icons.menu_book),
+        Row(
+          children: [
+            SubIconTitle(AppLocalizations.of(context)!.poetry, Icons.menu_book),
+            Expanded(child: Container()),
+            Container(
+              margin: const EdgeInsets.only(right: Dimens.backgroundMarginRight),
+              child: TouchUnitWidget(
+                onTapDelay: (){
+                  Get.toNamed(AppRoutes.catalogueFull);
+                },
+                child: const Text("目錄",
+                    style: Styles.subTitleStyleMainColor),
+              ),
+            )
+          ],
+        ),
         const Divider(
             height: 0,
             thickness: Dimens.lineDividing,
             color: AppColor.dividerColor),
         Column(
-          children: [
-            Container(
-                padding: const EdgeInsets.fromLTRB(
-                    Dimens.backgroundMarginLeft,
-                    Dimens.textSpace,
-                    Dimens.backgroundMarginRight,
-                    Dimens.textSpace),
-                height: 104,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.catalogue,
-                          style: Styles.textStyleBlack,
-                        ),
-                        Expanded(child: Container()),
-                        InkWell(
-                          onTap: () {
-                            Get.to(CatalogueFull());
-                          },
-                          child: Text(
-                            AppLocalizations.of(context)!.seeMore,
-                            style: Styles.helperStyle,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: Dimens.space,
-                    ),
-                    Expanded(child: _catalogueList()),
-                  ],
-                )),
-            const Divider(
+          children: const [
+            /**
+                // Container(
+                //     padding: const EdgeInsets.fromLTRB(
+                //         Dimens.backgroundMarginLeft,
+                //         Dimens.textSpace,
+                //         Dimens.backgroundMarginRight,
+                //         Dimens.textSpace),
+                //     height: 104,
+                //     width: MediaQuery.of(context).size.width,
+                //     child: Column(
+                //       children: [
+                //         Row(
+                //           children: [
+                //             Text(
+                //               AppLocalizations.of(context)!.catalogue,
+                //               style: Styles.textStyleBlack,
+                //             ),
+                //             Expanded(child: Container()),
+                //             InkWell(
+                //               onTap: () {
+                //                 Get.to(CatalogueFull());
+                //               },
+                //               child: Text(
+                //                 AppLocalizations.of(context)!.seeMore,
+                //                 style: Styles.helperStyle,
+                //               ),
+                //             ),
+                //           ],
+                //         ),
+                //         const SizedBox(
+                //           height: Dimens.space,
+                //         ),
+                //         Expanded(child: _catalogueList()),
+                //       ],
+                //     )),
+             **/
+            Divider(
                 height: Dimens.moduleDividing,
                 thickness: Dimens.moduleDividing,
                 color: AppColor.dividerColor),

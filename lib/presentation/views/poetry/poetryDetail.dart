@@ -156,7 +156,6 @@ class PoetryDetail extends GetView<PoetryDetailController> {
           itemCount: controller.items.length,
           itemBuilder: (context, index) {
             var item = controller.items[index];
-            myLog("$index  $item");
             return Text(
               item,
               style: Styles.textStyleBlack,

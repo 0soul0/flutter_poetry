@@ -10,9 +10,8 @@ import '../widget/backIconButton.dart';
 import '../widget/subIconTitle.dart';
 import '../item/catalogue_item.dart';
 
-class CatalogueFull extends StatelessWidget {
-  CatalogueFull({Key? key}) : super(key: key);
-  final SearchController? controllers = Get.find<SearchController>();
+class CatalogueFull extends GetView<SearchController> {
+  const CatalogueFull({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,18 +42,17 @@ class CatalogueFull extends StatelessWidget {
           crossAxisCount: 3,
           crossAxisSpacing: Dimens.itemSpace,
           mainAxisSpacing: Dimens.itemSpace,
-          itemCount: controllers?.catalogueItems.length,
+          itemCount: controller.catalogueItems.length,
           itemBuilder: (context, index) {
-            var item = controllers?.catalogueItems[index];
+            var item = controller.catalogueItems[index];
             return Catalogue_item(item, () {
-              if (item == null) return;
-              controllers?.resetCatalogueModelList();
+              controller.resetCatalogueModelList();
 
               item.type = CatalogueModel.constSELECTED;
-              controllers?.updateCatalogueModelList(index, item);
+              controller.updateCatalogueModelList(index, item);
 
               //change search text
-              controllers?.setSearchText(item.text);
+              controller.setSearchText(item.text);
 
               Get.back();
             });

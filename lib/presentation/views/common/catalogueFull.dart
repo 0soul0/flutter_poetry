@@ -6,20 +6,13 @@ import '../../../resource/dimens.dart';
 import '../widget/subIconTitle.dart';
 import '../item/catalogue_item.dart';
 
-class CatalogueFull extends StatefulWidget {
-  const CatalogueFull({Key? key}) : super(key: key);
-
-  @override
-  State<CatalogueFull> createState() => _CatalogueFullState();
-}
-
-class _CatalogueFullState extends State<CatalogueFull> {
+class _CatalogueFullState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.banner)),
       body: Container(
-          padding: EdgeInsets.fromLTRB(Dimens.backgroundMarginLeft,
+          padding: const EdgeInsets.fromLTRB(Dimens.backgroundMarginLeft,
               Dimens.textSpace, Dimens.backgroundMarginRight, Dimens.textSpace),
           width: MediaQuery.of(context).size.width,
           child: Column(
