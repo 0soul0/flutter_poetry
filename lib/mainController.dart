@@ -93,17 +93,17 @@ class MainController extends BaseController {
             switch (newFile.dbType) {
               case FileModel.keyPoetryDb:
                 {
-                  await _poetryDb.autoCheckInsertOrUpdate(list[i]);
+                  await _poetryDb.autoCheckInsertOrUpdateWithId(list[i]);
                   break;
                 }
               case FileModel.keyCategoryDb:
                 {
-                  await _categoryDb.autoCheckInsertOrUpdate(list[i]);
+                  await _categoryDb.autoCheckInsertOrUpdateWithId(list[i]);
                   break;
                 }
               case FileModel.keySubCategoryDb:
                 {
-                  await _subCategoryDb.autoCheckInsertOrUpdate(list[i]);
+                  await _subCategoryDb.autoCheckInsertOrUpdateWithId(list[i]);
                   break;
                 }
             }
@@ -121,7 +121,7 @@ class MainController extends BaseController {
   /// @param newFile need updated file
   updateFileDownloadStatus(int status, FileModel newFile) async {
     newFile.dataUpdateDone = status;
-    await _fileDb.autoCheckInsertOrUpdate(newFile.toMap());
+    await _fileDb.autoCheckInsertOrUpdateWithId(newFile.toMap());
   }
 
   /// Is version of application updated

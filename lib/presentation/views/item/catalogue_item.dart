@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
 import '../../../../domain/model/catalogueModel.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../../../resource/style.dart';
 
-class Catalogue_item extends StatelessWidget {
-  const Catalogue_item( this.itemData,this.onTapFunction, {Key? key})
+class CatalogueItem extends StatelessWidget {
+  const CatalogueItem( this.itemData,this.onTapFunction, {Key? key})
       : super(key: key);
   final CatalogueModel? itemData;
   final Function onTapFunction;
@@ -14,8 +15,8 @@ class Catalogue_item extends StatelessWidget {
   Widget build(BuildContext context) {
     var item = itemData;
     if (item == null) return Container();
-    return GestureDetector(
-        onTap: () {
+    return TouchUnitWidget(
+        onTapDelay: () {
           onTapFunction();
         },
         child: Container(
@@ -31,7 +32,7 @@ class Catalogue_item extends StatelessWidget {
               item.selected ? Border.all(color: AppColor.mainColor) : Border.all(color: AppColor.gray),
               borderRadius: BorderRadius.circular(Dimens.itemRadius)),
           child: Text(
-            item.text,
+            item.category,
             style: item.selected
                 ? Styles.textStyleWhite
                 : Styles.textStyleGray,

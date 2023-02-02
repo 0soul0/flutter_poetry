@@ -1,8 +1,8 @@
 class CatalogueModel {
-  CatalogueModel({this.id = 1, this.text = "", this.type = "0"});
+  CatalogueModel({this.id = "", this.category = "", this.type = "0"});
 
-  late int id;
-  late String text;
+  late String id;
+  late String category;
   late String type; //0:unselected 1:selected
 
   static String constSELECTED = "1";
@@ -13,7 +13,7 @@ class CatalogueModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'text': text,
+      'category': category,
       'type': type,
     };
   }
@@ -21,7 +21,7 @@ class CatalogueModel {
   CatalogueModel.fromMap(Map<String, dynamic> map) {
     id= map["id"];
     type= map["type"];
-    text= map["text"];
+    category= map["category"];
   }
 
 }

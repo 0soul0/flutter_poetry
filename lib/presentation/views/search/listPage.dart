@@ -1,31 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
-import 'package:flutter_poetry/presentation/views/search/catalogueFull.dart';
 import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
-import 'package:flutter_poetry/routes/appPages.dart';
 import 'package:flutter_poetry/routes/appRoutes.dart';
-import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../item/catalogue_item.dart';
-import '../item/splitItem.dart';
-import '../item/searchResultItem.dart';
-import '../item/utils/moduleUntils.dart';
-import '../poetry/poetryDetail.dart';
+import '../item/utils/moduleUnit.dart';
 import '../widget/subIconTitle.dart';
 import 'searchController.dart';
 
 class ListPage<T> extends StatelessWidget {
-  const ListPage({this.controller, Key? key}) : super(key: key);
+  ListPage({Key? key}) : super(key: key);
 
-  final SearchController? controller;
-
-  init() {}
+  final SearchController controller=Get.find<SearchController>();
 
   @override
   Widget build(BuildContext context) {
@@ -118,29 +108,6 @@ class ListPage<T> extends StatelessWidget {
     );
   }
 
-  _catalogueList() {
-    return Obx(() => AlignedGridView.count(
-          scrollDirection: Axis.horizontal,
-          crossAxisCount: 2,
-          crossAxisSpacing: Dimens.itemSpace,
-          mainAxisSpacing: Dimens.itemSpace,
-          itemCount: controller?.catalogueItems.length,
-          itemBuilder: (context, index) {
-            var item = controller?.catalogueItems[index];
-            return Catalogue_item(item, () {
-              if (item == null) return;
-              controller?.resetCatalogueModelList();
-
-              item.type = CatalogueModel.constSELECTED;
-              controller?.updateCatalogueModelList(index, item);
-
-              //change search text
-              controller?.setSearchText(item.text);
-            });
-          },
-        ));
-  }
-
   /// show search result
   _searchResult() {
     return Obx(() => AlignedGridView.count(
@@ -148,24 +115,24 @@ class ListPage<T> extends StatelessWidget {
           crossAxisCount: 1,
           crossAxisSpacing: Dimens.itemSpace,
           mainAxisSpacing: Dimens.itemSpace,
-          itemCount: controller?.poetryItems.length,
+          itemCount: controller.poetryItems.length,
           itemBuilder: (context, index) {
             var lastItem = PoetryModel();
             if (index > 0) {
-              lastItem = controller?.poetryItems[index - 1] ?? PoetryModel();
+              lastItem = controller.poetryItems[index - 1] ;
             }
-            var item = controller?.poetryItems[index] ?? PoetryModel();
+            var item = controller.poetryItems[index];
 
             if (index == 0 || lastItem.type != item.type) {
               return ModuleUtils.bindPoetryItemByModel(
                   item, ModuleUtils.poetryModelWithType, onTapFunction: () {
-                controller?.onTapPoetry(item);
+                controller.onTapPoetry(item);
               });
             }
 
             return ModuleUtils.bindPoetryItemByModel(
                 item, ModuleUtils.poetryModel, onTapFunction: () {
-              controller?.onTapPoetry(item);
+              controller.onTapPoetry(item);
             });
           },
         ));
@@ -174,10 +141,10 @@ class ListPage<T> extends StatelessWidget {
   /// search data
   _search(BuildContext context) {
     return TextField(
-      controller: controller?.textController,
+      controller: controller.textController,
       textAlign: TextAlign.left,
       onChanged: (value) {
-        controller?.search(value);
+        controller.search(value);
       },
       decoration: InputDecoration(
           filled: true,

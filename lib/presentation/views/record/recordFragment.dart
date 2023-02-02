@@ -11,6 +11,7 @@ class RecordFragment extends StatelessWidget {
 
   init() {
     controller = Get.put(RecordController());
+    controller.queryAll();
     pageController = PageController(initialPage: 1);
   }
 
@@ -26,7 +27,7 @@ class RecordFragment extends StatelessWidget {
         // transformer: new ThreeDTransformer(),
         itemCount: 1,
         itemBuilder: (context, index) {
-          return ListPage(controller: controller);
+          return ListPage();
         },
       ),
     );

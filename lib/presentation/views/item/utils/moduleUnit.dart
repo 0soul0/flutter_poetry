@@ -34,12 +34,12 @@ class ModuleUtils {
   /// @param item data of poetry
   /// @param type type of poetry item
   static bindPoetryItemByModel(PoetryModel item, int type,
-      {Function? onTapFunction}) {
+      {Function? onTapFunction,title="詩歌"}) {
     switch (type) {
       case poetryModelWithType:
         return Column(
           children: [
-            SplitItem(name: "詩歌"),
+            SplitItem(name: title),
             SearchResultItem(
               onTapFunction ?? () {},
               title: item.getTitle(),

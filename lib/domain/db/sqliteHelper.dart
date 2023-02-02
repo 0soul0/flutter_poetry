@@ -38,23 +38,23 @@ class SqliteHelper {
         ''';
   static const createRecord = '''
       CREATE TABLE IF NOT EXISTS $tableRecord (
-      id INTEGER PRIMARY KEY, 
-      sourceId INTEGER, 
+      id TEXT PRIMARY KEY, 
+      sourceId TEXT, 
       title TEXT,
-      number TEXT,
+      number INTEGER,
       description TEXT,
       createTime TEXT
       );
       ''';
   static const createSystem = '''
       CREATE TABLE IF NOT EXISTS $tableSystem (
-      id INTEGER PRIMARY KEY, 
+      id TEXT PRIMARY KEY, 
       appVersion TEXT
       );
       ''';
   static const createFile = '''
       CREATE TABLE IF NOT EXISTS $tableFile (
-      id INTEGER PRIMARY KEY, 
+      id TEXT PRIMARY KEY, 
       fileName TEXT,
       dataVersion TEXT,
       url TEXT,

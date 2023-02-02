@@ -45,14 +45,14 @@ class CatalogueFull extends GetView<SearchController> {
           itemCount: controller.catalogueItems.length,
           itemBuilder: (context, index) {
             var item = controller.catalogueItems[index];
-            return Catalogue_item(item, () {
+            return CatalogueItem(item, () {
               controller.resetCatalogueModelList();
 
               item.type = CatalogueModel.constSELECTED;
               controller.updateCatalogueModelList(index, item);
 
               //change search text
-              controller.setSearchText(item.text);
+              controller.setSearchText(item.category);
 
               Get.back();
             });

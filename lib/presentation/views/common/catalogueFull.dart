@@ -33,7 +33,7 @@ class _CatalogueFullState extends StatelessWidget {
       mainAxisSpacing: Dimens.itemSpace,
       itemCount: 200,
       itemBuilder: (context, index) {
-        return Catalogue_item(CatalogueModel(text: "羨慕200-250"), () {
+        return CatalogueItem(CatalogueModel(category: "羨慕200-250"), () {
 
         });
       },

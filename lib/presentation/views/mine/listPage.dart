@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
-import 'package:flutter_poetry/presentation/views/item/utils/moduleUntils.dart';
+import 'package:flutter_poetry/presentation/views/item/utils/moduleUnit.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/record/recordController.dart';
 import 'package:flutter_poetry/presentation/views/search/catalogueFull.dart';

@@ -26,7 +26,7 @@ class SearchFragment extends StatelessWidget {
         // transformer: new ThreeDTransformer(),
         itemCount: 1,
         itemBuilder: (context, index) {
-          return ListPage(controller: controller);
+          return ListPage();
         },
       ),
     );

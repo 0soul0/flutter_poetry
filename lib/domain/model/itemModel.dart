@@ -1,4 +1,4 @@
-import '../../presentation/views/item/utils/moduleUntils.dart';
+import '../../presentation/views/item/utils/moduleUnit.dart';
 
 class ItemModel {
   ItemModel(

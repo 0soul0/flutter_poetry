@@ -1,15 +1,18 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_poetry/domain/model/poetryModel.dart';
+import 'package:flutter_poetry/presentation/views/poetry/poetryDetail.dart';
 
-class RecordModel {
+
+class RecordModel extends PoetryModel{
   RecordModel(this.sourceId,
-      {this.id = -1, this.title = "", this.number = "", this.description = ""});
+      {String id = "", String title = "", int number = -1, String description=""}):super(id:id,number:number,title: title,description: description);
 
-  late int id;
-  late int sourceId; //foreign key Poetry
-  late String title;
-  late String number;
-  late String description; //搜尋結果的歌詞描述
+  late String sourceId; //foreign key Poetry
   String createTime = DateTime.now().toString();
+
+  updateCreateTime(){
+    createTime = DateTime.now().toString();
+  }
 
   Map<String, dynamic> toMap() {
     return {
@@ -26,8 +29,8 @@ class RecordModel {
     id = map["id"] ?? "";
     sourceId = map["sourceId"] ?? "";
     title = map["title"] ?? "";
-    number = map["number"] ?? "";
-    description = map["describe"] ?? "";
+    number = map["number"] ?? -1;
+    description = map["description"] ?? "";
     createTime = map["createTime"] ?? "";
   }
 }

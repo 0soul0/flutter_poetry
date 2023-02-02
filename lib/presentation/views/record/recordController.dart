@@ -1,52 +1,63 @@
 import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_poetry/domain/db/poetryDb.dart';
+import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/db/recordDb.dart';
 import '../../../domain/model/recordModel.dart';
+import '../../../routes/appRoutes.dart';
 
 class RecordController extends BaseController {
-
   late RecordDb _recordDb;
-
+  late PoetryDb _poetryDb;
   RxList<RecordModel> recordItems = List<RecordModel>.from([]).obs;
 
   @override
   Future onInit() async {
-    init();
-    await fakeData();
-    await queryAll();
     super.onInit();
+    init();
+    // initData();
   }
 
   init() {
     _recordDb = RecordDb();
+    _poetryDb = PoetryDb();
   }
 
-  queryAll() async{
-    await _recordDb.open();
-    var maps=await _recordDb.queryAll();
+  // initData() async {
+  //   await queryAll();
+  // }
 
-    recordItems.value = List.generate(maps.length, (index){
+  queryAll() async {
+    await _recordDb.open();
+    var maps = await _recordDb.queryPage(1, 20, orderBy: "createTime DESC");
+
+    recordItems.value = List.generate(maps.length, (index) {
       return RecordModel.fromMap(maps[index]);
     });
 
     await _recordDb.close();
-
   }
 
+  /// on tap event
+  ///
+  /// @param item poetryModel of data
+  onTapPoetry(RecordModel item) async {
+    await _poetryDb.open();
+    PoetryModel poetry = await _poetryDb.query('id = ?', [item.sourceId]);
+    Get.toNamed(AppRoutes.poetryDetail, arguments: poetry);
+    insertRecordDb(item);
+    _poetryDb.close();
+  }
 
-  fakeData() async {
+  /// insert data to recordDb
+  insertRecordDb(RecordModel item) async {
     await _recordDb.open();
-    await _recordDb.delete();
-    for (int i = 0; i < 100; i++) {
-      RecordModel model = RecordModel(-1,id: i,title: "詩歌+$i",number: "200$i",description: "gogogo");
-      await _recordDb.insert(model.toMap());
-    }
-
-    await _recordDb.close();
+    item.updateCreateTime();
+    await _recordDb.autoCheckInsertOrUpdateWithId(item.toMap());
+    _recordDb.close();
   }
-
 }

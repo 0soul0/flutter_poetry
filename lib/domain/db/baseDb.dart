@@ -13,14 +13,6 @@ class BaseDb {
   final SqliteHelper _sql = SqliteHelper();
   late Database db;
 
-  // static final BaseDb _instance = BaseDb.internal();
-  //
-  // static BaseDb get instance => _instance;
-  //
-  // BaseDb.internal() {
-  //   _sql = SqliteHelper();
-  // }
-
   Future open() async {
     db = await _sql.db;
     await myDbQuery(this, "before");
@@ -39,12 +31,27 @@ class BaseDb {
     return await db.query(table, limit: limit);
   }
 
+  queryPage(int page, int count, {String? orderBy="id ASC"}) async {
+    page =(page-1)*count;
+    return await db.rawQuery('SELECT * FROM $table ORDER BY $orderBy LIMIT $page,$count');
+  }
+
   update(Map<String, dynamic> m) async {
     return await db.update(table, m, where: 'id = ?', whereArgs: [m['id']]);
   }
 
-  autoCheckInsertOrUpdate(Map<String, dynamic> m) async {
+  autoCheckInsertOrUpdateWithId(Map<String, dynamic> m) async {
     var map = await query('id = ?', [m['id']]);
+    if (map.length > 0) {
+      await update(m);
+    } else {
+      await insert(m);
+    }
+  }
+
+  autoCheckInsertOrUpdate(
+      String where, List<Object?>? whereArgs, Map<String, dynamic> m) async {
+    var map = await query(where, whereArgs);
     if (map.length > 0) {
       await update(m);
     } else {

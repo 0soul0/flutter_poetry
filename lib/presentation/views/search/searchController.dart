@@ -5,8 +5,11 @@ import 'package:flutter_poetry/data/settingParameters.dart';
 import 'package:flutter_poetry/domain/db/baseDb.dart';
 import 'package:flutter_poetry/domain/db/categoryDb.dart';
 import 'package:flutter_poetry/domain/db/poetryDb.dart';
+import 'package:flutter_poetry/domain/db/recordDb.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
+import 'package:flutter_poetry/domain/model/recordModel.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../domain/model/poetryModel.dart';
 import '../../../routes/appRoutes.dart';
@@ -16,6 +19,7 @@ import '../base/baseController.dart';
 class SearchController extends BaseController {
   late PoetryDb _poetryDb;
   late CategoryDb _categoryDb;
+  late RecordDb _recordDb;
   late TextEditingController textController;
 
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
@@ -24,30 +28,30 @@ class SearchController extends BaseController {
   /// init controller
   @override
   Future<void> onInit() async {
-    init();
-    await _poetryDb.open();
-    await _categoryDb.open();
-
-    // var catalogData = await _catalogDb.queryAll(limit: 20);
-    // var poetryData = await _poetryDb.queryAll();
-
-
-    _poetryDb.close();
-    _categoryDb.close();
-    // addCatalogueModelList(List.generate(catalogData.length, (index) {
-    //   return CatalogueModel.fromMap(catalogData[index]);
-    // }));
-    // addPoetryModelList(List.generate(poetryData.length, (index) {
-    //   return PoetryModel.fromMap(poetryData[index]);
-    // }));
-
     super.onInit();
+    init();
+    initData();
+
   }
 
   /// init class
   init() {
     _poetryDb = PoetryDb();
+    _categoryDb = CategoryDb();
+    _recordDb = RecordDb();
     textController = TextEditingController();
+  }
+
+  /// init default data
+  initData() async {
+    search("");
+
+    await _categoryDb.open();
+    var catalogData = await _categoryDb.queryAll();
+    _categoryDb.close();
+    addCatalogueModelList(List.generate(catalogData.length, (index) {
+      return CatalogueModel.fromMap(catalogData[index]);
+    }));
   }
 
   @override
@@ -117,7 +121,7 @@ class SearchController extends BaseController {
   ///
   /// @param poetryData data of poetry
   /// @return data of poetry that have description
-  setDescription(String search,dynamic poetryData) {
+  setDescription(String search, dynamic poetryData) {
     if (poetryData['number'].toString().contains(search) ||
         poetryData['title'].contains(search)) {
       if (!poetryData['refrain'].isEmpty) {
@@ -128,11 +132,11 @@ class SearchController extends BaseController {
     }
 
     if (poetryData['content'].contains(search)) {
-      return returnDescriptionOfSection(search,poetryData, 'content');
+      return returnDescriptionOfSection(search, poetryData, 'content');
     }
 
     if (poetryData['refrain'].indexOf(search)) {
-      return returnDescriptionOfSection(search,poetryData, 'refrain');
+      return returnDescriptionOfSection(search, poetryData, 'refrain');
     }
 
     if (poetryData['author'].contains(search)) {
@@ -153,7 +157,7 @@ class SearchController extends BaseController {
   /// @param poetryData data of poetry
   /// @param key of poetry
   /// @return data of poetry
-  returnDescriptionOfSelf(dynamic poetryData,String key) {
+  returnDescriptionOfSelf(dynamic poetryData, String key) {
     var len = min(SettingParameters.poetryOfDescriptionLong,
         poetryData[key].toString().length);
     final newPoetryData = Map.of(poetryData);
@@ -166,9 +170,10 @@ class SearchController extends BaseController {
   /// @param poetryData data of poetry
   /// @param key of poetry
   /// @return data of poetry
-  returnDescriptionOfSection(String search,dynamic poetryData,String key) {
+  returnDescriptionOfSection(String search, dynamic poetryData, String key) {
     var index = poetryData[key].indexOf(search);
-    var halfPoetryOfDescriptionLong=((SettingParameters.poetryOfDescriptionLong) / 2).round();
+    var halfPoetryOfDescriptionLong =
+        ((SettingParameters.poetryOfDescriptionLong) / 2).round();
     var startIndex = index - halfPoetryOfDescriptionLong;
     var endLen = 0;
     if (startIndex < 0) {
@@ -188,7 +193,18 @@ class SearchController extends BaseController {
     return Map<String, dynamic>.from(newPoetryData);
   }
 
-  onTapPoetry(PoetryModel item){
-    Get.toNamed(AppRoutes.poetryDetail,arguments: item);
+  /// on tap event
+  ///
+  /// @param item poetryModel of data
+  onTapPoetry(PoetryModel item) {
+    Get.toNamed(AppRoutes.poetryDetail, arguments: item);
+    insertRecordDb(item);
+  }
+
+  /// insert data to recordDb
+  insertRecordDb(PoetryModel item) async {
+    await _recordDb.open();
+    await _recordDb.autoCheckInsertOrUpdate('sourceId = ?', [item.id],RecordModel(item.id,id:const Uuid().v4(),title: item.title,number: item.number,description: item.description).toMap());
+    _recordDb.close();
   }
 }
