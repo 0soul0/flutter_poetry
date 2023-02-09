@@ -3,6 +3,7 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
 import '../../../resource/style.dart';
+import '../widget/textUnitWidget.dart';
 
 class FrameItem extends StatelessWidget {
   const FrameItem(this.onTapFunction,{this.title = "", this.value = "", Key? key})
@@ -36,11 +37,11 @@ class FrameItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: Styles.subTitleStyleWhite),
+              TextUnitWidget(title, style: Styles.subTitleStyleWhite),
               const SizedBox(
                 height: Dimens.space,
               ),
-              Text(value, style: Styles.textStyleGray),
+              TextUnitWidget(value, style: Styles.textStyleGray),
             ],
           )),
     );

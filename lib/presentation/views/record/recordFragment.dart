@@ -3,16 +3,17 @@ import 'package:flutter_poetry/presentation/views/record/listPage.dart';
 import 'package:flutter_poetry/presentation/views/record/recordController.dart';
 import 'package:get/get.dart';
 
+import '../../../domain/model/recordModel.dart';
+import '../../../routes/singleton.dart';
+
 class RecordFragment extends StatelessWidget {
   RecordFragment({super.key});
 
   late RecordController controller;
-  late PageController pageController;
 
   init() {
     controller = Get.put(RecordController());
-    controller.queryAll();
-    pageController = PageController(initialPage: 1);
+    Singleton.getEventBusInstance().fire(RecordModel(""));
   }
 
   @override
@@ -20,7 +21,7 @@ class RecordFragment extends StatelessWidget {
     init();
     return Scaffold(
       body: PageView.builder(
-        controller: pageController,
+        controller: controller.pageController,
         scrollDirection: Axis.horizontal,
         // curve: Curves.easeInBack,
         // loop: true,

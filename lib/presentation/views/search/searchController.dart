@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_poetry/data/settingParameters.dart';
 import 'package:flutter_poetry/domain/db/baseDb.dart';
@@ -7,12 +8,15 @@ import 'package:flutter_poetry/domain/db/categoryDb.dart';
 import 'package:flutter_poetry/domain/db/poetryDb.dart';
 import 'package:flutter_poetry/domain/db/recordDb.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
+import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
 import 'package:flutter_poetry/domain/model/recordModel.dart';
+import 'package:flutter_poetry/mainController.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../domain/model/poetryModel.dart';
 import '../../../routes/appRoutes.dart';
+import '../../../routes/singleton.dart';
 import '../base/baseController.dart';
 
 ///  search controller
@@ -31,7 +35,6 @@ class SearchController extends BaseController {
     super.onInit();
     init();
     initData();
-
   }
 
   /// init class
@@ -44,14 +47,10 @@ class SearchController extends BaseController {
 
   /// init default data
   initData() async {
+    Singleton.getEventBusInstance().on<MsgEvent>().listen((event) {
+      search("");
+    });
     search("");
-
-    await _categoryDb.open();
-    var catalogData = await _categoryDb.queryAll();
-    _categoryDb.close();
-    addCatalogueModelList(List.generate(catalogData.length, (index) {
-      return CatalogueModel.fromMap(catalogData[index]);
-    }));
   }
 
   @override
@@ -62,6 +61,16 @@ class SearchController extends BaseController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  /// query all of category
+  queryAllCategory() async {
+    await _categoryDb.open();
+    var catalogData = await _categoryDb.queryAll();
+    _categoryDb.close();
+    addCatalogueModelList(List.generate(catalogData.length, (index) {
+      return CatalogueModel.fromMap(catalogData[index]);
+    }));
   }
 
   /// Add catalogue data into rxList
@@ -204,7 +213,15 @@ class SearchController extends BaseController {
   /// insert data to recordDb
   insertRecordDb(PoetryModel item) async {
     await _recordDb.open();
-    await _recordDb.autoCheckInsertOrUpdate('sourceId = ?', [item.id],RecordModel(item.id,id:const Uuid().v4(),title: item.title,number: item.number,description: item.description).toMap());
+    await _recordDb.autoCheckInsertOrUpdate(
+        'sourceId = ?',
+        [item.id],
+        RecordModel(item.id,
+                id: const Uuid().v4(),
+                title: item.title,
+                number: item.number,
+                description: item.description)
+            .toMap());
     _recordDb.close();
   }
 }

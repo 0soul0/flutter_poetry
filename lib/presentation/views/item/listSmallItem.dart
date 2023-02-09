@@ -3,6 +3,7 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
 import '../../../resource/style.dart';
+import '../widget/textUnitWidget.dart';
 
 class ListSmallItem extends StatelessWidget {
   const ListSmallItem(this.onTapFunction,
@@ -30,9 +31,9 @@ class ListSmallItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(title, style: Styles.textStyleBlack),
+              TextUnitWidget(title, style: Styles.textStyleBlack),
               Expanded(child: Container()),
-              Text(value, style: Styles.textStyleBlack),
+              TextUnitWidget(value, style: Styles.textStyleBlack),
               const SizedBox(
                 width: Dimens.space,
               ),

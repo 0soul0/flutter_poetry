@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
 import '../../../resource/colors.dart';
@@ -19,7 +20,7 @@ class BigButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(backgroundColor: AppColor.secondColor),
-        child: Text(
+        child: TextUnitWidget(
           title,
           style: Styles.textStyleWhite,
         ),

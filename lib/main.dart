@@ -1,14 +1,16 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/mainController.dart';
+import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lifecycle/lifecycle.dart';
 import 'presentation/views/record/recordFragment.dart';
 import 'presentation/views/search/searchFragment.dart';
 import 'presentation/views/mine/mineFragment.dart';
@@ -24,7 +26,7 @@ Future<void> main() async {
   //啟動launch page
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  runApp(const MyApp());
+  runApp(Phoenix(child: const MyApp()));
   // FlutterNativeSplash.remove();
 }
 
@@ -37,26 +39,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ScreenUtilInit(
-    builder: (BuildContext context, Widget? child) {
-        return GetMaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate, // Add this line
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: L10n.all,
-          getPages: AppPages.pages,
-          home: child,
-        );
-
-    },
-    child: const Scaffold(
-      body: BottomNavigationController(
-        key: Key('main_bottom'),
-      ),
-    ),
-  );
+        builder: (BuildContext context, Widget? child) {
+          return GetMaterialApp(
+            navigatorObservers: [defaultLifecycleObserver],
+            localizationsDelegates: const [
+              AppLocalizations.delegate, // Add this line
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: L10n.all,
+            getPages: AppPages.pages,
+            home: child,
+          );
+        },
+        child: const Scaffold(
+          body: BottomNavigationController(
+            key: Key('main_bottom'),
+          ),
+        ),
+      );
 }
 
 class BottomNavigationController extends StatefulWidget {
@@ -76,7 +78,7 @@ class BottomNavigationControllerState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.banner)),
+      appBar: AppBar(title: TextUnitWidget(AppLocalizations.of(context)!.banner)),
       body: pages[_currentIndex],
       bottomNavigationBar: SizedBox(
         height: 56,
@@ -131,7 +133,7 @@ class BottomNavigationControllerState
                   size: Dimens.iconSizeSelected,
                   color: AppColor.mainColor,
                 ),
-                Text(label, style: Styles.homeTextStyleSelected)
+                TextUnitWidget(label, style: Styles.homeTextStyleSelected)
               ],
             )
           : Column(
@@ -142,7 +144,7 @@ class BottomNavigationControllerState
                   size: Dimens.iconSize,
                   color: AppColor.gray,
                 ),
-                Text(
+                TextUnitWidget(
                   label,
                   style: Styles.homeTextStyleUnSelect,
                 )
@@ -176,7 +178,7 @@ class BottomNavigationControllerState
                       size: Dimens.iconSizeSelected,
                       color: AppColor.mainColor,
                     ),
-                    Text(label, style: Styles.homeTextStyleSelected)
+                    TextUnitWidget(label, style: Styles.homeTextStyleSelected)
                   ],
                 ),
               )
@@ -199,7 +201,7 @@ class BottomNavigationControllerState
                       size: Dimens.iconSize,
                       color: AppColor.gray,
                     ),
-                    Text(label, style: Styles.homeTextStyleUnSelect)
+                    TextUnitWidget(label, style: Styles.homeTextStyleUnSelect)
                   ],
                 ),
               ));

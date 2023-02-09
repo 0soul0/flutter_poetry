@@ -43,7 +43,7 @@ class ListPage<T> extends StatelessWidget {
           itemCount: controller?.items.length,
           itemBuilder: (context, index) {
             var item = controller?.items[index] ?? ItemModel();
-            return ModuleUtils.bindItemByModule(item);
+            return ModuleUtils.bindMineItemByModule(item);
           },
         ));
   }

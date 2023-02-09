@@ -28,5 +28,5 @@ class Dimens {
   static const double backIconPositionBottom =96;
   static const double backIconPositionRight=32;
   static const double bigButtonMargin =space*2;
-
+  static double textSizeTimes = 1;
 }

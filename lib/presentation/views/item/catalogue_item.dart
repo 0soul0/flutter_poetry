@@ -4,6 +4,7 @@ import '../../../../domain/model/catalogueModel.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../../../resource/style.dart';
+import '../widget/textUnitWidget.dart';
 
 class CatalogueItem extends StatelessWidget {
   const CatalogueItem( this.itemData,this.onTapFunction, {Key? key})
@@ -31,7 +32,7 @@ class CatalogueItem extends StatelessWidget {
               border:
               item.selected ? Border.all(color: AppColor.mainColor) : Border.all(color: AppColor.gray),
               borderRadius: BorderRadius.circular(Dimens.itemRadius)),
-          child: Text(
+          child: TextUnitWidget(
             item.category,
             style: item.selected
                 ? Styles.textStyleWhite

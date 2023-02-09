@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/widget/bigButton.dart';
 import 'package:flutter_poetry/resource/style.dart';
@@ -9,24 +10,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../domain/model/itemModel.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
+import '../../../../routes/singleton.dart';
 import '../../item/selectedItem.dart';
 import '../../widget/backIconButton.dart';
+import '../../widget/textUnitWidget.dart';
 
-class FontFragment extends StatelessWidget {
-  FontFragment({Key? key}) : super(key: key);
 
-  late MineController controller;
-
-  init() {
-    controller = Get.find<MineController>();
-  }
+class FontFragment extends GetView<MineController> {
+  const FontFragment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    init();
     return Scaffold(
       appBar: AppBar(
-        title: Text("SSS"),
+        title: const TextUnitWidget("banner"),
       ),
       body: Stack(children: [
         Container(
@@ -44,7 +41,7 @@ class FontFragment extends StatelessWidget {
             const SizedBox(
               height: Dimens.space * 3,
             ),
-            _saveButton(),
+            _saveButton(context),
           ]),
         ),
         const BackIconButton(),
@@ -65,22 +62,20 @@ class FontFragment extends StatelessWidget {
               Expanded(
                   child: Container(
                       alignment: Alignment.center,
-                      child: Text(
+                      child: TextUnitWidget(
                         "主耶穌",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: controller?.seekValue.value.toDouble(),
-                            color: AppColor.textColor),
+                        textScaleFactor: controller.valueToValueTime(
+                            controller.seekValue.value.toDouble()),
+                        style: Styles.textStyleBlack,
                       ))),
               Expanded(
                   child: Container(
                       alignment: Alignment.center,
-                      child: Text(
+                      child: TextUnitWidget(
                         "我如困鹿切慕溪水",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: controller.seekValue.value.toDouble(),
-                            color: AppColor.textColor),
+                        textScaleFactor: controller.valueToValueTime(
+                            controller.seekValue.value.toDouble()),
+                        style: Styles.textStyleBlack,
                       ))),
             ],
           ),
@@ -95,14 +90,14 @@ class FontFragment extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Text(
+                const TextUnitWidget(
                   "字體大小",
                   style: Styles.textStyleBlack,
                 ),
                 const SizedBox(
                   width: Dimens.space,
                 ),
-                Text(
+                TextUnitWidget(
                   controller.seekValue.value.toString(),
                   style: Styles.textStyleBlack,
                 ),
@@ -113,7 +108,7 @@ class FontFragment extends StatelessWidget {
             ),
             NeumorphicSlider(
               min: 8,
-              max: 40,
+              max: 30,
               value: controller.seekValue.value.toDouble(),
               onChanged: (value) {
                 controller.setSeekValue(value.toInt());
@@ -126,15 +121,22 @@ class FontFragment extends StatelessWidget {
     );
   }
 
-  _saveButton() {
+  _saveButton(BuildContext context) {
     return Obx(() => Visibility(
         visible: controller.seekValueShow.value,
         child: BigButton(
           onPressed: () {
+            Dimens.textSizeTimes = controller
+                .valueToValueTime(controller.seekValue.value.toDouble());
             controller.storage(
-                MineController.constSeekValue, controller.seekValue.value);
+                MineController.constSeekValue, Dimens.textSizeTimes);
+            //通知儲存
+            controller.items[1].value=controller.seekValue.value.toString();
             controller.seekValueShow.value = false;
-            Get.snackbar("儲存成功", "", snackPosition: SnackPosition.BOTTOM);
+            Phoenix.rebirth(context);
+            Get.snackbar("儲存成功", "",
+                duration: const Duration(milliseconds: 1200),
+                snackPosition: SnackPosition.BOTTOM);
           },
         )));
   }

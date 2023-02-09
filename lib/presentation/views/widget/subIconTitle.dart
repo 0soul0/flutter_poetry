@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
 
@@ -27,7 +28,7 @@ class SubIconTitle extends StatelessWidget {
         ),
         Container(
             margin: const EdgeInsets.only(left: Dimens.textSpace),
-            child: Text(
+            child: TextUnitWidget(
               text,
               style: Styles.subTitleStyleBlack,
               textAlign: TextAlign.center,

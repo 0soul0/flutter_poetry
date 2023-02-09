@@ -3,6 +3,7 @@ import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../../../resource/style.dart';
+import '../widget/textUnitWidget.dart';
 
 class SearchResultItem extends StatelessWidget {
   const SearchResultItem(this.onTapFunction,
@@ -36,13 +37,13 @@ class SearchResultItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            TextUnitWidget(
               title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Styles.textStyleBlack,
             ),
-            Text(
+            TextUnitWidget(
               description,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

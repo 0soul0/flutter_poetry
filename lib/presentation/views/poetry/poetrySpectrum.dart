@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import '../../../domain/model/poetryModel.dart';
 import '../../../resource/colors.dart';
 import '../widget/FloatFabWidget.dart';
+import '../widget/textUnitWidget.dart';
 
 class PoetrySpectrum extends StatefulWidget {
   const PoetrySpectrum({Key? key}) : super(key: key);
@@ -98,7 +99,7 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
                                 : 0,
                         offset: const Offset(0, 0))
                   ]),
-              child: Text(
+              child: TextUnitWidget(
                 item.nameV,
                 textAlign: TextAlign.center,
                 style: Styles.subTitleStyleWhite,

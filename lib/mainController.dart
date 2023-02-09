@@ -1,12 +1,20 @@
+import 'dart:ffi';
+
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter_poetry/domain/db/fileDb.dart';
 import 'package:flutter_poetry/domain/db/poetryDb.dart';
 import 'package:flutter_poetry/domain/db/subCategoryDb.dart';
 import 'package:flutter_poetry/domain/db/systemDb.dart';
+import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
 import 'package:flutter_poetry/domain/model/fileModel.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/domain/model/systemInfoModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
+import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
+import 'package:flutter_poetry/resource/dimens.dart';
+import 'package:flutter_poetry/routes/singleton.dart';
 import 'package:flutter_poetry/tool/extension.dart';
+import 'package:flutter_poetry/tool/sharedPreferencesUnit.dart';
 import 'data/data_source/api.dart';
 import 'data/routeApi.dart';
 import 'domain/db/categoryDb.dart';
@@ -22,7 +30,12 @@ class MainController extends BaseController {
   @override
   Future onInit() async {
     super.onInit();
+    await init();
     await request();
+  }
+
+  init() async {
+    Dimens.textSizeTimes=double.parse(await SharedPreferencesUnit().read(MineController.constSeekValue,Dimens.textSizeTimes.toString()));
   }
 
   /// Request information of system data
@@ -109,6 +122,7 @@ class MainController extends BaseController {
             }
           }
           // 更新完成否更新完成設定為true
+          Singleton.getEventBusInstance().fire(MsgEvent("update file finish"));
           // await updateFileDownloadStatus(FileModel.keyUpdateDone, newFile);
         });
       }

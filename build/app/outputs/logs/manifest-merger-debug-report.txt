@@ -1,6 +1,8 @@
 -- Merging decision tree log ---
 application
 INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:3:4-33:19
+MERGED from [:url_launcher_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-14:19
+MERGED from [:url_launcher_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-14:19
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/liushuya/.gradle/caches/transforms-3/dee59bb480020f42d53c2ea15e4501f7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/liushuya/.gradle/caches/transforms-3/dee59bb480020f42d53c2ea15e4501f7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.core:core:1.8.0] /Users/liushuya/.gradle/caches/transforms-3/270e9501dde0430a83746f97bf9ab544/transformed/core-1.8.0/AndroidManifest.xml:24:5-89
@@ -20,6 +22,7 @@ MERGED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/
 MERGED from [:shared_preferences_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:audioplayers_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/audioplayers_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:sqflite] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:url_launcher_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-16:12
 MERGED from [:path_provider_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:flutter_native_splash] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/flutter_native_splash/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/liushuya/.gradle/caches/transforms-3/006d93cd422dbc43e89591147c2de572/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
@@ -67,6 +70,8 @@ MERGED from [:audioplayers_android] /Users/liushuya/Desktop/code/flutter/flutter
 MERGED from [:audioplayers_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/audioplayers_android/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:sqflite] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:sqflite] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:url_launcher_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:url_launcher_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:path_provider_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:path_provider_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_native_splash] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/flutter_native_splash/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
@@ -119,6 +124,14 @@ uses-permission#android.permission.INTERNET
 ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/debug/AndroidManifest.xml:7:5-66
 	android:name
 		ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/debug/AndroidManifest.xml:7:22-64
+activity#io.flutter.plugins.urllauncher.WebViewActivity
+ADDED from [:url_launcher_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-13:74
+	android:exported
+		ADDED from [:url_launcher_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
+	android:theme
+		ADDED from [:url_launcher_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
+	android:name
+		ADDED from [:url_launcher_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
 uses-library#androidx.window.extensions
 ADDED from [androidx.window:window:1.0.0-beta04] /Users/liushuya/.gradle/caches/transforms-3/dee59bb480020f42d53c2ea15e4501f7/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
 	android:required

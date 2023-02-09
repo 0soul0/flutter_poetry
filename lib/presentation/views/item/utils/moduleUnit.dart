@@ -4,6 +4,7 @@ import 'package:flutter_poetry/presentation/views/item/frameItem.dart';
 import '../../../../domain/model/itemModel.dart';
 import '../listSmallItem.dart';
 import '../searchResultItem.dart';
+import '../selectedItem.dart';
 import '../splitItem.dart';
 
 class ModuleUtils {
@@ -12,7 +13,12 @@ class ModuleUtils {
   static const poetryModel = 0;
   static const poetryModelWithType = 1;
 
-  static bindItemByModule(ItemModel item) {
+
+  /// bind mine item by type of module
+  ///
+  /// @param item data of item
+  /// @return widget
+  static bindMineItemByModule(ItemModel item) {
     switch (item.module) {
       case listSmallModule:
         return ListSmallItem(
@@ -33,6 +39,7 @@ class ModuleUtils {
   ///
   /// @param item data of poetry
   /// @param type type of poetry item
+  /// /// @return widget
   static bindPoetryItemByModel(PoetryModel item, int type,
       {Function? onTapFunction,title="詩歌"}) {
     switch (type) {

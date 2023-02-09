@@ -9,14 +9,16 @@ import '../../../resource/dimens.dart';
 import '../widget/backIconButton.dart';
 import '../widget/subIconTitle.dart';
 import '../item/catalogue_item.dart';
+import '../widget/textUnitWidget.dart';
 
 class CatalogueFull extends GetView<SearchController> {
   const CatalogueFull({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.banner)),
+      appBar: AppBar(title: TextUnitWidget(AppLocalizations.of(context)!.banner)),
       body: Container(
           padding: const EdgeInsets.fromLTRB(Dimens.backgroundMarginLeft,
               Dimens.textSpace, Dimens.backgroundMarginRight, Dimens.textSpace),
@@ -37,6 +39,7 @@ class CatalogueFull extends GetView<SearchController> {
   }
 
   _catalogueList() {
+    controller.queryAllCategory();
     return Obx(() => AlignedGridView.count(
           scrollDirection: Axis.vertical,
           crossAxisCount: 3,

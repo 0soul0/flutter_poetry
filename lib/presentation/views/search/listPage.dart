@@ -10,6 +10,7 @@ import '../../../resource/style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../item/utils/moduleUnit.dart';
 import '../widget/subIconTitle.dart';
+import '../widget/textUnitWidget.dart';
 import 'searchController.dart';
 
 class ListPage<T> extends StatelessWidget {
@@ -32,7 +33,7 @@ class ListPage<T> extends StatelessWidget {
                 onTapDelay: (){
                   Get.toNamed(AppRoutes.catalogueFull);
                 },
-                child: const Text("目錄",
+                child: const TextUnitWidget("目錄",
                     style: Styles.subTitleStyleMainColor),
               ),
             )

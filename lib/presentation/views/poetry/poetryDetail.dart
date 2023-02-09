@@ -12,6 +12,7 @@ import '../../../resource/colors.dart';
 import '../../../resource/style.dart';
 import '../../../routes/appRoutes.dart';
 import '../widget/backIconButton.dart';
+import '../widget/textUnitWidget.dart';
 import '../widget/touchUnitWidget.dart';
 
 /// A class representing show detail of poetry
@@ -22,7 +23,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(controller.arguments.getTitle()),
+        title: TextUnitWidget(controller.arguments.getTitle()),
       ),
       body: Stack(
         children: [
@@ -68,7 +69,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
               ),
               Expanded(
                 child: Center(
-                  child: Text(
+                  child: TextUnitWidget(
                     controller.arguments.title,
                     style: Styles.subTitleStyleBlack,
                   ),
@@ -129,7 +130,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
           margin: const EdgeInsets.fromLTRB(Dimens.space, 0, Dimens.space, 0),
           child: Row(
             children: [
-              Text("${controller.getDurationTime(controller.position.value)}"),
+              TextUnitWidget("${controller.getDurationTime(controller.position.value)}"),
               Expanded(
                   child: SizedBox(
                 height: 20,
@@ -142,7 +143,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                   },
                 ),
               )),
-              Text("${controller.getDurationTime(controller.duration.value)}"),
+              TextUnitWidget("${controller.getDurationTime(controller.duration.value)}"),
             ],
           ),
         ));
@@ -156,7 +157,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
           itemCount: controller.items.length,
           itemBuilder: (context, index) {
             var item = controller.items[index];
-            return Text(
+            return TextUnitWidget(
               item,
               style: Styles.textStyleBlack,
               textAlign: TextAlign.left,
@@ -168,7 +169,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   _refrain() {
     return Obx(() => Container(
           margin: const EdgeInsets.only(left: Dimens.textSpace * 2),
-          child: Text(controller.refrain.toString(),
+          child: TextUnitWidget(controller.refrain.toString(),
               key: controller.keyRefrain,
               style: Styles.textStyleBlack,
               textAlign: TextAlign.left),

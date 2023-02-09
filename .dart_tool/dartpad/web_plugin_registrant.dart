@@ -9,6 +9,7 @@
 import 'package:audioplayers_web/audioplayers_web.dart';
 import 'package:flutter_native_splash/flutter_native_splash_web.dart';
 import 'package:shared_preferences_web/shared_preferences_web.dart';
+import 'package:url_launcher_web/url_launcher_web.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 void registerPlugins([final Registrar? pluginRegistrar]) {
@@ -16,5 +17,6 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   AudioplayersPlugin.registerWith(registrar);
   FlutterNativeSplashWeb.registerWith(registrar);
   SharedPreferencesPlugin.registerWith(registrar);
+  UrlLauncherPlugin.registerWith(registrar);
   registrar.registerMessageHandler();
 }

@@ -43,9 +43,9 @@ class BaseDb {
   autoCheckInsertOrUpdateWithId(Map<String, dynamic> m) async {
     var map = await query('id = ?', [m['id']]);
     if (map.length > 0) {
-      await update(m);
+     return await update(m);
     } else {
-      await insert(m);
+     return await insert(m);
     }
   }
 
@@ -53,6 +53,7 @@ class BaseDb {
       String where, List<Object?>? whereArgs, Map<String, dynamic> m) async {
     var map = await query(where, whereArgs);
     if (map.length > 0) {
+      m['id']=map[0]['id'];
       await update(m);
     } else {
       await insert(m);

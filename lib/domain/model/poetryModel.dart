@@ -53,12 +53,6 @@ class PoetryModel {
 
   getMedia() {
     List<SpectrumModel> list = [];
-    list.add(SpectrumModel(
-        index:4,
-        name: "吉他", media: guitarMedia ?? "", spectrum: guitarSpectrum,nameV: "吉\n他"));
-    list.add(SpectrumModel(
-        index:3,
-        name: "吉他", media: guitarMedia ?? "", spectrum: guitarSpectrum,nameV: "吉\n他"));
     if (singMedia.isNotEmpty) {
       list.add(SpectrumModel( index:0,name: "歌唱", media: singMedia, spectrum: "",nameV: "歌\n唱"));
     }
