@@ -11,17 +11,25 @@ import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lifecycle/lifecycle.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'firebase_options.dart';
 import 'presentation/views/record/recordFragment.dart';
 import 'presentation/views/search/searchFragment.dart';
 import 'presentation/views/mine/mineFragment.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:storage_view/storage_view.dart';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'routes/appPages.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 
 late MainController controller;
 
 Future<void> main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  // MobileAds.instance.initialize();
+
   init();
   //啟動launch page
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +38,78 @@ Future<void> main() async {
   // FlutterNativeSplash.remove();
 }
 
-init() {
+init() async {
+  await checkPermission();
+  await registerNotification();
   controller = Get.put(MainController());
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+}
+
+// showDialog() async{
+//
+//   await animated_dialog_box.showRotatedAlert(
+//       title: Center(child: Text("Hello")), // IF YOU WANT TO ADD
+//       context: context,
+//       firstButton: MaterialButton(
+//         // FIRST BUTTON IS REQUIRED
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(40),
+//         ),
+//         color: Colors.white,
+//         child: Text('Ok'),
+//         onPressed: () {
+//           Navigator.of(context).pop();
+//         },
+//       ),
+//       secondButton: MaterialButton(
+//         // OPTIONAL BUTTON
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(40),
+//         ),
+//         color: Colors.white,
+//         child: Text('Cancel'),
+//         onPressed: () {
+//           Navigator.of(context).pop();
+//         },
+//       ),
+//       icon: Icon(Icons.info_outline,color: Colors.red,), // IF YOU WANT TO ADD ICON
+//       yourWidget: Container(
+//         child: Text('This is my first package'),
+//       ));
+// }
+
+checkPermission() async {
+  var status = await Permission.notification.status;
+  if (status.isDenied) {
+    // openAppSettings();
+  }
+}
+
+registerNotification() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {});
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 }
 
 class MyApp extends StatelessWidget {
@@ -78,7 +156,8 @@ class BottomNavigationControllerState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: TextUnitWidget(AppLocalizations.of(context)!.banner)),
+      appBar:
+          AppBar(title: TextUnitWidget(AppLocalizations.of(context)!.banner)),
       body: pages[_currentIndex],
       bottomNavigationBar: SizedBox(
         height: 56,

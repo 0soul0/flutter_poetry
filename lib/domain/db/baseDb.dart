@@ -31,9 +31,10 @@ class BaseDb {
     return await db.query(table, limit: limit);
   }
 
-  queryPage(int page, int count, {String? orderBy="id ASC"}) async {
-    page =(page-1)*count;
-    return await db.rawQuery('SELECT * FROM $table ORDER BY $orderBy LIMIT $page,$count');
+  queryPage(int page, int count, {String? orderBy = "id ASC"}) async {
+    page = (page - 1) * count;
+    return await db
+        .rawQuery('SELECT * FROM $table ORDER BY $orderBy LIMIT $page,$count');
   }
 
   update(Map<String, dynamic> m) async {
@@ -43,9 +44,9 @@ class BaseDb {
   autoCheckInsertOrUpdateWithId(Map<String, dynamic> m) async {
     var map = await query('id = ?', [m['id']]);
     if (map.length > 0) {
-     return await update(m);
+      return await update(m);
     } else {
-     return await insert(m);
+      return await insert(m);
     }
   }
 
@@ -53,7 +54,7 @@ class BaseDb {
       String where, List<Object?>? whereArgs, Map<String, dynamic> m) async {
     var map = await query(where, whereArgs);
     if (map.length > 0) {
-      m['id']=map[0]['id'];
+      m['id'] = map[0]['id'];
       await update(m);
     } else {
       await insert(m);
@@ -70,5 +71,9 @@ class BaseDb {
 
   isExist(String where, List<Object?>? whereArgs) async {
     return await query(where, whereArgs) != null;
+  }
+
+  isOpen() {
+    return db.isOpen;
   }
 }

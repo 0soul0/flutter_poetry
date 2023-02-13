@@ -35,14 +35,14 @@ class MainController extends BaseController {
   }
 
   init() async {
-    Dimens.textSizeTimes=double.parse(await SharedPreferencesUnit().read(MineController.constSeekValue,Dimens.textSizeTimes.toString()));
+    Dimens.textSizeTimes = double.parse(await SharedPreferencesUnit()
+        .read(MineController.constSeekValue, Dimens.textSizeTimes.toString()));
   }
 
   /// Request information of system data
   request() async {
     return Api.getInstance().get(RouteApi.systemInfo,
         success: (Map<String, dynamic> map) {
-
       SystemInfoModel systemInfo = SystemInfoModel.fromMap(map);
 
       checkSystemInfo(systemInfo);
@@ -54,11 +54,6 @@ class MainController extends BaseController {
   /// @param systemInfo Need checked data
   checkSystemInfo(SystemInfoModel systemInfo) async {
     await _systemDb.open();
-    await _fileDb.open();
-    await _poetryDb.open();
-    await _subCategoryDb.open();
-    await _categoryDb.open();
-
     var maps = await _systemDb.queryAll();
     var oldInfo = SystemInfoModel.fromMap(maps[0]);
     final newInfo = systemInfo;
@@ -68,24 +63,20 @@ class MainController extends BaseController {
       //更新版本
       await _systemDb.updateVersion(newInfo.appVersion);
     }
+    _systemDb.close();
 
     // 檢查檔案 版本
     await checkAndUpdateFilesVersion(newInfo);
-
-    _systemDb.close();
-    _poetryDb.close();
-    _fileDb.close();
-    _subCategoryDb.close();
-    _categoryDb.close();
   }
 
   /// Check version of files. if version of files will upgrade,Update files into locale database
   ///
   /// @param newInfo Need checked data
   checkAndUpdateFilesVersion(SystemInfoModel newInfo) async {
+    // await _fileDb.open();
+
     var len = newInfo.files?.length ?? 0;
     for (int i = 0; i < len; i++) {
-
       var newFile = newInfo.files?[i] ?? FileModel();
       var fileMap = await _fileDb.query('id = ?', [newFile.id]);
       var oldV = fileMap.length > 0 ? fileMap[0]['dataVersion'] : "-1";
@@ -95,13 +86,12 @@ class MainController extends BaseController {
 
       if (isFileVersionUpdate(oldV, newFile.dataVersion, newFile) ||
           dataUpdateDone == FileModel.keyUpdateUnDone) {
-
         //更新資料庫版本和是否更新完成設定為false
-        await updateFileDownloadStatus(
-            FileModel.keyUpdateUnDone, newFile);
+        await updateFileDownloadStatus(FileModel.keyUpdateUnDone, newFile);
         // 更新檔案
         await Api.getInstance().getArray(newFile.url,
             success: (List<dynamic> list) async {
+          // await openDb(newFile.dbType);
           for (int i = 0; i < list.length; i++) {
             switch (newFile.dbType) {
               case FileModel.keyPoetryDb:
@@ -123,9 +113,52 @@ class MainController extends BaseController {
           }
           // 更新完成否更新完成設定為true
           Singleton.getEventBusInstance().fire(MsgEvent("update file finish"));
+          // await closeDb(newFile.dbType);
           // await updateFileDownloadStatus(FileModel.keyUpdateDone, newFile);
         });
       }
+    }
+
+    _fileDb.close();
+  }
+
+  openDb(String type) async {
+    switch (type) {
+      case FileModel.keyPoetryDb:
+        {
+          await _poetryDb.open();
+          break;
+        }
+      case FileModel.keyCategoryDb:
+        {
+          await _categoryDb.open();
+          break;
+        }
+      case FileModel.keySubCategoryDb:
+        {
+          await _subCategoryDb.open();
+          break;
+        }
+    }
+  }
+
+  closeDb(String type) async {
+    switch (type) {
+      case FileModel.keyPoetryDb:
+        {
+          await _poetryDb.close();
+          break;
+        }
+      case FileModel.keyCategoryDb:
+        {
+          await _categoryDb.close();
+          break;
+        }
+      case FileModel.keySubCategoryDb:
+        {
+          await _subCategoryDb.close();
+          break;
+        }
     }
   }
 

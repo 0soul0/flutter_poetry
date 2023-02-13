@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.flutter_poetry.app-mergeDebugResources-11:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.example.flutter_poetry.app-mergeDebugResources-17:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
                     "source": "/Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/res/values-night/styles.xml",
