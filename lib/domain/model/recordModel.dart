@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:floor/floor.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
-import 'package:flutter_poetry/presentation/views/poetry/poetryDetail.dart';
 
-
+@entity
 class RecordModel extends PoetryModel{
   RecordModel(this.sourceId,
       {String id = "", String title = "", int number = -1, String description=""}):super(id:id,number:number,title: title,description: description);

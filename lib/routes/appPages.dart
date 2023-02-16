@@ -8,7 +8,6 @@ import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.
 import 'package:flutter_poetry/presentation/views/search/searchController.dart';
 import 'package:get/get.dart';
 
-import '../presentation/views/common/catalogueFull.dart';
 import '../presentation/views/poetry/poetrySpectrum.dart';
 import '../presentation/views/search/catalogueFull.dart';
 import '../presentation/views/search/searchFragment.dart';

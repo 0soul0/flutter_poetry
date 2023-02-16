@@ -3,8 +3,10 @@ import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/routes/appRoutes.dart';
+import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,96 +18,64 @@ import 'searchController.dart';
 class ListPage<T> extends StatelessWidget {
   ListPage({Key? key}) : super(key: key);
 
-  final SearchController controller=Get.find<SearchController>();
+  final SearchController controller = Get.find<SearchController>();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: AppColor.backgroundColor,
-      child: Column(children: [
-        Row(
-          children: [
-            SubIconTitle(AppLocalizations.of(context)!.poetry, Icons.menu_book),
-            Expanded(child: Container()),
-            Container(
-              margin: const EdgeInsets.only(right: Dimens.backgroundMarginRight),
-              child: TouchUnitWidget(
-                onTapDelay: (){
-                  Get.toNamed(AppRoutes.catalogueFull);
-                },
-                child: const TextUnitWidget("目錄",
-                    style: Styles.subTitleStyleMainColor),
-              ),
-            )
-          ],
-        ),
-        const Divider(
-            height: 0,
-            thickness: Dimens.lineDividing,
-            color: AppColor.dividerColor),
-        Column(
-          children: const [
-            /**
-                // Container(
-                //     padding: const EdgeInsets.fromLTRB(
-                //         Dimens.backgroundMarginLeft,
-                //         Dimens.textSpace,
-                //         Dimens.backgroundMarginRight,
-                //         Dimens.textSpace),
-                //     height: 104,
-                //     width: MediaQuery.of(context).size.width,
-                //     child: Column(
-                //       children: [
-                //         Row(
-                //           children: [
-                //             Text(
-                //               AppLocalizations.of(context)!.catalogue,
-                //               style: Styles.textStyleBlack,
-                //             ),
-                //             Expanded(child: Container()),
-                //             InkWell(
-                //               onTap: () {
-                //                 Get.to(CatalogueFull());
-                //               },
-                //               child: Text(
-                //                 AppLocalizations.of(context)!.seeMore,
-                //                 style: Styles.helperStyle,
-                //               ),
-                //             ),
-                //           ],
-                //         ),
-                //         const SizedBox(
-                //           height: Dimens.space,
-                //         ),
-                //         Expanded(child: _catalogueList()),
-                //       ],
-                //     )),
-             **/
-            Divider(
-                height: Dimens.moduleDividing,
-                thickness: Dimens.moduleDividing,
-                color: AppColor.dividerColor),
-          ],
-        ),
-        Expanded(
-            child: Container(
-          padding: const EdgeInsets.symmetric(vertical: Dimens.textSpace),
-          child: _searchResult(),
-        )),
-        const Divider(
-            height: Dimens.moduleDividing,
-            thickness: Dimens.moduleDividing,
-            color: AppColor.dividerColor),
-        Container(
-          height: 32,
-          decoration: const BoxDecoration(color: AppColor.dividerColor),
-          child: _search(context),
-        ),
-        const Divider(
-            height: Dimens.moduleDividing,
-            thickness: Dimens.moduleDividing,
-            color: AppColor.dividerColor),
-      ]),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SubIconTitle(
+                  AppLocalizations.of(context)!.poetry, Icons.menu_book),
+              Expanded(child: Container()),
+              Container(
+                margin:
+                    const EdgeInsets.only(right: Dimens.backgroundMarginRight),
+                child: TouchUnitWidget(
+                  onTapDelay: () {
+                    Get.toNamed(AppRoutes.catalogueFull);
+                  },
+                  child: const TextUnitWidget("目錄",
+                      style: Styles.subTitleStyleMainColor),
+                ),
+              )
+            ],
+          ),
+          const Divider(
+              height: 0,
+              thickness: Dimens.lineDividing,
+              color: AppColor.dividerColor),
+          Column(
+            children: const [
+              Divider(
+                  height: Dimens.moduleDividing,
+                  thickness: Dimens.moduleDividing,
+                  color: AppColor.dividerColor),
+            ],
+          ),
+          Expanded(
+              child: Container(
+            padding: const EdgeInsets.symmetric(vertical: Dimens.textSpace),
+            child: _searchResult(),
+          )),
+          const Divider(
+              height: Dimens.moduleDividing,
+              thickness: Dimens.moduleDividing,
+              color: AppColor.dividerColor),
+          Container(
+            height: 32,
+            decoration: const BoxDecoration(color: AppColor.dividerColor),
+            child: _search(context),
+          ),
+          const Divider(
+              height: Dimens.moduleDividing,
+              thickness: Dimens.moduleDividing,
+              color: AppColor.dividerColor),
+        ],
+      ),
     );
   }
 
@@ -120,7 +90,7 @@ class ListPage<T> extends StatelessWidget {
           itemBuilder: (context, index) {
             var lastItem = PoetryModel();
             if (index > 0) {
-              lastItem = controller.poetryItems[index - 1] ;
+              lastItem = controller.poetryItems[index - 1];
             }
             var item = controller.poetryItems[index];
 

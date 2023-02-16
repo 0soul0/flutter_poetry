@@ -9,4 +9,11 @@
     </option>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Android API 15 Platform" project-jdk-type="Android SDK" />
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="flutter_poetry_android" />
+      </set>
+    </option>
+  </component>
 </project>

@@ -4,7 +4,6 @@ import 'package:flutter_poetry/presentation/views/search/searchController.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import '../../../domain/model/catalogueModel.dart';
-import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
 import '../widget/backIconButton.dart';
 import '../widget/subIconTitle.dart';
@@ -14,11 +13,11 @@ import '../widget/textUnitWidget.dart';
 class CatalogueFull extends GetView<SearchController> {
   const CatalogueFull({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: TextUnitWidget(AppLocalizations.of(context)!.banner)),
+      appBar:
+          AppBar(title: TextUnitWidget(AppLocalizations.of(context)!.banner)),
       body: Container(
           padding: const EdgeInsets.fromLTRB(Dimens.backgroundMarginLeft,
               Dimens.textSpace, Dimens.backgroundMarginRight, Dimens.textSpace),
@@ -39,7 +38,7 @@ class CatalogueFull extends GetView<SearchController> {
   }
 
   _catalogueList() {
-    controller.queryAllCategory();
+    controller.queryAllCatalogue();
     return Obx(() => AlignedGridView.count(
           scrollDirection: Axis.vertical,
           crossAxisCount: 3,
@@ -51,8 +50,8 @@ class CatalogueFull extends GetView<SearchController> {
             return CatalogueItem(item, () {
               controller.resetCatalogueModelList();
 
-              item.type = CatalogueModel.constSELECTED;
-              controller.updateCatalogueModelList(index, item);
+              item.selectedStatus = CatalogueModel.constSELECTED;
+              controller.updateCatalogue(index, item, false);
 
               //change search text
               controller.setSearchText(item.category);

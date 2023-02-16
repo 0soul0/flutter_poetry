@@ -1,5 +1,8 @@
 import 'dart:ffi';
 
+import 'package:floor/floor.dart';
+
+@entity
 class PoetryModel {
   PoetryModel(
       {this.id = "",
@@ -20,6 +23,7 @@ class PoetryModel {
       this.guitarMedia = "",
       this.description = ""});
 
+  @primaryKey
   late String id;
   late int number;
   late int type; //0詩歌 1補充本

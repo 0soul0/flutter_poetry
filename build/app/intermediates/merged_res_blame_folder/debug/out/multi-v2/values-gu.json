@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.flutter_poetry.app-mergeDebugResources-17:/values-gu/values-gu.xml",
+            "outputFile": "com.example.flutter_poetry.app-mergeDebugResources-22:/values-gu/values-gu.xml",
             "map": [
                 {
                     "source": "/Users/liushuya/.gradle/caches/transforms-3/c73ad65913b879aa233696edd15e21e1/transformed/jetified-play-services-basement-18.1.0/res/values-gu/values.xml",
@@ -30,11 +30,45 @@
                         "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "20",
+                        "startLines": "38",
                         "startColumns": "4",
-                        "startOffsets": "2231",
+                        "startOffsets": "3663",
                         "endColumns": "100",
-                        "endOffsets": "2327"
+                        "endOffsets": "3759"
+                    }
+                },
+                {
+                    "source": "/Users/liushuya/.gradle/caches/transforms-3/991e39c6c384247326314da8e222c71d/transformed/jetified-play-services-ads-21.3.0/res/values-gu/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "199,276,374,425,543,599,711,802,839,925,961,994,1043,1118",
+                        "endColumns": "76,97,50,117,55,111,90,36,85,35,32,48,74,44",
+                        "endOffsets": "275,373,424,542,598,710,801,838,924,960,993,1042,1117,1162"
+                    },
+                    "to": {
+                        "startLines": "24,25,26,27,28,29,30,31,32,33,34,35,36,37",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "2643,2724,2826,2881,3003,3063,3179,3274,3315,3405,3445,3482,3535,3614",
+                        "endColumns": "80,101,54,121,59,115,94,40,89,39,36,52,78,48",
+                        "endOffsets": "2719,2821,2876,2998,3058,3174,3269,3310,3400,3440,3477,3530,3609,3658"
+                    }
+                },
+                {
+                    "source": "/Users/liushuya/.gradle/caches/transforms-3/0aed28fbe0d6feab509d6f9cbfb158bf/transformed/browser-1.4.0/res/values-gu/values-gu.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,156,257,366",
+                        "endColumns": "100,100,108,100",
+                        "endOffsets": "151,252,361,462"
+                    },
+                    "to": {
+                        "startLines": "20,21,22,23",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "2231,2332,2433,2542",
+                        "endColumns": "100,100,108,100",
+                        "endOffsets": "2327,2428,2537,2638"
                     }
                 },
                 {

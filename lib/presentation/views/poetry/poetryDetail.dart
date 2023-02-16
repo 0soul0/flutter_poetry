@@ -23,7 +23,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextUnitWidget(controller.arguments.getTitle()),
+        title: TextUnitWidget(controller.arguments.getTitle(), overflow: TextOverflow.ellipsis,),
       ),
       body: Stack(
         children: [
@@ -72,6 +72,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                   child: TextUnitWidget(
                     controller.arguments.title,
                     style: Styles.subTitleStyleBlack,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),

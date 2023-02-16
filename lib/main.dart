@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/mainController.dart';
+import 'package:flutter_poetry/presentation/views/widget/nativeBannerWidget.dart';
 import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_poetry/resource/l10n/l10n.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lifecycle/lifecycle.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'firebase_options.dart';
@@ -28,7 +30,7 @@ late MainController controller;
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  // MobileAds.instance.initialize();
+  MobileAds.instance.initialize();
 
   init();
   //啟動launch page
@@ -156,8 +158,8 @@ class BottomNavigationControllerState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          AppBar(title: TextUnitWidget(AppLocalizations.of(context)!.banner)),
+      appBar: PreferredSize(preferredSize: const Size.fromHeight(Dimens.bannerHeight),
+      child: NativeBannerWidget(Dimens.bannerHeight),),
       body: pages[_currentIndex],
       bottomNavigationBar: SizedBox(
         height: 56,

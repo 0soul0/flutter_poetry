@@ -1,33 +1,34 @@
 import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_poetry/domain/db/poetryDb.dart';
+import 'package:flutter_poetry/domain/dao/poetryDao.dart';
+import 'package:flutter_poetry/domain/dao/recordDao.dart';
+import 'package:flutter_poetry/domain/fxDataBaseManager.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/db/recordDb.dart';
 import '../../../domain/model/recordModel.dart';
 import '../../../routes/appRoutes.dart';
 import '../../../routes/singleton.dart';
 
 class RecordController extends BaseController {
-  late RecordDb _recordDb;
-  late PoetryDb _poetryDb;
-  late PageController pageController;
+  late RecordDao _recordDb;
+  late PoetryDao _poetryDb;
+  final PageController pageController =PageController(initialPage: 1);
   RxList<RecordModel> recordItems = List<RecordModel>.from([]).obs;
 
   @override
   Future onInit() async {
-    super.onInit();
-    init();
+    await init();
+    initData();
     initEvent();
+    super.onInit();
   }
 
-  init() {
-    _recordDb = RecordDb();
-    _poetryDb = PoetryDb();
-    pageController = PageController(initialPage: 1);
+  init() async {
+    _recordDb = await FxDataBaseManager.recordDao();
+    _poetryDb = await FxDataBaseManager.poetryDao();
   }
 
   initEvent() {
@@ -36,39 +37,29 @@ class RecordController extends BaseController {
     });
   }
 
-  // initData() async {
-  //   await queryAll();
-  // }
+  initData() async {
+    await queryAll();
+  }
 
   queryAll() async {
-    await _recordDb.open();
-    var maps = await _recordDb.queryPage(1, 20, orderBy: "createTime DESC");
-
-    recordItems.value = List.generate(maps.length, (index) {
-      return RecordModel.fromMap(maps[index]);
-    });
-
-    await _recordDb.close();
+    var items = await _recordDb.queryAll(1,20,"createTime DESC");
+    recordItems.value = items;
   }
 
   /// on tap event
   ///
   /// @param item poetryModel of data
   onTapPoetry(RecordModel item) async {
-    await _poetryDb.open();
-    var poetry = await _poetryDb.query('id = ?', [item.sourceId]);
+    var poetry = await _poetryDb.query(item.sourceId);
     insertRecordDb(item);
-    _poetryDb.close();
     Get.toNamed(AppRoutes.poetryDetail,
-        arguments: PoetryModel.fromMap(poetry[0]));
+        arguments: poetry);
   }
 
   /// insert data to recordDb
   insertRecordDb(RecordModel item) async {
-    await _recordDb.open();
     item.updateCreateTime();
-    await _recordDb.autoCheckInsertOrUpdateWithId(item.toMap());
-    _recordDb.close();
+    await _recordDb.updateItem(item);
     Singleton.getEventBusInstance().fire(RecordModel(""));
   }
 }

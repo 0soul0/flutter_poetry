@@ -1,17 +1,27 @@
 import 'dart:convert';
 import 'dart:ffi';
+import 'package:floor/floor.dart';
 import 'package:flutter_poetry/domain/model/fileModel.dart';
 import 'package:get/get.dart';
 
 import 'source/baseModel.dart';
 
+@entity
 class SystemInfoModel extends BaseModel {
-  SystemInfoModel(super.status, this.appVersion, this.baseUrl,
-      this.updateContent, this.files);
+  SystemInfoModel(super.status,
+      {this.id = "",
+      this.appVersion = "",
+      this.baseUrl = "",
+      this.updateContent = "",
+      this.files});
 
+  @primaryKey
+  late String id;
   late String appVersion;
-  late String? baseUrl;
-  late String? updateContent;
+  late String baseUrl;
+  late String updateContent;
+
+  @ignore
   late List<FileModel>? files;
 
   factory SystemInfoModel.fromMap(Map<String, dynamic> json) {
@@ -22,11 +32,13 @@ class SystemInfoModel extends BaseModel {
           .toList();
     }
 
-    return SystemInfoModel(json['status'], json['appVersion'], json['baseUrl'],
-        json['updateContent'], files);
+    return SystemInfoModel(json['status'], id:json['id'],appVersion:json['appVersion'],
+        baseUrl:json['baseUrl'], updateContent:json['updateContent'], files:files);
   }
 
+  @override
   Map<String, dynamic> toMap() => {
+        'id': id,
         'appVersion': appVersion,
         'baseUrl': baseUrl,
         'updateContent': updateContent,

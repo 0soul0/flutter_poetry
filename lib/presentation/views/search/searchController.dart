@@ -1,12 +1,11 @@
+import 'dart:isolate';
 import 'dart:math';
 
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_poetry/data/settingParameters.dart';
-import 'package:flutter_poetry/domain/db/baseDb.dart';
-import 'package:flutter_poetry/domain/db/categoryDb.dart';
-import 'package:flutter_poetry/domain/db/poetryDb.dart';
-import 'package:flutter_poetry/domain/db/recordDb.dart';
+import 'package:flutter_poetry/domain/dao/poetryDao.dart';
+import 'package:flutter_poetry/domain/fxDataBaseManager.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
 import 'package:flutter_poetry/domain/model/recordModel.dart';
@@ -14,6 +13,8 @@ import 'package:flutter_poetry/mainController.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../domain/dao/catalogueDao.dart';
+import '../../../domain/dao/recordDao.dart';
 import '../../../domain/model/poetryModel.dart';
 import '../../../routes/appRoutes.dart';
 import '../../../routes/singleton.dart';
@@ -21,10 +22,10 @@ import '../base/baseController.dart';
 
 ///  search controller
 class SearchController extends BaseController {
-  late PoetryDb _poetryDb;
-  late CategoryDb _categoryDb;
-  late RecordDb _recordDb;
-  late TextEditingController textController;
+  late PoetryDao _poetryDao;
+  late CatalogueDao _catalogueDao;
+  late RecordDao _recordDao;
+  final TextEditingController textController = TextEditingController();
 
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
   RxList<PoetryModel> poetryItems = List<PoetryModel>.from([]).obs;
@@ -33,16 +34,15 @@ class SearchController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    init();
+    await init();
     initData();
   }
 
   /// init class
-  init() {
-    _poetryDb = PoetryDb();
-    _categoryDb = CategoryDb();
-    _recordDb = RecordDb();
-    textController = TextEditingController();
+  init() async {
+    _poetryDao = await FxDataBaseManager.poetryDao();
+    _catalogueDao = await FxDataBaseManager.categoryDao();
+    _recordDao = await FxDataBaseManager.recordDao();
   }
 
   /// init default data
@@ -64,28 +64,28 @@ class SearchController extends BaseController {
   }
 
   /// query all of category
-  queryAllCategory() async {
-    await _categoryDb.open();
-    var catalogData = await _categoryDb.queryAll();
-    _categoryDb.close();
-    addCatalogueModelList(List.generate(catalogData.length, (index) {
-      return CatalogueModel.fromMap(catalogData[index]);
-    }));
+  queryAllCatalogue() async {
+    var catalogData = await _catalogueDao.queryAll();
+    addCatalogueModelList(catalogData);
   }
 
   /// Add catalogue data into rxList
   ///
   /// @param data list of CatalogueModel
   addCatalogueModelList(List<CatalogueModel> data) {
-    catalogueItems.addAll(data);
+    catalogueItems.value = data;
   }
 
   /// Update catalogue data into rxList
   ///
   /// @param index updated position
   /// @param data updated data
-  updateCatalogueModelList(int index, CatalogueModel data) {
+  /// @param isUpdateDb is updated catalogue table
+  updateCatalogue(int index, CatalogueModel data, bool isUpdateDb) {
     catalogueItems[index] = data;
+    if (isUpdateDb) {
+      _catalogueDao.updateItem(data);
+    }
   }
 
   /// Add poetry data into rxList
@@ -105,7 +105,7 @@ class SearchController extends BaseController {
 
   resetCatalogueModelList() {
     for (int i = 0; i < catalogueItems.length; i++) {
-      catalogueItems[i].type = CatalogueModel.constUNSELECTED;
+      catalogueItems[i].selectedStatus = CatalogueModel.constUNSELECTED;
     }
   }
 
@@ -118,12 +118,12 @@ class SearchController extends BaseController {
   ///
   /// @param search needed search text
   search(String search) async {
-    await _poetryDb.open();
-    var poetryData = await _poetryDb.search(search);
-    _poetryDb.close();
-    poetryItems.value = List.generate(poetryData.length, (index) {
-      return PoetryModel.fromMap(setDescription(search, poetryData[index]));
-    });
+    var items = await _poetryDao.search("%$search%");
+    for (int i = 0; i < items.length; i++) {
+      items[i] = PoetryModel.fromMap(setDescription(search, items[i].toMap()));
+    }
+
+    poetryItems.value = items;
   }
 
   /// set description of poetry
@@ -206,22 +206,23 @@ class SearchController extends BaseController {
   ///
   /// @param item poetryModel of data
   onTapPoetry(PoetryModel item) {
+    runMyIsolate(item);
     Get.toNamed(AppRoutes.poetryDetail, arguments: item);
-    insertRecordDb(item);
   }
 
-  /// insert data to recordDb
-  insertRecordDb(PoetryModel item) async {
-    await _recordDb.open();
-    await _recordDb.autoCheckInsertOrUpdate(
-        'sourceId = ?',
-        [item.id],
-        RecordModel(item.id,
-                id: const Uuid().v4(),
-                title: item.title,
-                number: item.number,
-                description: item.description)
-            .toMap());
-    _recordDb.close();
+  void runMyIsolate(PoetryModel item) async {
+    var recordDao = await FxDataBaseManager.recordDao();
+    var data = await recordDao.queryBySourceId(item.id);
+    if (data != null) {
+      data.updateCreateTime();
+      await recordDao.updateItem(data);
+      return;
+    }
+
+    await recordDao.insertItem(RecordModel(item.id,
+        id: const Uuid().v4(),
+        title: item.title,
+        number: item.number,
+        description: item.description));
   }
 }

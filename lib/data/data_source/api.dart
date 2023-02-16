@@ -32,23 +32,47 @@ class Api {
     return dio;
   }
 
+  getReturn<T>(String url, {Function(Object)? error}) async {
+    try {
+      var response = await dio().get(url);
+      return decodeJson(response);
+    } catch (e) {
+      myLog("error url: $url");
+      myLog("error ${e.toString()}");
+      error!(e);
+      return null;
+    }
+  }
+
   get<T>(String url,
       {Function(Map<String, dynamic>)? success,
-        Function(Object)? error}) async {
+      Function(Object)? error}) async {
     try {
       var response = await dio().get(url);
       var json = decodeJson(response);
       success!(json);
     } catch (e) {
-      myLog("error url: ${e.toString()}");
+      myLog("error url: $url");
       myLog("error ${e.toString()}");
       error!(e);
     }
   }
 
+  getArrayReturn<T>(String url, {Function(Object)? error}) async {
+    try {
+      var response = await dio().get(url);
+      var json = decodeJson(response);
+      return json['data'];
+    } catch (e) {
+      myLog("error url: $url");
+      myLog("error ${e.toString()}");
+      error!(e);
+      return null;
+    }
+  }
+
   getArray<T>(String url,
-      {Function(List<dynamic>)? success,
-        Function(Object)? error}) async {
+      {Function(List<dynamic>)? success, Function(Object)? error}) async {
     try {
       var response = await dio().get(url);
       var json = decodeJson(response);
@@ -62,6 +86,6 @@ class Api {
 
   //解析json檔
   static decodeJson(Response response) {
-    return jsonDecode(response.toString());
+    return json.decode(response.data);
   }
 }
