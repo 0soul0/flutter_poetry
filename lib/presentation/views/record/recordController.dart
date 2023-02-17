@@ -37,20 +37,18 @@ class RecordController extends BaseController {
 
   initEvent() {
     Singleton.getEventBusInstance().on<RecordModel>().listen((event) {
-      queryAll();
+      loadData();
     });
   }
 
   initData() async {
-    await queryAll();
+    await loadData();
   }
 
   /// query all of data
-  queryAll() async {
-    await loadData(0);
-  }
 
-  loadData(int page, {int count = 20}) async {
+  /// query data by page
+  loadData({int page=0, int count = 20}) async {
     page = page * count;
     var items = await _recordDao.queryPage(page, count, "createTime DESC");
     if (items.isNotEmpty) {

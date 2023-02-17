@@ -10,7 +10,9 @@ import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
 import 'package:flutter_poetry/domain/model/recordModel.dart';
 import 'package:flutter_poetry/mainController.dart';
+import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../domain/dao/catalogueDao.dart';
@@ -26,7 +28,7 @@ class SearchController extends BaseController {
   late CatalogueDao _catalogueDao;
   late RecordDao _recordDao;
   final TextEditingController textController = TextEditingController();
-
+  final RefreshController refreshController = RefreshController(initialRefresh: false);
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
   RxList<PoetryModel> poetryItems = List<PoetryModel>.from([]).obs;
 
@@ -88,20 +90,6 @@ class SearchController extends BaseController {
     }
   }
 
-  /// Add poetry data into rxList
-  ///
-  /// @param data list of PoetryModel
-  addPoetryModelList(List<PoetryModel> data) {
-    poetryItems.addAll(data);
-  }
-
-  /// Update poetry data into rxList
-  ///
-  /// @param data list of PoetryModel
-  updateAllPoetryModelList(List<PoetryModel> data) {
-    poetryItems.clear();
-    addPoetryModelList(data);
-  }
 
   resetCatalogueModelList() {
     for (int i = 0; i < catalogueItems.length; i++) {
@@ -117,13 +105,16 @@ class SearchController extends BaseController {
   /// search data from locale db
   ///
   /// @param search needed search text
-  search(String search) async {
-    var items = await _poetryDao.search("%$search%");
+  search(String search,{int page = 0,int count = SettingParameters.pageCount}) async {
+    page = page * count;
+    var items = await _poetryDao.search("%$search%",page,count);
+
     for (int i = 0; i < items.length; i++) {
       items[i] = PoetryModel.fromMap(setDescription(search, items[i].toMap()));
     }
-
-    poetryItems.value = items;
+    if(items.isNotEmpty){
+      poetryItems.addAll(items);
+    }
   }
 
   /// set description of poetry

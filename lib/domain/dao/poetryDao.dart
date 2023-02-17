@@ -14,13 +14,13 @@ abstract class PoetryDao extends BaseDao<PoetryModel> {
   @Query("SELECT * FROM $tableName WHERE id = :id")
   Future<PoetryModel?> query(String id);
 
-  @Query(
-      "SELECT * FROM $tableName WHERE number LIKE :str OR title LIKE :str "
+  @Query("SELECT * FROM $tableName WHERE number LIKE :str OR title LIKE :str "
       "OR content LIKE :str "
       "OR refrain LIKE :str "
       "OR author LIKE :str "
       "OR category LIKE :str "
       "OR subCategory LIKE :str "
-      "ORDER BY type ASC, number ASC")
-  Future<List<PoetryModel>> search(String str);
+      "ORDER BY type ASC, number ASC "
+      "LIMIT :page,:count")
+  Future<List<PoetryModel>> search(String str, int page, int count);
 }

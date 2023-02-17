@@ -46,47 +46,44 @@ class ListPage<T> extends StatelessWidget {
   }
 
   _recordResult() {
-    if (controller.recordItems.isEmpty) {
-      return const EmptyPageWidget();
-    }
-
     var time = "";
     var page = 1;
-    return Obx(() =>
-        SmartRefresher(
-          controller: controller.refreshController,
-          enablePullDown: false,
-          enablePullUp: true,
-          header: const WaterDropHeader(),
-          footer: const ClassicFooter(
-            loadStyle: LoadStyle.ShowWhenLoading,
-            completeDuration: Duration(milliseconds: 500),
-          ),
-          onLoading: () async{
-            controller.loadData(page);
-            page++;
-            controller.refreshController.loadComplete();
-          },
-          child: AlignedGridView.count(
-            scrollDirection: Axis.vertical,
-            crossAxisCount: 1,
-            crossAxisSpacing: Dimens.itemSpace,
-            mainAxisSpacing: Dimens.itemSpace,
-            itemCount: controller.recordItems.length,
-            itemBuilder: (context, index) {
-              var item = controller.recordItems[index];
-              var type = ModuleUtils.poetryModel;
-              if (time != item.createTime.split(" ")[0]) {
-                time = item.createTime.split(" ")[0];
-                type = ModuleUtils.poetryModelWithType;
-              }
-              item.number = index;
-              return ModuleUtils.bindPoetryItemByModel(item, type,
-                  onTapFunction: () {
-                    controller.onTapPoetry(item);
-                  }, title: time);
+    return Obx(() => controller.recordItems.isNotEmpty
+        ? SmartRefresher(
+            controller: controller.refreshController,
+            enablePullDown: false,
+            enablePullUp: true,
+            header: const WaterDropHeader(),
+            footer: const ClassicFooter(
+              loadStyle: LoadStyle.ShowWhenLoading,
+              completeDuration: Duration(milliseconds: 500),
+            ),
+            onLoading: () async {
+              controller.loadData(page: page);
+              page++;
+              controller.refreshController.loadComplete();
             },
-          ),
-        ));
+            child: AlignedGridView.count(
+              scrollDirection: Axis.vertical,
+              crossAxisCount: 1,
+              crossAxisSpacing: Dimens.itemSpace,
+              mainAxisSpacing: Dimens.itemSpace,
+              itemCount: controller.recordItems.length,
+              itemBuilder: (context, index) {
+                var item = controller.recordItems[index];
+                var type = ModuleUtils.poetryModel;
+                if (time != item.createTime.split(" ")[0]) {
+                  time = item.createTime.split(" ")[0];
+                  type = ModuleUtils.poetryModelWithType;
+                }
+                item.number = index;
+                return ModuleUtils.bindPoetryItemByModel(item, type,
+                    onTapFunction: () {
+                  controller.onTapPoetry(item);
+                }, title: time);
+              },
+            ),
+          )
+        : const EmptyPageWidget());
   }
 }

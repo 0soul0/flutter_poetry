@@ -7,10 +7,12 @@ import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../item/utils/moduleUnit.dart';
+import '../widget/emptyPageWidget.dart';
 import '../widget/subIconTitle.dart';
 import '../widget/textUnitWidget.dart';
 import 'searchController.dart';
@@ -19,6 +21,8 @@ class ListPage<T> extends StatelessWidget {
   ListPage({Key? key}) : super(key: key);
 
   final SearchController controller = Get.find<SearchController>();
+  int page = 1;
+  String searchVal = "";
 
   @override
   Widget build(BuildContext context) {
@@ -81,31 +85,47 @@ class ListPage<T> extends StatelessWidget {
 
   /// show search result
   _searchResult() {
-    return Obx(() => AlignedGridView.count(
-          scrollDirection: Axis.vertical,
-          crossAxisCount: 1,
-          crossAxisSpacing: Dimens.itemSpace,
-          mainAxisSpacing: Dimens.itemSpace,
-          itemCount: controller.poetryItems.length,
-          itemBuilder: (context, index) {
-            var lastItem = PoetryModel();
-            if (index > 0) {
-              lastItem = controller.poetryItems[index - 1];
-            }
-            var item = controller.poetryItems[index];
 
-            if (index == 0 || lastItem.type != item.type) {
+    return Obx(() => SmartRefresher(
+          controller: controller.refreshController,
+          enablePullDown: false,
+          enablePullUp: true,
+          header: const WaterDropHeader(),
+          footer: const ClassicFooter(
+            loadStyle: LoadStyle.ShowWhenLoading,
+            completeDuration: Duration(milliseconds: 500),
+          ),
+          onLoading: () async {
+            controller.search(searchVal, page: page);
+            page++;
+            controller.refreshController.loadComplete();
+          },
+          child: AlignedGridView.count(
+            scrollDirection: Axis.vertical,
+            crossAxisCount: 1,
+            crossAxisSpacing: Dimens.itemSpace,
+            mainAxisSpacing: Dimens.itemSpace,
+            itemCount: controller.poetryItems.length,
+            itemBuilder: (context, index) {
+              var lastItem = PoetryModel();
+              if (index > 0) {
+                lastItem = controller.poetryItems[index - 1];
+              }
+              var item = controller.poetryItems[index];
+
+              if (index == 0 || lastItem.type != item.type) {
+                return ModuleUtils.bindPoetryItemByModel(
+                    item, ModuleUtils.poetryModelWithType, onTapFunction: () {
+                  controller.onTapPoetry(item);
+                });
+              }
+
               return ModuleUtils.bindPoetryItemByModel(
-                  item, ModuleUtils.poetryModelWithType, onTapFunction: () {
+                  item, ModuleUtils.poetryModel, onTapFunction: () {
                 controller.onTapPoetry(item);
               });
-            }
-
-            return ModuleUtils.bindPoetryItemByModel(
-                item, ModuleUtils.poetryModel, onTapFunction: () {
-              controller.onTapPoetry(item);
-            });
-          },
+            },
+          ),
         ));
   }
 
@@ -115,6 +135,9 @@ class ListPage<T> extends StatelessWidget {
       controller: controller.textController,
       textAlign: TextAlign.left,
       onChanged: (value) {
+        searchVal = value;
+        page = 1;
+
         controller.search(value);
       },
       decoration: InputDecoration(
