@@ -13,4 +13,5 @@ abstract class BaseDao<T>{
 
   @update
   Future<void> updateItems(List<T> item);
+
 }

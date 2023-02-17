@@ -672,7 +672,7 @@ class _$RecordDao extends RecordDao {
   final UpdateAdapter<RecordModel> _recordModelUpdateAdapter;
 
   @override
-  Future<List<RecordModel>> queryAll(
+  Future<List<RecordModel>> queryPage(
     int page,
     int count,
     String orderBy,

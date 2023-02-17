@@ -211,15 +211,14 @@ class SearchController extends BaseController {
   }
 
   void runMyIsolate(PoetryModel item) async {
-    var recordDao = await FxDataBaseManager.recordDao();
-    var data = await recordDao.queryBySourceId(item.id);
+    var data = await _recordDao.queryBySourceId(item.id);
     if (data != null) {
       data.updateCreateTime();
-      await recordDao.updateItem(data);
+      await _recordDao.updateItem(data);
       return;
     }
 
-    await recordDao.insertItem(RecordModel(item.id,
+    await _recordDao.insertItem(RecordModel(item.id,
         id: const Uuid().v4(),
         title: item.title,
         number: item.number,
