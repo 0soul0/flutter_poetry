@@ -23,10 +23,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get poetry => 'Poetry';
 
   @override
-  String get searchHelper => 'input??';
+  String get searchHelper => '輸入詩歌編號/標題/內容';
 
   @override
-  String get seeMore => 'more';
+  String get seeMore => '更多';
 
   @override
   String get catalogue => 'catalogue';

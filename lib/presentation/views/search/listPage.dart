@@ -33,8 +33,8 @@ class ListPage<T> extends StatelessWidget {
         children: [
           Row(
             children: [
-              SubIconTitle(
-                  AppLocalizations.of(context)!.poetry, Icons.menu_book),
+              const SubIconTitle(
+                  "詩歌", Icons.menu_book),
               Expanded(child: Container()),
               Container(
                 margin:
@@ -138,30 +138,29 @@ class ListPage<T> extends StatelessWidget {
       onChanged: (value) {
         searchVal = value;
         page = 1;
-
         controller.search(value);
       },
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
           filled: true,
           fillColor: AppColor.backgroundColor,
-          hintText: AppLocalizations.of(context)!.searchHelper,
+          hintText: "輸入詩歌編號/標題/內容",
           hintStyle: Styles.helperStyle,
-          border: const OutlineInputBorder(
+          border: OutlineInputBorder(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(Dimens.moduleRadius),
                   bottomRight: Radius.circular(Dimens.moduleRadius))),
-          enabledBorder: const OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(width: 0, color: AppColor.dividerColor),
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(Dimens.moduleRadius),
                   bottomRight: Radius.circular(Dimens.moduleRadius))),
-          focusedBorder: const OutlineInputBorder(
+          focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(width: 1, color: AppColor.secondColor),
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(Dimens.moduleRadius),
                   bottomRight: Radius.circular(Dimens.moduleRadius))),
-          contentPadding: const EdgeInsets.all(Dimens.itemPaddingSpace_4),
-          prefixIcon: const Icon(Icons.search)),
+          contentPadding: EdgeInsets.all(Dimens.itemPaddingSpace_4),
+          prefixIcon: Icon(Icons.search)),
     );
   }
 }

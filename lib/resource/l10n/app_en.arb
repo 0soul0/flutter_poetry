@@ -8,7 +8,7 @@
      "search": "Search",
      "mine": "Mine",
      "poetry": "Poetry",
-     "searchHelper":"input??",
-     "seeMore":"more",
+     "searchHelper":"輸入詩歌編號/標題/內容",
+     "seeMore":"更多",
      "catalogue":"catalogue"
 }

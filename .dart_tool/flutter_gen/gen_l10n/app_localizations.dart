@@ -132,13 +132,13 @@ abstract class AppLocalizations {
   /// No description provided for @searchHelper.
   ///
   /// In en, this message translates to:
-  /// **'input??'**
+  /// **'輸入詩歌編號/標題/內容'**
   String get searchHelper;
 
   /// No description provided for @seeMore.
   ///
   /// In en, this message translates to:
-  /// **'more'**
+  /// **'更多'**
   String get seeMore;
 
   /// No description provided for @catalogue.
