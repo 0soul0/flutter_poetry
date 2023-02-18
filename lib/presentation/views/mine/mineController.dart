@@ -8,6 +8,7 @@ import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/item/utils/moduleUnit.dart';
 import 'package:flutter_poetry/presentation/views/mine/setting/fontFragment.dart';
 import 'package:flutter_poetry/presentation/views/mine/setting/languageFragment.dart';
+import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import 'package:flutter_poetry/tool/sharedPreferencesUnit.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,9 +31,9 @@ class MineController extends BaseController {
 
   @override
   Future onInit() async {
+    super.onInit();
     await _defaultSeekValue();
     await initList();
-    super.onInit();
   }
 
   initList() async{
@@ -170,7 +171,7 @@ class MineController extends BaseController {
 
   _defaultSeekValue() async {
     var valueTime = double.parse(
-        await read(constSeekValue, Dimens.textSizeTimes.toString()));
+        await read(constSeekValue, TextUnitWidget.textSizeTimes.toString()));
     setSeekValue(valueTimeToValue(valueTime).toInt());
   }
 

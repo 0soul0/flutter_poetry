@@ -46,7 +46,6 @@ class ListPage<T> extends StatelessWidget {
   }
 
   _recordResult() {
-    var time = "";
     var page = 1;
     return Obx(() => controller.recordItems.isNotEmpty
         ? SmartRefresher(
@@ -72,15 +71,24 @@ class ListPage<T> extends StatelessWidget {
               itemBuilder: (context, index) {
                 var item = controller.recordItems[index];
                 var type = ModuleUtils.poetryModel;
-                if (time != item.createTime.split(" ")[0]) {
-                  time = item.createTime.split(" ")[0];
-                  type = ModuleUtils.poetryModelWithType;
+
+                if (index >= controller.recordItems.length) {
+                  if (index != 0 &&
+                      controller.recordItems[index - 1].createTime
+                              .split(" ")[0] ==
+                          item.createTime.split(" ")[0]) {
+                    controller.recordItemsType.add(ModuleUtils.poetryModel);
+                  } else {
+                    controller.recordItemsType
+                        .add(ModuleUtils.poetryModelWithType);
+                  }
                 }
-                item.number = index;
-                return ModuleUtils.bindPoetryItemByModel(item, type,
+
+                return ModuleUtils.bindPoetryItemByModel(
+                    item, controller.recordItems[index].type,
                     onTapFunction: () {
                   controller.onTapPoetry(item);
-                }, title: time);
+                }, title: item.createTime.split(" ")[0]);
               },
             ),
           )

@@ -1,15 +1,19 @@
 import 'dart:ffi';
+import 'dart:isolate';
 
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
+import 'package:flutter_poetry/domain/dao/typeDao.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
 import 'package:flutter_poetry/domain/model/fileModel.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/domain/model/subCategoryModel.dart';
 import 'package:flutter_poetry/domain/model/systemInfoModel.dart';
+import 'package:flutter_poetry/domain/model/typeModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
+import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/routes/singleton.dart';
 import 'package:flutter_poetry/tool/extension.dart';
@@ -25,29 +29,41 @@ import 'domain/dao/systemInfoDao.dart';
 
 /// MainController class representing a init setting of application
 class MainController extends BaseController {
+
+  static List<TypeModel> typeName = [TypeModel("",name: "詩歌",id: "0")];
+
+
   late SystemInfoDao _systemDao;
   late FileDao _fileDao;
   late PoetryDao _poetryDao;
-  late CatalogueDao _categoryDb;
-  late SubCategoryDao _subCategoryDb;
+  late CatalogueDao _categoryDao;
+  late SubCategoryDao _subCategoryDao;
+  late TypeDao _typeDao;
 
   @override
   Future onInit() async {
     super.onInit();
     await init();
-    await request();
+    request();
+    await initCache();
   }
 
   init() async {
-    Dimens.textSizeTimes = double.parse(await SharedPreferencesUnit()
-        .read(MineController.constSeekValue, Dimens.textSizeTimes.toString()));
+    TextUnitWidget.textSizeTimes = double.parse(await SharedPreferencesUnit()
+        .read(MineController.constSeekValue, TextUnitWidget.textSizeTimes.toString()));
 
     _fileDao = await FxDataBaseManager.fileDao();
     _systemDao = await FxDataBaseManager.systemInfoDao();
     _poetryDao = await FxDataBaseManager.poetryDao();
-    _categoryDb = await FxDataBaseManager.categoryDao();
-    _subCategoryDb = await FxDataBaseManager.subCategoryDao();
+    _categoryDao = await FxDataBaseManager.categoryDao();
+    _subCategoryDao = await FxDataBaseManager.subCategoryDao();
+    _typeDao = await FxDataBaseManager.typeDao();
   }
+
+  initCache() async{
+    typeName = await _typeDao.queryAll();
+  }
+
 
   /// Request information of system data
   request() async {
@@ -81,22 +97,28 @@ class MainController extends BaseController {
         var items = await Api.getInstance().getArrayReturn(newFile.url);
         // 更新檔案
         switch (newFile.dbType) {
-          case FileModel.keyPoetryDb:
+          case PoetryDao.tableName:
             {
               await _poetryDao.insertItems(List.generate(
                   items.length, (index) => PoetryModel.fromMap(items[index])));
               break;
             }
-          case FileModel.keyCategoryDb:
+          case CatalogueDao.tableName:
             {
-              await _categoryDb.insertItems(List.generate(items.length,
+              await _categoryDao.insertItems(List.generate(items.length,
                   (index) => CatalogueModel.fromMap(items[index])));
               break;
             }
-          case FileModel.keySubCategoryDb:
+          case SubCategoryDao.tableName:
             {
-              await _subCategoryDb.insertItems(List.generate(items.length,
+              await _subCategoryDao.insertItems(List.generate(items.length,
                   (index) => SubCategoryModel.fromMap(items[index])));
+              break;
+            }
+          case TypeDao.tableName:
+            {
+              await _typeDao.insertItems(List.generate(
+                  items.length, (index) => TypeModel.fromMap(items[index])));
               break;
             }
         }

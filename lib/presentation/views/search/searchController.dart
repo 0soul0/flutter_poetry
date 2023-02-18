@@ -24,14 +24,16 @@ import '../base/baseController.dart';
 
 ///  search controller
 class SearchController extends BaseController {
+
   late PoetryDao _poetryDao;
   late CatalogueDao _catalogueDao;
   late RecordDao _recordDao;
-  final TextEditingController textController = TextEditingController();
-  final RefreshController refreshController = RefreshController(initialRefresh: false);
+  late final TextEditingController textController = TextEditingController();
+  final RefreshController refreshController =
+      RefreshController(initialRefresh: false);
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
   RxList<PoetryModel> poetryItems = List<PoetryModel>.from([]).obs;
-
+  late List<int> poetryItemType =[];
   /// init controller
   @override
   Future<void> onInit() async {
@@ -90,7 +92,6 @@ class SearchController extends BaseController {
     }
   }
 
-
   resetCatalogueModelList() {
     for (int i = 0; i < catalogueItems.length; i++) {
       catalogueItems[i].selectedStatus = CatalogueModel.constUNSELECTED;
@@ -105,14 +106,21 @@ class SearchController extends BaseController {
   /// search data from locale db
   ///
   /// @param search needed search text
-  search(String search,{int page = 0,int count = SettingParameters.pageCount}) async {
+  search(String search,
+      {int page = 0, int count = SettingParameters.pageCount}) async {
     page = page * count;
-    var items = await _poetryDao.search("%$search%",page,count);
+    var items = await _poetryDao.search("%$search%", page, count);
 
     for (int i = 0; i < items.length; i++) {
       items[i] = PoetryModel.fromMap(setDescription(search, items[i].toMap()));
     }
-    if(items.isNotEmpty){
+
+    if (page == 0) {
+      poetryItems.value = items;
+      return;
+    }
+
+    if (items.isNotEmpty) {
       poetryItems.addAll(items);
     }
   }

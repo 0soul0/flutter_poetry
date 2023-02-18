@@ -21,6 +21,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   Rx<PlayerState> playState = PlayerState.stopped.obs;
   RxBool playerUIStatus = false.obs;
   RxDouble ddd = 0.0.obs;
+  PageController pageController = PageController(initialPage: 1);
 
   late List<AudioPlayer> players;
   late AudioPlayer selectPlayer;
@@ -39,6 +40,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     selectMusicPlayer(0);
   }
 
+
   @override
   void onClose() {
     super.onClose();
@@ -49,17 +51,15 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     setVerticalScreen();
   }
 
-
-
   /// toggle play status
-  togglePlayerUI(){
-    playerUIStatus.value=!playerUIStatus.value;
+  togglePlayerUI() {
+    playerUIStatus.value = !playerUIStatus.value;
   }
 
   /// init music player
   initMusicPlayer() {
     spectrum.value = arguments.getMedia();
-    selectSpectrum.value=spectrum.first;
+    selectSpectrum.value = spectrum.first;
     players = List.generate(spectrum.length,
         (_) => AudioPlayer()..setReleaseMode(ReleaseMode.stop));
   }
@@ -72,7 +72,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
       players[index].setSourceUrl(spectrum[index].media);
     }
     selectPlayer = players[index];
-    selectSpectrum.value= spectrum[index];
+    selectSpectrum.value = spectrum[index];
     selectPlayer.onDurationChanged.listen((d) => duration.value = d);
     selectPlayer.onPositionChanged.listen((d) => position.value = d);
     selectPlayer.onPlayerStateChanged.listen((d) => playState.value = d);
@@ -193,17 +193,16 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   }
 
   /// set horizontal of screen
-  setHorizontalScreen(){
+  setHorizontalScreen() {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   }
 
   /// set Vertical of screen
-  setVerticalScreen(){
+  setVerticalScreen() {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   }
-
 }

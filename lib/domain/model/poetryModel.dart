@@ -95,8 +95,8 @@ class PoetryModel {
 
   PoetryModel.fromMap(Map<String, dynamic> map) {
     id = map["id"] ?? "";
-    number = map["number"] ?? "";
-    type = map["type"] ?? "";
+    number =map["number"] ?? 0;
+    type = map["type"] ?? 0;
     title = map["title"] ?? "";
     content = map["content"] ?? "";
     refrain = map["refrain"] ?? "";
@@ -126,5 +126,5 @@ class SpectrumModel {
   late String spectrum;
   late String media;
   late String name;
-  late String nameV;
+  late String nameV; //垂直顯示
 }

@@ -23,7 +23,10 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextUnitWidget(controller.arguments.getTitle(), overflow: TextOverflow.ellipsis,),
+        title: TextUnitWidget(
+          controller.arguments.getTitle(),
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
       body: Stack(
         children: [
@@ -56,7 +59,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                   Get.toNamed(AppRoutes.poetrySpectrum);
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(Dimens.itemSpace * 1.5),
+                  padding: const EdgeInsets.all(Dimens.itemSpace * 1.7),
                   decoration: BoxDecoration(
                     color: AppColor.secondColor,
                     borderRadius: BorderRadius.circular(Dimens.itemSpace),
@@ -64,16 +67,14 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                   child: const Icon(
                     Icons.queue_music_outlined,
                     color: AppColor.white,
+                    size: Dimens.iconSize,
                   ),
                 ),
               ),
               Expanded(
-                child: Center(
-                  child: TextUnitWidget(
-                    controller.arguments.title,
-                    style: Styles.subTitleStyleBlack,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                child: SizedBox(
+                  height: Dimens.iconSize + Dimens.itemSpace * 3.4,
+                  child: _changeTitle(),
                 ),
               ),
               _play()
@@ -84,6 +85,28 @@ class PoetryDetail extends GetView<PoetryDetailController> {
     );
   }
 
+  _changeTitle() {
+    return Obx(() => PageView.builder(
+          controller: controller.pageController,
+          scrollDirection: Axis.vertical,
+          itemCount: controller.spectrum.length,
+          onPageChanged: (int page) {
+            controller.selectMusicPlayer(page);
+          },
+          itemBuilder: (context, index) {
+            var item = controller.spectrum[index];
+            return Center(
+              child: TextUnitWidget(
+                "(${item.name})+${controller.arguments.title}",
+                style: Styles.textStyleBlack,
+                overflow: TextOverflow.ellipsis,
+              ),
+            );
+          },
+        ));
+  }
+
+  //
   _play() {
     return Obx(() => Row(
           children: [
@@ -131,7 +154,8 @@ class PoetryDetail extends GetView<PoetryDetailController> {
           margin: const EdgeInsets.fromLTRB(Dimens.space, 0, Dimens.space, 0),
           child: Row(
             children: [
-              TextUnitWidget("${controller.getDurationTime(controller.position.value)}"),
+              TextUnitWidget(
+                  "${controller.getDurationTime(controller.position.value)}"),
               Expanded(
                   child: SizedBox(
                 height: 20,
@@ -144,7 +168,8 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                   },
                 ),
               )),
-              TextUnitWidget("${controller.getDurationTime(controller.duration.value)}"),
+              TextUnitWidget(
+                  "${controller.getDurationTime(controller.duration.value)}"),
             ],
           ),
         ));

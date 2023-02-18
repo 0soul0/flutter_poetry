@@ -4,6 +4,7 @@ import 'package:floor/floor.dart';
 import 'package:flutter_poetry/domain/dao/catalogueDao.dart';
 import 'package:flutter_poetry/domain/dao/recordDao.dart';
 import 'package:flutter_poetry/domain/dao/systemInfoDao.dart';
+import 'package:flutter_poetry/domain/dao/typeDao.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/recordModel.dart';
 import 'package:flutter_poetry/domain/model/systemInfoModel.dart';
@@ -15,6 +16,7 @@ import 'dao/subCategoryDao.dart';
 import 'model/fileModel.dart';
 import 'model/poetryModel.dart';
 import 'model/subCategoryModel.dart';
+import 'model/typeModel.dart';
 
 part 'appDatabase.g.dart';
 
@@ -28,7 +30,8 @@ part 'appDatabase.g.dart';
   PoetryModel,
   CatalogueModel,
   SubCategoryModel,
-  RecordModel
+  RecordModel,
+  TypeModel
 ])
 abstract class AppDatabase extends FloorDatabase {
   FileDao get fileDao;
@@ -42,4 +45,6 @@ abstract class AppDatabase extends FloorDatabase {
   SubCategoryDao get subCategoryDao;
 
   RecordDao get recordDao;
+
+  TypeDao get typeDao;
 }

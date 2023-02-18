@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:floor/floor.dart';
+import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/domain/model/source/baseModel.dart';
+
+import '../dao/poetryDao.dart';
 
 @entity
 class FileModel extends BaseModel {
@@ -12,7 +15,7 @@ class FileModel extends BaseModel {
       this.url = "",
       this.updateDate = "",
       this.updates = keyNotUpdatable,
-      this.dbType = keyPoetryDb,
+      this.dbType = PoetryDao.tableName,
       this.dataUpdateDone = keyUpdateUnDone}) : super('');
 
   static const keyNotUpdatable = "0";
@@ -20,9 +23,6 @@ class FileModel extends BaseModel {
   static const keyLimitedTimeUpdate = "2";
   static const keyUpdateDone = 0;
   static const keyUpdateUnDone = 1;
-  static const keySubCategoryDb = "subCategoryDb";
-  static const keyCategoryDb = "categoryDb";
-  static const keyPoetryDb = "poetryDb";
 
   @primaryKey
   late String id;

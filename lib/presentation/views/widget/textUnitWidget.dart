@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
+
 class TextUnitWidget extends Text {
+  static double textSizeTimes = 1;
+
   const TextUnitWidget(
     super.data, {
     super.key,
@@ -22,7 +25,7 @@ class TextUnitWidget extends Text {
 
   @override
   double? get textScaleFactor {
-    if (super.textScaleFactor == null) return Dimens.textSizeTimes;
+    if (super.textScaleFactor == null) return textSizeTimes;
     return super.textScaleFactor;
   }
 }

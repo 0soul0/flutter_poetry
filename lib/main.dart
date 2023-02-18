@@ -24,11 +24,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'routes/appPages.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-
 late MainController controller;
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
 
@@ -158,8 +156,10 @@ class BottomNavigationControllerState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(preferredSize: const Size.fromHeight(Dimens.bannerHeight),
-      child: NativeBannerWidget(Dimens.bannerHeight),),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(Dimens.bannerHeight),
+        child: NativeBannerWidget(Dimens.bannerHeight),
+      ),
       body: pages[_currentIndex],
       bottomNavigationBar: SizedBox(
         height: 56,

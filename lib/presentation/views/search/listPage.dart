@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
+import 'package:flutter_poetry/mainController.dart';
 import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/routes/appRoutes.dart';
@@ -85,7 +86,6 @@ class ListPage<T> extends StatelessWidget {
 
   /// show search result
   _searchResult() {
-
     return Obx(() => SmartRefresher(
           controller: controller.refreshController,
           enablePullDown: false,
@@ -107,21 +107,22 @@ class ListPage<T> extends StatelessWidget {
             mainAxisSpacing: Dimens.itemSpace,
             itemCount: controller.poetryItems.length,
             itemBuilder: (context, index) {
-              var lastItem = PoetryModel();
-              if (index > 0) {
-                lastItem = controller.poetryItems[index - 1];
-              }
               var item = controller.poetryItems[index];
 
-              if (index == 0 || lastItem.type != item.type) {
-                return ModuleUtils.bindPoetryItemByModel(
-                    item, ModuleUtils.poetryModelWithType, onTapFunction: () {
-                  controller.onTapPoetry(item);
-                });
+              if (index >= controller.poetryItemType.length) {
+                if (index != 0 &&
+                    controller.poetryItems[index - 1].type == item.type) {
+                  controller.poetryItemType.add(ModuleUtils.poetryModel);
+                } else {
+                  controller.poetryItemType
+                      .add(ModuleUtils.poetryModelWithType);
+                }
               }
 
               return ModuleUtils.bindPoetryItemByModel(
-                  item, ModuleUtils.poetryModel, onTapFunction: () {
+                  item, controller.poetryItemType[index],
+                  title: MainController.typeName[item.type].name,
+                  onTapFunction: () {
                 controller.onTapPoetry(item);
               });
             },

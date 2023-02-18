@@ -22,12 +22,14 @@ class RecordController extends BaseController {
       RefreshController(initialRefresh: false);
   RxList<RecordModel> recordItems = List<RecordModel>.from([]).obs;
 
+  List<int> recordItemsType =[];
+
   @override
   Future onInit() async {
+    super.onInit();
     await init();
     initData();
     initEvent();
-    super.onInit();
   }
 
   init() async {
@@ -48,14 +50,19 @@ class RecordController extends BaseController {
   /// query all of data
 
   /// query data by page
-  loadData({int page=0, int count = 20}) async {
+  loadData({int page = 0, int count = 20}) async {
     page = page * count;
     var items = await _recordDao.queryPage(page, count, "createTime DESC");
+
+    if (page == 0) {
+      recordItems.value = items;
+      return;
+    }
+
     if (items.isNotEmpty) {
       recordItems.addAll(items);
     }
   }
-
 
   /// on tap event
   ///

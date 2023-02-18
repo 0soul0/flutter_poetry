@@ -41,4 +41,9 @@ class FxDataBaseManager{
     final db= await database() ;
     return db.recordDao;
   }
+
+  static typeDao() async {
+    final db= await database() ;
+    return db.typeDao;
+  }
 }

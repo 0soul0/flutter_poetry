@@ -126,10 +126,10 @@ class FontFragment extends GetView<MineController> {
         visible: controller.seekValueShow.value,
         child: BigButton(
           onPressed: () {
-            Dimens.textSizeTimes = controller
+            TextUnitWidget.textSizeTimes = controller
                 .valueToValueTime(controller.seekValue.value.toDouble());
             controller.storage(
-                MineController.constSeekValue, Dimens.textSizeTimes);
+                MineController.constSeekValue, TextUnitWidget.textSizeTimes);
             //通知儲存
             controller.items[1].value=controller.seekValue.value.toString();
             controller.seekValueShow.value = false;

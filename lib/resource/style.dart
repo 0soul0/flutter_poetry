@@ -13,6 +13,11 @@ class Styles {
       fontSize: Dimens.textSize,
       color: AppColor.textColor);
 
+  static const TextStyle tabStyle = TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: Dimens.textSize,
+      color: AppColor.mainColor);
+
   static const TextStyle subTextStyleSecondColor = TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: Dimens.subTitleSize,
@@ -47,6 +52,8 @@ class Styles {
       fontWeight: FontWeight.w600,
       fontSize: Dimens.homeSize,
       color: AppColor.mainColor);
+
+
 
   static const TextStyle homeTextStyleUnSelect = TextStyle(
       fontWeight: FontWeight.w300,
