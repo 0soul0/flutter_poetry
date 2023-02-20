@@ -22,35 +22,40 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: TextUnitWidget(
-          controller.arguments.getTitle(),
-          overflow: TextOverflow.ellipsis,
-        ),
-      ),
       body: Stack(
         children: [
           Container(
-            margin: const EdgeInsets.only(left: Dimens.textSpace * 2),
+            margin:
+                const EdgeInsets.symmetric(horizontal: Dimens.textSpace * 2),
             child: Column(
               children: [
                 Expanded(
                   child: _poetry(),
                 ),
+                const Divider(
+                  color: Colors.grey,
+                  height: 0.5,
+                ),
+                ScrollToHideWidget(
+                  controller: controller.scrollController,
+                  child: _refrain(),
+                ),
+                const Divider(
+                  color: Colors.grey,
+                  height: 0.5,
+                ),
               ],
             ),
           ),
-          // const BackIconButton(),
+          const BackIconButton(
+            tuneHeight: -Dimens.itemSpace * 9,
+            opacity: 0.6,
+          ),
         ],
       ),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ScrollToHideWidget(
-            controller: controller.scrollController,
-            keyGlobal: controller.keyRefrain,
-            child: _refrain(),
-          ),
           _slider(),
           Row(
             children: [
@@ -106,7 +111,6 @@ class PoetryDetail extends GetView<PoetryDetailController> {
         ));
   }
 
-  //
   _play() {
     return Obx(() => Row(
           children: [
@@ -193,12 +197,22 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   }
 
   _refrain() {
+    if (controller.refrain.isEmpty) {
+      return Container();
+    }
+
     return Obx(() => Container(
-          margin: const EdgeInsets.only(left: Dimens.textSpace * 2),
-          child: TextUnitWidget(controller.refrain.toString(),
-              key: controller.keyRefrain,
-              style: Styles.textStyleBlack,
-              textAlign: TextAlign.left),
+          margin: const EdgeInsets.only(left: Dimens.textSpace * 1),
+          child: Column(
+            children: [
+              const TextUnitWidget(
+                "副歌",
+                style: Styles.textStyleBlack,
+              ),
+              TextUnitWidget(controller.refrain.trim().toString(),
+                  style: Styles.textStyleBlack, textAlign: TextAlign.left),
+            ],
+          ),
         ));
   }
 }

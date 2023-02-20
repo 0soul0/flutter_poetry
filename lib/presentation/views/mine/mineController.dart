@@ -32,7 +32,7 @@ class MineController extends BaseController {
   @override
   Future onInit() async {
     super.onInit();
-    await _defaultSeekValue();
+    await defaultSeekValue();
     await initList();
   }
 
@@ -49,26 +49,26 @@ class MineController extends BaseController {
     items.addAll({
       ItemModel(
           id: 0,
-          title: "捐款",
+          title: "denote".tr,
           value: "你的支持是我們的動力",
           module: ModuleUtils.frameModule),
       ItemModel(
           id: 1,
-          title: "字體大小",
+          title: "textSize".tr,
           value: seekValue.value.toString(),
           onTapFunction: () {
             Get.toNamed(AppRoutes.fontFragment);
           }),
       ItemModel(
           id: 2,
-          title: "語言",
+          title: "language".tr,
           value: selectLanguage[languageIndex],
           onTapFunction: () {
             Get.to(() => const LanguageFragment());
           }),
       ItemModel(
           id: 3,
-          title: "聯絡我們",
+          title: "contactUs".tr,
           onTapFunction: () {
             Get.toNamed(AppRoutes.aboutFragment);
           }),
@@ -169,10 +169,11 @@ class MineController extends BaseController {
     _launchUrl(emailLaunchUri);
   }
 
-  _defaultSeekValue() async {
+  defaultSeekValue() async {
     var valueTime = double.parse(
         await read(constSeekValue, TextUnitWidget.textSizeTimes.toString()));
     setSeekValue(valueTimeToValue(valueTime).toInt());
+    return valueTime;
   }
 
   setSeekValue(int value) {

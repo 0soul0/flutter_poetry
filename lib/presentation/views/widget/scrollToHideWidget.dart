@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import 'package:flutter_poetry/tool/extension.dart';
+
+import '../../../resource/style.dart';
 
 class ScrollToHideWidget extends StatefulWidget {
   final Widget child;
   final ScrollController controller;
   final Duration duration;
-  final GlobalKey keyGlobal;
+  final keyText = GlobalKey();
 
-  const ScrollToHideWidget(
+  ScrollToHideWidget(
       {Key? key,
-      required this.keyGlobal,
       required this.child,
       required this.controller,
       this.duration = const Duration(milliseconds: 200)})
@@ -36,12 +38,13 @@ class _ScrollToHideWidgetState extends State<ScrollToHideWidget> {
   }
 
   void listen() {
-    // if (widget.controller.position.pixels >= 200) {
-    final direction = widget.controller.position.userScrollDirection;
-    if (direction == ScrollDirection.forward) {
-      hide();
-    } else if (direction == ScrollDirection.reverse) {
-      show();
+    if (widget.controller.position.pixels >= 200) {
+      final direction = widget.controller.position.userScrollDirection;
+      if (direction == ScrollDirection.forward) {
+        hide();
+      } else if (direction == ScrollDirection.reverse) {
+        show();
+      }
     }
   }
 
@@ -55,19 +58,9 @@ class _ScrollToHideWidgetState extends State<ScrollToHideWidget> {
 
   @override
   Widget build(BuildContext context) {
-    RenderBox? renderBox =
-        widget.keyGlobal.currentContext?.findRenderObject() as RenderBox?;
-    var height = renderBox?.size.height;
-
-    if (height == null) {
-      isVisible = false;
-      widget.controller.removeListener(listen);
-    }
-
     return AnimatedContainer(
-      color: Colors.green,
       duration: widget.duration,
-      height: isVisible ? height : 0,
+      height: null,
       child: Wrap(children: [widget.child]),
     );
   }

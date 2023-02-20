@@ -5,6 +5,7 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/mainController.dart';
 import 'package:flutter_poetry/presentation/views/widget/nativeBannerWidget.dart';
 import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
+import 'package:flutter_poetry/resource/IntlMessages.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
@@ -119,6 +120,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => ScreenUtilInit(
         builder: (BuildContext context, Widget? child) {
           return GetMaterialApp(
+            translations: IntlMessages(),
+            locale: const Locale('zh', 'CN'),
+            fallbackLocale: const Locale('en', 'US'),
             navigatorObservers: [defaultLifecycleObserver],
             localizationsDelegates: const [
               AppLocalizations.delegate, // Add this line
@@ -167,14 +171,14 @@ class BottomNavigationControllerState
           children: [
             Expanded(
                 child: _bottomNavigationItem(
-                    AppLocalizations.of(context)!.record,
+                    "record".tr,
                     0,
                     Icons.history_edu)),
             Expanded(
                 child: _bottomNavigationItemCenter(
-                    AppLocalizations.of(context)!.search, 1, Icons.search)),
+                    "search".tr, 1, Icons.search)),
             Expanded(
-                child: _bottomNavigationItem(AppLocalizations.of(context)!.mine,
+                child: _bottomNavigationItem("mine".tr,
                     2, Icons.account_circle)),
           ],
         ),

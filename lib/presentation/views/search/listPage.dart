@@ -33,8 +33,8 @@ class ListPage<T> extends StatelessWidget {
         children: [
           Row(
             children: [
-              const SubIconTitle(
-                  "詩歌", Icons.menu_book),
+              SubIconTitle(
+                  "poetry".tr, Icons.menu_book),
               Expanded(child: Container()),
               Container(
                 margin:
@@ -43,7 +43,7 @@ class ListPage<T> extends StatelessWidget {
                   onTapDelay: () {
                     Get.toNamed(AppRoutes.catalogueFull);
                   },
-                  child: const TextUnitWidget("目錄",
+                  child: TextUnitWidget("catalogue".tr,
                       style: Styles.subTitleStyleMainColor),
                 ),
               )
@@ -138,29 +138,30 @@ class ListPage<T> extends StatelessWidget {
       onChanged: (value) {
         searchVal = value;
         page = 1;
+        controller.poetryItemType=[];
         controller.search(value);
       },
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
           filled: true,
           fillColor: AppColor.backgroundColor,
-          hintText: "輸入詩歌編號/標題/內容",
+          hintText: "searchHelper".tr,
           hintStyle: Styles.helperStyle,
-          border: OutlineInputBorder(
+          border: const OutlineInputBorder(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(Dimens.moduleRadius),
                   bottomRight: Radius.circular(Dimens.moduleRadius))),
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(width: 0, color: AppColor.dividerColor),
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(Dimens.moduleRadius),
                   bottomRight: Radius.circular(Dimens.moduleRadius))),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(width: 1, color: AppColor.secondColor),
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(Dimens.moduleRadius),
                   bottomRight: Radius.circular(Dimens.moduleRadius))),
-          contentPadding: EdgeInsets.all(Dimens.itemPaddingSpace_4),
-          prefixIcon: Icon(Icons.search)),
+          contentPadding: const EdgeInsets.all(Dimens.itemPaddingSpace_4),
+          prefixIcon: const Icon(Icons.search)),
     );
   }
 }

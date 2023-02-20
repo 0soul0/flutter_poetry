@@ -27,7 +27,7 @@ class ListPage<T> extends StatelessWidget {
     return Container(
       color: AppColor.backgroundColor,
       child: Column(children: [
-        SubIconTitle(AppLocalizations.of(context)!.record, Icons.receipt),
+        SubIconTitle("record".tr, Icons.receipt),
         const Divider(
             height: Dimens.moduleDividing,
             thickness: Dimens.moduleDividing,

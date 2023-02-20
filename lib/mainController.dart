@@ -18,6 +18,7 @@ import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/routes/singleton.dart';
 import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_poetry/tool/sharedPreferencesUnit.dart';
+import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'data/data_source/api.dart';
 import 'data/routeApi.dart';
@@ -30,7 +31,7 @@ import 'domain/dao/systemInfoDao.dart';
 /// MainController class representing a init setting of application
 class MainController extends BaseController {
 
-  static List<TypeModel> typeName = [TypeModel("",name: "詩歌",id: "0")];
+  static List<TypeModel> typeName = [TypeModel("",name: "poetry".tr,id: "0")];
 
 
   late SystemInfoDao _systemDao;

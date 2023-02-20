@@ -13,6 +13,7 @@ import '../../../../resource/dimens.dart';
 import '../../../../routes/singleton.dart';
 import '../../item/selectedItem.dart';
 import '../../widget/backIconButton.dart';
+import '../../widget/nativeBannerWidget.dart';
 import '../../widget/textUnitWidget.dart';
 
 
@@ -22,8 +23,9 @@ class FontFragment extends GetView<MineController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const TextUnitWidget("banner"),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(Dimens.bannerHeight),
+        child: NativeBannerWidget(Dimens.bannerHeight),
       ),
       body: Stack(children: [
         Container(
@@ -52,37 +54,25 @@ class FontFragment extends GetView<MineController> {
   _textBox(BuildContext context) {
     return Obx(() => Container(
         width: MediaQuery.of(context).size.width,
-        height: 300,
+        height: 450,
+        padding: const EdgeInsets.symmetric(vertical: Dimens.itemSpace),
         decoration: BoxDecoration(
             border: Border.all(color: AppColor.gray),
             borderRadius: BorderRadius.circular(Dimens.itemRadius)),
         child: Center(
-          child: Column(
-            children: [
-              Expanded(
-                  child: Container(
-                      alignment: Alignment.center,
-                      child: TextUnitWidget(
-                        "主耶穌",
-                        textScaleFactor: controller.valueToValueTime(
-                            controller.seekValue.value.toDouble()),
-                        style: Styles.textStyleBlack,
-                      ))),
-              Expanded(
-                  child: Container(
-                      alignment: Alignment.center,
-                      child: TextUnitWidget(
-                        "我如困鹿切慕溪水",
-                        textScaleFactor: controller.valueToValueTime(
-                            controller.seekValue.value.toDouble()),
-                        style: Styles.textStyleBlack,
-                      ))),
-            ],
-          ),
-        )));
+          child: Container(
+            alignment: Alignment.center,
+            child: TextUnitWidget(
+              "textSizeSample".tr,
+              textScaleFactor: controller.valueToValueTime(
+                  controller.seekValue.value.toDouble()),
+              style: Styles.textStyleBlack,
+            ))),
+        ));
   }
 
   _seekbar() {
+    double tempTextSize=controller.defaultSeekValue();
     return Obx(
       () => Container(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.itemSpace),
@@ -90,8 +80,8 @@ class FontFragment extends GetView<MineController> {
           children: [
             Row(
               children: [
-                const TextUnitWidget(
-                  "字體大小",
+                TextUnitWidget(
+                  "textSize".tr,
                   style: Styles.textStyleBlack,
                 ),
                 const SizedBox(
@@ -112,7 +102,7 @@ class FontFragment extends GetView<MineController> {
               value: controller.seekValue.value.toDouble(),
               onChanged: (value) {
                 controller.setSeekValue(value.toInt());
-                controller.seekValueShow.value = true;
+                controller.seekValueShow.value = tempTextSize.toInt()!=value.toInt();
               },
             ),
           ],
