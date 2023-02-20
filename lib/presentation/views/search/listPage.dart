@@ -8,6 +8,7 @@ import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
@@ -33,8 +34,7 @@ class ListPage<T> extends StatelessWidget {
         children: [
           Row(
             children: [
-              SubIconTitle(
-                  "poetry".tr, Icons.menu_book),
+              SubIconTitle("poetry".tr, Icons.menu_book),
               Expanded(child: Container()),
               Container(
                 margin:
@@ -63,9 +63,9 @@ class ListPage<T> extends StatelessWidget {
           ),
           Expanded(
               child: Container(
-            padding: const EdgeInsets.symmetric(vertical: Dimens.textSpace),
-            child: _searchResult(),
-          )),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: Dimens.textSpace),
+                  child: _searchResult())),
           const Divider(
               height: Dimens.moduleDividing,
               thickness: Dimens.moduleDividing,
@@ -86,38 +86,50 @@ class ListPage<T> extends StatelessWidget {
 
   /// show search result
   _searchResult() {
-    return Obx(() => SmartRefresher(
-          controller: controller.refreshController,
-          enablePullDown: false,
-          enablePullUp: true,
-          header: const WaterDropHeader(),
-          footer: const ClassicFooter(
-            loadStyle: LoadStyle.ShowWhenLoading,
-            completeDuration: Duration(milliseconds: 500),
-          ),
-          onLoading: () async {
-            controller.search(searchVal, page: page);
-            page++;
-            controller.refreshController.loadComplete();
-          },
-          child: AlignedGridView.count(
-            controller: controller.scrollController,
-            scrollDirection: Axis.vertical,
-            crossAxisCount: 1,
-            crossAxisSpacing: Dimens.itemSpace,
-            mainAxisSpacing: Dimens.itemSpace,
-            itemCount: controller.poetryItems.length,
-            itemBuilder: (context, index) {
-              var item = controller.poetryItems[index];
-              return ModuleUtils.bindPoetryItemByModel(
-                  item, item.itemType,
-                  title: MainController.typeName[item.type].name,
-                  onTapFunction: () {
-                controller.onTapPoetry(item);
-              });
+    return Obx(() => controller.loadingDone.value
+        ? SmartRefresher(
+            controller: controller.refreshController,
+            enablePullDown: false,
+            enablePullUp: true,
+            header: const WaterDropHeader(),
+            footer: const ClassicFooter(
+              loadStyle: LoadStyle.ShowWhenLoading,
+              completeDuration: Duration(milliseconds: 500),
+            ),
+            onLoading: () async {
+              controller.search(searchVal, page: page);
+              page++;
+              controller.refreshController.loadComplete();
             },
-          ),
-        ));
+            child: AlignedGridView.count(
+              controller: controller.scrollController,
+              scrollDirection: Axis.vertical,
+              crossAxisCount: 1,
+              crossAxisSpacing: Dimens.itemSpace,
+              mainAxisSpacing: Dimens.itemSpace,
+              itemCount: controller.poetryItems.length,
+              itemBuilder: (context, index) {
+                var item = controller.poetryItems[index];
+                return ModuleUtils.bindPoetryItemByModel(item, item.itemType,
+                    title: MainController.typeName[item.type].name,
+                    onTapFunction: () {
+                  controller.onTapPoetry(item);
+                });
+              },
+            ),
+          )
+        : const Center(
+            child: SizedBox(
+              height: 50,
+              width: 50,
+              child: LoadingIndicator(
+                indicatorType: Indicator.ballClipRotate,
+                colors: [AppColor.mainColor],
+                strokeWidth: 2,
+                backgroundColor: Colors.transparent,
+              ),
+            ),
+          ));
   }
 
   /// search data

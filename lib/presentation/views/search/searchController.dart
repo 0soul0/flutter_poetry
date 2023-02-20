@@ -34,6 +34,8 @@ class SearchController extends BaseController {
       RefreshController(initialRefresh: false);
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
   RxList<PoetryModel> poetryItems = List<PoetryModel>.from([]).obs;
+  Rx<bool> loadingDone = false.obs;
+
   FocusNode commentFocus = FocusNode();
   ScrollController scrollController = ScrollController();
 
@@ -55,6 +57,10 @@ class SearchController extends BaseController {
   /// init default data
   initData() async {
     Singleton.getEventBusInstance().on<MsgEvent>().listen((event) {
+      if (event.msg == "loadingDone") {
+        loadingDone.value = true;
+        return;
+      }
       search("");
     });
     search("");

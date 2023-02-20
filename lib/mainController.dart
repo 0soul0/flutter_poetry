@@ -131,6 +131,9 @@ class MainController extends BaseController {
         Singleton.getEventBusInstance().fire(MsgEvent("update file finish"));
       }
     }
+
+    Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
+
   }
 
   /// Update downloaded status of file
