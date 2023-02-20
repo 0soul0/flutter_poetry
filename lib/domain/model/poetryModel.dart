@@ -2,6 +2,8 @@ import 'dart:ffi';
 
 import 'package:floor/floor.dart';
 
+import '../../presentation/views/item/utils/moduleUnit.dart';
+
 @entity
 class PoetryModel {
   PoetryModel(
@@ -43,6 +45,9 @@ class PoetryModel {
 
   /// locate used
   String description = ""; //搜尋結果的歌詞描述
+
+  @ignore
+  int itemType=ModuleUtils.poetryModel;
 
   getTitle() {
     return number.toString() + title;

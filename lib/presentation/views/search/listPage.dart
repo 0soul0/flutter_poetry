@@ -101,6 +101,7 @@ class ListPage<T> extends StatelessWidget {
             controller.refreshController.loadComplete();
           },
           child: AlignedGridView.count(
+            controller: controller.scrollController,
             scrollDirection: Axis.vertical,
             crossAxisCount: 1,
             crossAxisSpacing: Dimens.itemSpace,
@@ -108,19 +109,8 @@ class ListPage<T> extends StatelessWidget {
             itemCount: controller.poetryItems.length,
             itemBuilder: (context, index) {
               var item = controller.poetryItems[index];
-
-              if (index >= controller.poetryItemType.length) {
-                if (index != 0 &&
-                    controller.poetryItems[index - 1].type == item.type) {
-                  controller.poetryItemType.add(ModuleUtils.poetryModel);
-                } else {
-                  controller.poetryItemType
-                      .add(ModuleUtils.poetryModelWithType);
-                }
-              }
-
               return ModuleUtils.bindPoetryItemByModel(
-                  item, controller.poetryItemType[index],
+                  item, item.itemType,
                   title: MainController.typeName[item.type].name,
                   onTapFunction: () {
                 controller.onTapPoetry(item);
@@ -134,11 +124,11 @@ class ListPage<T> extends StatelessWidget {
   _search(BuildContext context) {
     return TextField(
       controller: controller.textController,
+      focusNode: controller.commentFocus,
       textAlign: TextAlign.left,
       onChanged: (value) {
         searchVal = value;
         page = 1;
-        controller.poetryItemType=[];
         controller.search(value);
       },
       decoration: InputDecoration(

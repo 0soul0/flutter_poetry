@@ -9,5 +9,6 @@ abstract class AppRoutes {
   static const catalogueFull = '/catalogueFull';
   static const fontFragment = '/fontFragment';
   static const aboutFragment = '/aboutFragment';
+  static const poetryListFragment = '/poetryListFragment';
   static const languageFragment = '/languageFragment';
 }

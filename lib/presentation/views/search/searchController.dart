@@ -11,6 +11,7 @@ import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
 import 'package:flutter_poetry/domain/model/recordModel.dart';
 import 'package:flutter_poetry/mainController.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
+import 'package:flutter_poetry/tool/extension.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:uuid/uuid.dart';
@@ -21,10 +22,10 @@ import '../../../domain/model/poetryModel.dart';
 import '../../../routes/appRoutes.dart';
 import '../../../routes/singleton.dart';
 import '../base/baseController.dart';
+import '../item/utils/moduleUnit.dart';
 
 ///  search controller
 class SearchController extends BaseController {
-
   late PoetryDao _poetryDao;
   late CatalogueDao _catalogueDao;
   late RecordDao _recordDao;
@@ -33,7 +34,9 @@ class SearchController extends BaseController {
       RefreshController(initialRefresh: false);
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
   RxList<PoetryModel> poetryItems = List<PoetryModel>.from([]).obs;
-  late List<int> poetryItemType =[];
+  FocusNode commentFocus = FocusNode();
+  ScrollController scrollController = ScrollController();
+
   /// init controller
   @override
   Future<void> onInit() async {
@@ -55,6 +58,12 @@ class SearchController extends BaseController {
       search("");
     });
     search("");
+
+    scrollController.addListener(() {
+      if (commentFocus.hasFocus) {
+        commentFocus.unfocus();
+      }
+    });
   }
 
   @override
@@ -109,10 +118,27 @@ class SearchController extends BaseController {
   search(String search,
       {int page = 0, int count = SettingParameters.pageCount}) async {
     page = page * count;
-    var items = await _poetryDao.search("%$search%", page, count);
+
+    List<PoetryModel> items = [];
+    //過濾數字搜尋到段落
+    if (int.tryParse(search) == null) {
+      items = await _poetryDao.search("%$search%", page, count);
+    } else {
+      if (page == 0) {
+        items = await _poetryDao.searchNumber(search);
+      }
+      var itemAll =
+          await _poetryDao.searchNoContent(search, "%$search%", page, count);
+      items.addAll(itemAll);
+    }
 
     for (int i = 0; i < items.length; i++) {
       items[i] = PoetryModel.fromMap(setDescription(search, items[i].toMap()));
+      if (i != 0 && items[i - 1].type == items[i].type) {
+        items[i].itemType = ModuleUtils.poetryModel;
+      } else {
+        items[i].itemType = ModuleUtils.poetryModelWithType;
+      }
     }
 
     if (page == 0) {
@@ -143,7 +169,7 @@ class SearchController extends BaseController {
       return returnDescriptionOfSection(search, poetryData, 'content');
     }
 
-    if (poetryData['refrain'].indexOf(search)) {
+    if (poetryData['refrain'].contains(search)) {
       return returnDescriptionOfSection(search, poetryData, 'refrain');
     }
 
@@ -151,11 +177,11 @@ class SearchController extends BaseController {
       return returnDescriptionOfSelf(poetryData, 'author');
     }
 
-    if (poetryData['category'].indexOf(search)) {
+    if (poetryData['category'].contains(search)) {
       return returnDescriptionOfSelf(poetryData, 'category');
     }
 
-    if (poetryData['subCategory'].indexOf(search)) {
+    if (poetryData['subCategory'].contains(search)) {
       return returnDescriptionOfSelf(poetryData, 'subCategory');
     }
   }

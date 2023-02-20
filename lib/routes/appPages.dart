@@ -3,6 +3,7 @@ import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/mine/setting/aboutFragment.dart';
 import 'package:flutter_poetry/presentation/views/mine/setting/fontFragment.dart';
 import 'package:flutter_poetry/presentation/views/mine/setting/languageFragment.dart';
+import 'package:flutter_poetry/presentation/views/mine/setting/poetryListFragment.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetail.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
 import 'package:flutter_poetry/presentation/views/search/searchController.dart';
@@ -53,6 +54,13 @@ class AppPages {
     GetPage(
         name: AppRoutes.languageFragment,
         page: () => const LanguageFragment(),
+        binding: MyBinding(() {
+          Get.lazyPut(() => MineController());
+        })),
+
+    GetPage(
+        name: AppRoutes.poetryListFragment,
+        page: () => const PoetryListFragment(),
         binding: MyBinding(() {
           Get.lazyPut(() => MineController());
         })),

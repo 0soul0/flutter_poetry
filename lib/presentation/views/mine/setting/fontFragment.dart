@@ -72,7 +72,6 @@ class FontFragment extends GetView<MineController> {
   }
 
   _seekbar() {
-    double tempTextSize=controller.defaultSeekValue();
     return Obx(
       () => Container(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.itemSpace),
@@ -102,7 +101,7 @@ class FontFragment extends GetView<MineController> {
               value: controller.seekValue.value.toDouble(),
               onChanged: (value) {
                 controller.setSeekValue(value.toInt());
-                controller.seekValueShow.value = tempTextSize.toInt()!=value.toInt();
+                controller.seekValueShow.value = true;
               },
             ),
           ],
@@ -121,10 +120,10 @@ class FontFragment extends GetView<MineController> {
             controller.storage(
                 MineController.constSeekValue, TextUnitWidget.textSizeTimes);
             //通知儲存
-            controller.items[1].value=controller.seekValue.value.toString();
+            controller.items.firstWhere((element) => element.id==1).value=controller.seekValue.value.toString();
             controller.seekValueShow.value = false;
             Phoenix.rebirth(context);
-            Get.snackbar("儲存成功", "",
+            Get.snackbar("saveSuccess".tr, "",
                 duration: const Duration(milliseconds: 1200),
                 snackPosition: SnackPosition.BOTTOM);
           },

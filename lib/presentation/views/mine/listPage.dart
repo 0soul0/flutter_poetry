@@ -44,9 +44,6 @@ class ListPage<T> extends StatelessWidget {
           itemBuilder: (context, index) {
             var item = controller?.items[index] ?? ItemModel();
 
-            //暫時關閉語言和捐款
-            if(item.id==0||item.id==2) return Container();
-
             return ModuleUtils.bindMineItemByModule(item);
           },
         ));

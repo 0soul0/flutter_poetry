@@ -18,9 +18,9 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
 13. 返回 v
 13 詩歌 副歌 v
 14 多國語言 v
-14. 下載美體
-15. 自動下載新詩哥
+14. 下載media
+15. 自動下載新詩歌
 16. 詩歌背景下載？
-17. 詩歌收入列表
+17. 詩歌收入列表 第二
 18. 開啟lunch page
-19. 詩歌搜尋排序 和 詩歌段落數字過濾
+19. 詩歌搜尋排序 和 詩歌段落數字過濾 v

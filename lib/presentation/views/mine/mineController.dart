@@ -47,11 +47,11 @@ class MineController extends BaseController {
   bindMineItem() {
     items.clear();
     items.addAll({
-      ItemModel(
-          id: 0,
-          title: "denote".tr,
-          value: "你的支持是我們的動力",
-          module: ModuleUtils.frameModule),
+      // ItemModel(
+      //     id: 0,
+      //     title: "denote".tr,
+      //     value: "你的支持是我們的動力",
+      //     module: ModuleUtils.frameModule),
       ItemModel(
           id: 1,
           title: "textSize".tr,
@@ -59,15 +59,21 @@ class MineController extends BaseController {
           onTapFunction: () {
             Get.toNamed(AppRoutes.fontFragment);
           }),
+      // ItemModel(
+      //     id: 2,
+      //     title: "language".tr,
+      //     value: selectLanguage[languageIndex],
+      //     onTapFunction: () {
+      //       Get.to(() => const LanguageFragment());
+      //     }),
+      // ItemModel(
+      //     id: 3,
+      //     title: "poetryList".tr,
+      //     onTapFunction: () {
+      //       Get.toNamed(AppRoutes.poetryListFragment);
+      //     }),
       ItemModel(
-          id: 2,
-          title: "language".tr,
-          value: selectLanguage[languageIndex],
-          onTapFunction: () {
-            Get.to(() => const LanguageFragment());
-          }),
-      ItemModel(
-          id: 3,
+          id: 4,
           title: "contactUs".tr,
           onTapFunction: () {
             Get.toNamed(AppRoutes.aboutFragment);

@@ -456,6 +456,27 @@ class _$PoetryDao extends PoetryDao {
   }
 
   @override
+  Future<List<PoetryModel>> searchNoContent(
+    String number,
+    String str,
+    int page,
+    int count,
+  ) async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM PoetryModel WHERE number != ?1 AND number LIKE ?2 OR title LIKE ?2 OR author LIKE ?2 OR category LIKE ?2 OR subCategory LIKE ?2 ORDER BY type ASC, number ASC LIMIT ?3,?4',
+        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String),
+        arguments: [number, str, page, count]);
+  }
+
+  @override
+  Future<List<PoetryModel>> searchNumber(String str) async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM PoetryModel WHERE number == ?1 ORDER BY type ASC, number ASC',
+        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String),
+        arguments: [str]);
+  }
+
+  @override
   Future<void> insertItem(PoetryModel item) async {
     await _poetryModelInsertionAdapter.insert(item, OnConflictStrategy.replace);
   }
