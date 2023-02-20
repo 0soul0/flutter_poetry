@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,14 +31,12 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   // 宣告 TabController
   late TabController tabController;
   late PoetryDetailController controller;
-  bool _open = false;
 
   @override
   void initState() {
     // 建立 TabController，vsync 接受的型態是 TickerProvider
     tabController = TabController(length: 3, vsync: this);
     controller = Get.find<PoetryDetailController>();
-    _open = false;
     super.initState();
   }
 
@@ -74,6 +73,9 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
         itemCount: controller.spectrum.length,
         itemBuilder: (context, index) {
           var item = controller.spectrum[index];
+
+          if (item.spectrum.isEmpty) return null;
+
           return TouchUnitWidget(
             onTapDelay: () {
               controller.selectMusicPlayer(index);
@@ -116,10 +118,11 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
-                    child: SvgPicture.network(
-                  controller.selectSpectrum.value.spectrum,
-                  width: ScreenUtil.defaultSize.height,
-                )),
+                  child: SvgPicture.network(
+                    controller.selectSpectrum.value.spectrum,
+                    width: ScreenUtil.defaultSize.height,
+                  ),
+                ),
               ],
             )
           ],

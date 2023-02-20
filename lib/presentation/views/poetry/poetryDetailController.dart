@@ -78,6 +78,10 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     selectPlayer.onPlayerStateChanged.listen((d) => playState.value = d);
   }
 
+  setSpectrum(SpectrumModel spectrumModel){
+    selectSpectrum.value = spectrumModel;
+  }
+
   /// set position of sliver
   setPosition(double value) {
     int sec = ((value - getPosition()) * duration.value.inMilliseconds).round();

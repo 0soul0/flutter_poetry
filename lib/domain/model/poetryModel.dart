@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:floor/floor.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../presentation/views/item/utils/moduleUnit.dart';
 
@@ -126,10 +127,13 @@ class SpectrumModel {
     this.media = "",
     this.name = "",
     this.nameV = "",
+    this.pic
   });
   late int index;
   late String spectrum;
   late String media;
   late String name;
-  late String nameV; //垂直顯示
+  late String nameV;
+
+  SvgPicture? pic;//垂直顯示
 }

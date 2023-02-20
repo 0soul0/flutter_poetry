@@ -21,7 +21,8 @@ class IntlMessages extends Translations {
           "textSizeSample": "清晨的日光\n\n雖經漫漫長夜，\n晚星也都已消滅，\n神卻末曾忘記\n祂所定的永約；\n當我們正徘徊在\n死蔭之地離不開，\n有一清晨的日光\n從天而來。",
           "contactUs":"聯絡我們",
           "poetryList":"收錄詩歌",
-          "saveSuccess":"儲存成功"
+          "saveSuccess":"儲存成功",
+          "retain":"副歌"
         },
         'en_US': {
           'english': 'english',

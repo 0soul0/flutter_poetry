@@ -5,6 +5,7 @@ import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.
 import 'package:flutter_poetry/presentation/views/widget/scrollToHideWidget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/tool/extension.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
@@ -32,17 +33,9 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                 Expanded(
                   child: _poetry(),
                 ),
-                const Divider(
-                  color: Colors.grey,
-                  height: 0.5,
-                ),
                 ScrollToHideWidget(
                   controller: controller.scrollController,
                   child: _refrain(),
-                ),
-                const Divider(
-                  color: Colors.grey,
-                  height: 0.5,
                 ),
               ],
             ),
@@ -53,38 +46,47 @@ class PoetryDetail extends GetView<PoetryDetailController> {
           ),
         ],
       ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
+      bottomNavigationBar: Stack(
         children: [
-          _slider(),
-          Row(
+          Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              TouchUnitWidget(
-                onTapDelay: () {
-                  Get.toNamed(AppRoutes.poetrySpectrum);
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(Dimens.itemSpace * 1.7),
-                  decoration: BoxDecoration(
-                    color: AppColor.secondColor,
-                    borderRadius: BorderRadius.circular(Dimens.itemSpace),
+              _slider(),
+              Row(
+                children: [
+                  TouchUnitWidget(
+                    onTapDelay: () {
+                      for (int i = 0; i < controller.spectrum.length; i++) {
+                        if (controller.spectrum.isNotEmpty) {
+                          controller.selectMusicPlayer(i);
+                        }
+                      }
+                      Get.toNamed(AppRoutes.poetrySpectrum);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(Dimens.itemSpace * 1.7),
+                      decoration: BoxDecoration(
+                        color: AppColor.secondColor,
+                        borderRadius: BorderRadius.circular(Dimens.itemSpace),
+                      ),
+                      child: const Icon(
+                        Icons.queue_music_outlined,
+                        color: AppColor.white,
+                        size: Dimens.iconSize,
+                      ),
+                    ),
                   ),
-                  child: const Icon(
-                    Icons.queue_music_outlined,
-                    color: AppColor.white,
-                    size: Dimens.iconSize,
+                  Expanded(
+                    child: SizedBox(
+                      height: Dimens.iconSize + Dimens.itemSpace * 3.4,
+                      child: _changeTitle(),
+                    ),
                   ),
-                ),
-              ),
-              Expanded(
-                child: SizedBox(
-                  height: Dimens.iconSize + Dimens.itemSpace * 3.4,
-                  child: _changeTitle(),
-                ),
-              ),
-              _play()
+                  _play()
+                ],
+              )
             ],
-          )
+          ),
         ],
       ),
     );
@@ -203,14 +205,23 @@ class PoetryDetail extends GetView<PoetryDetailController> {
 
     return Obx(() => Container(
           margin: const EdgeInsets.only(left: Dimens.textSpace * 1),
+          padding: const EdgeInsets.symmetric(vertical: Dimens.itemSpace),
           child: Column(
             children: [
-              const TextUnitWidget(
-                "副歌",
+              const Divider(
+                color: Colors.grey,
+                height: 0.5,
+              ),
+              TextUnitWidget(
+                "retain".tr,
                 style: Styles.textStyleBlack,
               ),
               TextUnitWidget(controller.refrain.trim().toString(),
                   style: Styles.textStyleBlack, textAlign: TextAlign.left),
+              const Divider(
+                color: Colors.grey,
+                height: 0.5,
+              ),
             ],
           ),
         ));
