@@ -1,5 +1,13 @@
 [
     {
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/layout_my_native_ad.xml.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/layout/my_native_ad.xml"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-24:/layout_list_tile_native_ad.xml.flat",
+        "source": "com.example.flutter_poetry.app-main-17:/layout/list_tile_native_ad.xml"
+    },
+    {
         "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-xxxhdpi/ic_launcher.png"
     },
@@ -38,10 +46,6 @@
     {
         "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable-xxxhdpi_splash.png.flat",
         "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable-xxxhdpi/splash.png"
-    },
-    {
-        "merged": "com.example.flutter_poetry.app-merged_res-24:/layout_my_native_ad.xml.flat",
-        "source": "com.example.flutter_poetry.app-main-17:/layout/my_native_ad.xml"
     },
     {
         "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable-xxhdpi_splash.png.flat",

@@ -30,9 +30,7 @@ import 'domain/dao/systemInfoDao.dart';
 
 /// MainController class representing a init setting of application
 class MainController extends BaseController {
-
-  static List<TypeModel> typeName = [TypeModel("",name: "poetry".tr,id: "0")];
-
+  static List<TypeModel> typeName = [TypeModel("", name: "poetry".tr, id: "0")];
 
   late SystemInfoDao _systemDao;
   late FileDao _fileDao;
@@ -51,7 +49,8 @@ class MainController extends BaseController {
 
   init() async {
     TextUnitWidget.textSizeTimes = double.parse(await SharedPreferencesUnit()
-        .read(MineController.constSeekValue, TextUnitWidget.textSizeTimes.toString()));
+        .read(MineController.constSeekValue,
+            TextUnitWidget.textSizeTimes.toString()));
 
     _fileDao = await FxDataBaseManager.fileDao();
     _systemDao = await FxDataBaseManager.systemInfoDao();
@@ -61,10 +60,9 @@ class MainController extends BaseController {
     _typeDao = await FxDataBaseManager.typeDao();
   }
 
-  initCache() async{
+  initCache() async {
     typeName = await _typeDao.queryAll();
   }
-
 
   /// Request information of system data
   request() async {
@@ -86,6 +84,10 @@ class MainController extends BaseController {
     for (int i = 0; i < len; i++) {
       var newFile = newInfo.files?[i] ?? FileModel();
 
+      if (!isFileCanUpdate(newFile)) {
+        continue;
+      }
+
       var fileMap = await _fileDao.findFileById(newFile.id);
       var oldV = fileMap?.dataVersion ?? "-1";
       var dataUpdateDone = fileMap?.dataUpdateDone ?? FileModel.keyUpdateUnDone;
@@ -96,6 +98,7 @@ class MainController extends BaseController {
         await updateFileDownloadStatus(FileModel.keyUpdateUnDone, newFile);
 
         var items = await Api.getInstance().getArrayReturn(newFile.url);
+        if (items == null) continue;
         // 更新檔案
         switch (newFile.dbType) {
           case PoetryDao.tableName:
@@ -133,7 +136,6 @@ class MainController extends BaseController {
     }
 
     Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
-
   }
 
   /// Update downloaded status of file
@@ -185,5 +187,20 @@ class MainController extends BaseController {
         }
     }
     return false;
+  }
+
+  /// is file can update
+  isFileCanUpdate(FileModel fileModel) {
+    switch (fileModel.updates) {
+      case FileModel.keyNotUpdatable:
+        return false;
+      case FileModel.keyUpdatable:
+        return true;
+      case FileModel.keyLimitedTimeUpdate:
+        return DateTime.now().microsecondsSinceEpoch >
+            DateTime.parse(fileModel.updateDate).microsecondsSinceEpoch;
+    }
+
+    return true;
   }
 }

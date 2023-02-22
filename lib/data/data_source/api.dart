@@ -39,7 +39,9 @@ class Api {
     } catch (e) {
       myLog("error url: $url");
       myLog("error ${e.toString()}");
-      error!(e);
+      if (error != null) {
+        error(e);
+      }
       return null;
     }
   }
@@ -54,7 +56,9 @@ class Api {
     } catch (e) {
       myLog("error url: $url");
       myLog("error ${e.toString()}");
-      error!(e);
+      if (error != null) {
+        error(e);
+      }
     }
   }
 
@@ -66,7 +70,9 @@ class Api {
     } catch (e) {
       myLog("error url: $url");
       myLog("error ${e.toString()}");
-      error!(e);
+      if (error != null) {
+        error(e);
+      }
       return null;
     }
   }
@@ -80,7 +86,9 @@ class Api {
     } catch (e) {
       myLog("error url: ${e.toString()}");
       myLog("error ${e.toString()}");
-      error!(e);
+      if (error != null) {
+        error(e);
+      }
     }
   }
 

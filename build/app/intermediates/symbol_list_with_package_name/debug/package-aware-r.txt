@@ -162,8 +162,6 @@ id action_divider
 id action_image
 id action_text
 id actions
-id ad_body
-id ad_headline
 id adjust_height
 id adjust_width
 id androidx_window_activity_scope
@@ -184,6 +182,7 @@ id icon_group
 id icon_only
 id info
 id italic
+id iv_list_tile_native_ad_icon
 id light
 id line1
 id line3
@@ -215,6 +214,10 @@ id text
 id text2
 id time
 id title
+id tv_list_tile_native_ad_attribution_large
+id tv_list_tile_native_ad_attribution_small
+id tv_list_tile_native_ad_body
+id tv_list_tile_native_ad_headline
 id view_tree_lifecycle_owner
 id wide
 integer google_play_services_version
@@ -222,7 +225,7 @@ integer status_bar_notification_info_maxnum
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout custom_dialog
-layout my_native_ad
+layout list_tile_native_ad
 layout notification_action
 layout notification_action_tombstone
 layout notification_template_custom_big

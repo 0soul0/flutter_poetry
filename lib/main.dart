@@ -22,6 +22,7 @@ import 'presentation/views/mine/mineFragment.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'presentation/views/widget/bannerWidget.dart';
 import 'routes/appPages.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -29,8 +30,6 @@ late MainController controller;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
-
   init();
   //啟動launch page
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +41,12 @@ Future<void> main() async {
 init() async {
   await checkPermission();
   await registerNotification();
+  await _initGoogleMobileAds();
   controller = Get.put(MainController());
+}
+
+Future<InitializationStatus> _initGoogleMobileAds() {
+  return MobileAds.instance.initialize();
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -162,7 +166,7 @@ class BottomNavigationControllerState
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(Dimens.bannerHeight),
-        child: NativeBannerWidget(Dimens.bannerHeight),
+        child: BannerWidget(),
       ),
       body: pages[_currentIndex],
       bottomNavigationBar: SizedBox(
@@ -170,16 +174,14 @@ class BottomNavigationControllerState
         child: Row(
           children: [
             Expanded(
-                child: _bottomNavigationItem(
-                    "record".tr,
-                    0,
-                    Icons.history_edu)),
+                child:
+                    _bottomNavigationItem("record".tr, 0, Icons.history_edu)),
             Expanded(
-                child: _bottomNavigationItemCenter(
-                    "search".tr, 1, Icons.search)),
+                child:
+                    _bottomNavigationItemCenter("search".tr, 1, Icons.search)),
             Expanded(
-                child: _bottomNavigationItem("mine".tr,
-                    2, Icons.account_circle)),
+                child:
+                    _bottomNavigationItem("mine".tr, 2, Icons.account_circle)),
           ],
         ),
       ),

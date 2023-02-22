@@ -11,6 +11,7 @@ import '../../../../resource/dimens.dart';
 import '../../item/listMidItem.dart';
 import '../../record/listPage.dart';
 import '../../widget/backIconButton.dart';
+import '../../widget/bannerWidget.dart';
 import '../../widget/nativeBannerWidget.dart';
 import '../../widget/textUnitWidget.dart';
 
@@ -25,9 +26,9 @@ class AboutFragment extends GetView<MineController> {
   Widget build(BuildContext context) {
     init();
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(Dimens.bannerHeight),
-        child: NativeBannerWidget(Dimens.bannerHeight),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(Dimens.bannerHeight),
+        child: BannerWidget(),
       ),
       body: Stack(
         children: [

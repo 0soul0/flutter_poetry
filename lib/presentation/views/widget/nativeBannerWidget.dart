@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +28,7 @@ class _NativeBannerWidgetState extends State<NativeBannerWidget> {
 
   banner() {
     widget.myNative = NativeAd(
-      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+      adUnitId: 'ca-app-pub-9515998171000409/4199099846',
       factoryId: 'adFactoryExample',
       request: const AdRequest(),
       listener: NativeAdListener(
@@ -54,7 +56,7 @@ class _NativeBannerWidgetState extends State<NativeBannerWidget> {
         onAdClicked: (Ad ad) => myLog('Ad1 impression.'),
       ),
     );
-    widget.myNative?.load();
+    widget.myNative!.load();
   }
 
   @override

@@ -13,6 +13,7 @@ import '../../../../resource/dimens.dart';
 import '../../../../routes/singleton.dart';
 import '../../item/selectedItem.dart';
 import '../../widget/backIconButton.dart';
+import '../../widget/bannerWidget.dart';
 import '../../widget/nativeBannerWidget.dart';
 import '../../widget/textUnitWidget.dart';
 
@@ -25,7 +26,7 @@ class FontFragment extends GetView<MineController> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(Dimens.bannerHeight),
-        child: NativeBannerWidget(Dimens.bannerHeight),
+        child: BannerWidget(),
       ),
       body: Stack(children: [
         Container(

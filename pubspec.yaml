@@ -68,7 +68,7 @@ dependencies:
   #launch page
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/img.png
+  image: assets/lanuch_page.png
 
 
 
@@ -103,6 +103,7 @@ flutter:
      - assets/icon_gmail.gif
      - assets/icon_fb.gif
      - assets/icon_ig.gif
+     - assets/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
