@@ -86,28 +86,28 @@ class MineController extends BaseController {
     contact.addAll({
       ItemModel(
           id: 0,
-          title: "gmail",
+          title: "datatellthetruth@gmail.com",
           value: SettingParameters.gmail[0],
           iconGif: "assets/icon_gmail.gif",
           onTapFunction: () {
             _sendEmail(SettingParameters.gmail[0]);
           }),
-      ItemModel(
-          id: 1,
-          title: "instagram",
-          value: SettingParameters.ig[0],
-          iconGif: "assets/icon_ig.gif",
-          onTapFunction: () {
-            _launchUrl(Uri.parse(SettingParameters.ig[1]));
-          }),
-      ItemModel(
-          id: 2,
-          title: "facebook",
-          value: SettingParameters.facebook[0],
-          iconGif: "assets/icon_fb.gif",
-          onTapFunction: () {
-            _launchUrl(Uri.parse(SettingParameters.facebook[1]));
-          }),
+      // ItemModel(
+      //     id: 1,
+      //     title: "instagram",
+      //     value: SettingParameters.ig[0],
+      //     iconGif: "assets/icon_ig.gif",
+      //     onTapFunction: () {
+      //       _launchUrl(Uri.parse(SettingParameters.ig[1]));
+      //     }),
+      // ItemModel(
+      //     id: 2,
+      //     title: "facebook",
+      //     value: SettingParameters.facebook[0],
+      //     iconGif: "assets/icon_fb.gif",
+      //     onTapFunction: () {
+      //       _launchUrl(Uri.parse(SettingParameters.facebook[1]));
+      //     }),
     });
   }
 

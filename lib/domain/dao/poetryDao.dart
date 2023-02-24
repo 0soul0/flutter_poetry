@@ -32,6 +32,12 @@ abstract class PoetryDao extends BaseDao<PoetryModel> {
       "LIMIT :page,:count")
   Future<List<PoetryModel>> searchNoContent(String number,String str, int page, int count);
 
+  @Query("SELECT * FROM $tableName WHERE category LIKE :str "
+      "OR subCategory LIKE :str "
+      "ORDER BY type ASC, number ASC "
+      "LIMIT :page,:count")
+  Future<List<PoetryModel>> searchCategory(String str, int page, int count);
+
   @Query("SELECT * FROM $tableName WHERE number == :str "
       "ORDER BY type ASC, number ASC ")
   Future<List<PoetryModel>> searchNumber(String str);

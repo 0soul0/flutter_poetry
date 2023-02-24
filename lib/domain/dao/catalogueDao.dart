@@ -9,8 +9,8 @@ import 'baseDao.dart';
 @dao
 abstract class CatalogueDao extends BaseDao<CatalogueModel>{
   static const tableName = "CatalogueModel";
-  @Query('SELECT * FROM $tableName')
-  Future<List<CatalogueModel>> queryAll();
+  @Query('SELECT * FROM $tableName WHERE type = :type')
+  Future<List<CatalogueModel>> queryAllByType(int type);
 
 
 

@@ -100,6 +100,7 @@ class PoetryModel {
   }
 
   PoetryModel.fromMap(Map<String, dynamic> map) {
+
     id = map["id"] ?? "";
     number =map["number"] ?? 0;
     type = map["type"] ?? 0;

@@ -26,6 +26,9 @@ import '../item/utils/moduleUnit.dart';
 
 ///  search controller
 class SearchController extends BaseController {
+  static const searchCatalogueKey = "c";
+  static const split = "://";
+
   late PoetryDao _poetryDao;
   late CatalogueDao _catalogueDao;
   late RecordDao _recordDao;
@@ -83,17 +86,10 @@ class SearchController extends BaseController {
   }
 
   /// query all of category
-  queryAllCatalogue() async {
-    var catalogData = await _catalogueDao.queryAll();
-    addCatalogueModelList(catalogData);
+  Future<List<CatalogueModel>> queryAllCatalogue(int type) async {
+    return await _catalogueDao.queryAllByType(type);
   }
 
-  /// Add catalogue data into rxList
-  ///
-  /// @param data list of CatalogueModel
-  addCatalogueModelList(List<CatalogueModel> data) {
-    catalogueItems.value = data;
-  }
 
   /// Update catalogue data into rxList
   ///
@@ -114,7 +110,8 @@ class SearchController extends BaseController {
   }
 
   setSearchText(String text) {
-    textController.text = text;
+    var data = text;
+    textController.text = data;
     search(text);
   }
 
@@ -127,20 +124,27 @@ class SearchController extends BaseController {
 
     List<PoetryModel> items = [];
     //過濾數字搜尋到段落
-    if (int.tryParse(search) == null) {
+
+    if (search.contains(searchCatalogueKey+split)) {
+      search=search.split(split)[1];
+      items = await _poetryDao.searchCategory(search, page, count);
+    } else if (int.tryParse(search) == null) {
       items = await _poetryDao.search("%$search%", page, count);
     } else {
       if (page == 0) {
         items = await _poetryDao.searchNumber(search);
       }
+
       var itemAll =
           await _poetryDao.searchNoContent(search, "%$search%", page, count);
       items.addAll(itemAll);
     }
 
+
+
     for (int i = 0; i < items.length; i++) {
       items[i] = PoetryModel.fromMap(setDescription(search, items[i].toMap()));
-      if (i != 0 && items[i - 1].type == items[i].type) {
+      if (page != 0 || (i != 0 && items[i - 1].type == items[i].type)) {
         items[i].itemType = ModuleUtils.poetryModel;
       } else {
         items[i].itemType = ModuleUtils.poetryModelWithType;

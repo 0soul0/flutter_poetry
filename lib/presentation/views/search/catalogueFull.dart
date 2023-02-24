@@ -32,7 +32,7 @@ class _CatalogueFull extends State<CatalogueFull>
     super.initState();
     controller = Get.find<SearchController>();
     _tabController =
-        TabController(vsync: this, length: MainController.typeName.length);
+        TabController(vsync: this, length: MainController.category.length);
   }
 
   @override
@@ -49,10 +49,10 @@ class _CatalogueFull extends State<CatalogueFull>
             //设置为Label宽度
             indicatorColor: AppColor.mainColor,
             indicatorPadding: const EdgeInsets.all(10),
-            tabs: MainController.typeName.map((item) {
+            tabs: MainController.category.map((item) {
               return Tab(
                 child: Text(
-                  item.name,
+                  item.name.tr,
                   style: Styles.tabStyle,
                 ),
               );
@@ -60,67 +60,42 @@ class _CatalogueFull extends State<CatalogueFull>
           ),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: MainController.typeName.map((item) {
-          return Container(
-              padding: const EdgeInsets.fromLTRB(
-                  Dimens.backgroundMarginLeft,
-                  Dimens.textSpace,
-                  Dimens.backgroundMarginRight,
-                  Dimens.textSpace),
-              width: MediaQuery.of(context).size.width,
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      Expanded(child: _catalogueList(item.id)),
-                    ],
-                  ),
-                  const BackIconButton()
-                ],
-              ));
-        }).toList(),
+      body: Stack(
+        children: [
+          TabBarView(
+            controller: _tabController,
+            children: MainController.category.map((item) {
+              return Container(
+                padding: const EdgeInsets.fromLTRB(
+                    Dimens.backgroundMarginLeft,
+                    Dimens.textSpace,
+                    Dimens.backgroundMarginRight,
+                    Dimens.textSpace),
+                width: MediaQuery.of(context).size.width,
+                child: Expanded(child: FutureBuilder<List<CatalogueModel>>(
+                  future: controller.queryAllCatalogue(int.parse(item.id)),
+                  builder: (context,snapshot){
+                      return _catalogueList(snapshot);
+                  },
+                )),
+              );
+            }).toList(),
+          ),
+          const BackIconButton()
+        ],
       ),
     );
   }
 
-  //
-  // return Scaffold(
-  // appBar: PreferredSize(
-  // preferredSize: const Size.fromHeight(Dimens.bannerHeight),
-  // child: NativeBannerWidget(Dimens.bannerHeight),
-  // ),
-  // body: Container(
-  // padding: const EdgeInsets.fromLTRB(Dimens.backgroundMarginLeft,
-  // Dimens.textSpace, Dimens.backgroundMarginRight, Dimens.textSpace),
-  // width: MediaQuery.of(context).size.width,
-  // child: Stack(
-  // children: [
-  // Column(
-  // children: [
-  // SubIconTitle(AppLocalizations.of(context)!.catalogue,
-  // Icons.checklist_rtl),
-  // Expanded(child: _catalogueList()),
-  // ],
-  // ),
-  // const BackIconButton()
-  // ],
-  // )),
-  // );
-  _catalogueList(String id) {
-    controller.queryAllCatalogue();
-    return Obx(() => MasonryGridView.count(
+  _catalogueList(AsyncSnapshot<List<CatalogueModel>> snapshot) {
+    return MasonryGridView.count(
           scrollDirection: Axis.vertical,
           crossAxisCount: 3,
           crossAxisSpacing: Dimens.itemSpace,
           mainAxisSpacing: Dimens.itemSpace,
-          itemCount: controller.catalogueItems.length,
+          itemCount: snapshot.data?.length,
           itemBuilder: (context, index) {
-            var item = controller.catalogueItems[index];
-
-            if (item.type.toString() != id) return Container();
-
+            var item = snapshot.data![index];
             return CatalogueItem(item, () {
               controller.resetCatalogueModelList();
 
@@ -128,11 +103,11 @@ class _CatalogueFull extends State<CatalogueFull>
               // controller.updateCatalogue(index, item, false);
 
               //change search text
-              controller.setSearchText(item.category);
+              controller.setSearchText("${SearchController.searchCatalogueKey}${SearchController.split}${item.category}");
 
               Get.back();
             });
           },
-        ));
+        );
   }
 }

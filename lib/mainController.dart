@@ -3,14 +3,12 @@ import 'dart:isolate';
 
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
-import 'package:flutter_poetry/domain/dao/typeDao.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
 import 'package:flutter_poetry/domain/model/fileModel.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/domain/model/subCategoryModel.dart';
 import 'package:flutter_poetry/domain/model/systemInfoModel.dart';
-import 'package:flutter_poetry/domain/model/typeModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
@@ -30,20 +28,20 @@ import 'domain/dao/systemInfoDao.dart';
 
 /// MainController class representing a init setting of application
 class MainController extends BaseController {
-  static List<TypeModel> typeName = [TypeModel("", name: "poetry".tr, id: "0")];
+  static List<FileModel> allFiles = [];
+  static List<FileModel> category = [];
 
   late SystemInfoDao _systemDao;
   late FileDao _fileDao;
   late PoetryDao _poetryDao;
   late CatalogueDao _categoryDao;
   late SubCategoryDao _subCategoryDao;
-  late TypeDao _typeDao;
 
   @override
   Future onInit() async {
     super.onInit();
     await init();
-    request();
+    await request();
     await initCache();
   }
 
@@ -57,11 +55,11 @@ class MainController extends BaseController {
     _poetryDao = await FxDataBaseManager.poetryDao();
     _categoryDao = await FxDataBaseManager.categoryDao();
     _subCategoryDao = await FxDataBaseManager.subCategoryDao();
-    _typeDao = await FxDataBaseManager.typeDao();
   }
 
   initCache() async {
-    typeName = await _typeDao.queryAll();
+    allFiles = await _fileDao.queryAll();
+    category = allFiles.where((element) => element.dbType==CatalogueDao.tableName).toList();
   }
 
   /// Request information of system data
@@ -70,6 +68,7 @@ class MainController extends BaseController {
     var item = await Api.getInstance().getReturn(RouteApi.systemInfo);
     if (item == null) return;
     final systemInfo = SystemInfoModel.fromMap(item);
+    RouteApi.baseUrl = systemInfo.baseUrl;
     await _systemDao.insertItem(systemInfo);
     //檢查檔案 版本
     await checkAndUpdateFilesVersion(systemInfo);
@@ -117,12 +116,6 @@ class MainController extends BaseController {
             {
               await _subCategoryDao.insertItems(List.generate(items.length,
                   (index) => SubCategoryModel.fromMap(items[index])));
-              break;
-            }
-          case TypeDao.tableName:
-            {
-              await _typeDao.insertItems(List.generate(
-                  items.length, (index) => TypeModel.fromMap(items[index])));
               break;
             }
         }

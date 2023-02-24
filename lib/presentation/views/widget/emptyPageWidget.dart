@@ -16,9 +16,10 @@ class EmptyPageWidget extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            Icon(
-              MyIcons.logo,
-              size: ScreenUtil.defaultSize.width / 3,
+            Image.asset(
+              "assets/logo_no_background.png",
+              width: ScreenUtil.defaultSize.width / 3,
+              height: ScreenUtil.defaultSize.width / 3,
               color: AppColor.helperColor,
             ),
             const TextUnitWidget("無數據", style: Styles.textStyleGray)

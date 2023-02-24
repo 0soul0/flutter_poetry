@@ -17,15 +17,15 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
 9. //https://codelabs.developers.google.com/codelabs/admob-inline-ads-in-flutter#7
 10. fcm catch 分析
 
-11. 詩歌文件整理
+11. 詩歌文件整理  
 12. 字體太大換行字數減少 字體大小問題 詩歌排版
-13. logo v
+14. logo v
 
-14. 開啟lunch page v
+15. 開啟lunch page v
 
-15. 詩歌收入列表 v2
-16. 自動下載新詩歌 v2
-17. 會所地址??? 規劃路線 v2
+16. 詩歌收入列表 v2
+17. 自動下載新詩歌 v2
+18. 會所地址??? 規劃路線 v2
 
-18. 下載media
-19. 詩歌背景下載？ 
+19. 下載media
+20. 詩歌背景下載？ 

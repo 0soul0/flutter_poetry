@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poetry/domain/model/fileModel.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/mainController.dart';
 import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
@@ -110,8 +111,13 @@ class ListPage<T> extends StatelessWidget {
               itemCount: controller.poetryItems.length,
               itemBuilder: (context, index) {
                 var item = controller.poetryItems[index];
+                var title = "";
+                var files = MainController.allFiles.where((element) => element.id==item.itemType.toString());
+                if(files.isNotEmpty){
+                  title = (files as FileModel).name.tr;
+                }
                 return ModuleUtils.bindPoetryItemByModel(item, item.itemType,
-                    title: MainController.typeName[item.type].name,
+                    title: title,
                     onTapFunction: () {
                   controller.onTapPoetry(item);
                 });

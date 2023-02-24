@@ -73,8 +73,6 @@ class _$AppDatabase extends AppDatabase {
 
   RecordDao? _recordDaoInstance;
 
-  TypeDao? _typeDaoInstance;
-
   Future<sqflite.Database> open(
     String path,
     List<Migration> migrations, [
@@ -97,7 +95,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `FileModel` (`id` TEXT NOT NULL, `fileName` TEXT NOT NULL, `dataVersion` TEXT NOT NULL, `url` TEXT NOT NULL, `updateDate` TEXT NOT NULL, `updates` TEXT NOT NULL, `dbType` TEXT NOT NULL, `dataUpdateDone` INTEGER NOT NULL, `status` TEXT, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `FileModel` (`id` TEXT NOT NULL, `fileName` TEXT NOT NULL, `dataVersion` TEXT NOT NULL, `url` TEXT NOT NULL, `updateDate` TEXT NOT NULL, `updates` TEXT NOT NULL, `dbType` TEXT NOT NULL, `name` TEXT NOT NULL, `dataUpdateDone` INTEGER NOT NULL, `status` TEXT, PRIMARY KEY (`id`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `SystemInfoModel` (`id` TEXT NOT NULL, `appVersion` TEXT NOT NULL, `baseUrl` TEXT NOT NULL, `updateContent` TEXT NOT NULL, `status` TEXT, PRIMARY KEY (`id`))');
         await database.execute(
@@ -108,8 +106,6 @@ class _$AppDatabase extends AppDatabase {
             'CREATE TABLE IF NOT EXISTS `SubCategoryModel` (`id` TEXT NOT NULL, `categoryID` TEXT NOT NULL, `subcategory` TEXT NOT NULL, `startVerseNumber` INTEGER NOT NULL, `endVerseNumber` INTEGER NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `RecordModel` (`sourceId` TEXT NOT NULL, `createTime` TEXT NOT NULL, `id` TEXT NOT NULL, `number` INTEGER NOT NULL, `type` INTEGER NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `refrain` TEXT NOT NULL, `author` TEXT NOT NULL, `category` TEXT NOT NULL, `subCategory` TEXT NOT NULL, `url` TEXT NOT NULL, `pianoSpectrum` TEXT NOT NULL, `guitarSpectrum` TEXT NOT NULL, `pianoMedia` TEXT NOT NULL, `pianoMedia2` TEXT NOT NULL, `singMedia` TEXT NOT NULL, `guitarMedia` TEXT NOT NULL, `description` TEXT NOT NULL, PRIMARY KEY (`id`))');
-        await database.execute(
-            'CREATE TABLE IF NOT EXISTS `TypeModel` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `status` TEXT, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -147,11 +143,6 @@ class _$AppDatabase extends AppDatabase {
   RecordDao get recordDao {
     return _recordDaoInstance ??= _$RecordDao(database, changeListener);
   }
-
-  @override
-  TypeDao get typeDao {
-    return _typeDaoInstance ??= _$TypeDao(database, changeListener);
-  }
 }
 
 class _$FileDao extends FileDao {
@@ -170,6 +161,7 @@ class _$FileDao extends FileDao {
                   'updateDate': item.updateDate,
                   'updates': item.updates,
                   'dbType': item.dbType,
+                  'name': item.name,
                   'dataUpdateDone': item.dataUpdateDone,
                   'status': item.status
                 }),
@@ -185,6 +177,7 @@ class _$FileDao extends FileDao {
                   'updateDate': item.updateDate,
                   'updates': item.updates,
                   'dbType': item.dbType,
+                  'name': item.name,
                   'dataUpdateDone': item.dataUpdateDone,
                   'status': item.status
                 });
@@ -207,6 +200,7 @@ class _$FileDao extends FileDao {
             fileName: row['fileName'] as String,
             dataVersion: row['dataVersion'] as String,
             url: row['url'] as String,
+            name: row['name'] as String,
             updateDate: row['updateDate'] as String,
             updates: row['updates'] as String,
             dbType: row['dbType'] as String,
@@ -221,6 +215,7 @@ class _$FileDao extends FileDao {
             fileName: row['fileName'] as String,
             dataVersion: row['dataVersion'] as String,
             url: row['url'] as String,
+            name: row['name'] as String,
             updateDate: row['updateDate'] as String,
             updates: row['updates'] as String,
             dbType: row['dbType'] as String,
@@ -469,6 +464,18 @@ class _$PoetryDao extends PoetryDao {
   }
 
   @override
+  Future<List<PoetryModel>> searchCategory(
+    String str,
+    int page,
+    int count,
+  ) async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM PoetryModel WHERE category LIKE ?1 OR subCategory LIKE ?1 ORDER BY type ASC, number ASC LIMIT ?2,?3',
+        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String),
+        arguments: [str, page, count]);
+  }
+
+  @override
   Future<List<PoetryModel>> searchNumber(String str) async {
     return _queryAdapter.queryList(
         'SELECT * FROM PoetryModel WHERE number == ?1 ORDER BY type ASC, number ASC',
@@ -534,13 +541,15 @@ class _$CatalogueDao extends CatalogueDao {
   final UpdateAdapter<CatalogueModel> _catalogueModelUpdateAdapter;
 
   @override
-  Future<List<CatalogueModel>> queryAll() async {
-    return _queryAdapter.queryList('SELECT * FROM CatalogueModel',
+  Future<List<CatalogueModel>> queryAllByType(int type) async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM CatalogueModel WHERE type = ?1',
         mapper: (Map<String, Object?> row) => CatalogueModel(
             id: row['id'] as String,
             category: row['category'] as String,
             selectedStatus: row['selectedStatus'] as String,
-            type: row['type'] as int));
+            type: row['type'] as int),
+        arguments: [type]);
   }
 
   @override
@@ -753,69 +762,5 @@ class _$RecordDao extends RecordDao {
   @override
   Future<void> updateItems(List<RecordModel> item) async {
     await _recordModelUpdateAdapter.updateList(item, OnConflictStrategy.abort);
-  }
-}
-
-class _$TypeDao extends TypeDao {
-  _$TypeDao(
-    this.database,
-    this.changeListener,
-  )   : _queryAdapter = QueryAdapter(database),
-        _typeModelInsertionAdapter = InsertionAdapter(
-            database,
-            'TypeModel',
-            (TypeModel item) => <String, Object?>{
-                  'id': item.id,
-                  'name': item.name,
-                  'status': item.status
-                }),
-        _typeModelUpdateAdapter = UpdateAdapter(
-            database,
-            'TypeModel',
-            ['id'],
-            (TypeModel item) => <String, Object?>{
-                  'id': item.id,
-                  'name': item.name,
-                  'status': item.status
-                });
-
-  final sqflite.DatabaseExecutor database;
-
-  final StreamController<String> changeListener;
-
-  final QueryAdapter _queryAdapter;
-
-  final InsertionAdapter<TypeModel> _typeModelInsertionAdapter;
-
-  final UpdateAdapter<TypeModel> _typeModelUpdateAdapter;
-
-  @override
-  Future<List<TypeModel>> queryAll() async {
-    return _queryAdapter.queryList('SELECT * FROM TypeModel',
-        mapper: (Map<String, Object?> row) => TypeModel(
-            row['status'] as String?,
-            id: row['id'] as String,
-            name: row['name'] as String));
-  }
-
-  @override
-  Future<void> insertItem(TypeModel item) async {
-    await _typeModelInsertionAdapter.insert(item, OnConflictStrategy.replace);
-  }
-
-  @override
-  Future<void> insertItems(List<TypeModel> item) async {
-    await _typeModelInsertionAdapter.insertList(
-        item, OnConflictStrategy.replace);
-  }
-
-  @override
-  Future<void> updateItem(TypeModel item) async {
-    await _typeModelUpdateAdapter.update(item, OnConflictStrategy.replace);
-  }
-
-  @override
-  Future<void> updateItems(List<TypeModel> item) async {
-    await _typeModelUpdateAdapter.updateList(item, OnConflictStrategy.abort);
   }
 }

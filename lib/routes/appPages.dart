@@ -32,7 +32,7 @@ class AppPages {
         })),
     GetPage(
         name: AppRoutes.catalogueFull,
-        page: () => CatalogueFull(),
+        page: () => const CatalogueFull(),
         binding: MyBinding(() {
           Get.lazyPut(() => SearchController());
         })),
