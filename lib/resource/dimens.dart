@@ -29,6 +29,6 @@ class Dimens {
   static const double backIconPositionBottom =96;
   static const double backIconPositionRight=32;
   static const double bigButtonMargin =space*2;
-  static const double bannerHeight = 48;
+  static const double bannerHeight = 40;
 
 }

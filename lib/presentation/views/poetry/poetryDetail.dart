@@ -26,12 +26,12 @@ class PoetryDetail extends GetView<PoetryDetailController> {
       appBar: AppBar(
         toolbarHeight: Dimens.toolbarHeight,
         automaticallyImplyLeading:false,
-        backgroundColor: AppColor.white,
-        shadowColor: AppColor.white,
+        elevation:0,
+        backgroundColor: Colors.transparent,
         title: Center(
           child: TextUnitWidget(
             controller.arguments.getTitle(),
-            style: Styles.textStyleBlack,
+            style: Styles.subTextStyleBlack,
             overflow: TextOverflow.ellipsis,
           ),
         ),

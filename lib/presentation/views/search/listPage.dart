@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_poetry/domain/model/fileModel.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/mainController.dart';
+import 'package:flutter_poetry/presentation/views/widget/bannerWidget.dart';
 import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/routes/appRoutes.dart';
@@ -22,7 +23,7 @@ import 'searchController.dart';
 
 class ListPage<T> extends StatelessWidget {
   ListPage({Key? key}) : super(key: key);
-  final double _fontSize = Dimens.helperSize*TextUnitWidget.textSizeTimes;
+  final double _fontSize = Dimens.helperSize * TextUnitWidget.textSizeTimes;
   final SearchController controller = Get.find<SearchController>();
   int page = 1;
   String searchVal = "";
@@ -33,6 +34,7 @@ class ListPage<T> extends StatelessWidget {
       color: AppColor.backgroundColor,
       child: Column(
         children: [
+          const BannerWidget(),
           Row(
             children: [
               SubIconTitle("poetry".tr, Icons.menu_book),
@@ -112,13 +114,14 @@ class ListPage<T> extends StatelessWidget {
               itemBuilder: (context, index) {
                 var item = controller.poetryItems[index];
                 var title = "";
-                var files = MainController.allFiles.where((element) => element.id==item.type.toString()).toList();
-                if(files.isNotEmpty){
+                var files = MainController.allFiles
+                    .where((element) => element.id == item.type.toString())
+                    .toList();
+                if (files.isNotEmpty) {
                   title = files[0].name.tr;
                 }
                 return ModuleUtils.bindPoetryItemByModel(item, item.itemType,
-                    title: title,
-                    onTapFunction: () {
+                    title: title, onTapFunction: () {
                   controller.onTapPoetry(item);
                 });
               },
@@ -137,11 +140,15 @@ class ListPage<T> extends StatelessWidget {
             ),
           ));
   }
+
   /// search data
   _search(BuildContext context) {
     return Stack(
       children: [
-        TextUnitWidget("searchHelper".tr,style: Styles.helperStyle,),
+        TextUnitWidget(
+          "searchHelper".tr,
+          style: Styles.helperStyle,
+        ),
         TextField(
           controller: controller.textController,
           focusNode: controller.commentFocus,
@@ -164,7 +171,8 @@ class ListPage<T> extends StatelessWidget {
                       bottomLeft: Radius.circular(Dimens.moduleRadius),
                       bottomRight: Radius.circular(Dimens.moduleRadius))),
               enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(width: 0, color: AppColor.dividerColor),
+                  borderSide:
+                      BorderSide(width: 0, color: AppColor.dividerColor),
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(Dimens.moduleRadius),
                       bottomRight: Radius.circular(Dimens.moduleRadius))),

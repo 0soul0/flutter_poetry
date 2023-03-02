@@ -19,7 +19,6 @@ class _BannerWidgetState extends State<BannerWidget> {
   @override
   void initState() {
     super.initState();
-
     BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
@@ -44,8 +43,9 @@ class _BannerWidgetState extends State<BannerWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 23),
       width: MediaQuery.of(context).size.width,
-      height: 72.0,
+      height: 40,
       alignment: Alignment.center,
       child: isShowBanner
           ? AdWidget(

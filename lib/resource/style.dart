@@ -18,6 +18,11 @@ class Styles {
       fontSize: Dimens.textSize,
       color: AppColor.mainColor);
 
+  static const TextStyle subTextStyleBlack = TextStyle(
+      fontWeight: FontWeight.w800,
+      fontSize: Dimens.subTitleSize,
+      color: AppColor.textColor);
+
   static const TextStyle subTextStyleSecondColor = TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: Dimens.subTitleSize,

@@ -11,6 +11,7 @@ import '../../../domain/model/itemModel.dart';
 import '../../../domain/model/recordModel.dart';
 import '../../../resource/dimens.dart';
 import '../item/listSmallItem.dart';
+import '../widget/bannerWidget.dart';
 
 class ListPage<T> extends StatelessWidget {
   const ListPage({this.controller, Key? key}) : super(key: key);
@@ -21,29 +22,28 @@ class ListPage<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(
-          Dimens.backgroundMarginLeft,
-          Dimens.backgroundMarginTop,
-          Dimens.backgroundMarginRight,
-          Dimens.space),
+      padding:
+          const EdgeInsets.symmetric(horizontal: Dimens.backgroundMarginRight),
       color: AppColor.backgroundColor,
       child: Column(children: [
+        const BannerWidget(),
         Expanded(
-            child: Container(
           child: _mineList(),
-        )),
+        ),
       ]),
     );
   }
 
   _mineList() {
     return Obx(() => AlignedGridView.count(
+          padding: EdgeInsets.zero,
           scrollDirection: Axis.vertical,
           crossAxisCount: 1,
+          crossAxisSpacing: 0,
+          mainAxisSpacing: 0,
           itemCount: controller?.items.length,
           itemBuilder: (context, index) {
             var item = controller?.items[index] ?? ItemModel();
-
             return ModuleUtils.bindMineItemByModule(item);
           },
         ));

@@ -13,6 +13,7 @@ import '../../../resource/style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:developer';
 import '../item/utils/moduleUnit.dart';
+import '../widget/bannerWidget.dart';
 import '../widget/emptyPageWidget.dart';
 import '../widget/subIconTitle.dart';
 import '../item/splitItem.dart';
@@ -27,6 +28,7 @@ class ListPage<T> extends StatelessWidget {
     return Container(
       color: AppColor.backgroundColor,
       child: Column(children: [
+        const BannerWidget(),
         SubIconTitle("record".tr, Icons.receipt),
         const Divider(
             height: Dimens.moduleDividing,
