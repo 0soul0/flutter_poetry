@@ -51,7 +51,7 @@ class PoetryModel {
   int itemType=ModuleUtils.poetryModel;
 
   getTitle() {
-    return number.toString() + title;
+    return "$number $title";
   }
 
   getPianoMedia() {
@@ -66,12 +66,12 @@ class PoetryModel {
     if (singMedia.isNotEmpty) {
       list.add(SpectrumModel( index:0,name: "歌唱", media: singMedia, spectrum: "",nameV: "歌\n唱"));
     }
-    if (guitarMedia.isNotEmpty) {
+    if (guitarMedia.isNotEmpty||guitarSpectrum.isNotEmpty) {
       list.add(SpectrumModel(
           index:1,
           name: "吉他", media: guitarMedia, spectrum: guitarSpectrum,nameV: "吉\n他"));
     }
-    if (getPianoMedia().isNotEmpty) {
+    if (getPianoMedia().isNotEmpty||pianoSpectrum.isNotEmpty) {
       list.add(SpectrumModel(index:2,
           name: "鋼琴", media: getPianoMedia() , spectrum: pianoSpectrum,nameV: "鋼\n琴"));
     }

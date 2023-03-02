@@ -130,7 +130,7 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   }
 
   _play() {
-    return Obx(() => Stack(
+    return Obx(() => controller.hasMedia.isTrue? Stack(
           children: [
             FloatFabWidget(
               Icons.music_note_outlined,
@@ -175,6 +175,6 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
               controller.seekMusic(10 * 1000);
             }, controller.playerUIStatus.value),
           ],
-        ));
+        ):Container());
   }
 }

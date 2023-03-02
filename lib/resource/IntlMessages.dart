@@ -30,6 +30,8 @@ class IntlMessages extends Translations {
           "詩歌本(子分類)": "詩歌本(子分類)",
           "補充本": "補充本",
           "補充本(附)": "補充本(附)",
+          "downloadDone":"已收錄",
+          "downloadUnDone":"未下載"
         },
         'en_US': {
           'english': 'english',

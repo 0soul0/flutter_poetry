@@ -13,5 +13,7 @@ abstract class FileDao extends BaseDao<FileModel>{
   @Query('SELECT * FROM $tableName WHERE id = :id')
   Future<FileModel?> findFileById(String id);
 
+  @Query('SELECT * FROM $tableName WHERE dbType = :dbType')
+  Future<List<FileModel>> queryAllByDbType(String dbType);
 
 }

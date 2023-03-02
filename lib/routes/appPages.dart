@@ -23,7 +23,6 @@ class AppPages {
         binding: MyBinding(() {
           Get.lazyPut(() => PoetryDetailController());
         })),
-
     GetPage(
         name: AppRoutes.poetrySpectrum,
         page: () => const PoetrySpectrum(),
@@ -36,34 +35,29 @@ class AppPages {
         binding: MyBinding(() {
           Get.lazyPut(() => SearchController());
         })),
-
     GetPage(
         name: AppRoutes.fontFragment,
         page: () => const FontFragment(),
         binding: MyBinding(() {
           Get.lazyPut(() => MineController());
         })),
-
     GetPage(
         name: AppRoutes.aboutFragment,
         page: () => const AboutFragment(),
         binding: MyBinding(() {
           Get.lazyPut(() => MineController());
         })),
-
     GetPage(
         name: AppRoutes.languageFragment,
         page: () => const LanguageFragment(),
         binding: MyBinding(() {
           Get.lazyPut(() => MineController());
         })),
-
     GetPage(
         name: AppRoutes.poetryListFragment,
         page: () => const PoetryListFragment(),
         binding: MyBinding(() {
           Get.lazyPut(() => MineController());
         })),
-
   ];
 }

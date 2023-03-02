@@ -6,15 +6,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter_poetry/domain/model/fileModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/tool/extension.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/model/poetryModel.dart';
+import '../../../resource/dimens.dart';
+import '../../../resource/style.dart';
+import '../widget/textUnitWidget.dart';
 
 /// A class represent controller of poetry
 class PoetryDetailController extends BaseController<PoetryModel> {
   RxList<String> items = List<String>.from([]).obs;
   Rx<String> refrain = "".obs;
   RxList<SpectrumModel> spectrum = List<SpectrumModel>.from([]).obs;
+  Rx<bool> hasMedia = false.obs;
+  Rx<bool> hasSpectrum = false.obs;
   Rx<SpectrumModel> selectSpectrum = SpectrumModel().obs;
   Rx<Duration> duration = const Duration(seconds: 0).obs;
   Rx<Duration> position = const Duration(seconds: 0).obs;
@@ -22,7 +28,8 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   RxBool playerUIStatus = false.obs;
   RxDouble ddd = 0.0.obs;
   PageController pageController = PageController(initialPage: 1);
-
+  double screenWidth = ScreenUtil.defaultSize.width;
+  double times = 2 / 3;
   late List<AudioPlayer> players;
   late AudioPlayer selectPlayer;
 
@@ -39,7 +46,6 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     initMusicPlayer();
     selectMusicPlayer(0);
   }
-
 
   @override
   void onClose() {
@@ -59,7 +65,11 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   /// init music player
   initMusicPlayer() {
     spectrum.value = arguments.getMedia();
-    selectSpectrum.value = spectrum.first;
+    if (spectrum.isNotEmpty) {
+      selectSpectrum.value = spectrum.first;
+      hasMedia.value = spectrum.first.media.isNotEmpty;
+      hasSpectrum.value = spectrum.first.spectrum.isNotEmpty;
+    }
     players = List.generate(spectrum.length,
         (_) => AudioPlayer()..setReleaseMode(ReleaseMode.stop));
   }
@@ -78,7 +88,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     selectPlayer.onPlayerStateChanged.listen((d) => playState.value = d);
   }
 
-  setSpectrum(SpectrumModel spectrumModel){
+  setSpectrum(SpectrumModel spectrumModel) {
     selectSpectrum.value = spectrumModel;
   }
 
@@ -156,26 +166,55 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   /// @param content data of poetry
   /// @return String list of content
   List<String> splitContent(String content) {
+
     List<String> strList = [];
-    var str = "";
     var contents = content.trim();
+    var str = "";
+    var lastSplitIndex = 0;
     for (int i = 0; i < contents.length; i++) {
       if (isNumeric(contents[i])) {
-        if (str.isNotEmpty) strList.add(str);
+        if (str.isNotEmpty) {
+          var arr = whichClearPivot(str, str.substring(lastSplitIndex));
+          strList.add(arr[1]);
+          str = arr[0];
+        }
         strList.add(contents[i]);
         continue;
       }
 
-      if (isSymbols(contents[i]) && str.length >= 8) {
-        strList.add(str + contents[i]);
-        str = "";
-        continue;
-      }
+      str+=contents[i];
 
-      str += contents[i];
+      if (isSymbols(contents[i])) {
+        if (isMoreLong(str)) {
+          var data = whichClearPivot(str, str.substring(0, lastSplitIndex));
+          strList.add(data[1]);
+          str = data[0];
+        }
+        lastSplitIndex=str.length;
+      }
     }
     if (str.isNotEmpty) strList.add(str);
     return strList;
+  }
+
+  whichClearPivot(String str1, String str2) {
+    double len = str1.length * Dimens.textSize * TextUnitWidget.textSizeTimes;
+    if (len >= screenWidth) return [str1.replaceAll(str2, ""), str2];
+    double textWidth1 = (len - screenWidth * times).abs();
+    double textWidth2 =
+        (str2.length * Dimens.textSize * TextUnitWidget.textSizeTimes -
+                screenWidth * times)
+            .abs();
+    if (textWidth1 > textWidth2) {
+      return [str1.replaceAll(str2, ""), str2];
+    }
+    return ["", str1];
+  }
+
+  isMoreLong(String str) {
+    double textWidth =
+        str.length * Dimens.textSize * TextUnitWidget.textSizeTimes;
+    return textWidth > screenWidth * times;
   }
 
   /// Is String is number
@@ -192,7 +231,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   /// @param str String
   /// @return Is symbols
   isSymbols(String str) {
-    final symbolsRegex = RegExp(r'^[,，：；;、。:！]+$');
+    final symbolsRegex = RegExp(r'^[,，─：；;、。:？『』！]+$');
     return symbolsRegex.hasMatch(str);
   }
 

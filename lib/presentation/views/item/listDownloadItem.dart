@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../../../resource/style.dart';
+import '../../../domain/model/fileModel.dart';
 import '../widget/textUnitWidget.dart';
 import '../widget/touchUnitWidget.dart';
 
@@ -9,6 +10,7 @@ class ListDownloadItem extends StatelessWidget {
   const ListDownloadItem(this.onTapFunction,
       {this.iconGif="",
       this.icon,
+        this.done=true,
       this.title = "",
       this.description = "",
       Key? key})
@@ -18,6 +20,7 @@ class ListDownloadItem extends StatelessWidget {
   final Function onTapFunction;
   final IconData? icon;
   final String iconGif;
+  final bool done;
 
   @override
   Widget build(BuildContext context) {
@@ -71,20 +74,33 @@ class ListDownloadItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: Styles.textStyleBlack,
                 ),
-                TextUnitWidget(
-                  description,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Styles.textStyleGray,
-                ),
               ],
             ),
             Expanded(child: Container()),
-            const Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: Dimens.smallIconSize,
-              color: AppColor.gray,
-            )
+            TouchUnitWidget(
+              onTapDelay: (){
+
+              },
+              child: Container(
+                padding: const EdgeInsets.all(Dimens.space),
+                decoration:BoxDecoration(
+                    color: done?AppColor.gray:AppColor.secondColor,
+                    shape: BoxShape.rectangle,
+                    borderRadius:BorderRadius.circular(Dimens.itemRadius/3),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: AppColor.gray,
+                          blurRadius: 4,
+                          offset: Offset(0, 0))
+                    ]),
+                child: TextUnitWidget(
+                  description,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Styles.textStyleBlack,
+                ),
+              ),
+            ),
           ],
         ),
       ),

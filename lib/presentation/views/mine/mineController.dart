@@ -4,6 +4,7 @@ import 'package:event_bus/event_bus.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/data/settingParameters.dart';
+import 'package:flutter_poetry/domain/dao/fileDao.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/item/utils/moduleUnit.dart';
 import 'package:flutter_poetry/presentation/views/mine/setting/fontFragment.dart';
@@ -12,7 +13,11 @@ import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import 'package:flutter_poetry/tool/sharedPreferencesUnit.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../domain/dao/poetryDao.dart';
+import '../../../domain/fxDataBaseManager.dart';
+import '../../../domain/model/fileModel.dart';
 import '../../../domain/model/itemModel.dart';
+import '../../../mainController.dart';
 import '../../../resource/dimens.dart';
 import '../../../routes/appRoutes.dart';
 import '../../../routes/singleton.dart';
@@ -26,21 +31,29 @@ class MineController extends BaseController {
   RxList<ItemModel> items = List<ItemModel>.from([]).obs;
   RxList<ItemModel> contact = List<ItemModel>.from([]).obs;
   RxList<ItemModel> language = List<ItemModel>.from([]).obs;
-  List<String> selectLanguage = ["中文","English","French"];
+  RxList<ItemModel> hymn = List<ItemModel>.from([]).obs;
+  List<String> selectLanguage = ["中文", "English", "French"];
   int languageIndex = 0;
+  late FileDao _fileDao;
 
   @override
   Future onInit() async {
     super.onInit();
+    await init();
     await defaultSeekValue();
     await initList();
   }
 
-  initList() async{
+  init() async {
+    _fileDao = await FxDataBaseManager.fileDao();
+  }
+
+  initList() async {
     Singleton.getEventBusInstance().on<ItemModel>().listen((event) {
       items.replaceRange(event.id, event.id + 1, [event]);
     });
-    languageIndex = int.parse(await read(MineController.constLanguageSelected, "0"));
+    languageIndex =
+        int.parse(await read(MineController.constLanguageSelected, "0"));
     bindMineItem();
   }
 
@@ -66,12 +79,12 @@ class MineController extends BaseController {
       //     onTapFunction: () {
       //       Get.to(() => const LanguageFragment());
       //     }),
-      // ItemModel(
-      //     id: 3,
-      //     title: "poetryList".tr,
-      //     onTapFunction: () {
-      //       Get.toNamed(AppRoutes.poetryListFragment);
-      //     }),
+      ItemModel(
+          id: 3,
+          title: "poetryList".tr,
+          onTapFunction: () {
+            Get.toNamed(AppRoutes.poetryListFragment);
+          }),
       ItemModel(
           id: 4,
           title: "contactUs".tr,
@@ -86,7 +99,7 @@ class MineController extends BaseController {
     contact.addAll({
       ItemModel(
           id: 0,
-          title: "datatellthetruth@gmail.com",
+          title: "gmail",
           value: SettingParameters.gmail[0],
           iconGif: "assets/icon_gmail.gif",
           onTapFunction: () {
@@ -120,7 +133,7 @@ class MineController extends BaseController {
           selected: languageIndex == 0,
           onTapFunction: () {
             storage(MineController.constLanguageSelected, 0);
-            items[2].value=selectLanguage[0];
+            items[2].value = selectLanguage[0];
             Phoenix.rebirth(context);
             Get.back();
           }),
@@ -130,7 +143,7 @@ class MineController extends BaseController {
           selected: languageIndex == 1,
           onTapFunction: () {
             storage(MineController.constLanguageSelected, 1);
-            items[2].value=selectLanguage[1];
+            items[2].value = selectLanguage[1];
             Phoenix.rebirth(context);
             Get.back();
           }),
@@ -140,11 +153,26 @@ class MineController extends BaseController {
           selected: languageIndex == 2,
           onTapFunction: () {
             storage(MineController.constLanguageSelected, 2);
-            items[2].value=selectLanguage[2];
+            items[2].value = selectLanguage[2];
             Phoenix.rebirth(context);
             Get.back();
           }),
     ]);
+  }
+
+  bindHymn() async {
+    hymn.clear();
+    var files = MainController.allFiles.where((element) => element.dbType==PoetryDao.tableName).toList();
+    for (var i = 0; i < files.length; i++) {
+      FileModel item = files[i];
+      hymn.addAll({
+        ItemModel(
+            id: int.parse(item.id),
+            title: item.name.tr,
+            value: item.dataUpdateDone.toString(),
+            onTapFunction: () {})
+      });
+    }
   }
 
   /// launch website

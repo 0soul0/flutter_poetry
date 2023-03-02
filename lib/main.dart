@@ -170,7 +170,7 @@ class BottomNavigationControllerState
       ),
       body: pages[_currentIndex],
       bottomNavigationBar: SizedBox(
-        height: 56,
+        height: 56+TextUnitWidget.textSizeTimes*3,
         child: Row(
           children: [
             Expanded(

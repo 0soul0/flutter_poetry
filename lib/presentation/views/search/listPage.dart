@@ -112,9 +112,9 @@ class ListPage<T> extends StatelessWidget {
               itemBuilder: (context, index) {
                 var item = controller.poetryItems[index];
                 var title = "";
-                var files = MainController.allFiles.where((element) => element.id==item.itemType.toString());
+                var files = MainController.allFiles.where((element) => element.id==item.type.toString()).toList();
                 if(files.isNotEmpty){
-                  title = (files as FileModel).name.tr;
+                  title = files[0].name.tr;
                 }
                 return ModuleUtils.bindPoetryItemByModel(item, item.itemType,
                     title: title,

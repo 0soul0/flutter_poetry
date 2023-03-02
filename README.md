@@ -19,13 +19,17 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
 
 11. 詩歌文件整理  
 12. 字體太大換行字數減少 字體大小問題 詩歌排版
-14. logo v
 
-15. 開啟lunch page v
 
-16. 詩歌收入列表 v2
-17. 自動下載新詩歌 v2
-18. 會所地址??? 規劃路線 v2
+13. logo v
+14. 下載進度
+15. 一天檢查一次
 
-19. 下載media
-20. 詩歌背景下載？ 
+16. 開啟lunch page v
+
+17. 詩歌收入列表 v2
+18. 自動下載新詩歌 v2
+19. 會所地址??? 規劃路線 v2
+
+20. 下載media
+21. 詩歌背景下載？ 
