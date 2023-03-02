@@ -7,7 +7,7 @@ import '../widget/touchUnitWidget.dart';
 
 class ListMidItem extends StatelessWidget {
   const ListMidItem(this.onTapFunction,
-      {this.iconGif="",
+      {this.iconGif = "",
       this.icon,
       this.title = "",
       this.description = "",
@@ -45,8 +45,8 @@ class ListMidItem extends StatelessWidget {
             iconGif.isNotEmpty
                 ? Image.asset(
                     iconGif,
-                    height: Dimens.iconSize*2,
-                    width: Dimens.iconSize*2,
+                    height: Dimens.iconSize * 2,
+                    width: Dimens.iconSize * 2,
                   )
                 : const SizedBox(
                     width: 0,
@@ -61,7 +61,9 @@ class ListMidItem extends StatelessWidget {
                     width: 0,
                     height: 0,
                   ),
-            const SizedBox(width: Dimens.itemSpace,),
+            const SizedBox(
+              width: Dimens.itemSpace,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -71,11 +73,14 @@ class ListMidItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: Styles.textStyleBlack,
                 ),
-                TextUnitWidget(
-                  description,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Styles.textStyleGray,
+                SizedBox(
+                  width: 250,
+                  child: TextUnitWidget(
+                    description,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Styles.textStyleGray,
+                  ),
                 ),
               ],
             ),

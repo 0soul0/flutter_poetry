@@ -19,6 +19,8 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
 
 11. 詩歌文件整理  
 12. 字體太大換行字數減少 字體大小問題 詩歌排版
+13. 一天檢查一次config檔
+14. 更新內容
 
 
 13. logo v

@@ -22,7 +22,7 @@ import 'searchController.dart';
 
 class ListPage<T> extends StatelessWidget {
   ListPage({Key? key}) : super(key: key);
-
+  final double _fontSize = Dimens.helperSize*TextUnitWidget.textSizeTimes;
   final SearchController controller = Get.find<SearchController>();
   int page = 1;
   String searchVal = "";
@@ -137,39 +137,46 @@ class ListPage<T> extends StatelessWidget {
             ),
           ));
   }
-
   /// search data
   _search(BuildContext context) {
-    return TextField(
-      controller: controller.textController,
-      focusNode: controller.commentFocus,
-      textAlign: TextAlign.left,
-      onChanged: (value) {
-        searchVal = value;
-        page = 1;
-        controller.search(value);
-      },
-      decoration: InputDecoration(
-          filled: true,
-          fillColor: AppColor.backgroundColor,
-          hintText: "searchHelper".tr,
-          hintStyle: Styles.helperStyle,
-          border: const OutlineInputBorder(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(Dimens.moduleRadius),
-                  bottomRight: Radius.circular(Dimens.moduleRadius))),
-          enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 0, color: AppColor.dividerColor),
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(Dimens.moduleRadius),
-                  bottomRight: Radius.circular(Dimens.moduleRadius))),
-          focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: AppColor.secondColor),
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(Dimens.moduleRadius),
-                  bottomRight: Radius.circular(Dimens.moduleRadius))),
-          contentPadding: const EdgeInsets.all(Dimens.itemPaddingSpace_4),
-          prefixIcon: const Icon(Icons.search)),
+    return Stack(
+      children: [
+        TextUnitWidget("searchHelper".tr,style: Styles.helperStyle,),
+        TextField(
+          controller: controller.textController,
+          focusNode: controller.commentFocus,
+          textAlign: TextAlign.left,
+          onChanged: (value) {
+            searchVal = value;
+            page = 1;
+            controller.search(value);
+          },
+          decoration: InputDecoration(
+              filled: true,
+              fillColor: AppColor.backgroundColor,
+              hintText: "searchHelper".tr,
+              hintStyle: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: _fontSize,
+                  color: AppColor.helperColor),
+              border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(Dimens.moduleRadius),
+                      bottomRight: Radius.circular(Dimens.moduleRadius))),
+              enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(width: 0, color: AppColor.dividerColor),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(Dimens.moduleRadius),
+                      bottomRight: Radius.circular(Dimens.moduleRadius))),
+              focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(width: 1, color: AppColor.secondColor),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(Dimens.moduleRadius),
+                      bottomRight: Radius.circular(Dimens.moduleRadius))),
+              contentPadding: const EdgeInsets.all(Dimens.itemPaddingSpace_4),
+              prefixIcon: const Icon(Icons.search)),
+        ),
+      ],
     );
   }
 }
