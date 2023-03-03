@@ -22,7 +22,7 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
     2. 詩歌附
     3. 補充本
     
-12. 下載進度
+12. 下載進度 v
 13. 一天檢查一次config檔 v
 14. 更新內容 v
 15. 換真廣告 

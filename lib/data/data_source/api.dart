@@ -18,10 +18,12 @@ class Api {
     baseUrl: RouteApi.baseUrl,
     connectTimeout: 5000,
     receiveTimeout: 3000,
+    sendTimeout: 5000,
   );
 
   Dio dio() {
     Dio dio = Dio(options);
+    dio.interceptors.add(LogInterceptor());
     // dio.interceptors.add(PrettyDioLogger(
     //   requestHeader: true,
     //   requestBody: true,
@@ -62,9 +64,19 @@ class Api {
     }
   }
 
-  getArrayReturn<T>(String url, {Function(Object)? error}) async {
+  getArrayReturn<T>(String url,
+      {Function(Object)? error, Function(Object)? progress}) async {
     try {
-      var response = await dio().get(url);
+      var response =
+          await dio().get(url, onReceiveProgress: (receivedBytes, totalBytes) {
+        double progressData = receivedBytes / totalBytes * 100;
+        if (progressData > 100) {
+          progressData = 100;
+        }
+        if (progress != null) {
+          progress(progressData);
+        }
+      });
       var json = decodeJson(response);
       return json['data'];
     } catch (e) {

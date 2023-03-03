@@ -89,7 +89,7 @@ class ListPage<T> extends StatelessWidget {
 
   /// show search result
   _searchResult() {
-    return Obx(() => controller.loadingDone.value
+    return Obx(() => controller.loadingProgress.value.msg != "loading"
         ? SmartRefresher(
             controller: controller.refreshController,
             enablePullDown: false,
@@ -127,16 +127,39 @@ class ListPage<T> extends StatelessWidget {
               },
             ),
           )
-        : const Center(
+        : Center(
             child: SizedBox(
-              height: 50,
-              width: 50,
-              child: LoadingIndicator(
-                indicatorType: Indicator.ballClipRotate,
-                colors: [AppColor.mainColor],
-                strokeWidth: 2,
-                backgroundColor: Colors.transparent,
+              height: 200,
+              width: 200,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 6,
+                      backgroundColor: AppColor.helperColor,
+                      value:
+                          controller.loadingProgress.value.map?["progress"] / 100,
+                      valueColor:
+                          const AlwaysStoppedAnimation<Color>(AppColor.mainColor),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: Dimens.space,
+                  ),
+                  TextUnitWidget(
+                    "${controller.loadingProgress.value.map?["number"]}/${controller.loadingProgress.value.map?["total"]}",
+                    style: Styles.helperStyleBlack,
+                  )
+                ],
               ),
+              // child: LoadingIndicator(
+              //   indicatorType: Indicator.ballClipRotate,
+              //   colors: [AppColor.mainColor],
+              //   strokeWidth: 2,
+              //   backgroundColor: Colors.transparent,
+              // ),
             ),
           ));
   }
@@ -162,10 +185,7 @@ class ListPage<T> extends StatelessWidget {
               filled: true,
               fillColor: AppColor.backgroundColor,
               hintText: "searchHelper".tr,
-              hintStyle: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: _fontSize,
-                  color: AppColor.helperColor),
+              hintStyle: Styles.helperStyle,
               border: const OutlineInputBorder(
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(Dimens.moduleRadius),

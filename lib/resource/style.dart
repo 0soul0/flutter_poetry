@@ -4,7 +4,8 @@ import 'package:flutter_poetry/resource/dimens.dart';
 
 class Styles {
   static const FontWeight fontTextWeight=FontWeight.w500;
-
+  static const FontWeight fontHelperWeight=FontWeight.w400;
+  static const FontWeight fontSubTextWeight=FontWeight.w500;
 
   static const TextStyle textStyleWhite = TextStyle(
       fontWeight: fontTextWeight,
@@ -22,12 +23,12 @@ class Styles {
       color: AppColor.mainColor);
 
   static const TextStyle subTextStyleBlack = TextStyle(
-      fontWeight: FontWeight.w800,
+      fontWeight: fontSubTextWeight,
       fontSize: Dimens.subTitleSize,
       color: AppColor.textColor);
 
   static const TextStyle subTextStyleSecondColor = TextStyle(
-      fontWeight: FontWeight.w600,
+      fontWeight: fontSubTextWeight,
       fontSize: Dimens.subTitleSize,
       color: AppColor.secondColor);
 
@@ -37,22 +38,27 @@ class Styles {
       color: AppColor.gray);
 
   static const TextStyle subTitleStyleBlack = TextStyle(
-      fontWeight: FontWeight.w600,
+      fontWeight: fontSubTextWeight,
       fontSize: Dimens.subTitleSize,
       color: AppColor.textColor);
 
   static const TextStyle subTitleStyleWhite = TextStyle(
-      fontWeight: FontWeight.w600,
+      fontWeight: fontSubTextWeight,
       fontSize: Dimens.subTitleSize,
       color: AppColor.white);
 
   static const TextStyle helperStyle = TextStyle(
-      fontWeight: FontWeight.w600,
+      fontWeight: fontHelperWeight,
       fontSize: Dimens.helperSize,
       color: AppColor.helperColor);
 
+  static const TextStyle helperStyleBlack = TextStyle(
+      fontWeight: fontHelperWeight,
+      fontSize: Dimens.helperSize,
+      color: AppColor.textColor);
+
   static const TextStyle subTitleStyleMainColor = TextStyle(
-      fontWeight: FontWeight.w600,
+      fontWeight: fontSubTextWeight,
       fontSize: Dimens.textSize,
       color: AppColor.mainColor);
 
@@ -60,7 +66,6 @@ class Styles {
       fontWeight: FontWeight.w600,
       fontSize: Dimens.homeSize,
       color: AppColor.mainColor);
-
 
 
   static const TextStyle homeTextStyleUnSelect = TextStyle(

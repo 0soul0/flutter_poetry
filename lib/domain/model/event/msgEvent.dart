@@ -1,4 +1,5 @@
 class MsgEvent {
   String msg;
-  MsgEvent(this.msg);
+  Map<String,dynamic>? map;
+  MsgEvent(this.msg,{this.map});
 }

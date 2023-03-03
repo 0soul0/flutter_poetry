@@ -78,17 +78,19 @@ class MainController extends BaseController {
       SharedPreferencesUnit().storage(checkConfigTimeKey, currentTime);
       return true;
     }
-    Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
     return false;
   }
 
   /// Request information of config data
   requestConfig() async {
-    // if (!await canCheckConfigOnceDay()) return;
+    if (!await canCheckConfigOnceDay()){
+    Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
+    return;
+    };
 
     //取得config資料
     var item = await Api.getInstance().getReturn(RouteApi.systemInfo);
-    if (item == null){
+    if (item == null) {
       Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
       return;
     }
@@ -121,7 +123,6 @@ class MainController extends BaseController {
   /// @param newInfo Need checked data
   checkAndUpdateFilesVersion(SystemInfoModel newInfo) async {
     var len = newInfo.files?.length ?? 0;
-
     for (int i = 0; i < len; i++) {
       var newFile = newInfo.files?[i] ?? FileModel();
 
@@ -138,7 +139,11 @@ class MainController extends BaseController {
         //更新資料庫版本和是否更新完成設定為false
         await updateFileDownloadStatus(FileModel.keyUpdateUnDone, newFile);
 
-        var items = await Api.getInstance().getArrayReturn(newFile.url);
+        var items = await Api.getInstance().getArrayReturn(newFile.url,
+            progress: (progress) {
+          Singleton.getEventBusInstance().fire(MsgEvent("loading",
+              map: {"total": len, "number": i + 1, "progress": progress as double}));
+        });
         if (items == null) continue;
         // 更新檔案
         switch (newFile.dbType) {
@@ -164,10 +169,11 @@ class MainController extends BaseController {
 
         //更新資料庫版本和是否更新完成設定為false
         await updateFileDownloadStatus(FileModel.keyUpdateDone, newFile);
-
-        // 更新完成否更新完成設定為true
-        Singleton.getEventBusInstance().fire(MsgEvent("update file finish"));
+        continue;
       }
+
+      Singleton.getEventBusInstance().fire(MsgEvent("loading",
+          map: {"total": len, "number": i + 1, "progress": 100.0}));
     }
   }
 

@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:isolate';
 import 'dart:math';
 
@@ -37,7 +38,8 @@ class SearchController extends BaseController {
       RefreshController(initialRefresh: false);
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
   RxList<PoetryModel> poetryItems = List<PoetryModel>.from([]).obs;
-  Rx<bool> loadingDone = false.obs;
+  Rx<MsgEvent> loadingProgress =
+      MsgEvent("loading", map: {"total": 0, "number": 0, "progress": 0}).obs;
 
   FocusNode commentFocus = FocusNode();
   ScrollController scrollController = ScrollController();
@@ -60,10 +62,7 @@ class SearchController extends BaseController {
   /// init default data
   initData() async {
     Singleton.getEventBusInstance().on<MsgEvent>().listen((event) {
-      if (event.msg == "loadingDone") {
-        loadingDone.value = true;
-        return;
-      }
+      loadingProgress.value = event;
       search("");
     });
     search("");
@@ -89,7 +88,6 @@ class SearchController extends BaseController {
   Future<List<CatalogueModel>> queryAllCatalogue(int type) async {
     return await _catalogueDao.queryAllByType(type);
   }
-
 
   /// Update catalogue data into rxList
   ///
@@ -125,8 +123,8 @@ class SearchController extends BaseController {
     List<PoetryModel> items = [];
     //過濾數字搜尋到段落
 
-    if (search.contains(searchCatalogueKey+split)) {
-      search=search.split(split)[1];
+    if (search.contains(searchCatalogueKey + split)) {
+      search = search.split(split)[1];
       items = await _poetryDao.searchCategory(search, page, count);
     } else if (int.tryParse(search) == null) {
       items = await _poetryDao.search("%$search%", page, count);
@@ -139,8 +137,6 @@ class SearchController extends BaseController {
           await _poetryDao.searchNoContent(search, "%$search%", page, count);
       items.addAll(itemAll);
     }
-
-
 
     for (int i = 0; i < items.length; i++) {
       items[i] = PoetryModel.fromMap(setDescription(search, items[i].toMap()));
