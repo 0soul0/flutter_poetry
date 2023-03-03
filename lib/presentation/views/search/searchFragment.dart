@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/search/searchController.dart';
 import 'package:get/get.dart';
+import '../../../resource/style.dart';
+import '../widget/textUnitWidget.dart';
 import 'listPage.dart';
 
 class SearchFragment extends StatelessWidget {
@@ -31,4 +33,5 @@ class SearchFragment extends StatelessWidget {
       ),
     );
   }
+
 }

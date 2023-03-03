@@ -14,6 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lifecycle/lifecycle.dart';
+import 'package:material_dialogs/material_dialogs.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'firebase_options.dart';
 import 'presentation/views/record/recordFragment.dart';
@@ -121,7 +122,8 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => ScreenUtilInit(
+  Widget build(BuildContext context) =>
+      ScreenUtilInit(
         builder: (BuildContext context, Widget? child) {
           return GetMaterialApp(
             translations: IntlMessages(),
@@ -150,6 +152,8 @@ class MyApp extends StatelessWidget {
 class BottomNavigationController extends StatefulWidget {
   const BottomNavigationController({required Key key}) : super(key: key);
 
+
+
   @override
   BottomNavigationControllerState createState() =>
       BottomNavigationControllerState();
@@ -171,13 +175,13 @@ class BottomNavigationControllerState
           children: [
             Expanded(
                 child:
-                    _bottomNavigationItem("record".tr, 0, Icons.history_edu)),
+                _bottomNavigationItem("record".tr, 0, Icons.history_edu)),
             Expanded(
                 child:
-                    _bottomNavigationItemCenter("search".tr, 1, Icons.search)),
+                _bottomNavigationItemCenter("search".tr, 1, Icons.search)),
             Expanded(
                 child:
-                    _bottomNavigationItem("mine".tr, 2, Icons.account_circle)),
+                _bottomNavigationItem("mine".tr, 2, Icons.account_circle)),
           ],
         ),
       ),
@@ -209,30 +213,30 @@ class BottomNavigationControllerState
       },
       child: _currentIndex == index
           ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  icon,
-                  size: Dimens.iconSizeSelected,
-                  color: AppColor.mainColor,
-                ),
-                TextUnitWidget(label, style: Styles.homeTextStyleSelected)
-              ],
-            )
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            icon,
+            size: Dimens.iconSizeSelected,
+            color: AppColor.mainColor,
+          ),
+          TextUnitWidget(label, style: Styles.homeTextStyleSelected)
+        ],
+      )
           : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  icon,
-                  size: Dimens.iconSize,
-                  color: AppColor.gray,
-                ),
-                TextUnitWidget(
-                  label,
-                  style: Styles.homeTextStyleUnSelect,
-                )
-              ],
-            ),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            icon,
+            size: Dimens.iconSize,
+            color: AppColor.gray,
+          ),
+          TextUnitWidget(
+            label,
+            style: Styles.homeTextStyleUnSelect,
+          )
+        ],
+      ),
     );
   }
 
@@ -243,50 +247,52 @@ class BottomNavigationControllerState
         },
         child: _currentIndex == index
             ? Container(
-                margin: const EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                    color: AppColor.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          color: AppColor.mainColor,
-                          blurRadius: 4,
-                          offset: Offset(0, 0))
-                    ]),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      icon,
-                      size: Dimens.iconSizeSelected,
-                      color: AppColor.mainColor,
-                    ),
-                    TextUnitWidget(label, style: Styles.homeTextStyleSelected)
-                  ],
-                ),
-              )
+          margin: const EdgeInsets.all(2),
+          decoration: const BoxDecoration(
+              color: AppColor.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                    color: AppColor.mainColor,
+                    blurRadius: 4,
+                    offset: Offset(0, 0))
+              ]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                icon,
+                size: Dimens.iconSizeSelected,
+                color: AppColor.mainColor,
+              ),
+              TextUnitWidget(label, style: Styles.homeTextStyleSelected)
+            ],
+          ),
+        )
             : Container(
-                margin: const EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                    color: AppColor.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          color: AppColor.gray,
-                          blurRadius: 4,
-                          offset: Offset(0, 0))
-                    ]),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      icon,
-                      size: Dimens.iconSize,
-                      color: AppColor.gray,
-                    ),
-                    TextUnitWidget(label, style: Styles.homeTextStyleUnSelect)
-                  ],
-                ),
-              ));
+          margin: const EdgeInsets.all(2),
+          decoration: const BoxDecoration(
+              color: AppColor.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                    color: AppColor.gray,
+                    blurRadius: 4,
+                    offset: Offset(0, 0))
+              ]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                icon,
+                size: Dimens.iconSize,
+                color: AppColor.gray,
+              ),
+              TextUnitWidget(label, style: Styles.homeTextStyleUnSelect)
+            ],
+          ),
+        ));
   }
+
+
 }

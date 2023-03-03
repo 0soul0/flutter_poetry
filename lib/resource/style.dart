@@ -3,13 +3,16 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
 class Styles {
+  static const FontWeight fontTextWeight=FontWeight.w500;
+
+
   static const TextStyle textStyleWhite = TextStyle(
-      fontWeight: FontWeight.w600,
+      fontWeight: fontTextWeight,
       fontSize: Dimens.textSize,
       color: AppColor.white);
 
   static const TextStyle textStyleBlack = TextStyle(
-      fontWeight: FontWeight.w600,
+      fontWeight: fontTextWeight,
       fontSize: Dimens.textSize,
       color: AppColor.textColor);
 
@@ -29,7 +32,7 @@ class Styles {
       color: AppColor.secondColor);
 
   static const TextStyle textStyleGray = TextStyle(
-      fontWeight: FontWeight.w600,
+      fontWeight: fontTextWeight,
       fontSize: Dimens.textSize,
       color: AppColor.gray);
 

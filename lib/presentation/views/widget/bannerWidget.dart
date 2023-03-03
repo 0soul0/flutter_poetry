@@ -45,7 +45,7 @@ class _BannerWidgetState extends State<BannerWidget> {
     return Container(
       margin: const EdgeInsets.only(top: 23),
       width: MediaQuery.of(context).size.width,
-      height: 40,
+      height: 48,
       alignment: Alignment.center,
       child: isShowBanner
           ? AdWidget(

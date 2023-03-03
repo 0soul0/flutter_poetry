@@ -55,6 +55,7 @@ dependencies:
   cached_network_image: ^3.2.3
   #https://pub.dev/packages/loading_indicator
   loading_indicator: ^3.1.0
+  material_dialogs: ^1.1.4
 
   # sqlite
   floor: ^1.4.1

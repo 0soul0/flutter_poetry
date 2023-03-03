@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:isolate';
 
 import 'package:event_bus/event_bus.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
@@ -12,12 +13,15 @@ import 'package:flutter_poetry/domain/model/systemInfoModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
+import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
+import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_poetry/routes/singleton.dart';
 import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_poetry/tool/sharedPreferencesUnit.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'data/data_source/api.dart';
 import 'data/routeApi.dart';
 import 'domain/dao/catalogueDao.dart';
@@ -28,6 +32,8 @@ import 'domain/dao/systemInfoDao.dart';
 
 /// MainController class representing a init setting of application
 class MainController extends BaseController {
+  static const String checkConfigTimeKey = "checkConfigTimeKey";
+
   static List<FileModel> allFiles = [];
   static List<FileModel> category = [];
 
@@ -41,7 +47,7 @@ class MainController extends BaseController {
   Future onInit() async {
     super.onInit();
     await init();
-    await request();
+    await requestConfig();
     await initCache();
   }
 
@@ -59,19 +65,55 @@ class MainController extends BaseController {
 
   initCache() async {
     allFiles = await _fileDao.queryAll();
-    category = allFiles.where((element) => element.dbType==CatalogueDao.tableName).toList();
+    category = allFiles
+        .where((element) => element.dbType == CatalogueDao.tableName)
+        .toList();
   }
 
-  /// Request information of system data
-  request() async {
+  /// can check config data from network
+  canCheckConfigOnceDay() async {
+    var oldTime = await SharedPreferencesUnit().read(checkConfigTimeKey, '0');
+    var currentTime = DateTime.now().day;
+    if (currentTime != int.parse(oldTime)) {
+      SharedPreferencesUnit().storage(checkConfigTimeKey, currentTime);
+      return true;
+    }
+    Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
+    return false;
+  }
+
+  /// Request information of config data
+  requestConfig() async {
+    // if (!await canCheckConfigOnceDay()) return;
+
     //取得config資料
     var item = await Api.getInstance().getReturn(RouteApi.systemInfo);
-    if (item == null) return;
+    if (item == null){
+      Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
+      return;
+    }
     final systemInfo = SystemInfoModel.fromMap(item);
     RouteApi.baseUrl = systemInfo.baseUrl;
-    await _systemDao.insertItem(systemInfo);
-    //檢查檔案 版本
+    //檢查檔案版本
     await checkAndUpdateFilesVersion(systemInfo);
+    //檢查config版本
+    await checkConfigVersion(systemInfo);
+
+    Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
+  }
+
+  /// check version of config
+  ///
+  /// @param newConfig Need checked data
+  checkConfigVersion(SystemInfoModel newConfig) async {
+    List<SystemInfoModel> oldConfig = await _systemDao.queryAll();
+
+    if (oldConfig.isEmpty ||
+        (int.parse(newConfig.appVersion.replaceAll(".", "")) >
+            int.parse(oldConfig[0].appVersion.replaceAll(".", "")))) {
+      showDialog(newConfig.updateContent);
+      _systemDao.insertItem(newConfig);
+    }
   }
 
   /// Check version of files. if version of files will upgrade,Update files into locale database
@@ -127,8 +169,6 @@ class MainController extends BaseController {
         Singleton.getEventBusInstance().fire(MsgEvent("update file finish"));
       }
     }
-
-    Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
   }
 
   /// Update downloaded status of file
@@ -195,5 +235,35 @@ class MainController extends BaseController {
     }
 
     return true;
+  }
+
+  /// show Dialog for update content
+  showDialog(String updateContent) {
+    // if (updateContent.isEmpty) return;
+    // 在每個第五個計數時，顯示一個對話框
+    Get.dialog(
+      AlertDialog(
+        title: Text(
+          'updateTitle'.tr,
+          style: Styles.subTextStyleBlack,
+        ),
+        content: Text(
+          updateContent,
+          style: Styles.textStyleBlack,
+        ),
+        actions: [
+          IconsButton(
+            onPressed: () {
+              Get.back();
+            },
+            text: 'current'.tr,
+            iconData: Icons.check,
+            color: AppColor.secondColor,
+            textStyle: Styles.textStyleWhite,
+            iconColor: Colors.white,
+          )
+        ],
+      ),
+    );
   }
 }
