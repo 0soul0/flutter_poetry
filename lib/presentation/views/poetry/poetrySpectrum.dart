@@ -37,12 +37,13 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
     // 建立 TabController，vsync 接受的型態是 TickerProvider
     tabController = TabController(length: 3, vsync: this);
     controller = Get.find<PoetryDetailController>();
+    controller.setHorizontalScreen();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    controller.setHorizontalScreen();
+
     return Scaffold(
         body: Stack(
       children: [
@@ -65,6 +66,7 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   }
 
   _spectrumTab() {
+
     return Obx(() => AlignedGridView.count(
         scrollDirection: Axis.horizontal,
         crossAxisCount: 3,
@@ -78,7 +80,7 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
 
           return TouchUnitWidget(
             onTapDelay: () {
-              controller.selectMusicPlayer(index);
+              controller.selectMusicPlayer(item.index);
               controller.spectrum.refresh();
             },
             child: Container(
@@ -130,7 +132,8 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   }
 
   _play() {
-    return Obx(() => controller.hasMedia.isTrue? Stack(
+
+    return Obx(() => controller.spectrumAndMedia.where((p0) => p0.media.isNotEmpty).isNotEmpty? Stack(
           children: [
             FloatFabWidget(
               Icons.music_note_outlined,

@@ -201,7 +201,9 @@ class SearchController extends BaseController {
     var len = min(SettingParameters.poetryOfDescriptionLong,
         poetryData[key].toString().length);
     final newPoetryData = Map.of(poetryData);
-    newPoetryData['description'] = poetryData[key].substring(0, len);
+    newPoetryData['description'] = 'refrain' == key
+        ? poetryData[key].substring(0, len)
+        : poetryData[key].substring(1, len);
     return Map<String, dynamic>.from(newPoetryData);
   }
 

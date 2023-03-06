@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:floor/floor.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -135,6 +136,7 @@ class SpectrumModel {
   late String media;
   late String name;
   late String nameV;
+  AudioPlayer play=AudioPlayer()..setReleaseMode(ReleaseMode.stop);
 
   SvgPicture? pic;//垂直顯示
 }

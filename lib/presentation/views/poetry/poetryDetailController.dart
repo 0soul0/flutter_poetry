@@ -18,9 +18,9 @@ import '../widget/textUnitWidget.dart';
 class PoetryDetailController extends BaseController<PoetryModel> {
   RxList<String> items = List<String>.from([]).obs;
   Rx<String> refrain = "".obs;
+  RxList<SpectrumModel> spectrumAndMedia = List<SpectrumModel>.from([]).obs;
+  RxList<SpectrumModel> media = List<SpectrumModel>.from([]).obs;
   RxList<SpectrumModel> spectrum = List<SpectrumModel>.from([]).obs;
-  Rx<bool> hasMedia = false.obs;
-  Rx<bool> hasSpectrum = false.obs;
   Rx<SpectrumModel> selectSpectrum = SpectrumModel().obs;
   Rx<Duration> duration = const Duration(seconds: 0).obs;
   Rx<Duration> position = const Duration(seconds: 0).obs;
@@ -30,7 +30,6 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   PageController pageController = PageController(initialPage: 1);
   double screenWidth = ScreenUtil.defaultSize.width;
   double times = 2 / 3;
-  late List<AudioPlayer> players;
   late AudioPlayer selectPlayer;
 
   final scrollController = ScrollController();
@@ -44,14 +43,13 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     setPoetryItemToList(arguments);
     setRefrain(arguments);
     initMusicPlayer();
-    selectMusicPlayer(0);
   }
 
   @override
   void onClose() {
     super.onClose();
-    for (var element in players) {
-      element.release();
+    for (var element in spectrumAndMedia) {
+      element.play.release();
     }
 
     setVerticalScreen();
@@ -64,32 +62,38 @@ class PoetryDetailController extends BaseController<PoetryModel> {
 
   /// init music player
   initMusicPlayer() {
-    spectrum.value = arguments.getMedia();
-    if (spectrum.isNotEmpty) {
-      selectSpectrum.value = spectrum.first;
-      hasMedia.value = spectrum.first.media.isNotEmpty;
-      hasSpectrum.value = spectrum.first.spectrum.isNotEmpty;
+    spectrumAndMedia.value = arguments.getMedia();
+    if (spectrumAndMedia.isNotEmpty) {
+      media.value = spectrumAndMedia.where((p0) => p0.media != "").toList();
+      spectrum.value =
+          spectrumAndMedia.where((p0) => p0.spectrum != "").toList();
     }
-    players = List.generate(spectrum.length,
-        (_) => AudioPlayer()..setReleaseMode(ReleaseMode.stop));
   }
 
   /// select music which need to play
   ///
   /// @param position index of music
   selectMusicPlayer(int index) async {
-    if (players[index].source == null) {
-      players[index].setSourceUrl(spectrum[index].media);
+    var sIndex = 0;
+    for (var i = 0; i < spectrumAndMedia.length; i++) {
+      if (spectrumAndMedia[i].index == index) {
+        sIndex = i;
+        break;
+      }
     }
-    selectPlayer = players[index];
-    selectSpectrum.value = spectrum[index];
-    selectPlayer.onDurationChanged.listen((d) => duration.value = d);
-    selectPlayer.onPositionChanged.listen((d) => position.value = d);
-    selectPlayer.onPlayerStateChanged.listen((d) => playState.value = d);
-  }
+    if (spectrumAndMedia[sIndex].spectrum.isNotEmpty) {
+      selectSpectrum.value = spectrumAndMedia[sIndex];
+    }
 
-  setSpectrum(SpectrumModel spectrumModel) {
-    selectSpectrum.value = spectrumModel;
+    if (spectrumAndMedia[sIndex].media.isNotEmpty) {
+      if (spectrumAndMedia[sIndex].play.source == null) {
+        spectrumAndMedia[sIndex].play.setSourceUrl(spectrumAndMedia[sIndex].media);
+      }
+      selectPlayer = spectrumAndMedia[sIndex].play;
+      selectPlayer.onPositionChanged.listen((d) => position.value = d);
+      selectPlayer.onDurationChanged.listen((d) => duration.value = d);
+      selectPlayer.onPlayerStateChanged.listen((d) => playState.value = d);
+    }
   }
 
   /// set position of sliver
@@ -166,7 +170,6 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   /// @param content data of poetry
   /// @return String list of content
   List<String> splitContent(String content) {
-
     List<String> strList = [];
     var contents = content.trim();
     var str = "";
@@ -182,7 +185,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
         continue;
       }
 
-      str+=contents[i];
+      str += contents[i];
 
       if (isSymbols(contents[i])) {
         if (isMoreLong(str)) {
@@ -190,7 +193,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
           strList.add(data[1]);
           str = data[0];
         }
-        lastSplitIndex=str.length;
+        lastSplitIndex = str.length;
       }
     }
     if (str.isNotEmpty) strList.add(str);

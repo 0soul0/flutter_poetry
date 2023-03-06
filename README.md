@@ -17,7 +17,7 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
 9. //https://codelabs.developers.google.com/codelabs/admob-inline-ads-in-flutter#7
 10. fcm catch 分析
 
-11. 檢查 18 25 30 
+11. 檢查 
     1. 詩歌 
     2. 詩歌附
     3. 補充本
@@ -27,6 +27,7 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
 14. 更新內容 v
 15. 換真廣告 
 16. 開啟lunch page
+17. logo
 
 
 

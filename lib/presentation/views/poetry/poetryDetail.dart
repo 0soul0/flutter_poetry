@@ -25,8 +25,8 @@ class PoetryDetail extends GetView<PoetryDetailController> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: Dimens.toolbarHeight,
-        automaticallyImplyLeading:false,
-        elevation:0,
+        automaticallyImplyLeading: false,
+        elevation: 0,
         backgroundColor: Colors.transparent,
         title: Center(
           child: TextUnitWidget(
@@ -67,16 +67,9 @@ class PoetryDetail extends GetView<PoetryDetailController> {
               _slider(),
               Row(
                 children: [
-                  controller.hasSpectrum.isTrue
+                  controller.spectrumAndMedia.where((p0) => p0.spectrum.isNotEmpty).isNotEmpty
                       ? TouchUnitWidget(
                           onTapDelay: () {
-                            for (int i = 0;
-                                i < controller.spectrum.length;
-                                i++) {
-                              if (controller.spectrum.isNotEmpty) {
-                                controller.selectMusicPlayer(i);
-                              }
-                            }
                             Get.toNamed(AppRoutes.poetrySpectrum);
                           },
                           child: Container(
@@ -114,30 +107,49 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   }
 
   _changeTitle() {
-    return Obx(() => controller.hasMedia.isTrue
-        ? PageView.builder(
-            controller: controller.pageController,
-            scrollDirection: Axis.vertical,
-            itemCount: controller.spectrum.length,
-            onPageChanged: (int page) {
-              controller.selectMusicPlayer(page);
-            },
-            itemBuilder: (context, index) {
-              var item = controller.spectrum[index];
-              return Center(
-                child: TextUnitWidget(
+
+    return Obx(() => PageView.builder(
+          controller: controller.pageController,
+          scrollDirection: Axis.vertical,
+          itemCount: controller.media.length,
+          onPageChanged: (int page) {
+            controller.selectMusicPlayer(controller.media[page].index);
+          },
+          itemBuilder: (context, index) {
+            var item = controller.media[index];
+
+            IconData iconData = Icons.linear_scale_sharp;
+            if (index == 0 && controller.media.length != 1) {
+              iconData = Icons.arrow_circle_up;
+            } else if (index == controller.media.length - 1 &&
+                controller.media.length != 1) {
+              iconData = Icons.arrow_circle_down;
+            }
+
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TextUnitWidget(
                   "(${item.name})",
                   style: Styles.textStyleBlack,
                   overflow: TextOverflow.ellipsis,
                 ),
-              );
-            },
-          )
-        : Container());
+                Container(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Icon(
+                      iconData,
+                      size: Dimens.iconSize,
+                    ))
+                // const Icon(Icons.arrow_downward_rounded,size: 10,),
+              ],
+            );
+          },
+        ));
   }
 
   _play() {
-    return Obx(() => controller.hasMedia.isTrue
+    return Obx(() => controller.media.isNotEmpty
         ? Row(
             children: [
               TouchUnitWidget(
@@ -181,7 +193,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   }
 
   _slider() {
-    return Obx(() => controller.hasMedia.isTrue
+    return Obx(() =>controller.spectrumAndMedia.where((p0) => p0.spectrum.isNotEmpty).isNotEmpty
         ? Container(
             margin: const EdgeInsets.fromLTRB(Dimens.space, 0, Dimens.space, 0),
             child: Row(
@@ -213,11 +225,12 @@ class PoetryDetail extends GetView<PoetryDetailController> {
           controller: controller.scrollController,
           scrollDirection: Axis.vertical,
           crossAxisCount: 1,
-          itemCount: controller.items.length+1,
+          itemCount: controller.items.length + 1,
           itemBuilder: (context, index) {
-
-            if(index>=controller.items.length){
-              return const SizedBox(height: Dimens.itemSpace*3,);
+            if (index >= controller.items.length) {
+              return const SizedBox(
+                height: Dimens.itemSpace * 3,
+              );
             }
 
             var item = controller.items[index];
