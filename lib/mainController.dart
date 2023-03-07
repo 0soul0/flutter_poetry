@@ -83,10 +83,10 @@ class MainController extends BaseController {
 
   /// Request information of config data
   requestConfig() async {
-    if (!await canCheckConfigOnceDay()){
-    Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
-    return;
-    };
+    // if (!await canCheckConfigOnceDay()){
+    // Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
+    // return;
+    // }
 
     //取得config資料
     var item = await Api.getInstance().getReturn(RouteApi.systemInfo);

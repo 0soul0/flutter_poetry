@@ -71,8 +71,8 @@
 44        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 44-->[androidx.core:core:1.8.0] /Users/liushuya/.gradle/caches/transforms-3/354a81e599c0b0e8ce779e4febfa5c95/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
 45        android:debuggable="true"
-46        android:icon="@mipmap/ic_launcher"
-47        android:label="flutter_poetry" >
+46        android:icon="@mipmap/launcher_icon"
+47        android:label="hymnLife" >
 48        <activity
 49            android:name="com.example.flutter_poetry.MainActivity"
 50            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -109,7 +109,7 @@
 81        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
 82        <meta-data
 83            android:name="com.google.android.gms.ads.APPLICATION_ID"
-84            android:value="ca-app-pub-3940256099942544~3347511713" />
+84            android:value="ca-app-pub-9515998171000409~4909546280" />
 85
 86        <service
 86-->[:firebase_messaging] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:16:9-19:72

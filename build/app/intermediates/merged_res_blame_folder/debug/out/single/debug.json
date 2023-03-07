@@ -4,28 +4,16 @@
         "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/layout/my_native_ad.xml"
     },
     {
-        "merged": "com.example.flutter_poetry.app-merged_res-24:/layout_list_tile_native_ad.xml.flat",
-        "source": "com.example.flutter_poetry.app-main-17:/layout/list_tile_native_ad.xml"
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-hdpi_logo.png.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-hdpi/logo.png"
     },
     {
-        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-xhdpi_logo.png.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-xhdpi/logo.png"
     },
     {
-        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable-v21_background.png.flat",
-        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable-v21/background.png"
-    },
-    {
-        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable-v21_launch_background.xml.flat",
-        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable-v21/launch_background.xml"
-    },
-    {
-        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable-xhdpi_splash.png.flat",
-        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable-xhdpi/splash.png"
+        "merged": "com.example.flutter_poetry.app-merged_res-24:/mipmap-xhdpi_launcher_icon.png.flat",
+        "source": "com.example.flutter_poetry.app-main-17:/mipmap-xhdpi/launcher_icon.png"
     },
     {
         "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-xxhdpi_ic_launcher.png.flat",
@@ -48,16 +36,68 @@
         "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable-xxxhdpi/splash.png"
     },
     {
-        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable-xxhdpi_splash.png.flat",
-        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable-xxhdpi/splash.png"
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/layout_list_tile_native_ad.xml.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/layout/list_tile_native_ad.xml"
     },
     {
-        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable_launch_background.xml.flat",
-        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable/launch_background.xml"
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-mdpi_logo.png.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-mdpi/logo.png"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-24:/mipmap-mdpi_launcher_icon.png.flat",
+        "source": "com.example.flutter_poetry.app-main-17:/mipmap-mdpi/launcher_icon.png"
     },
     {
         "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-xhdpi_ic_launcher.png.flat",
         "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-24:/mipmap-xxhdpi_launcher_icon.png.flat",
+        "source": "com.example.flutter_poetry.app-main-17:/mipmap-xxhdpi/launcher_icon.png"
+    },
+    {
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable-v21_background.png.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable-v21/background.png"
+    },
+    {
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable-v21_launch_background.xml.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable-v21/launch_background.xml"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-24:/mipmap-hdpi_launcher_icon.png.flat",
+        "source": "com.example.flutter_poetry.app-main-17:/mipmap-hdpi/launcher_icon.png"
+    },
+    {
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable-xhdpi_splash.png.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable-xhdpi/splash.png"
+    },
+    {
+        "merged": "com.example.flutter_poetry.app-merged_res-24:/mipmap-xxxhdpi_launcher_icon.png.flat",
+        "source": "com.example.flutter_poetry.app-main-17:/mipmap-xxxhdpi/launcher_icon.png"
+    },
+    {
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-xxxhdpi_logo.png.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-xxxhdpi/logo.png"
+    },
+    {
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable-xxhdpi_splash.png.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable-xxhdpi/splash.png"
+    },
+    {
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/mipmap-xxhdpi_logo.png.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/mipmap-xxhdpi/logo.png"
+    },
+    {
+        "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable_launch_background.xml.flat",
+        "source": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-main-17:/drawable/launch_background.xml"
     },
     {
         "merged": "/Users/liushuya/.gradle/daemon/7.5/com.example.flutter_poetry.app-merged_res-24:/drawable_background.png.flat",

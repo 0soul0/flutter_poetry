@@ -46,8 +46,14 @@ class ListPage<T> extends StatelessWidget {
                   onTapDelay: () {
                     Get.toNamed(AppRoutes.catalogueFull);
                   },
-                  child: TextUnitWidget("catalogue".tr,
-                      style: Styles.subTitleStyleMainColor),
+                  child: Row(
+                    children: [
+                      TextUnitWidget("catalogue".tr,
+                          style: Styles.subTitleStyleMainColor),
+                      const Icon(Icons.arrow_forward_ios_rounded,
+                          size: Dimens.iconSize - 5, color: AppColor.mainColor),
+                    ],
+                  ),
                 ),
               )
             ],
@@ -139,10 +145,10 @@ class ListPage<T> extends StatelessWidget {
                     child: CircularProgressIndicator(
                       strokeWidth: 6,
                       backgroundColor: AppColor.helperColor,
-                      value:
-                          controller.loadingProgress.value.map?["progress"] / 100,
-                      valueColor:
-                          const AlwaysStoppedAnimation<Color>(AppColor.mainColor),
+                      value: controller.loadingProgress.value.map?["progress"] /
+                          100,
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                          AppColor.mainColor),
                     ),
                   ),
                   const SizedBox(

@@ -43,7 +43,7 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
 
   @override
   Widget build(BuildContext context) {
-
+    controller.selectMusicPlayer(controller.spectrum[0].index);
     return Scaffold(
         body: Stack(
       children: [
@@ -66,7 +66,6 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   }
 
   _spectrumTab() {
-
     return Obx(() => AlignedGridView.count(
         scrollDirection: Axis.horizontal,
         crossAxisCount: 3,
@@ -75,8 +74,6 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
         itemCount: controller.spectrum.length,
         itemBuilder: (context, index) {
           var item = controller.spectrum[index];
-
-          if (item.spectrum.isEmpty) return null;
 
           return TouchUnitWidget(
             onTapDelay: () {
@@ -132,52 +129,53 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   }
 
   _play() {
-
-    return Obx(() => controller.spectrumAndMedia.where((p0) => p0.media.isNotEmpty).isNotEmpty? Stack(
-          children: [
-            FloatFabWidget(
-              Icons.music_note_outlined,
-              const [
+    return Obx(() => controller.media.isNotEmpty
+        ? Stack(
+            children: [
+              FloatFabWidget(
+                Icons.music_note_outlined,
+                const [
+                  0,
+                  Dimens.backIconPositionBottom / 4,
+                  0,
+                  Dimens.backgroundMarginRight * 2
+                ],
+                () {
+                  controller.togglePlayerUI();
+                },
+                true,
+                size: Dimens.iconSize * 1.2,
+              ),
+              FloatFabWidget(Icons.replay_10, const [
+                0,
+                Dimens.backIconPositionBottom / 4 + 42,
+                0,
+                Dimens.backgroundMarginRight * 2
+              ], () {
+                controller.seekMusic(-10 * 1000);
+              }, controller.playerUIStatus.value),
+              FloatFabWidget(
+                  controller.playState.value == PlayerState.playing
+                      ? Icons.pause
+                      : Icons.play_arrow_rounded,
+                  const [
+                    0,
+                    Dimens.backIconPositionBottom / 4 + 30,
+                    0,
+                    Dimens.backgroundMarginRight * 2 + 30
+                  ], () {
+                controller.toggleSMusicStatus();
+              }, controller.playerUIStatus.value),
+              FloatFabWidget(Icons.forward_10, const [
                 0,
                 Dimens.backIconPositionBottom / 4,
                 0,
-                Dimens.backgroundMarginRight * 2
-              ],
-              () {
-                controller.togglePlayerUI();
-              },
-              true,
-              size: Dimens.iconSize * 1.2,
-            ),
-            FloatFabWidget(Icons.replay_10, const [
-              0,
-              Dimens.backIconPositionBottom / 4 + 42,
-              0,
-              Dimens.backgroundMarginRight * 2
-            ], () {
-              controller.seekMusic(-10 * 1000);
-            }, controller.playerUIStatus.value),
-            FloatFabWidget(
-                controller.playState.value == PlayerState.playing
-                    ? Icons.pause
-                    : Icons.play_arrow_rounded,
-                const [
-                  0,
-                  Dimens.backIconPositionBottom / 4 + 30,
-                  0,
-                  Dimens.backgroundMarginRight * 2 + 30
-                ], () {
-              controller.toggleSMusicStatus();
-            }, controller.playerUIStatus.value),
-            FloatFabWidget(Icons.forward_10, const [
-              0,
-              Dimens.backIconPositionBottom / 4,
-              0,
-              Dimens.backgroundMarginRight * 2 + 42
-            ], () {
-              controller.seekMusic(10 * 1000);
-            }, controller.playerUIStatus.value),
-          ],
-        ):Container());
+                Dimens.backgroundMarginRight * 2 + 42
+              ], () {
+                controller.seekMusic(10 * 1000);
+              }, controller.playerUIStatus.value),
+            ],
+          )
+        : Container());
   }
 }

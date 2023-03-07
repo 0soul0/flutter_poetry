@@ -27,7 +27,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   Rx<PlayerState> playState = PlayerState.stopped.obs;
   RxBool playerUIStatus = false.obs;
   RxDouble ddd = 0.0.obs;
-  PageController pageController = PageController(initialPage: 1);
+  PageController pageController = PageController(initialPage: 0);
   double screenWidth = ScreenUtil.defaultSize.width;
   double times = 2 / 3;
   late AudioPlayer selectPlayer;
@@ -43,6 +43,9 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     setPoetryItemToList(arguments);
     setRefrain(arguments);
     initMusicPlayer();
+    if(media.isNotEmpty) {
+      selectMusicPlayer(media[0].index);
+    }
   }
 
   @override

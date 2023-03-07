@@ -13,7 +13,7 @@
 		<key>CFBundleInfoDictionaryVersion</key>
 		<string>6.0</string>
 		<key>CFBundleName</key>
-		<string>flutter_poetry</string>
+		<string>hymnLife</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>
@@ -50,6 +50,6 @@
 		<key>UIStatusBarHidden</key>
 		<false/>
 		<key>GADApplicationIdentifier</key>
-        <string>ca-app-pub-3940256099942544~1458002511</string>
+		<string>ca-app-pub-9515998171000409~6031056269</string>
 	</dict>
 </plist>

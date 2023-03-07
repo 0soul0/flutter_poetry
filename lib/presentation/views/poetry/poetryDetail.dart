@@ -67,7 +67,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
               _slider(),
               Row(
                 children: [
-                  controller.spectrumAndMedia.where((p0) => p0.spectrum.isNotEmpty).isNotEmpty
+                  controller.spectrum.isNotEmpty
                       ? TouchUnitWidget(
                           onTapDelay: () {
                             Get.toNamed(AppRoutes.poetrySpectrum);
@@ -193,7 +193,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   }
 
   _slider() {
-    return Obx(() =>controller.spectrumAndMedia.where((p0) => p0.spectrum.isNotEmpty).isNotEmpty
+    return Obx(() =>controller.media.isNotEmpty
         ? Container(
             margin: const EdgeInsets.fromLTRB(Dimens.space, 0, Dimens.space, 0),
             child: Row(

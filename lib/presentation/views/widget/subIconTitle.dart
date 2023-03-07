@@ -4,9 +4,10 @@ import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
 
 class SubIconTitle extends StatelessWidget {
-  const SubIconTitle(this.text,this.icon, {super.key});
+  SubIconTitle(this.text,this.icon, {this.style = Styles.subTitleStyleBlack,super.key});
   final String text;
   final IconData icon;
+  TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class SubIconTitle extends StatelessWidget {
             margin: const EdgeInsets.only(left: Dimens.textSpace),
             child: TextUnitWidget(
               text,
-              style: Styles.subTitleStyleBlack,
+              style: style,
               textAlign: TextAlign.center,
             ))
       ],
