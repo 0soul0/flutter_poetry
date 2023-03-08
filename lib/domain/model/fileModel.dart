@@ -13,7 +13,7 @@ class FileModel extends BaseModel {
       this.fileName = "",
       this.dataVersion = "",
       this.url = "",
-        this.name = "",
+      this.name = "",
       this.updateDate = "",
       this.updates = keyNotUpdatable,
       this.dbType = PoetryDao.tableName,
@@ -36,7 +36,6 @@ class FileModel extends BaseModel {
   late String dbType;
   late String name;
   late int dataUpdateDone;
-
 
   factory FileModel.fromMap(Map<String, dynamic> json) {
     return FileModel(

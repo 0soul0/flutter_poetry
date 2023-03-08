@@ -8,7 +8,7 @@ import '../../../../resource/style.dart';
 import '../widget/textUnitWidget.dart';
 
 class CatalogueItem extends StatelessWidget {
-  const CatalogueItem( this.itemData,this.onTapFunction, {Key? key})
+  const CatalogueItem(this.itemData, this.onTapFunction, {Key? key})
       : super(key: key);
   final CatalogueModel? itemData;
   final Function onTapFunction;
@@ -30,17 +30,15 @@ class CatalogueItem extends StatelessWidget {
               Dimens.itemPaddingSpace_4),
           decoration: BoxDecoration(
               color: item.selected ? AppColor.mainColor : AppColor.white,
-              border:
-              item.selected ? Border.all(color: AppColor.mainColor) : Border.all(color: AppColor.gray),
+              border: item.selected
+                  ? Border.all(color: AppColor.mainColor)
+                  : Border.all(color: AppColor.gray),
               borderRadius: BorderRadius.circular(Dimens.itemRadius)),
           child: TextUnitWidget(
             item.category,
-            style: item.selected
-                ? Styles.textStyleWhite
-                : Styles.textStyleGray,
+            style: item.selected ? Styles.textStyleWhite : Styles.textStyleGray,
             textAlign: TextAlign.center,
           ),
-        )
-    );
+        ));
   }
 }

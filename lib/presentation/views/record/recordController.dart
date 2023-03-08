@@ -22,7 +22,7 @@ class RecordController extends BaseController {
       RefreshController(initialRefresh: false);
   RxList<RecordModel> recordItems = List<RecordModel>.from([]).obs;
 
-  List<int> recordItemsType =[];
+  List<int> recordItemsType = [];
 
   @override
   Future onInit() async {

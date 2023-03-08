@@ -2,14 +2,18 @@ import 'package:floor/floor.dart';
 import 'package:flutter_poetry/domain/model/poetryModel.dart';
 
 @entity
-class RecordModel extends PoetryModel{
+class RecordModel extends PoetryModel {
   RecordModel(this.sourceId,
-      {String id = "", String title = "", int number = -1, String description=""}):super(id:id,number:number,title: title,description: description);
+      {String id = "",
+      String title = "",
+      int number = -1,
+      String description = ""})
+      : super(id: id, number: number, title: title, description: description);
 
   late String sourceId; //foreign key Poetry
   String createTime = DateTime.now().toString();
 
-  updateCreateTime(){
+  updateCreateTime() {
     createTime = DateTime.now().toString();
   }
 

@@ -142,3 +142,5 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 #ios 混肴
 #flutter build ios --release --obfuscate
+#刪除沒用到import
+#flutter format .

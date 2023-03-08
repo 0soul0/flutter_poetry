@@ -6,7 +6,8 @@ import '../../../resource/style.dart';
 import '../widget/textUnitWidget.dart';
 
 class FrameItem extends StatelessWidget {
-  const FrameItem(this.onTapFunction,{this.title = "", this.value = "", Key? key})
+  const FrameItem(this.onTapFunction,
+      {this.title = "", this.value = "", Key? key})
       : super(key: key);
 
   final String title;
@@ -16,7 +17,7 @@ class FrameItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         onTapFunction();
       },
       child: Container(

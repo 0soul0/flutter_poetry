@@ -51,5 +51,4 @@ class TouchUnitWidget extends InkWell {
   onDelayed(Function func, {int delayTime = 300}) {
     Future.delayed(Duration(milliseconds: delayTime)).then((value) => func());
   }
-
 }

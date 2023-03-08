@@ -17,7 +17,6 @@ import '../../widget/bannerWidget.dart';
 import '../../widget/nativeBannerWidget.dart';
 import '../../widget/textUnitWidget.dart';
 
-
 class FontFragment extends GetView<MineController> {
   const FontFragment({Key? key}) : super(key: key);
 
@@ -54,21 +53,21 @@ class FontFragment extends GetView<MineController> {
 
   _textBox(BuildContext context) {
     return Obx(() => Container(
-        width: MediaQuery.of(context).size.width,
-        height: 450,
-        padding: const EdgeInsets.symmetric(vertical: Dimens.itemSpace),
-        decoration: BoxDecoration(
-            border: Border.all(color: AppColor.gray),
-            borderRadius: BorderRadius.circular(Dimens.itemRadius)),
-        child: Center(
-          child: Container(
-            alignment: Alignment.center,
-            child: TextUnitWidget(
-              "textSizeSample".tr,
-              textScaleFactor: controller.valueToValueTime(
-                  controller.seekValue.value.toDouble()),
-              style: Styles.textStyleBlack,
-            ))),
+          width: MediaQuery.of(context).size.width,
+          height: 450,
+          padding: const EdgeInsets.symmetric(vertical: Dimens.itemSpace),
+          decoration: BoxDecoration(
+              border: Border.all(color: AppColor.gray),
+              borderRadius: BorderRadius.circular(Dimens.itemRadius)),
+          child: Center(
+              child: Container(
+                  alignment: Alignment.center,
+                  child: TextUnitWidget(
+                    "textSizeSample".tr,
+                    textScaleFactor: controller.valueToValueTime(
+                        controller.seekValue.value.toDouble()),
+                    style: Styles.textStyleBlack,
+                  ))),
         ));
   }
 
@@ -121,7 +120,8 @@ class FontFragment extends GetView<MineController> {
             controller.storage(
                 MineController.constSeekValue, TextUnitWidget.textSizeTimes);
             //通知儲存
-            controller.items.firstWhere((element) => element.id==1).value=controller.seekValue.value.toString();
+            controller.items.firstWhere((element) => element.id == 1).value =
+                controller.seekValue.value.toString();
             controller.seekValueShow.value = false;
             Phoenix.rebirth(context);
             Get.snackbar("saveSuccess".tr, "",

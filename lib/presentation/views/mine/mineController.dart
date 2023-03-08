@@ -162,7 +162,9 @@ class MineController extends BaseController {
 
   bindHymn() async {
     hymn.clear();
-    var files = MainController.allFiles.where((element) => element.dbType==PoetryDao.tableName).toList();
+    var files = MainController.allFiles
+        .where((element) => element.dbType == PoetryDao.tableName)
+        .toList();
     for (var i = 0; i < files.length; i++) {
       FileModel item = files[i];
       hymn.addAll({

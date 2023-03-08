@@ -5,7 +5,7 @@ import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
 
 class FloatFabWidget extends StatelessWidget {
-  FloatFabWidget(this.icon,this.margin, this.function, this.open,
+  FloatFabWidget(this.icon, this.margin, this.function, this.open,
       {Key? key, this.size = Dimens.iconSize})
       : super(key: key);
 

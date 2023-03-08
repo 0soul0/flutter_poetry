@@ -32,8 +32,12 @@ class SystemInfoModel extends BaseModel {
           .toList();
     }
 
-    return SystemInfoModel(json['status'], id:json['id'],appVersion:json['appVersion'],
-        baseUrl:json['baseUrl'], updateContent:json['updateContent'], files:files);
+    return SystemInfoModel(json['status'],
+        id: json['id'],
+        appVersion: json['appVersion'],
+        baseUrl: json['baseUrl'],
+        updateContent: json['updateContent'],
+        files: files);
   }
 
   @override

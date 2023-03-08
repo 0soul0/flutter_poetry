@@ -3,9 +3,9 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
 class Styles {
-  static const FontWeight fontTextWeight=FontWeight.w500;
-  static const FontWeight fontHelperWeight=FontWeight.w400;
-  static const FontWeight fontSubTextWeight=FontWeight.w500;
+  static const FontWeight fontTextWeight = FontWeight.w500;
+  static const FontWeight fontHelperWeight = FontWeight.w400;
+  static const FontWeight fontSubTextWeight = FontWeight.w500;
 
   static const TextStyle textStyleWhite = TextStyle(
       fontWeight: fontTextWeight,
@@ -67,11 +67,8 @@ class Styles {
       fontSize: Dimens.homeSize,
       color: AppColor.mainColor);
 
-
   static const TextStyle homeTextStyleUnSelect = TextStyle(
       fontWeight: FontWeight.w300,
       fontSize: Dimens.homeSize,
       color: AppColor.gray);
 }
-
-

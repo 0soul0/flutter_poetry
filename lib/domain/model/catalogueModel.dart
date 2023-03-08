@@ -2,7 +2,11 @@ import 'package:floor/floor.dart';
 
 @entity
 class CatalogueModel {
-  CatalogueModel({this.id = "", this.category = "", this.selectedStatus = "0",this.type=0});
+  CatalogueModel(
+      {this.id = "",
+      this.category = "",
+      this.selectedStatus = "0",
+      this.type = 0});
 
   @primaryKey
   late String id;
@@ -25,10 +29,9 @@ class CatalogueModel {
   }
 
   CatalogueModel.fromMap(Map<String, dynamic> map) {
-    id= map["id"];
-    selectedStatus= map["selectedStatus"]??"0";
-    category= map["category"]??"";
-    type= map["type"]??0;
+    id = map["id"];
+    selectedStatus = map["selectedStatus"] ?? "0";
+    category = map["category"] ?? "";
+    type = map["type"] ?? 0;
   }
-
 }

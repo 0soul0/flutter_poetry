@@ -1,7 +1,6 @@
 import 'package:floor/floor.dart';
 
-abstract class BaseDao<T>{
-
+abstract class BaseDao<T> {
   @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> insertItem(T item);
 
@@ -13,5 +12,4 @@ abstract class BaseDao<T>{
 
   @update
   Future<void> updateItems(List<T> item);
-
 }

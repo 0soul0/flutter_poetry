@@ -86,8 +86,7 @@ class ListPage<T> extends StatelessWidget {
                 }
 
                 return ModuleUtils.bindPoetryItemByModel(
-                    item, controller.recordItemsType[index],
-                    onTapFunction: () {
+                    item, controller.recordItemsType[index], onTapFunction: () {
                   controller.onTapPoetry(item);
                 }, title: item.createTime.split(" ")[0]);
               },

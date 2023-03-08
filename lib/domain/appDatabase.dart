@@ -42,5 +42,4 @@ abstract class AppDatabase extends FloorDatabase {
   SubCategoryDao get subCategoryDao;
 
   RecordDao get recordDao;
-
 }

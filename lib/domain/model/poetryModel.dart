@@ -49,7 +49,7 @@ class PoetryModel {
   String description = ""; //搜尋結果的歌詞描述
 
   @ignore
-  int itemType=ModuleUtils.poetryModel;
+  int itemType = ModuleUtils.poetryModel;
 
   getTitle() {
     return "$number $title";
@@ -65,16 +65,24 @@ class PoetryModel {
   getMedia() {
     List<SpectrumModel> list = [];
     if (singMedia.isNotEmpty) {
-      list.add(SpectrumModel( index:0,name: "歌唱", media: singMedia, spectrum: "",nameV: "歌\n唱"));
-    }
-    if (guitarMedia.isNotEmpty||guitarSpectrum.isNotEmpty) {
       list.add(SpectrumModel(
-          index:1,
-          name: "吉他", media: guitarMedia, spectrum: guitarSpectrum,nameV: "吉\n他"));
+          index: 0, name: "歌唱", media: singMedia, spectrum: "", nameV: "歌\n唱"));
     }
-    if (getPianoMedia().isNotEmpty||pianoSpectrum.isNotEmpty) {
-      list.add(SpectrumModel(index:2,
-          name: "鋼琴", media: getPianoMedia() , spectrum: pianoSpectrum,nameV: "鋼\n琴"));
+    if (guitarMedia.isNotEmpty || guitarSpectrum.isNotEmpty) {
+      list.add(SpectrumModel(
+          index: 1,
+          name: "吉他",
+          media: guitarMedia,
+          spectrum: guitarSpectrum,
+          nameV: "吉\n他"));
+    }
+    if (getPianoMedia().isNotEmpty || pianoSpectrum.isNotEmpty) {
+      list.add(SpectrumModel(
+          index: 2,
+          name: "鋼琴",
+          media: getPianoMedia(),
+          spectrum: pianoSpectrum,
+          nameV: "鋼\n琴"));
     }
     return list;
   }
@@ -101,9 +109,8 @@ class PoetryModel {
   }
 
   PoetryModel.fromMap(Map<String, dynamic> map) {
-
     id = map["id"] ?? "";
-    number =map["number"] ?? 0;
+    number = map["number"] ?? 0;
     type = map["type"] ?? 0;
     title = map["title"] ?? "";
     content = map["content"] ?? "";
@@ -123,20 +130,19 @@ class PoetryModel {
 }
 
 class SpectrumModel {
-  SpectrumModel({
-    this.index=0,
-    this.spectrum = "",
-    this.media = "",
-    this.name = "",
-    this.nameV = "",
-    this.pic
-  });
+  SpectrumModel(
+      {this.index = 0,
+      this.spectrum = "",
+      this.media = "",
+      this.name = "",
+      this.nameV = "",
+      this.pic});
   late int index;
   late String spectrum;
   late String media;
   late String name;
   late String nameV;
-  AudioPlayer play=AudioPlayer()..setReleaseMode(ReleaseMode.stop);
+  AudioPlayer play = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
 
-  SvgPicture? pic;//垂直顯示
+  SvgPicture? pic; //垂直顯示
 }

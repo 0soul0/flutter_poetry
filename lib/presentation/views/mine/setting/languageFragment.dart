@@ -11,11 +11,10 @@ import '../../item/selectedItem.dart';
 import '../../widget/backIconButton.dart';
 import '../../widget/textUnitWidget.dart';
 
-
 class LanguageFragment extends GetView<MineController> {
   const LanguageFragment({Key? key}) : super(key: key);
 
-  init(BuildContext context){
+  init(BuildContext context) {
     controller.bindLanguages(context);
   }
 
@@ -44,17 +43,16 @@ class LanguageFragment extends GetView<MineController> {
 
   _list() {
     return Obx(() => AlignedGridView.count(
-      scrollDirection: Axis.vertical,
-      crossAxisCount: 1,
-      mainAxisSpacing: Dimens.space,
-      itemCount: controller.language.length,
-      itemBuilder: (context, index) {
-        ItemModel item = controller.language[index];
-        return SelectedItem(item);
-      },
-    ));
+          scrollDirection: Axis.vertical,
+          crossAxisCount: 1,
+          mainAxisSpacing: Dimens.space,
+          itemCount: controller.language.length,
+          itemBuilder: (context, index) {
+            ItemModel item = controller.language[index];
+            return SelectedItem(item);
+          },
+        ));
   }
-
 
   // AlignedGridView.count(
   // scrollDirection: Axis.vertical,
@@ -68,7 +66,4 @@ class LanguageFragment extends GetView<MineController> {
   // }, item);
   // },
   // );
-
-
-
 }

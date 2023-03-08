@@ -18,7 +18,7 @@ import '../../widget/textUnitWidget.dart';
 class AboutFragment extends GetView<MineController> {
   const AboutFragment({Key? key}) : super(key: key);
 
-  init(){
+  init() {
     controller.bindContactItem();
   }
 
@@ -64,5 +64,4 @@ class AboutFragment extends GetView<MineController> {
           },
         ));
   }
-
 }

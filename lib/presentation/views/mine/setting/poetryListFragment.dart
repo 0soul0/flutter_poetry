@@ -20,12 +20,11 @@ import '../../widget/bannerWidget.dart';
 import '../../widget/nativeBannerWidget.dart';
 import '../../widget/textUnitWidget.dart';
 
-
 class PoetryListFragment extends GetView<MineController> {
   const PoetryListFragment({Key? key}) : super(key: key);
 
   init() {
-   controller.bindHymn();
+    controller.bindHymn();
   }
 
   @override
@@ -57,19 +56,20 @@ class PoetryListFragment extends GetView<MineController> {
 
   _list() {
     return Obx(() => AlignedGridView.count(
-      scrollDirection: Axis.vertical,
-      crossAxisCount: 1,
-      mainAxisSpacing: Dimens.space,
-      itemCount: controller.hymn.length,
-      itemBuilder: (context, index) {
-        ItemModel item = controller.hymn[index];
-        return ListDownloadItem(item.onTapFunction!,
-            iconGif: item.iconGif,
-            title: item.title,
-            done:item.value==FileModel.keyUpdateDone.toString(),
-            description: item.value==FileModel.keyUpdateDone.toString()?"downloadDone".tr:"downloadUnDone".tr);
-      },
-    ));
+          scrollDirection: Axis.vertical,
+          crossAxisCount: 1,
+          mainAxisSpacing: Dimens.space,
+          itemCount: controller.hymn.length,
+          itemBuilder: (context, index) {
+            ItemModel item = controller.hymn[index];
+            return ListDownloadItem(item.onTapFunction!,
+                iconGif: item.iconGif,
+                title: item.title,
+                done: item.value == FileModel.keyUpdateDone.toString(),
+                description: item.value == FileModel.keyUpdateDone.toString()
+                    ? "downloadDone".tr
+                    : "downloadUnDone".tr);
+          },
+        ));
   }
-
 }

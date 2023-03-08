@@ -17,7 +17,6 @@ extension ObjectExtension on Object {
       myLog(item as Object);
     }
   }
-
 }
 
 // myLog(String msg) {

@@ -107,7 +107,6 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   }
 
   _changeTitle() {
-
     return Obx(() => PageView.builder(
           controller: controller.pageController,
           scrollDirection: Axis.vertical,
@@ -193,7 +192,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   }
 
   _slider() {
-    return Obx(() =>controller.media.isNotEmpty
+    return Obx(() => controller.media.isNotEmpty
         ? Container(
             margin: const EdgeInsets.fromLTRB(Dimens.space, 0, Dimens.space, 0),
             child: Row(

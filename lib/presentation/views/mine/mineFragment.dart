@@ -26,17 +26,17 @@ class _MineFragmentState extends State<MineFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: PageView.builder(
-          controller: widget.pageController,
-          scrollDirection: Axis.horizontal,
-          // curve: Curves.easeInBack,
-          // loop: true,
-          // transformer: new ThreeDTransformer(),
-          itemCount: 1,
-          itemBuilder: (context, index) {
-            return ListPage(controller: widget.controller);
-          },
-        ),
+      body: PageView.builder(
+        controller: widget.pageController,
+        scrollDirection: Axis.horizontal,
+        // curve: Curves.easeInBack,
+        // loop: true,
+        // transformer: new ThreeDTransformer(),
+        itemCount: 1,
+        itemBuilder: (context, index) {
+          return ListPage(controller: widget.controller);
+        },
+      ),
     );
   }
 }

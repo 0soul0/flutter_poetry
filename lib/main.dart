@@ -44,7 +44,6 @@ init() async {
   controller = Get.put(MainController());
   await registerNotification();
   await _initGoogleMobileAds();
-
 }
 
 Future<InitializationStatus> _initGoogleMobileAds() {

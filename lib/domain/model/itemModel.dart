@@ -1,15 +1,15 @@
 import '../../presentation/views/item/utils/moduleUnit.dart';
 
 class ItemModel {
-  ItemModel({this.id = -1,
-    this.title = "",
-    this.value = "",
-    this.iconGif = "",
-    this.hasNextPage = true,
-    this.selected = false,
-    this.module = ModuleUtils.listSmallModule,
-    this.onTapFunction
-  });
+  ItemModel(
+      {this.id = -1,
+      this.title = "",
+      this.value = "",
+      this.iconGif = "",
+      this.hasNextPage = true,
+      this.selected = false,
+      this.module = ModuleUtils.listSmallModule,
+      this.onTapFunction});
 
   late int id;
   late String title;

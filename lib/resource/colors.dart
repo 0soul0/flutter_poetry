@@ -12,7 +12,7 @@ class AppColor {
   static const Color textColor = Color(0xff393939);
   static const Color frameBackgroundColor_1 = Color(0xff7957FF);
   static const Color frameBackgroundColor_2 = Color(0x887957FF);
-  static const Color dividerColor =gray;
+  static const Color dividerColor = gray;
   static const Color helperColor = gray;
   static const Color borderColor = helperColor;
   static const Color backgroundColor = white;

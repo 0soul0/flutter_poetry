@@ -13,7 +13,6 @@ class ModuleUtils {
   static const poetryModel = 0;
   static const poetryModelWithType = 1;
 
-
   /// bind mine item by type of module
   ///
   /// @param item data of item
@@ -41,7 +40,7 @@ class ModuleUtils {
   /// @param type type of poetry item
   /// /// @return widget
   static bindPoetryItemByModel(PoetryModel item, int type,
-      {Function? onTapFunction,title="詩歌"}) {
+      {Function? onTapFunction, title = "詩歌"}) {
     switch (type) {
       case poetryModelWithType:
         return Column(

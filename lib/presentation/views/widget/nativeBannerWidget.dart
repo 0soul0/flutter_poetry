@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class NativeBannerWidget extends StatefulWidget {
-  NativeBannerWidget(this.height,{Key? key}) : super(key: key);
+  NativeBannerWidget(this.height, {Key? key}) : super(key: key);
 
   NativeAd? myNative;
   bool isShowBanner = false;

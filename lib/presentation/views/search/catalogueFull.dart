@@ -72,10 +72,11 @@ class _CatalogueFull extends State<CatalogueFull>
                     Dimens.backgroundMarginRight,
                     Dimens.textSpace),
                 width: MediaQuery.of(context).size.width,
-                child: Expanded(child: FutureBuilder<List<CatalogueModel>>(
+                child: Expanded(
+                    child: FutureBuilder<List<CatalogueModel>>(
                   future: controller.queryAllCatalogue(int.parse(item.id)),
-                  builder: (context,snapshot){
-                      return _catalogueList(snapshot);
+                  builder: (context, snapshot) {
+                    return _catalogueList(snapshot);
                   },
                 )),
               );
@@ -89,25 +90,26 @@ class _CatalogueFull extends State<CatalogueFull>
 
   _catalogueList(AsyncSnapshot<List<CatalogueModel>> snapshot) {
     return MasonryGridView.count(
-          scrollDirection: Axis.vertical,
-          crossAxisCount: 3,
-          crossAxisSpacing: Dimens.itemSpace,
-          mainAxisSpacing: Dimens.itemSpace,
-          itemCount: snapshot.data?.length,
-          itemBuilder: (context, index) {
-            var item = snapshot.data![index];
-            return CatalogueItem(item, () {
-              controller.resetCatalogueModelList();
+      scrollDirection: Axis.vertical,
+      crossAxisCount: 3,
+      crossAxisSpacing: Dimens.itemSpace,
+      mainAxisSpacing: Dimens.itemSpace,
+      itemCount: snapshot.data?.length,
+      itemBuilder: (context, index) {
+        var item = snapshot.data![index];
+        return CatalogueItem(item, () {
+          controller.resetCatalogueModelList();
 
-              // item.selectedStatus = CatalogueModel.constSELECTED;
-              // controller.updateCatalogue(index, item, false);
+          // item.selectedStatus = CatalogueModel.constSELECTED;
+          // controller.updateCatalogue(index, item, false);
 
-              //change search text
-              controller.setSearchText("${SearchController.searchCatalogueKey}${SearchController.split}${item.category}");
+          //change search text
+          controller.setSearchText(
+              "${SearchController.searchCatalogueKey}${SearchController.split}${item.category}");
 
-              Get.back();
-            });
-          },
-        );
+          Get.back();
+        });
+      },
+    );
   }
 }

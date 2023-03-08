@@ -1,11 +1,10 @@
-
 import 'package:floor/floor.dart';
 import 'package:flutter_poetry/domain/model/fileModel.dart';
 
 import 'baseDao.dart';
 
 @dao
-abstract class FileDao extends BaseDao<FileModel>{
+abstract class FileDao extends BaseDao<FileModel> {
   static const tableName = "FileModel";
   @Query('SELECT * FROM $tableName')
   Future<List<FileModel>> queryAll();
@@ -15,5 +14,4 @@ abstract class FileDao extends BaseDao<FileModel>{
 
   @Query('SELECT * FROM $tableName WHERE dbType = :dbType')
   Future<List<FileModel>> queryAllByDbType(String dbType);
-
 }

@@ -141,8 +141,11 @@ class MainController extends BaseController {
 
         var items = await Api.getInstance().getArrayReturn(newFile.url,
             progress: (progress) {
-          Singleton.getEventBusInstance().fire(MsgEvent("loading",
-              map: {"total": len, "number": i + 1, "progress": progress as double}));
+          Singleton.getEventBusInstance().fire(MsgEvent("loading", map: {
+            "total": len,
+            "number": i + 1,
+            "progress": progress as double
+          }));
         });
         if (items == null) continue;
         // 更新檔案

@@ -43,7 +43,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     setPoetryItemToList(arguments);
     setRefrain(arguments);
     initMusicPlayer();
-    if(media.isNotEmpty) {
+    if (media.isNotEmpty) {
       selectMusicPlayer(media[0].index);
     }
   }
@@ -90,7 +90,9 @@ class PoetryDetailController extends BaseController<PoetryModel> {
 
     if (spectrumAndMedia[sIndex].media.isNotEmpty) {
       if (spectrumAndMedia[sIndex].play.source == null) {
-        spectrumAndMedia[sIndex].play.setSourceUrl(spectrumAndMedia[sIndex].media);
+        spectrumAndMedia[sIndex]
+            .play
+            .setSourceUrl(spectrumAndMedia[sIndex].media);
       }
       selectPlayer = spectrumAndMedia[sIndex].play;
       selectPlayer.onPositionChanged.listen((d) => position.value = d);

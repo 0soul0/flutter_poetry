@@ -8,9 +8,9 @@ import '../widget/touchUnitWidget.dart';
 
 class ListDownloadItem extends StatelessWidget {
   const ListDownloadItem(this.onTapFunction,
-      {this.iconGif="",
+      {this.iconGif = "",
       this.icon,
-        this.done=true,
+      this.done = true,
       this.title = "",
       this.description = "",
       Key? key})
@@ -48,8 +48,8 @@ class ListDownloadItem extends StatelessWidget {
             iconGif.isNotEmpty
                 ? Image.asset(
                     iconGif,
-                    height: Dimens.iconSize*2,
-                    width: Dimens.iconSize*2,
+                    height: Dimens.iconSize * 2,
+                    width: Dimens.iconSize * 2,
                   )
                 : const SizedBox(
                     width: 0,
@@ -64,7 +64,9 @@ class ListDownloadItem extends StatelessWidget {
                     width: 0,
                     height: 0,
                   ),
-            const SizedBox(width: Dimens.itemSpace,),
+            const SizedBox(
+              width: Dimens.itemSpace,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -78,15 +80,13 @@ class ListDownloadItem extends StatelessWidget {
             ),
             Expanded(child: Container()),
             TouchUnitWidget(
-              onTapDelay: (){
-
-              },
+              onTapDelay: () {},
               child: Container(
                 padding: const EdgeInsets.all(Dimens.space),
-                decoration:BoxDecoration(
-                    color: done?AppColor.gray:AppColor.secondColor,
+                decoration: BoxDecoration(
+                    color: done ? AppColor.gray : AppColor.secondColor,
                     shape: BoxShape.rectangle,
-                    borderRadius:BorderRadius.circular(Dimens.itemRadius/3),
+                    borderRadius: BorderRadius.circular(Dimens.itemRadius / 3),
                     boxShadow: const [
                       BoxShadow(
                           color: AppColor.gray,

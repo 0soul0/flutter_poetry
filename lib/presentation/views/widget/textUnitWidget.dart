@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
-
 class TextUnitWidget extends Text {
   static double textSizeTimes = 1;
 

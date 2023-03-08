@@ -12,7 +12,7 @@ class SharedPreferencesUnit {
     await prefs.setString(key, value.toString());
   }
 
-  Future<String> read(String key,String defaultValue) async {
+  Future<String> read(String key, String defaultValue) async {
     await init();
     if (!prefs.containsKey(key)) {
       return defaultValue;

@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '917056923195',
     projectId: 'fcmflutterpoetry-95547',
     storageBucket: 'fcmflutterpoetry-95547.appspot.com',
-    iosClientId: '917056923195-504t4s1es6i0r2g88eo6dmefo7ms3ika.apps.googleusercontent.com',
+    iosClientId:
+        '917056923195-504t4s1es6i0r2g88eo6dmefo7ms3ika.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterPoetry',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '917056923195',
     projectId: 'fcmflutterpoetry-95547',
     storageBucket: 'fcmflutterpoetry-95547.appspot.com',
-    iosClientId: '917056923195-504t4s1es6i0r2g88eo6dmefo7ms3ika.apps.googleusercontent.com',
+    iosClientId:
+        '917056923195-504t4s1es6i0r2g88eo6dmefo7ms3ika.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterPoetry',
   );
 }
