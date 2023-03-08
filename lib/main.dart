@@ -1,9 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/mainController.dart';
-import 'package:flutter_poetry/presentation/views/widget/nativeBannerWidget.dart';
 import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import 'package:flutter_poetry/resource/IntlMessages.dart';
 import 'package:flutter_poetry/resource/colors.dart';
@@ -14,18 +16,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lifecycle/lifecycle.dart';
-import 'package:material_dialogs/material_dialogs.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 import 'firebase_options.dart';
+import 'presentation/views/mine/mineFragment.dart';
 import 'presentation/views/record/recordFragment.dart';
 import 'presentation/views/search/searchFragment.dart';
-import 'presentation/views/mine/mineFragment.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'presentation/views/widget/bannerWidget.dart';
 import 'routes/appPages.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 late MainController controller;
 

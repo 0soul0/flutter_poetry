@@ -1,7 +1,3 @@
-import 'dart:ffi';
-import 'dart:isolate';
-
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
@@ -14,21 +10,19 @@ import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
-import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_poetry/routes/singleton.dart';
-import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_poetry/tool/sharedPreferencesUnit.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
+
 import 'data/data_source/api.dart';
 import 'data/routeApi.dart';
 import 'domain/dao/catalogueDao.dart';
 import 'domain/dao/fileDao.dart';
 import 'domain/dao/subCategoryDao.dart';
-import 'domain/fxDataBaseManager.dart';
 import 'domain/dao/systemInfoDao.dart';
+import 'domain/fxDataBaseManager.dart';
 
 /// MainController class representing a init setting of application
 class MainController extends BaseController {

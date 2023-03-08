@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/mine/setting/aboutFragment.dart';
 import 'package:flutter_poetry/presentation/views/mine/setting/fontFragment.dart';
@@ -11,7 +10,6 @@ import 'package:get/get.dart';
 
 import '../presentation/views/poetry/poetrySpectrum.dart';
 import '../presentation/views/search/catalogueFull.dart';
-import '../presentation/views/search/searchFragment.dart';
 import 'appRoutes.dart';
 import 'myBinding.dart';
 

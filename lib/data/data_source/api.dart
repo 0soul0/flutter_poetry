@@ -1,8 +1,8 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_poetry/data/routeApi.dart';
 import 'package:flutter_poetry/tool/extension.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class Api {
   static late Api _instance;

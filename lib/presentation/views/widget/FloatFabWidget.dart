@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+
 import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
 

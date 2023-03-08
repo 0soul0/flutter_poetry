@@ -1,7 +1,5 @@
 import 'package:floor/floor.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
-import 'package:flutter_poetry/domain/model/fileModel.dart';
-import 'package:flutter_poetry/domain/model/poetryModel.dart';
 
 import 'baseDao.dart';
 

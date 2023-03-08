@@ -4,8 +4,6 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../resource/icons.dart';
-
 class EmptyPageWidget extends StatelessWidget {
   const EmptyPageWidget({Key? key}) : super(key: key);
 

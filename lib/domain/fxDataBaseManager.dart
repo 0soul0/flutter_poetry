@@ -1,7 +1,3 @@
-import 'package:flutter_poetry/domain/dao/fileDao.dart';
-import 'package:flutter_poetry/domain/dao/recordDao.dart';
-import 'package:flutter_poetry/domain/model/systemInfoModel.dart';
-
 import 'appDatabase.dart';
 
 const dbName = "myDb.db";

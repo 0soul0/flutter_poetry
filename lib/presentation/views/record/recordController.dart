@@ -1,14 +1,10 @@
-import 'dart:collection';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
 import 'package:flutter_poetry/domain/dao/recordDao.dart';
 import 'package:flutter_poetry/domain/fxDataBaseManager.dart';
-import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../domain/model/recordModel.dart';
 import '../../../routes/appRoutes.dart';

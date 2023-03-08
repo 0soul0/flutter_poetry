@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/domain/model/fileModel.dart';
-import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/mainController.dart';
 import 'package:flutter_poetry/presentation/views/widget/bannerWidget.dart';
 import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/routes/appRoutes.dart';
-import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../item/utils/moduleUnit.dart';
-import '../widget/emptyPageWidget.dart';
 import '../widget/subIconTitle.dart';
 import '../widget/textUnitWidget.dart';
 import 'searchController.dart';

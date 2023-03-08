@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/domain/model/itemModel.dart';
-import 'package:flutter_poetry/presentation/views/item/searchResultItem.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
-import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../item/listMidItem.dart';
-import '../../record/listPage.dart';
 import '../../widget/backIconButton.dart';
 import '../../widget/bannerWidget.dart';
-import '../../widget/nativeBannerWidget.dart';
-import '../../widget/textUnitWidget.dart';
 
 class AboutFragment extends GetView<MineController> {
   const AboutFragment({Key? key}) : super(key: key);

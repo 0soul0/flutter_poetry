@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/presentation/views/record/recordController.dart';
-import 'package:flutter_poetry/presentation/views/search/catalogueFull.dart';
 import 'package:flutter_poetry/resource/colors.dart';
-import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../../domain/model/recordModel.dart';
+
 import '../../../resource/dimens.dart';
-import '../../../resource/style.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'dart:developer';
 import '../item/utils/moduleUnit.dart';
 import '../widget/bannerWidget.dart';
 import '../widget/emptyPageWidget.dart';
 import '../widget/subIconTitle.dart';
-import '../item/splitItem.dart';
-import '../item/searchResultItem.dart';
 
 class ListPage<T> extends StatelessWidget {
   ListPage({Key? key}) : super(key: key);

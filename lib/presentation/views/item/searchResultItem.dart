@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/domain/model/poetryModel.dart';
+
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../../../resource/style.dart';

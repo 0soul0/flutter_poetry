@@ -1,8 +1,5 @@
-import 'dart:ffi';
-import 'dart:isolate';
 import 'dart:math';
 
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_poetry/data/settingParameters.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
@@ -10,9 +7,6 @@ import 'package:flutter_poetry/domain/fxDataBaseManager.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
 import 'package:flutter_poetry/domain/model/recordModel.dart';
-import 'package:flutter_poetry/mainController.dart';
-import 'package:flutter_poetry/resource/dimens.dart';
-import 'package:flutter_poetry/tool/extension.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:uuid/uuid.dart';

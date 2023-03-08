@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/mine/listPage.dart';
-import 'package:flutter_poetry/tool/extension.dart';
 import 'package:get/get.dart';
-import 'package:lifecycle/lifecycle.dart';
 
 import 'mineController.dart';
 

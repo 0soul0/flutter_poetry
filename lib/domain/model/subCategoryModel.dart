@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:floor/floor.dart';
 
 @entity

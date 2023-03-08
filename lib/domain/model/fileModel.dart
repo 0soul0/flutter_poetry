@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:floor/floor.dart';
-import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/domain/model/source/baseModel.dart';
 
 import '../dao/poetryDao.dart';

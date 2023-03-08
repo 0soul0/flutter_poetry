@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/presentation/views/item/utils/moduleUnit.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../../domain/model/itemModel.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../item/selectedItem.dart';
 import '../../widget/backIconButton.dart';
-import '../../widget/textUnitWidget.dart';
 
 class LanguageFragment extends GetView<MineController> {
   const LanguageFragment({Key? key}) : super(key: key);

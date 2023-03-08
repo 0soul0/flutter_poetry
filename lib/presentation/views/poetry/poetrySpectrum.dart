@@ -1,9 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
 import 'package:flutter_poetry/presentation/views/widget/backIconButton.dart';
 import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
@@ -14,7 +10,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/model/poetryModel.dart';
 import '../../../resource/colors.dart';
 import '../widget/FloatFabWidget.dart';
 import '../widget/textUnitWidget.dart';

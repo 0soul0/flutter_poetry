@@ -1,17 +1,12 @@
-import 'dart:ffi';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_poetry/domain/model/fileModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
-import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/model/poetryModel.dart';
 import '../../../resource/dimens.dart';
-import '../../../resource/style.dart';
 import '../widget/textUnitWidget.dart';
 
 /// A class represent controller of poetry

@@ -1,18 +1,13 @@
-import 'dart:ffi';
-
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/data/settingParameters.dart';
 import 'package:flutter_poetry/domain/dao/fileDao.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
-import 'package:flutter_poetry/presentation/views/item/utils/moduleUnit.dart';
-import 'package:flutter_poetry/presentation/views/mine/setting/fontFragment.dart';
-import 'package:flutter_poetry/presentation/views/mine/setting/languageFragment.dart';
 import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 import 'package:flutter_poetry/tool/sharedPreferencesUnit.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../domain/dao/poetryDao.dart';
 import '../../../domain/fxDataBaseManager.dart';
 import '../../../domain/model/fileModel.dart';

@@ -1,5 +1,4 @@
 import 'package:floor/floor.dart';
-import 'package:flutter_poetry/domain/model/fileModel.dart';
 
 import '../model/systemInfoModel.dart';
 import 'baseDao.dart';

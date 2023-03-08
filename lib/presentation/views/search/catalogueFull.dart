@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_poetry/mainController.dart';
 import 'package:flutter_poetry/presentation/views/search/searchController.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import '../../../domain/model/catalogueModel.dart';
 import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
-import '../widget/backIconButton.dart';
-import '../widget/nativeBannerWidget.dart';
-import '../widget/subIconTitle.dart';
 import '../item/catalogue_item.dart';
-import '../widget/textUnitWidget.dart';
+import '../widget/backIconButton.dart';
 
 class CatalogueFull extends StatefulWidget {
   const CatalogueFull({super.key});

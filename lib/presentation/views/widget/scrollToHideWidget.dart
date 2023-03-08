@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
-import 'package:flutter_poetry/tool/extension.dart';
-
-import '../../../resource/style.dart';
 
 class ScrollToHideWidget extends StatefulWidget {
   final Widget child;

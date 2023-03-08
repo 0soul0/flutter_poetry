@@ -1,11 +1,8 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/domain/model/poetryModel.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
 import 'package:flutter_poetry/presentation/views/widget/scrollToHideWidget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
-import 'package:flutter_poetry/tool/extension.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
