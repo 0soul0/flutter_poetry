@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/mainController.dart';
+import 'package:flutter_poetry/main_controller.dart';
 import 'package:flutter_poetry/presentation/views/widget/bannerWidget.dart';
 import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
-import 'package:flutter_poetry/routes/appRoutes.dart';
+import 'package:flutter_poetry/routes/app_routes.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

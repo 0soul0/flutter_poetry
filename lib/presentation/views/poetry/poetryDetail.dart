@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
 import '../../../resource/style.dart';
-import '../../../routes/appRoutes.dart';
+import '../../../routes/app_routes.dart';
 import '../widget/backIconButton.dart';
 import '../widget/textUnitWidget.dart';
 import '../widget/touchUnitWidget.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/mainController.dart';
+import 'package:flutter_poetry/main_controller.dart';
 import 'package:flutter_poetry/presentation/views/search/searchController.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

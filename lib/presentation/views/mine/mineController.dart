@@ -4,7 +4,7 @@ import 'package:flutter_poetry/data/settingParameters.dart';
 import 'package:flutter_poetry/domain/dao/fileDao.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
-import 'package:flutter_poetry/tool/sharedPreferencesUnit.dart';
+import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,9 +12,9 @@ import '../../../domain/dao/poetryDao.dart';
 import '../../../domain/fxDataBaseManager.dart';
 import '../../../domain/model/fileModel.dart';
 import '../../../domain/model/itemModel.dart';
-import '../../../mainController.dart';
+import '../../../main_controller.dart';
 import '../../../resource/dimens.dart';
-import '../../../routes/appRoutes.dart';
+import '../../../routes/app_routes.dart';
 import '../../../routes/singleton.dart';
 
 class MineController extends BaseController {

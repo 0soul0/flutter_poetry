@@ -5,9 +5,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:flutter_poetry/mainController.dart';
+import 'package:flutter_poetry/main_controller.dart';
 import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
-import 'package:flutter_poetry/resource/IntlMessages.dart';
+import 'package:flutter_poetry/resource/intl_messages.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
@@ -22,7 +22,7 @@ import 'firebase_options.dart';
 import 'presentation/views/mine/mineFragment.dart';
 import 'presentation/views/record/recordFragment.dart';
 import 'presentation/views/search/searchFragment.dart';
-import 'routes/appPages.dart';
+import 'routes/app_pages.dart';
 
 late MainController controller;
 
@@ -100,7 +100,7 @@ registerNotification() async {
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-  NotificationSettings settings = await messaging.requestPermission(
+  await messaging.requestPermission(
     alert: true,
     announcement: false,
     badge: true,
