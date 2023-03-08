@@ -76,7 +76,7 @@ flutter_native_splash:
 #flutter pub run flutter_launcher_icons
   flutter_launcher_icons: ^0.9.2
 flutter_icons:
-  android: "launcher_icon"
+  android: "lanuch_logo"
   ios: true
   image_path: "assets/logo_circle.png"
 

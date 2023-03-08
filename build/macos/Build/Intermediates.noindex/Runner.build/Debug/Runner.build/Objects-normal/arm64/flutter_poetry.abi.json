@@ -330,6 +330,55 @@
       "moduleName": "flutter_poetry"
     },
     {
+      "kind": "Import",
+      "name": "audioplayers_darwin",
+      "printedName": "audioplayers_darwin",
+      "declKind": "Import",
+      "moduleName": "flutter_poetry"
+    },
+    {
+      "kind": "Import",
+      "name": "firebase_core",
+      "printedName": "firebase_core",
+      "declKind": "Import",
+      "moduleName": "flutter_poetry"
+    },
+    {
+      "kind": "Import",
+      "name": "firebase_messaging",
+      "printedName": "firebase_messaging",
+      "declKind": "Import",
+      "moduleName": "flutter_poetry"
+    },
+    {
+      "kind": "Import",
+      "name": "path_provider_macos",
+      "printedName": "path_provider_macos",
+      "declKind": "Import",
+      "moduleName": "flutter_poetry"
+    },
+    {
+      "kind": "Import",
+      "name": "shared_preferences_macos",
+      "printedName": "shared_preferences_macos",
+      "declKind": "Import",
+      "moduleName": "flutter_poetry"
+    },
+    {
+      "kind": "Import",
+      "name": "sqflite",
+      "printedName": "sqflite",
+      "declKind": "Import",
+      "moduleName": "flutter_poetry"
+    },
+    {
+      "kind": "Import",
+      "name": "url_launcher_macos",
+      "printedName": "url_launcher_macos",
+      "declKind": "Import",
+      "moduleName": "flutter_poetry"
+    },
+    {
       "kind": "Function",
       "name": "RegisterGeneratedPlugins",
       "printedName": "RegisterGeneratedPlugins(registry:)",

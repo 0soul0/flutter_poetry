@@ -43,7 +43,7 @@
         android:name="android.app.Application"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:icon="@mipmap/launcher_icon"
+        android:icon="@mipmap/lanuch_logo"
         android:label="hymnLife" >
         <activity
             android:name="com.example.flutter_poetry.MainActivity"

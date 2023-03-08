@@ -10,15 +10,35 @@
 		</data>
 		<key>Resources/flutter_assets/AssetManifest.json</key>
 		<data>
-		oG5/OGn+vw7vp/nu5DUDoZJ4nFc=
+		0FmxfCAoQYKGLTMDy/+1aGZp+k4=
 		</data>
 		<key>Resources/flutter_assets/FontManifest.json</key>
 		<data>
-		vKJkVIcw+LGHFnKJGwrQwCREv68=
+		Sz/GufK8UDFgBP7xoHpxUOoafus=
 		</data>
 		<key>Resources/flutter_assets/NOTICES.Z</key>
 		<data>
-		J8IQOqC4We5h+47qAqi82WTTMTw=
+		F3/XGDk/NguKkWtZEBegOxCjqLY=
+		</data>
+		<key>Resources/flutter_assets/assets/icon_fb.gif</key>
+		<data>
+		VxubJVr4p0tcgmGe1UJ1pi/Q25I=
+		</data>
+		<key>Resources/flutter_assets/assets/icon_gmail.gif</key>
+		<data>
+		uSV77f3mdGl4bqmvP04rYuI/oPc=
+		</data>
+		<key>Resources/flutter_assets/assets/icon_ig.gif</key>
+		<data>
+		5O/lYzickCSTFTnYUb52Vf2dvmo=
+		</data>
+		<key>Resources/flutter_assets/assets/logo.png</key>
+		<data>
+		7PP6IXTKjLjOoray6OrfS2f8OME=
+		</data>
+		<key>Resources/flutter_assets/assets/logo_no_background.png</key>
+		<data>
+		Xv+Z0ELwNph5xSIgzgjq4d/aTqs=
 		</data>
 		<key>Resources/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -30,11 +50,15 @@
 		</data>
 		<key>Resources/flutter_assets/kernel_blob.bin</key>
 		<data>
-		svMgMOV5eAxkkthgtSpwpLEeyFI=
+		tAlwp84kVZz3XZXqh4IAl9uaO1w=
 		</data>
 		<key>Resources/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
 		P7bb/oR3EhwqCIH1M6LyTuBIWYU=
+		</data>
+		<key>Resources/flutter_assets/packages/flutter_neumorphic/fonts/NeumorphicIcons.ttf</key>
+		<data>
+		j/gyItxv7nJwy6iDn+JK3Ow2kW0=
 		</data>
 		<key>Resources/flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -58,21 +82,56 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Sps95+7JukayebvM0TLjL1LW1VXXndpKp/O8tOm9ZR8=
+			UsuQ6/gVGX5c/nQYa9iD+HwE9Pt4Y3QoZ+1aytr1Gs8=
 			</data>
 		</dict>
 		<key>Resources/flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zX4DZFvESy3Ue3y2JvUcTsv1Whl6t3JBYotHrBZfviE=
+			dJ8BUWepSQqXwWn+oqJXJgyU3PQUEZpQy8LbnSJ9Ws0=
 			</data>
 		</dict>
 		<key>Resources/flutter_assets/NOTICES.Z</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+VpVtnwLFP3Y7B1gv5KOvkUOLm7Wu3Laoh4sixfYBnQ=
+			Ro0Zfz13QOp4DujQxI1owcpPWjRHjmtciNsZZggpuD8=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/icon_fb.gif</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rRvSHsgANLloFNDiMZDH6tTEtPk7ChQ8WVlsk2hzCmk=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/icon_gmail.gif</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3MtVFG2mwDP5+t6kpXNCSOn7Tzz6kwpOq4dzLQd6YR8=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/icon_ig.gif</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			wXUVjWwrx7jZZ0NS7jdYuJoVDuQ467tpKk2498GUeNs=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/logo.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dshT2m58XWX76yUs64ujQcFYV0TUElAUcaQjdi/Xy44=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/logo_no_background.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			UB9wRVHP9Adu0xuly3AT5Co05jpw0CvP7iGCylBqMEI=
 			</data>
 		</dict>
 		<key>Resources/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -93,7 +152,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MX5jgipLrSyDqyDeKyzwYlNo6AkedEE92jdLNTZpAMs=
+			glIx9TShGwYUmPUEpbfwGXIk2i2Y7DanHCFCNy+eYNM=
 			</data>
 		</dict>
 		<key>Resources/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -101,6 +160,13 @@
 			<key>hash2</key>
 			<data>
 			x6NX+tjyECiQtyzbbjyY8U2zoZ7GDbJtE+T+k/dzgI0=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/packages/flutter_neumorphic/fonts/NeumorphicIcons.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dG5Zlm9qgmPN4N+NEhqJ6dvsSd44jCKx5vyp8oOPgwg=
 			</data>
 		</dict>
 		<key>Resources/flutter_assets/shaders/ink_sparkle.frag</key>

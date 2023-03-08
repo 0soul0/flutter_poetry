@@ -71,7 +71,7 @@
 44        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 44-->[androidx.core:core:1.8.0] /Users/liushuya/.gradle/caches/transforms-3/354a81e599c0b0e8ce779e4febfa5c95/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
 45        android:debuggable="true"
-46        android:icon="@mipmap/launcher_icon"
+46        android:icon="@mipmap/lanuch_logo"
 47        android:label="hymnLife" >
 48        <activity
 49            android:name="com.example.flutter_poetry.MainActivity"

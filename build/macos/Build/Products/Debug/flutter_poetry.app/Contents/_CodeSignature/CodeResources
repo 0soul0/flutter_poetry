@@ -16,6 +16,10 @@
 		<data>
 		zL8cID2w5mFLQQw9P99cfW03u0E=
 		</data>
+		<key>Resources/GoogleService-Info.plist</key>
+		<data>
+		VRXj59yWQ10jgMgw0zv0gH2UrEs=
+		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -23,10 +27,64 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			ABWJ/V8bPakxXz8yBf24joqH5tE=
+			gQvsDZdi3VjfsR5ki5gh/gxEMc8=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"001589fd5f1b3da9315f3f3205fdb88e8a87e6d1"</string>
+			<string>cdhash H"810bec0d9762dd58dfb11e648b9821fe0c4431cf"</string>
+		</dict>
+		<key>Frameworks/FBLPromises.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			y/TA9jyDOAJoZERQkze6FdNxRcQ=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"cbf4c0f63c833802686444509337ba15d37145c4"</string>
+		</dict>
+		<key>Frameworks/FMDB.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			xgl6XEaq02W+bMB3UpIA0O419Eg=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"c6097a5c46aad365be6cc077529200d0ee35f448"</string>
+		</dict>
+		<key>Frameworks/FirebaseCore.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			zI9Lg1IRWrpk/hMOhLvySKh8kJo=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"cc8f4b8352115aba64fe130e84bbf248a87c909a"</string>
+		</dict>
+		<key>Frameworks/FirebaseCoreInternal.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			CYF5p7WKqKNdx0uJKBhUMBP/EcY=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"098179a7b58aa8a35dc74b892818543013ff11c6"</string>
+		</dict>
+		<key>Frameworks/FirebaseInstallations.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			ITO53/Kpvh5zCoeMPURARslr38E=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"2133b9dff2a9be1e730a878c3d444046c96bdfc1"</string>
+		</dict>
+		<key>Frameworks/FirebaseMessaging.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			plG3MPo5wmbV39q8i9Tl5GpxaB8=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"a651b730fa39c266d5dfdabc8bd4e5e46a71681f"</string>
 		</dict>
 		<key>Frameworks/FlutterMacOS.framework</key>
 		<dict>
@@ -36,6 +94,42 @@
 			</data>
 			<key>requirement</key>
 			<string>cdhash H"a8fa3a8da45ec203b3b728f04ca85f311c63df55"</string>
+		</dict>
+		<key>Frameworks/GoogleDataTransport.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			qeV1VEYrkRAhAfgb6Fqu/xIjHJM=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"a9e57554462b91102101f81be85aaeff12231c93"</string>
+		</dict>
+		<key>Frameworks/GoogleUtilities.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			TZckpzc//buXi266qPdI8AUE2cA=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"4d9724a7373ffdbb978b6ebaa8f748f00504d9c0"</string>
+		</dict>
+		<key>Frameworks/audioplayers_darwin.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			0p633zIOJr3ompo4eJa6Nn/pi58=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"d29eb7df320e26bde89a9a387896ba367fe98b9f"</string>
+		</dict>
+		<key>Frameworks/libswiftAVFoundation.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			vG/+wrcE2vnxenLi//6PdPbBnnI=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"feb2b00ea35babbf1f8ecd2b9dd7c3523b8dd2e3" or cdhash H"bc6ffec2b704daf9f17a72e2fffe8f74f6c19e72"</string>
 		</dict>
 		<key>Frameworks/libswiftAppKit.dylib</key>
 		<dict>
@@ -190,6 +284,60 @@
 			<key>requirement</key>
 			<string>cdhash H"3406aab10f486b91c2d9334de341504de56a5631" or cdhash H"73e04119822f2d8cd5eeb426ddac2b2b98295def"</string>
 		</dict>
+		<key>Frameworks/libswiftsimd.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			yoevzZNzSjWnQqIYLmXdd/DhGvQ=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"a91aa60521c71dd382e53441689bc0970469be1b" or cdhash H"ca87afcd93734a35a742a2182e65dd77f0e11af4"</string>
+		</dict>
+		<key>Frameworks/nanopb.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			Blgl9YiAyxEf+6Vn5sGOH21TQ4Y=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"065825f58880cb111ffba567e6c18e1f6d534386"</string>
+		</dict>
+		<key>Frameworks/path_provider_macos.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			RfzNSYlYZIFX2/IzVUJAk/OefJM=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"45fccd498958648157dbf23355424093f39e7c93"</string>
+		</dict>
+		<key>Frameworks/shared_preferences_macos.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			IkJ+ySn3YH2wCE52nGqVoqhnmNY=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"22427ec929f7607db0084e769c6a95a2a86798d6"</string>
+		</dict>
+		<key>Frameworks/sqflite.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			dah8+0fO1XglqNExdqCypP06zN4=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"75a87cfb47ced57825a8d13176a0b2a4fd3accde"</string>
+		</dict>
+		<key>Frameworks/url_launcher_macos.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			II2rDVidD7ZSv7AUXANamICv/Cw=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"208dab0d589d0fb652bfb0145c035a9880affc2c"</string>
+		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<dict>
 			<key>hash2</key>
@@ -209,6 +357,13 @@
 			<key>hash2</key>
 			<data>
 			DsOt8Qe+j994NJVN7maLFOkIVc28/P8zkMEr+Cd0iR0=
+			</data>
+		</dict>
+		<key>Resources/GoogleService-Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			IIi59ndDyw53S3hZCHahbf+lwrWlgpbMzCs2Mz//d9g=
 			</data>
 		</dict>
 	</dict>
