@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 application
-INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:4:5-39:19
+INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:4:5-40:19
 MERGED from [:firebase_messaging] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:15:5-48:19
 MERGED from [:firebase_messaging] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:15:5-48:19
 MERGED from [:firebase_core] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
@@ -15,8 +15,8 @@ MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/ca
 MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/caches/transforms-3/fae55d5cbe1db709ad762a4c527d56f2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:28:5-36:19
 MERGED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.gradle/caches/transforms-3/3c61fd3d859e37d93d552ab50910f150/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:30:5-59:19
 MERGED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.gradle/caches/transforms-3/3c61fd3d859e37d93d552ab50910f150/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:30:5-59:19
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:13:5-21:19
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:13:5-21:19
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:13:5-21:19
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:13:5-21:19
 MERGED from [com.google.firebase:firebase-datatransport:18.1.7] /Users/liushuya/.gradle/caches/transforms-3/d6e276bd6d8b4af7c21ac9529df2cdf0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:23:5-31:19
 MERGED from [com.google.firebase:firebase-datatransport:18.1.7] /Users/liushuya/.gradle/caches/transforms-3/d6e276bd6d8b4af7c21ac9529df2cdf0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:23:5-31:19
 MERGED from [com.google.firebase:firebase-common:20.3.0] /Users/liushuya/.gradle/caches/transforms-3/47d675c130cd132224e49cd67c7d4652/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:24:5-37:19
@@ -64,11 +64,11 @@ MERGED from [androidx.room:room-runtime:2.2.5] /Users/liushuya/.gradle/caches/tr
 	android:name
 		INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml
 manifest
-ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-40:12
-INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-40:12
-INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-40:12
-INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-40:12
-MERGED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-40:12
+ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-41:12
+INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-41:12
+INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-41:12
+INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-41:12
+MERGED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-41:12
 MERGED from [:shared_preferences_android] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:firebase_messaging] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-50:12
 MERGED from [:firebase_core] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
@@ -84,7 +84,7 @@ MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/liushuya/.gradle/c
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/liushuya/.gradle/caches/transforms-3/883c533f683a7ee7fa192439ddb35029/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
 MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/caches/transforms-3/fae55d5cbe1db709ad762a4c527d56f2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:17:1-38:12
 MERGED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.gradle/caches/transforms-3/3c61fd3d859e37d93d552ab50910f150/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:17:1-61:12
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:2:1-23:12
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:2:1-23:12
 MERGED from [com.google.firebase:firebase-datatransport:18.1.7] /Users/liushuya/.gradle/caches/transforms-3/d6e276bd6d8b4af7c21ac9529df2cdf0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:15:1-33:12
 MERGED from [com.google.firebase:firebase-common:20.3.0] /Users/liushuya/.gradle/caches/transforms-3/47d675c130cd132224e49cd67c7d4652/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:15:1-39:12
 MERGED from [androidx.core:core-ktx:1.8.0] /Users/liushuya/.gradle/caches/transforms-3/1327fe67f0358d368a29bb4fb8bf0b3a/transformed/jetified-core-ktx-1.8.0/AndroidManifest.xml:2:1-9:12
@@ -141,16 +141,16 @@ INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/sr
 INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/debug/AndroidManifest.xml:1:1-8:12
 INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/debug/AndroidManifest.xml:1:1-8:12
 	package
-		ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:2:5-41
+		ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:2:5-38
 		INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/debug/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-40:12
+		ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-41:12
 		INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-40:12
+		ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:1-41:12
 		INJECTED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/liushuya/Desktop/code/flutter/flutter_poetry/android/app/src/main/AndroidManifest.xml:1:11-69
@@ -164,8 +164,8 @@ MERGED from [:google_mobile_ads] /Users/liushuya/Desktop/code/flutter/flutter_po
 MERGED from [:google_mobile_ads] /Users/liushuya/Desktop/code/flutter/flutter_poetry/build/google_mobile_ads/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-67
 MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/caches/transforms-3/fae55d5cbe1db709ad762a4c527d56f2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:23:5-67
 MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/caches/transforms-3/fae55d5cbe1db709ad762a4c527d56f2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:10:5-67
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:10:5-67
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:10:5-67
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:10:5-67
 MERGED from [com.google.android.gms:play-services-ads-lite:21.3.0] /Users/liushuya/.gradle/caches/transforms-3/4e6961629888ee1ac903bb6d01559560/transformed/jetified-play-services-ads-lite-21.3.0/AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-ads-lite:21.3.0] /Users/liushuya/.gradle/caches/transforms-3/4e6961629888ee1ac903bb6d01559560/transformed/jetified-play-services-ads-lite-21.3.0/AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.1] /Users/liushuya/.gradle/caches/transforms-3/5c3762db3ff681a108250397544788e4/transformed/jetified-play-services-cloud-messaging-17.0.1/AndroidManifest.xml:8:5-67
@@ -210,8 +210,8 @@ MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/ca
 MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/caches/transforms-3/fae55d5cbe1db709ad762a4c527d56f2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.gradle/caches/transforms-3/3c61fd3d859e37d93d552ab50910f150/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.gradle/caches/transforms-3/3c61fd3d859e37d93d552ab50910f150/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:5:5-7:41
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.firebase:firebase-datatransport:18.1.7] /Users/liushuya/.gradle/caches/transforms-3/d6e276bd6d8b4af7c21ac9529df2cdf0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:18:5-20:41
 MERGED from [com.google.firebase:firebase-datatransport:18.1.7] /Users/liushuya/.gradle/caches/transforms-3/d6e276bd6d8b4af7c21ac9529df2cdf0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:18:5-20:41
 MERGED from [com.google.firebase:firebase-common:20.3.0] /Users/liushuya/.gradle/caches/transforms-3/47d675c130cd132224e49cd67c7d4652/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:19:5-21:41
@@ -346,8 +346,8 @@ MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/ca
 MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/caches/transforms-3/fae55d5cbe1db709ad762a4c527d56f2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:22:5-79
 MERGED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.gradle/caches/transforms-3/3c61fd3d859e37d93d552ab50910f150/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:24:5-79
 MERGED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.gradle/caches/transforms-3/3c61fd3d859e37d93d552ab50910f150/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:24:5-79
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:9:5-79
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:9:5-79
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:9:5-79
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:9:5-79
 MERGED from [com.google.android.gms:play-services-ads-lite:21.3.0] /Users/liushuya/.gradle/caches/transforms-3/4e6961629888ee1ac903bb6d01559560/transformed/jetified-play-services-ads-lite-21.3.0/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-ads-lite:21.3.0] /Users/liushuya/.gradle/caches/transforms-3/4e6961629888ee1ac903bb6d01559560/transformed/jetified-play-services-ads-lite-21.3.0/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.1] /Users/liushuya/.gradle/caches/transforms-3/5c3762db3ff681a108250397544788e4/transformed/jetified-play-services-cloud-messaging-17.0.1/AndroidManifest.xml:7:5-79
@@ -410,8 +410,8 @@ MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/ca
 MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/liushuya/.gradle/caches/transforms-3/fae55d5cbe1db709ad762a4c527d56f2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:29:9-35:19
 MERGED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.gradle/caches/transforms-3/3c61fd3d859e37d93d552ab50910f150/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:52:9-58:19
 MERGED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.gradle/caches/transforms-3/3c61fd3d859e37d93d552ab50910f150/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:52:9-58:19
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:14:9-20:19
-MERGED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:14:9-20:19
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:14:9-20:19
+MERGED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:14:9-20:19
 MERGED from [com.google.firebase:firebase-datatransport:18.1.7] /Users/liushuya/.gradle/caches/transforms-3/d6e276bd6d8b4af7c21ac9529df2cdf0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:24:9-30:19
 MERGED from [com.google.firebase:firebase-datatransport:18.1.7] /Users/liushuya/.gradle/caches/transforms-3/d6e276bd6d8b4af7c21ac9529df2cdf0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:24:9-30:19
 MERGED from [com.google.firebase:firebase-common:20.3.0] /Users/liushuya/.gradle/caches/transforms-3/47d675c130cd132224e49cd67c7d4652/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:32:9-36:35
@@ -509,11 +509,11 @@ ADDED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.grad
 	android:name
 		ADDED from [com.google.firebase:firebase-messaging:23.1.1] /Users/liushuya/.gradle/caches/transforms-3/3c61fd3d859e37d93d552ab50910f150/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:56:17-119
 meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar
-ADDED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:17:13-19:85
+ADDED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:17:13-19:85
 	android:value
-		ADDED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:19:17-82
+		ADDED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:19:17-82
 	android:name
-		ADDED from [com.google.firebase:firebase-installations:17.1.0] /Users/liushuya/.gradle/caches/transforms-3/0de02132483ebcb6a5e9d924259a3401/transformed/jetified-firebase-installations-17.1.0/AndroidManifest.xml:18:17-127
+		ADDED from [com.google.firebase:firebase-installations:17.1.2] /Users/liushuya/.gradle/caches/transforms-3/29c670fc402ecaf1efc3549c72a6c9b9/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:18:17-127
 meta-data#com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar
 ADDED from [com.google.firebase:firebase-datatransport:18.1.7] /Users/liushuya/.gradle/caches/transforms-3/d6e276bd6d8b4af7c21ac9529df2cdf0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:27:13-29:85
 	android:value

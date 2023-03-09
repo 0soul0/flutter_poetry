@@ -18,7 +18,7 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
 10. fcm catch 分析
 
 11. 檢查  v
-    1. 詩歌 v
+    1. 詩歌 
     2. 詩歌附
     3. 補充本
     

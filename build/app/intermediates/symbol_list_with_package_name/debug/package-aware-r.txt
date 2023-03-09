@@ -1,4 +1,4 @@
-com.example.flutter_poetry
+com.hymn.flutter_poetry
 attr activityAction
 attr activityName
 attr adSize
@@ -110,6 +110,7 @@ drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable launch_background
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low

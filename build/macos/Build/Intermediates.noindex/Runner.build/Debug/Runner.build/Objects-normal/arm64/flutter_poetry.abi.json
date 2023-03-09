@@ -352,15 +352,15 @@
     },
     {
       "kind": "Import",
-      "name": "path_provider_macos",
-      "printedName": "path_provider_macos",
+      "name": "path_provider_foundation",
+      "printedName": "path_provider_foundation",
       "declKind": "Import",
       "moduleName": "flutter_poetry"
     },
     {
       "kind": "Import",
-      "name": "shared_preferences_macos",
-      "printedName": "shared_preferences_macos",
+      "name": "shared_preferences_foundation",
+      "printedName": "shared_preferences_foundation",
       "declKind": "Import",
       "moduleName": "flutter_poetry"
     },

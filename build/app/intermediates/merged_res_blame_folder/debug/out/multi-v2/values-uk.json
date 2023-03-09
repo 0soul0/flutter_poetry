@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.flutter_poetry.app-mergeDebugResources-22:/values-uk/values-uk.xml",
+            "outputFile": "com.hymn.flutter_poetry.app-mergeDebugResources-22:/values-uk/values-uk.xml",
             "map": [
                 {
                     "source": "/Users/liushuya/.gradle/caches/transforms-3/354a81e599c0b0e8ce779e4febfa5c95/transformed/core-1.8.0/res/values-uk/values-uk.xml",

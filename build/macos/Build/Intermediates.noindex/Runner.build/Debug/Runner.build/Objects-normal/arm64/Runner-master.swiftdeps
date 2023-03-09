@@ -1,8 +1,8 @@
 version: "Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)"
 options: "48f63afaf6da48951ed58bb4412d99e38c67913250727eb25df8bf7c74abf6d0"
-build_start_time: [1678249182, 906808853]
-build_end_time: [1678249187, 728718996]
+build_start_time: [1678359349, 53078174]
+build_end_time: [1678359350, 269510030]
 inputs:
-  "/Users/liushuya/Desktop/code/flutter/flutter_poetry/macos/Flutter/GeneratedPluginRegistrant.swift": [1678249096, 539634704]
-  "/Users/liushuya/Desktop/code/flutter/flutter_poetry/macos/Runner/AppDelegate.swift": [1667965400, 25644063]
-  "/Users/liushuya/Desktop/code/flutter/flutter_poetry/macos/Runner/MainFlutterWindow.swift": [1667965400, 27978420]
+  "/Users/liushuya/Desktop/code/flutter/flutter_poetry/macos/Flutter/GeneratedPluginRegistrant.swift": !private [1678359338, 786027669]
+  "/Users/liushuya/Desktop/code/flutter/flutter_poetry/macos/Runner/AppDelegate.swift": !private [1678269296, 488803386]
+  "/Users/liushuya/Desktop/code/flutter/flutter_poetry/macos/Runner/MainFlutterWindow.swift": !private [1678269296, 491568803]

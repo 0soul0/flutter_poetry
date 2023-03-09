@@ -163,7 +163,8 @@ class BottomNavigationControllerState
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[_currentIndex],
-      bottomNavigationBar: SizedBox(
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.only(bottom: Dimens.space*2),
         height: 56 + TextUnitWidget.textSizeTimes * 3,
         child: Row(
           children: [
