@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
 import 'package:flutter_poetry/presentation/views/widget/scrollToHideWidget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
@@ -21,15 +22,48 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: Dimens.toolbarHeight,
+        toolbarHeight: Dimens.toolbarHeight+Dimens.itemSpace*3*TextUnitWidget.textSizeTimes,
         automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Center(
-          child: TextUnitWidget(
-            controller.arguments.getTitle(),
-            style: Styles.subTextStyleBlack,
-            overflow: TextOverflow.ellipsis,
+          child: Column(
+            children: [
+               TextUnitWidget(
+                  controller.arguments.getTitle(),
+                  style: Styles.subTextStyleBlack,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              controller.spectrum.isNotEmpty
+                  ? Column(
+                      children: [
+                        TouchUnitWidget(
+                            onTapDelay: () {
+                              Get.toNamed(AppRoutes.poetrySpectrum);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: Dimens.itemSpace/4),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: AppColor.secondColor),
+                                borderRadius:
+                                    BorderRadius.circular(Dimens.itemSpace),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(
+                                    Icons.queue_music_outlined,
+                                    color: AppColor.secondColor,
+                                    size: Dimens.iconSize * 1,
+                                  ),
+                                  TextUnitWidget('sheetMusic'.tr,style:Styles.helperStyleSecond,),
+                                ],
+                              ),
+                            )),
+                      ],
+                    )
+                  : Container(),
+            ],
           ),
         ),
       ),
@@ -64,27 +98,6 @@ class PoetryDetail extends GetView<PoetryDetailController> {
               _slider(),
               Row(
                 children: [
-                  controller.spectrum.isNotEmpty
-                      ? TouchUnitWidget(
-                          onTapDelay: () {
-                            Get.toNamed(AppRoutes.poetrySpectrum);
-                          },
-                          child: Container(
-                            padding:
-                                const EdgeInsets.all(Dimens.itemSpace * 1.7),
-                            decoration: BoxDecoration(
-                              color: AppColor.secondColor,
-                              borderRadius:
-                                  BorderRadius.circular(Dimens.itemSpace),
-                            ),
-                            child: const Icon(
-                              Icons.queue_music_outlined,
-                              color: AppColor.white,
-                              size: Dimens.iconSize,
-                            ),
-                          ),
-                        )
-                      : Container(),
                   Expanded(
                     child: Center(
                       child: SizedBox(

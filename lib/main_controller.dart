@@ -108,7 +108,7 @@ class MainController extends BaseController {
   checkConfigVersion(SystemInfoModel newConfig) async {
     List<SystemInfoModel> oldConfig = await _systemDao.queryAll();
 
-    if (true ||
+    if (
         oldConfig.isEmpty ||
         (int.parse(newConfig.appVersion.replaceAll(".", "")) >
             int.parse(oldConfig[0].appVersion.replaceAll(".", "")))) {
