@@ -8,11 +8,15 @@ import 'package:flutter_poetry/domain/model/subCategoryModel.dart';
 import 'package:flutter_poetry/domain/model/systemInfoModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
+import 'package:flutter_poetry/presentation/views/widget/small_button_widget.dart';
 import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
+import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
+import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_poetry/routes/singleton.dart';
 import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 
@@ -104,7 +108,8 @@ class MainController extends BaseController {
   checkConfigVersion(SystemInfoModel newConfig) async {
     List<SystemInfoModel> oldConfig = await _systemDao.queryAll();
 
-    if (oldConfig.isEmpty ||
+    if (true ||
+        oldConfig.isEmpty ||
         (int.parse(newConfig.appVersion.replaceAll(".", "")) >
             int.parse(oldConfig[0].appVersion.replaceAll(".", "")))) {
       showDialog(newConfig.updateContent);
@@ -246,24 +251,33 @@ class MainController extends BaseController {
     // 在每個第五個計數時，顯示一個對話框
     Get.dialog(
       AlertDialog(
-        title: Text(
-          'updateTitle'.tr,
-          style: Styles.subTextStyleBlack,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(30))),
+        title: Column(
+          children: [
+            Image.asset(
+              "assets/icon_rocket_launch.gif",
+              width: Dimens.iconSize * 8,
+              height: Dimens.iconSize * 8,
+            ),
+            Text(
+              'updateTitle'.tr,
+              style: Styles.subTextStyleBlack,
+            ),
+          ],
         ),
         content: Text(
           updateContent,
           style: Styles.textStyleBlack,
         ),
         actions: [
-          IconsButton(
-            onPressed: () {
+          TouchUnitWidget(
+            onTapDelay: () {
               Get.back();
             },
-            text: 'current'.tr,
-            iconData: Icons.check,
-            color: AppColor.secondColor,
-            textStyle: Styles.textStyleWhite,
-            iconColor: Colors.white,
+            child: Center(
+              child: SmallButtonWidget('current'.tr),
+            ),
           )
         ],
       ),

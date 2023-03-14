@@ -35,7 +35,7 @@ Bug 目錄 v
 歌譜跳頁
 切換音樂
 下載列表換icon v
-提示dialog
+提示dialog v
 
 新歌頌詠
 
