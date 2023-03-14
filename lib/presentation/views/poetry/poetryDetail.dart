@@ -22,18 +22,19 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: Dimens.toolbarHeight+Dimens.itemSpace*3*TextUnitWidget.textSizeTimes,
+        toolbarHeight: Dimens.toolbarHeight +
+            Dimens.itemSpace * 3 * TextUnitWidget.textSizeTimes,
         automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Center(
           child: Column(
             children: [
-               TextUnitWidget(
-                  controller.arguments.getTitle(),
-                  style: Styles.subTextStyleBlack,
-                  overflow: TextOverflow.ellipsis,
-                ),
+              TextUnitWidget(
+                controller.arguments.getTitle(),
+                style: Styles.subTextStyleBlack,
+                overflow: TextOverflow.ellipsis,
+              ),
               controller.spectrum.isNotEmpty
                   ? Column(
                       children: [
@@ -42,7 +43,8 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                               Get.toNamed(AppRoutes.poetrySpectrum);
                             },
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: Dimens.itemSpace/4),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: Dimens.itemSpace / 4),
                               decoration: BoxDecoration(
                                 border: Border.all(color: AppColor.secondColor),
                                 borderRadius:
@@ -56,7 +58,10 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                                     color: AppColor.secondColor,
                                     size: Dimens.iconSize * 1,
                                   ),
-                                  TextUnitWidget('sheetMusic'.tr,style:Styles.helperStyleSecond,),
+                                  TextUnitWidget(
+                                    'sheetMusic'.tr,
+                                    style: Styles.helperStyleSecond,
+                                  ),
                                 ],
                               ),
                             )),
@@ -90,71 +95,60 @@ class PoetryDetail extends GetView<PoetryDetailController> {
           ),
         ],
       ),
-      bottomNavigationBar: Stack(
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _slider(),
-              Row(
-                children: [
-                  Expanded(
-                    child: Center(
-                      child: SizedBox(
-                        height: Dimens.iconSize + Dimens.itemSpace * 3.4,
-                        child: _changeTitle(),
-                      ),
-                    ),
-                  ),
-                  _play()
-                ],
-              )
-            ],
-          ),
-        ],
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.space * 2),
+        child: _bottom(),
       ),
     );
   }
 
-  _changeTitle() {
-    return Obx(() => PageView.builder(
-          controller: controller.pageController,
-          scrollDirection: Axis.vertical,
-          itemCount: controller.media.length,
-          onPageChanged: (int page) {
-            controller.selectMusicPlayer(controller.media[page].index);
-          },
-          itemBuilder: (context, index) {
-            var item = controller.media[index];
-
-            IconData iconData = Icons.linear_scale_sharp;
-            if (index == 0 && controller.media.length != 1) {
-              iconData = Icons.arrow_circle_up;
-            } else if (index == controller.media.length - 1 &&
-                controller.media.length != 1) {
-              iconData = Icons.arrow_circle_down;
-            }
-
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TextUnitWidget(
-                  "(${item.name})",
-                  style: Styles.textStyleBlack,
-                  overflow: TextOverflow.ellipsis,
+  _bottom(){
+    return Obx(() =>
+    controller.loadFinish.value?Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _slider(),
+        Row(
+          children: [
+            Expanded(
+              child: Center(
+                child: SizedBox(
+                  height: Dimens.iconSize + Dimens.itemSpace,
+                  child: _changeSheet(),
                 ),
-                Container(
-                    padding: const EdgeInsets.only(top: 6),
-                    child: Icon(
-                      iconData,
-                      size: Dimens.iconSize,
-                    ))
-                // const Icon(Icons.arrow_downward_rounded,size: 10,),
-              ],
-            );
+              ),
+            ),
+            _play()
+          ],
+        )
+      ],
+    ):
+    const LinearProgressIndicator()
+    );
+  }
+
+  _changeSheet() {
+    return Obx(() => DefaultTabController(
+        length: controller.media.length,
+        child: TabBar(
+          onTap: (index) {
+            controller.selectPlayer.pause();
+            controller.selectMusicPlayer(controller.media[index].index);
           },
-        ));
+          unselectedLabelColor: AppColor.helperColor,
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicator: BoxDecoration(
+            color: AppColor.secondColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          tabs: controller.media.map((item) {
+            return Tab(
+              child: TextUnitWidget(
+                item.name.tr,
+              ),
+            );
+          }).toList(),
+        )));
   }
 
   _play() {

@@ -18,6 +18,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   RxList<SpectrumModel> spectrum = List<SpectrumModel>.from([]).obs;
   Rx<SpectrumModel> selectSpectrum = SpectrumModel().obs;
   Rx<Duration> duration = const Duration(seconds: 0).obs;
+  RxBool loadFinish = false.obs;
   Rx<Duration> position = const Duration(seconds: 0).obs;
   Rx<PlayerState> playState = PlayerState.stopped.obs;
   RxBool playerUIStatus = false.obs;
@@ -90,8 +91,15 @@ class PoetryDetailController extends BaseController<PoetryModel> {
             .setSourceUrl(spectrumAndMedia[sIndex].media);
       }
       selectPlayer = spectrumAndMedia[sIndex].play;
+      position.value=(await selectPlayer.getCurrentPosition())??const Duration(seconds: 0);
+      duration.value=(await selectPlayer.getDuration())??const Duration(seconds: 0);
       selectPlayer.onPositionChanged.listen((d) => position.value = d);
-      selectPlayer.onDurationChanged.listen((d) => duration.value = d);
+      selectPlayer.onDurationChanged.listen((d){
+        if(!loadFinish.value){
+          loadFinish.value=true;
+        }
+        duration.value = d;
+      });
       selectPlayer.onPlayerStateChanged.listen((d) => playState.value = d);
     }
   }
