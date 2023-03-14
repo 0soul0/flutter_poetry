@@ -91,77 +91,61 @@ class ListPage<T> extends StatelessWidget {
   _searchResult() {
     return Obx(() => controller.loadingProgress.value.msg != "loading"
         ? SmartRefresher(
-            controller: controller.refreshController,
-            enablePullDown: false,
-            enablePullUp: true,
-            header: const WaterDropHeader(),
-            footer: const ClassicFooter(
-              loadStyle: LoadStyle.ShowWhenLoading,
-              completeDuration: Duration(milliseconds: 500),
-            ),
-            onLoading: () async {
-              controller.search(searchVal, page: page);
-              page++;
-              controller.refreshController.loadComplete();
-            },
-            child: AlignedGridView.count(
-              controller: controller.scrollController,
-              scrollDirection: Axis.vertical,
-              crossAxisCount: 1,
-              crossAxisSpacing: Dimens.itemSpace,
-              mainAxisSpacing: Dimens.itemSpace,
-              itemCount: controller.poetryItems.length,
-              itemBuilder: (context, index) {
-                var item = controller.poetryItems[index];
-                var title = "";
-                var files = MainController.allFiles
-                    .where((element) => element.id == item.type.toString())
-                    .toList();
-                if (files.isNotEmpty) {
-                  title = files[0].name.tr;
-                }
-                return ModuleUtils.bindPoetryItemByModel(item, item.itemType,
-                    title: title, onTapFunction: () {
-                  controller.onTapPoetry(item);
-                });
-              },
-            ),
-          )
+      controller: controller.refreshController,
+      enablePullDown: false,
+      enablePullUp: true,
+      header: const WaterDropHeader(),
+      footer: const ClassicFooter(
+        loadStyle: LoadStyle.ShowWhenLoading,
+        completeDuration: Duration(milliseconds: 500),
+      ),
+      onLoading: () async {
+        controller.search(searchVal, page: page);
+        page++;
+        controller.refreshController.loadComplete();
+      },
+      child: AlignedGridView.count(
+        controller: controller.scrollController,
+        scrollDirection: Axis.vertical,
+        crossAxisCount: 1,
+        crossAxisSpacing: Dimens.itemSpace,
+        mainAxisSpacing: Dimens.itemSpace,
+        itemCount: controller.poetryItems.length,
+        itemBuilder: (context, index) {
+          var item = controller.poetryItems[index];
+          var title = "";
+          var files = MainController.allFiles
+              .where((element) => element.id == item.type.toString())
+              .toList();
+          if (files.isNotEmpty) {
+            title = files[0].name.tr;
+          }
+          return ModuleUtils.bindPoetryItemByModel(item, item.itemType,
+              title: title, onTapFunction: () {
+                controller.onTapPoetry(item);
+              });
+        },
+      ),
+    )
         : Center(
-            child: SizedBox(
-              height: 200,
-              width: 200,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 6,
-                      backgroundColor: AppColor.helperColor,
-                      value: controller.loadingProgress.value.map?["progress"] /
-                          100,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                          AppColor.mainColor),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: Dimens.space,
-                  ),
-                  TextUnitWidget(
-                    "${controller.loadingProgress.value.map?["number"]}/${controller.loadingProgress.value.map?["total"]}",
-                    style: Styles.helperStyleBlack,
-                  )
-                ],
-              ),
-              // child: LoadingIndicator(
-              //   indicatorType: Indicator.ballClipRotate,
-              //   colors: [AppColor.mainColor],
-              //   strokeWidth: 2,
-              //   backgroundColor: Colors.transparent,
-              // ),
+      child: SizedBox(
+        height: Dimens.iconSize * 10,
+        width: Dimens.iconSize * 10,
+        child: Column(
+          children: [
+            Image.asset(
+              "assets/icon_electric_guitar_music.gif",
+              height: Dimens.iconSize * 8,
+              width: Dimens.iconSize * 8,
             ),
-          ));
+            TextUnitWidget(
+              "${controller.loadingProgress.value.map?["number"]}/${controller.loadingProgress.value.map?["total"]}",
+              style: Styles.helperStyleBlack,
+            )
+          ],
+        ),
+      ),
+    ));
   }
 
   /// search data

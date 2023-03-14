@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/search/searchController.dart';
+import 'package:flutter_poetry/resource/colors.dart';
 import 'package:get/get.dart';
 
 import 'listPage.dart';
@@ -19,16 +20,18 @@ class SearchFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     init();
     return Scaffold(
-      body: PageView.builder(
-        controller: pageController,
-        scrollDirection: Axis.horizontal,
-        // curve: Curves.easeInBack,
-        // loop: true,
-        // transformer: new ThreeDTransformer(),
-        itemCount: 1,
-        itemBuilder: (context, index) {
-          return ListPage();
-        },
+      body: Container(
+        child: PageView.builder(
+          controller: pageController,
+          scrollDirection: Axis.horizontal,
+          // curve: Curves.easeInBack,
+          // loop: true,
+          // transformer: new ThreeDTransformer(),
+          itemCount: 1,
+          itemBuilder: (context, index) {
+            return ListPage();
+          },
+        ),
       ),
     );
   }

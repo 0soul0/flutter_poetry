@@ -31,10 +31,10 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
 
 
 Bug 音樂切換
-Bug 目錄
+Bug 目錄 v
 歌譜跳頁
 切換音樂
-下載列表換icon
+下載列表換icon v
 提示dialog
 
 新歌頌詠

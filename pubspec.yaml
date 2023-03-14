@@ -113,6 +113,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/icon_gmail.gif
+     - assets/icon_electric_guitar_music.gif
      - assets/icon_fb.gif
      - assets/icon_ig.gif
      - assets/logo.png
