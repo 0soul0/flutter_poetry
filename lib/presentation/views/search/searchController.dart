@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_poetry/data/settingParameters.dart';
+import 'package:flutter_poetry/domain/dao/fileDao.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
 import 'package:flutter_poetry/domain/fxDataBaseManager.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
@@ -25,6 +26,7 @@ class SearchController extends BaseController {
   static const split = "://";
 
   late PoetryDao _poetryDao;
+  late FileDao _fileDao;
   late CatalogueDao _catalogueDao;
   late RecordDao _recordDao;
   late final TextEditingController textController = TextEditingController();
@@ -51,6 +53,7 @@ class SearchController extends BaseController {
     _poetryDao = await FxDataBaseManager.poetryDao();
     _catalogueDao = await FxDataBaseManager.categoryDao();
     _recordDao = await FxDataBaseManager.recordDao();
+    _fileDao =  await FxDataBaseManager.fileDao();
   }
 
   /// init default data
@@ -117,7 +120,10 @@ class SearchController extends BaseController {
     List<PoetryModel> items = [];
     //過濾數字搜尋到段落
 
-    if (search.contains(searchCatalogueKey + split)) {
+    var file=await _fileDao.findFileByNameWithDbType(search,PoetryDao.tableName);
+    if(file!=null){ //詩歌 補沖本
+      items = await _poetryDao.searchType(int.parse(file.id), page, count);
+    } else if (search.contains(searchCatalogueKey + split)) {
       search = search.split(split)[1];
       items = await _poetryDao.searchCategory(search, page, count);
     } else if (int.tryParse(search) == null) {
@@ -173,17 +179,19 @@ class SearchController extends BaseController {
       return returnDescriptionOfSection(search, poetryData, 'refrain');
     }
 
-    if (poetryData['author'].contains(search)) {
-      return returnDescriptionOfSelf(poetryData, 'author');
-    }
+    // if (poetryData['author'].contains(search)) {
+    //   return returnDescriptionOfSelf(poetryData, 'author');
+    // }
+    //
+    // if (poetryData['category'].contains(search)) {
+    //   return returnDescriptionOfSelf(poetryData, 'category');
+    // }
+    //
+    // if (poetryData['subCategory'].contains(search)) {
+    //   return returnDescriptionOfSelf(poetryData, 'subCategory');
+    // }
 
-    if (poetryData['category'].contains(search)) {
-      return returnDescriptionOfSelf(poetryData, 'category');
-    }
-
-    if (poetryData['subCategory'].contains(search)) {
-      return returnDescriptionOfSelf(poetryData, 'subCategory');
-    }
+    return returnDescriptionOfSelf(poetryData, 'content');
   }
 
   /// return self that description is text of self

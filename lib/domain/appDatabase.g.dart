@@ -224,6 +224,26 @@ class _$FileDao extends FileDao {
   }
 
   @override
+  Future<FileModel?> findFileByNameWithDbType(
+    String name,
+    String dbType,
+  ) async {
+    return _queryAdapter.query(
+        'SELECT * FROM FileModel WHERE name = ?1 AND dbType = ?2',
+        mapper: (Map<String, Object?> row) => FileModel(
+            id: row['id'] as String,
+            fileName: row['fileName'] as String,
+            dataVersion: row['dataVersion'] as String,
+            url: row['url'] as String,
+            name: row['name'] as String,
+            updateDate: row['updateDate'] as String,
+            updates: row['updates'] as String,
+            dbType: row['dbType'] as String,
+            dataUpdateDone: row['dataUpdateDone'] as int),
+        arguments: [name, dbType]);
+  }
+
+  @override
   Future<List<FileModel>> queryAllByDbType(String dbType) async {
     return _queryAdapter.queryList('SELECT * FROM FileModel WHERE dbType = ?1',
         mapper: (Map<String, Object?> row) => FileModel(
@@ -489,6 +509,18 @@ class _$PoetryDao extends PoetryDao {
         'SELECT * FROM PoetryModel WHERE category LIKE ?1 OR subCategory LIKE ?1 ORDER BY type ASC, number ASC LIMIT ?2,?3',
         mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String),
         arguments: [str, page, count]);
+  }
+
+  @override
+  Future<List<PoetryModel>> searchType(
+    int type,
+    int page,
+    int count,
+  ) async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM PoetryModel WHERE type = ?1 ORDER BY type ASC, number ASC LIMIT ?2,?3',
+        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String),
+        arguments: [type, page, count]);
   }
 
   @override
