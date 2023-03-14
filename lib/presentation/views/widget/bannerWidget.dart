@@ -22,19 +22,17 @@ class _BannerWidgetState extends State<BannerWidget> {
     BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
-      request: AdRequest(),
+      request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (ad) {
           setState(() {
             isShowBanner = true;
             _ad = ad as BannerAd;
           });
-          print('Ad load success');
         },
         onAdFailedToLoad: (ad, error) {
           // Releases an ad resource when it fails to load
           ad.dispose();
-          print('Ad load failed (code=${error.code} message=${error.message})');
         },
       ),
     ).load();

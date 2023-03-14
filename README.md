@@ -30,6 +30,24 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
 17. logo v
 
 
+Bug 音樂切換
+Bug 目錄
+歌譜跳頁
+切換音樂
+下載列表換icon
+提示dialog
+
+新歌頌詠
+
+兒童詩歌
+
+複製樂譜
+分享樂譜（連結）
+降key 升key
+
+搜尋補充本
+分享樂譜
+
 
 18. 詩歌收入列表 v2
 19. 自動下載新詩歌 v2

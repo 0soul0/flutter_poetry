@@ -81,7 +81,7 @@ flutter_native_splash:
 flutter_icons:
   android: "lanuch_logo"
   ios: true
-  image_path: "assets/logo_circle.png"
+  image_path: "assets/logo.png"
 
 
 dev_dependencies:

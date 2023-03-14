@@ -68,14 +68,12 @@ class _CatalogueFull extends State<CatalogueFull>
                     Dimens.backgroundMarginRight,
                     Dimens.textSpace),
                 width: MediaQuery.of(context).size.width,
-                child: Expanded(
-                    child: FutureBuilder<List<CatalogueModel>>(
+                child: FutureBuilder<List<CatalogueModel>>(
                   future: controller.queryAllCatalogue(int.parse(item.id)),
                   builder: (context, snapshot) {
                     return _catalogueList(snapshot);
                   },
-                )),
-              );
+                ));
             }).toList(),
           ),
           const BackIconButton()
@@ -92,7 +90,7 @@ class _CatalogueFull extends State<CatalogueFull>
       mainAxisSpacing: Dimens.itemSpace,
       itemCount: snapshot.data?.length,
       itemBuilder: (context, index) {
-        var item = snapshot.data![index];
+        var item = snapshot.data?[index];
         return CatalogueItem(item, () {
           controller.resetCatalogueModelList();
 
@@ -101,7 +99,7 @@ class _CatalogueFull extends State<CatalogueFull>
 
           //change search text
           controller.setSearchText(
-              "${SearchController.searchCatalogueKey}${SearchController.split}${item.category}");
+              "${SearchController.searchCatalogueKey}${SearchController.split}${item?.category}");
 
           Get.back();
         });
