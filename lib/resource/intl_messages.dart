@@ -34,7 +34,8 @@ class IntlMessages extends Translations {
           "downloadUnDone": "未下載",
           "updateTitle": "更新內容",
           "current": "確定",
-          "sheetMusic": "樂譜"
+          "sheetMusic": "樂譜",
+          "noSheet":"無音樂"
         },
         'en_US': {
           'english': 'english',

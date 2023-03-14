@@ -70,66 +70,66 @@ class PoetryDetail extends GetView<PoetryDetailController> {
     );
   }
 
-  _spectrum(){
-    return  controller.spectrum.isNotEmpty
+  _spectrum() {
+    return controller.spectrum.isNotEmpty
         ? Column(
-      children: [
-        TouchUnitWidget(
-            onTapDelay: () {
-              controller.selectPlayer.pause();
-              Get.toNamed(AppRoutes.poetrySpectrum);
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Dimens.itemSpace / 4),
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColor.secondColor),
-                borderRadius:
-                BorderRadius.circular(Dimens.itemSpace),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    Icons.queue_music_outlined,
-                    color: AppColor.secondColor,
-                    size: Dimens.iconSize * 1,
-                  ),
-                  TextUnitWidget(
-                    'sheetMusic'.tr,
-                    style: Styles.helperStyleSecond,
-                  ),
-                ],
-              ),
-            )),
-      ],
-    )
+            children: [
+              TouchUnitWidget(
+                  onTapDelay: () {
+                    controller.selectPlayer.pause();
+                    Get.toNamed(AppRoutes.poetrySpectrum);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Dimens.itemSpace / 4),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColor.secondColor),
+                      borderRadius: BorderRadius.circular(Dimens.itemSpace),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.queue_music_outlined,
+                          color: AppColor.secondColor,
+                          size: Dimens.iconSize * 1,
+                        ),
+                        TextUnitWidget(
+                          'sheetMusic'.tr,
+                          style: Styles.helperStyleSecond,
+                        ),
+                      ],
+                    ),
+                  )),
+            ],
+          )
         : Container();
   }
 
-  _bottom(){
-    return Obx(() =>
-    controller.loadFinish.value?Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        _slider(),
-        Row(
-          children: [
-            Expanded(
-              child: Center(
-                child: SizedBox(
-                  height: Dimens.iconSize + Dimens.itemSpace,
-                  child: _changeSheet(),
-                ),
-              ),
-            ),
-            _play()
-          ],
-        )
-      ],
-    ):
-    const LinearProgressIndicator()
-    );
+  _bottom() {
+    return Obx(() => controller.media.isNotEmpty
+        ? controller.loadFinish.value
+            ? Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _slider(),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: SizedBox(
+                            height: Dimens.iconSize + Dimens.itemSpace,
+                            child: _changeSheet(),
+                          ),
+                        ),
+                      ),
+                      _play()
+                    ],
+                  )
+                ],
+              )
+            : const LinearProgressIndicator()
+        : SizedBox(height: 50,child: Center(child: TextUnitWidget("noSheet".tr,style: Styles.textStyleGray,)),));
   }
 
   _changeSheet() {
