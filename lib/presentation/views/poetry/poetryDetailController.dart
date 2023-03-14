@@ -45,6 +45,12 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   }
 
   @override
+  void onPaused() {
+    selectPlayer.pause();
+    super.onPaused();
+  }
+
+  @override
   void onClose() {
     super.onClose();
     for (var element in spectrumAndMedia) {

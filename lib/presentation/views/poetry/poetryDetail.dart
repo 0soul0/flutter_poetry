@@ -35,39 +35,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                 style: Styles.subTextStyleBlack,
                 overflow: TextOverflow.ellipsis,
               ),
-              controller.spectrum.isNotEmpty
-                  ? Column(
-                      children: [
-                        TouchUnitWidget(
-                            onTapDelay: () {
-                              Get.toNamed(AppRoutes.poetrySpectrum);
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: Dimens.itemSpace / 4),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: AppColor.secondColor),
-                                borderRadius:
-                                    BorderRadius.circular(Dimens.itemSpace),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Icon(
-                                    Icons.queue_music_outlined,
-                                    color: AppColor.secondColor,
-                                    size: Dimens.iconSize * 1,
-                                  ),
-                                  TextUnitWidget(
-                                    'sheetMusic'.tr,
-                                    style: Styles.helperStyleSecond,
-                                  ),
-                                ],
-                              ),
-                            )),
-                      ],
-                    )
-                  : Container(),
+              _spectrum()
             ],
           ),
         ),
@@ -100,6 +68,43 @@ class PoetryDetail extends GetView<PoetryDetailController> {
         child: _bottom(),
       ),
     );
+  }
+
+  _spectrum(){
+    return  controller.spectrum.isNotEmpty
+        ? Column(
+      children: [
+        TouchUnitWidget(
+            onTapDelay: () {
+              controller.selectPlayer.pause();
+              Get.toNamed(AppRoutes.poetrySpectrum);
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Dimens.itemSpace / 4),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColor.secondColor),
+                borderRadius:
+                BorderRadius.circular(Dimens.itemSpace),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.queue_music_outlined,
+                    color: AppColor.secondColor,
+                    size: Dimens.iconSize * 1,
+                  ),
+                  TextUnitWidget(
+                    'sheetMusic'.tr,
+                    style: Styles.helperStyleSecond,
+                  ),
+                ],
+              ),
+            )),
+      ],
+    )
+        : Container();
   }
 
   _bottom(){
