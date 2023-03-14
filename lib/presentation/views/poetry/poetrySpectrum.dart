@@ -49,7 +49,7 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
           ],
         ),
         const BackIconButton(direction: directionHorizontal),
-        _play(),
+        // _play(),
       ],
     ));
   }
