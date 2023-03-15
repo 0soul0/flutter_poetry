@@ -14,17 +14,19 @@ import '../widget/textUnitWidget.dart';
 import 'search_controller.dart';
 
 class ListPage extends StatelessWidget {
-  ListPage(this.id,this.listType,{Key? key}) : super(key: key);
+  ListPage(this.id, this.listType, {Key? key}) : super(key: key);
 
   // final double _fontSize = Dimens.helperSize * TextUnitWidget.textSizeTimes;
   late String id;
   late ListType listType;
   int page = 1;
   final SearchController controller = Get.put(SearchController());
-  final RefreshController refreshController = RefreshController(initialRefresh: false);
+  final RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+
   @override
   Widget build(BuildContext context) {
-    if(listType==ListType.list){
+    if (listType == ListType.list) {
       controller.queryAllById(id);
     }
     return _result();
@@ -32,8 +34,10 @@ class ListPage extends StatelessWidget {
 
   /// show search result
   _result() {
-    return Obx(() => controller.loadingProgress.value.msg != "loading"
-        ?controller.poetryItemsMap.isNotEmpty?SmartRefresher(
+    return Obx(() => controller.loadingProgress.value.msg != "loading" &&
+            (controller.poetryItemsMap[id] != null ||
+                listType == ListType.search)
+        ? SmartRefresher(
             controller: refreshController,
             enablePullDown: false,
             enablePullUp: true,
@@ -43,9 +47,9 @@ class ListPage extends StatelessWidget {
               completeDuration: Duration(milliseconds: 500),
             ),
             onLoading: () async {
-              if(listType==ListType.list){
+              if (listType == ListType.list) {
                 controller.queryAllById(id, page: page);
-              }else{
+              } else {
                 controller.search(controller.searchVal, page: page);
               }
               page++;
@@ -57,13 +61,15 @@ class ListPage extends StatelessWidget {
               crossAxisCount: 1,
               crossAxisSpacing: Dimens.itemSpace,
               mainAxisSpacing: Dimens.itemSpace,
-              itemCount: listType==ListType.list?controller.poetryItemsMap[id].length:controller.poetrySearchItems.length,
+              itemCount: listType == ListType.list
+                  ? controller.poetryItemsMap[id].length
+                  : controller.poetrySearchItems.length,
               itemBuilder: (context, index) {
                 PoetryModel item = PoetryModel();
                 int type = ModuleUtils.poetryModel;
-                if(listType==ListType.list){
+                if (listType == ListType.list) {
                   item = controller.poetryItemsMap[id][index];
-                }else{
+                } else {
                   item = controller.poetrySearchItems[index];
                   type = item.itemType;
                 }
@@ -75,36 +81,16 @@ class ListPage extends StatelessWidget {
                   title = files[0].name.tr;
                 }
 
-                return ModuleUtils.bindPoetryItemByModel(
-                    item, type, title: title,
-                    onTapFunction: () {
+                return ModuleUtils.bindPoetryItemByModel(item, type,
+                    title: title, onTapFunction: () {
                   controller.onTapPoetry(item);
                 });
               },
             ),
-          ):Container()
-        : Center(
-            child: SizedBox(
-              height: Dimens.iconSize * 10,
-              width: Dimens.iconSize * 10,
-              child: Column(
-                children: [
-                  Image.asset(
-                    "assets/icon_electric_guitar_music.gif",
-                    height: Dimens.iconSize * 8,
-                    width: Dimens.iconSize * 8,
-                  ),
-                  TextUnitWidget(
-                    "${controller.loadingProgress.value.map?["number"]}/${controller.loadingProgress.value.map?["total"]}",
-                    style: Styles.helperStyleBlack,
-                  )
-                ],
-              ),
-            ),
-          ));
+          )
+        : Container());
   }
 }
-
 
 enum ListType {
   list,

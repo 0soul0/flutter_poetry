@@ -40,67 +40,95 @@ class _SearchFragment extends State<SearchFragment>
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: fetData(),
-      builder: (context, snapshot) {
-        if (snapshot.data == null) return Container();
-        types = snapshot.data as List<FileModel>;
-        tabController ??= TabController(length: types.length, vsync: this);
-        if (tabController == null) return Container();
-        return Column(
-          children: [
-            const BannerWidget(),
-            TabBar(
-              isScrollable: true,
-              labelPadding: const EdgeInsets.only(
-                  right: Dimens.space, left: Dimens.space),
-              padding: EdgeInsets.zero,
-              controller: tabController,
-              unselectedLabelColor: AppColor.helperColor,
-              indicatorSize: TabBarIndicatorSize.label,
-              labelColor: AppColor.mainColor,
-              indicatorColor: AppColor.mainColor,
-              indicatorPadding: const EdgeInsets.all(10),
-              tabs: types.map((item) {
-                return Tab(
-                  child: TextUnitWidget(
-                    item.name.tr,
+    return Column(mainAxisSize: MainAxisSize.min, children: [
+      Expanded(child: body()),
+      const Divider(
+          height: Dimens.moduleDividing,
+          thickness: Dimens.moduleDividing,
+          color: AppColor.dividerColor),
+      Container(
+        height: 32,
+        decoration: const BoxDecoration(color: AppColor.dividerColor),
+        child: _search(context),
+      ),
+      const Divider(
+          height: Dimens.moduleDividing,
+          thickness: Dimens.moduleDividing,
+          color: AppColor.dividerColor),
+    ]);
+  }
+
+  body() {
+    return Obx(() => controller.loadingProgress.value.msg != "loading"
+        ? FutureBuilder(
+            future: fetData(),
+            builder: (context, snapshot) {
+              if (snapshot.data == null) return Container();
+              types = snapshot.data as List<FileModel>;
+              tabController ??=
+                  TabController(length: types.length, vsync: this);
+              if (tabController == null) return Container();
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const BannerWidget(),
+                  TabBar(
+                    isScrollable: true,
+                    labelPadding: const EdgeInsets.only(
+                        right: Dimens.space, left: Dimens.space),
+                    padding: EdgeInsets.zero,
+                    controller: tabController,
+                    unselectedLabelColor: AppColor.helperColor,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    labelColor: AppColor.mainColor,
+                    indicatorColor: AppColor.mainColor,
+                    indicatorPadding: const EdgeInsets.all(10),
+                    tabs: types.map((item) {
+                      return Tab(
+                        child: TextUnitWidget(
+                          item.name.tr,
+                        ),
+                      );
+                    }).toList(),
                   ),
-                );
-              }).toList(),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: tabController,
-                children: types.map((item) {
-                  return Container(
-                      padding: const EdgeInsets.fromLTRB(
-                          Dimens.backgroundMarginLeft,
-                          0,
-                          Dimens.backgroundMarginRight,
-                          0),
-                      key: Key(item.id),
-                      child: ListPage(item.id, ListType.list));
-                }).toList(),
+                  Expanded(
+                    child: TabBarView(
+                      controller: tabController,
+                      children: types.map((item) {
+                        return Container(
+                            padding: const EdgeInsets.fromLTRB(
+                                Dimens.backgroundMarginLeft,
+                                0,
+                                Dimens.backgroundMarginRight,
+                                0),
+                            key: Key(item.id),
+                            child: ListPage(item.id, ListType.list));
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              );
+            },
+          )
+        : Center(
+            child: SizedBox(
+              height: Dimens.iconSize * 10,
+              width: Dimens.iconSize * 10,
+              child: Column(
+                children: [
+                  Image.asset(
+                    "assets/icon_electric_guitar_music.gif",
+                    height: Dimens.iconSize * 8,
+                    width: Dimens.iconSize * 8,
+                  ),
+                  TextUnitWidget(
+                    "${controller.loadingProgress.value.map?["number"]}/${controller.loadingProgress.value.map?["total"]}",
+                    style: Styles.helperStyleBlack,
+                  )
+                ],
               ),
             ),
-            const Divider(
-                height: Dimens.moduleDividing,
-                thickness: Dimens.moduleDividing,
-                color: AppColor.dividerColor),
-            Container(
-              height: 32,
-              decoration: const BoxDecoration(color: AppColor.dividerColor),
-              child: _search(context),
-            ),
-            const Divider(
-                height: Dimens.moduleDividing,
-                thickness: Dimens.moduleDividing,
-                color: AppColor.dividerColor),
-          ],
-        );
-      },
-    );
+          ));
   }
 
   fetData() async {

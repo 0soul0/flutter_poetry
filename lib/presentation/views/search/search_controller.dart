@@ -36,7 +36,6 @@ class SearchController extends BaseController {
   late final TextEditingController textController = TextEditingController();
   String searchVal="";
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
-  RxList<FileModel> types = List<FileModel>.from([]).obs;
   RxList<PoetryModel> poetrySearchItems = List<PoetryModel>.from([]).obs;
   RxMap poetryItemsMap = {}.obs;
   Rx<MsgEvent> loadingProgress =
@@ -65,6 +64,7 @@ class SearchController extends BaseController {
   initData() async {
     Singleton.getEventBusInstance().on<MsgEvent>().listen((event) {
       loadingProgress.value = event;
+      queryAllById("0");
       // search("");
     });
     // search("");
