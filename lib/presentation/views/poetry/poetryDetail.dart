@@ -11,6 +11,7 @@ import '../../../resource/colors.dart';
 import '../../../resource/style.dart';
 import '../../../routes/app_routes.dart';
 import '../widget/backIconButton.dart';
+import '../widget/select_table_widget.dart';
 import '../widget/textUnitWidget.dart';
 import '../widget/touchUnitWidget.dart';
 
@@ -30,10 +31,10 @@ class PoetryDetail extends GetView<PoetryDetailController> {
         title: Center(
           child: Column(
             children: [
-              TextUnitWidget(
+              SelectTableWidget(
                 controller.arguments.getTitle(),
                 style: Styles.subTextStyleBlack,
-                overflow: TextOverflow.ellipsis,
+                // overflow: TextOverflow.ellipsis,
               ),
               _spectrum()
             ],
@@ -229,26 +230,31 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   }
 
   _poetry() {
-    return Obx(() => AlignedGridView.count(
-          controller: controller.scrollController,
-          scrollDirection: Axis.vertical,
-          crossAxisCount: 1,
-          itemCount: controller.items.length + 1,
-          itemBuilder: (context, index) {
-            if (index >= controller.items.length) {
-              return const SizedBox(
-                height: Dimens.itemSpace * 3,
-              );
-            }
+    return Obx(() => SelectableText(
+      controller.strItems.value,
+      style: Styles.textStyleBlack,
+      textAlign: TextAlign.left,
+    ));
 
-            var item = controller.items[index];
-            return TextUnitWidget(
-              item,
-              style: Styles.textStyleBlack,
-              textAlign: TextAlign.left,
-            );
-          },
-        ));
+    // return Obx(() => AlignedGridView.count(
+    //       controller: controller.scrollController,
+    //       scrollDirection: Axis.vertical,
+    //       crossAxisCount: 1,
+    //       itemCount: controller.items.length + 1,
+    //       itemBuilder: (context, index) {
+    //         if (index >= controller.items.length) {
+    //           return const SizedBox(
+    //             height: Dimens.itemSpace * 3,
+    //           );
+    //         }
+    //         var item = controller.items[index];
+    //         return SelectableText(
+    //           item,
+    //           style: Styles.textStyleBlack,
+    //           textAlign: TextAlign.left,
+    //         );
+    //       },
+    //     ));
   }
 
   _refrain() {
@@ -269,7 +275,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                 "retain".tr,
                 style: Styles.textStyleBlack,
               ),
-              TextUnitWidget(controller.refrain.trim().toString(),
+              SelectableText(controller.refrain.trim().toString(),
                   style: Styles.textStyleBlack, textAlign: TextAlign.left),
               const Divider(
                 color: Colors.grey,

@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
+import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,7 @@ import '../widget/textUnitWidget.dart';
 /// A class represent controller of poetry
 class PoetryDetailController extends BaseController<PoetryModel> {
   RxList<String> items = List<String>.from([]).obs;
+  Rx<String> strItems ="".obs;
   Rx<String> refrain = "".obs;
   RxList<SpectrumModel> spectrumAndMedia = List<SpectrumModel>.from([]).obs;
   RxList<SpectrumModel> media = List<SpectrumModel>.from([]).obs;
@@ -164,11 +166,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   ///
   /// @param item data of poetry
   setRefrain(PoetryModel item) {
-    var refrainItem = "";
-    splitContent(item.refrain).forEach((element) {
-      refrainItem += "$element\n";
-    });
-    refrain.value = refrainItem;
+    refrain.value = splitContent(item.refrain);
   }
 
   /// set content of poetry to list
@@ -176,15 +174,48 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   /// @param item data of poetry
   setPoetryItemToList(PoetryModel item) {
     //分割段落
-    items.value = splitContent(item.content);
+    // items.value = splitContent(item.content);
+    strItems.value = splitContent(item.content);
   }
 
-  /// split content of poetry to list
-  ///
-  /// @param content data of poetry
-  /// @return String list of content
-  List<String> splitContent(String content) {
-    List<String> strList = [];
+
+  // /// split content of poetry to list
+  // ///
+  // /// @param content data of poetry
+  // /// @return String list of content
+  // List<String> splitContent(String content) {
+  //   List<String> strList = [];
+  //   var contents = content.trim();
+  //   var str = "";
+  //   var lastSplitIndex = 0;
+  //   for (int i = 0; i < contents.length; i++) {
+  //     if (isNumeric(contents[i])) {
+  //       if (str.isNotEmpty) {
+  //         var arr = whichClearPivot(str, str.substring(lastSplitIndex));
+  //         strList.add(arr[1]);
+  //         str = arr[0];
+  //       }
+  //       strList.add(contents[i]);
+  //       continue;
+  //     }
+  //
+  //     str += contents[i];
+  //
+  //     if (isSymbols(contents[i])) {
+  //       if (isMoreLong(str)) {
+  //         var data = whichClearPivot(str, str.substring(0, lastSplitIndex));
+  //         strList.add(data[1]);
+  //         str = data[0];
+  //       }
+  //       lastSplitIndex = str.length;
+  //     }
+  //   }
+  //   if (str.isNotEmpty) strList.add(str);
+  //   return strList;
+  // }
+
+  String splitContent(String content) {
+    String strList = "";
     var contents = content.trim();
     var str = "";
     var lastSplitIndex = 0;
@@ -192,10 +223,10 @@ class PoetryDetailController extends BaseController<PoetryModel> {
       if (isNumeric(contents[i])) {
         if (str.isNotEmpty) {
           var arr = whichClearPivot(str, str.substring(lastSplitIndex));
-          strList.add(arr[1]);
+          strList+="${arr[1]}\n";
           str = arr[0];
         }
-        strList.add(contents[i]);
+        strList+="${contents[i]}\n";
         continue;
       }
 
@@ -204,13 +235,13 @@ class PoetryDetailController extends BaseController<PoetryModel> {
       if (isSymbols(contents[i])) {
         if (isMoreLong(str)) {
           var data = whichClearPivot(str, str.substring(0, lastSplitIndex));
-          strList.add(data[1]);
+          strList+="${data[1]}\n";
           str = data[0];
         }
         lastSplitIndex = str.length;
       }
     }
-    if (str.isNotEmpty) strList.add(str);
+    if (str.isNotEmpty) strList+="$str\n";
     return strList;
   }
 
