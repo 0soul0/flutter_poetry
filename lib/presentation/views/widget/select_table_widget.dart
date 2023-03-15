@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
 
 class SelectTableWidget extends SelectableText {
-  static double textSizeTimes = 1;
 
   const SelectTableWidget(
     super.data, {
@@ -19,7 +19,7 @@ class SelectTableWidget extends SelectableText {
 
   @override
   double? get textScaleFactor {
-    if (super.textScaleFactor == null) return textSizeTimes;
+    if (super.textScaleFactor == null) return TextUnitWidget.textSizeTimes;
     return super.textScaleFactor;
   }
 }

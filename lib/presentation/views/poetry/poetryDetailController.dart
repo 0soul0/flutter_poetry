@@ -27,9 +27,9 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   RxDouble ddd = 0.0.obs;
   PageController pageController = PageController(initialPage: 0);
   double screenWidth = ScreenUtil.defaultSize.width;
-  double times = 2 / 3;
+  double times = 4 / 5;
   late AudioPlayer selectPlayer;
-
+  var lastSplitIndex = 0;
   final scrollController = ScrollController();
   final GlobalKey keyRefrain = GlobalKey();
 
@@ -218,13 +218,17 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     String strList = "";
     var contents = content.trim();
     var str = "";
-    var lastSplitIndex = 0;
+
     for (int i = 0; i < contents.length; i++) {
       if (isNumeric(contents[i])) {
         if (str.isNotEmpty) {
           var arr = whichClearPivot(str, str.substring(lastSplitIndex));
+          if(arr[0]!="") {
+            strList+="${arr[0]}";
+          }
           strList+="${arr[1]}\n";
-          str = arr[0];
+          str = "";
+          lastSplitIndex = 0;
         }
         strList+="${contents[i]}\n";
         continue;
@@ -242,12 +246,17 @@ class PoetryDetailController extends BaseController<PoetryModel> {
       }
     }
     if (str.isNotEmpty) strList+="$str\n";
-    return strList;
+    return strList.replaceAll("－", "");
   }
 
   whichClearPivot(String str1, String str2) {
     double len = str1.length * Dimens.textSize * TextUnitWidget.textSizeTimes;
-    if (len >= screenWidth) return [str1.replaceAll(str2, ""), str2];
+    if (str2==""&&len>(screenWidth)){
+      double dd =(1/(len/(screenWidth * times)));
+      int d=(str1.length*dd).round();
+      str2=str1.substring(0, d);
+      lastSplitIndex=d;
+    }
     double textWidth1 = (len - screenWidth * times).abs();
     double textWidth2 =
         (str2.length * Dimens.textSize * TextUnitWidget.textSizeTimes -

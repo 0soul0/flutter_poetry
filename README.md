@@ -29,7 +29,7 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
 16. 開啟lunch page v
 17. logo v
 
-Bug 改變字體 詩歌
+Bug 改變字體 詩歌 v
 Bug 音樂切換 v
 Bug 目錄 v
 歌譜跳頁 v
@@ -48,10 +48,10 @@ Bug 目錄 v
 分頁List v
 搜尋補充本 v
 搜尋頁面 v
-分享樂譜
-新版本提醒
 
+新版本提醒 
 
+17. 分享樂譜 v2
 18. 詩歌收入列表 v2
 19. 自動下載新詩歌 v2
 20. 會所地址??? 規劃路線 v2
