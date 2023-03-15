@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/search/search_controller.dart';
 import 'package:flutter_poetry/presentation/views/widget/backIconButton.dart';
+import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
 import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
@@ -13,11 +14,15 @@ import 'list_page.dart';
 
 class SearchAllFragment extends GetView<SearchController> {
   SearchAllFragment({Key? key}) : super(key: key);
-
+  bool b =true;
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero,
-        () => FocusScope.of(context).requestFocus(controller.commentFocus));
+    if(b){
+      b=false;
+      Future.delayed(Duration.zero,
+              () => FocusScope.of(context).requestFocus(controller.commentFocus));
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -25,9 +30,24 @@ class SearchAllFragment extends GetView<SearchController> {
             mainAxisSize: MainAxisSize.min,
             children: [
               const BannerWidget(),
-              TextUnitWidget(
-                'search'.tr,
-                style: Styles.subTitleStyleBlack,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Dimens.itemSpace*2),
+                child: Row(
+                  children: [
+                    TextUnitWidget(
+                      'search'.tr,
+                      style: Styles.subTitleStyleBlack,
+                    ),
+                    Expanded(child: Container()),
+                    TouchUnitWidget(
+                      onTapDelay: (){
+                          Get.toNamed(AppRoutes.catalogueFull);
+                      },
+                      child: TextUnitWidget('catalogue'.tr,style: Styles.subTitleStyleBlack,),
+                    ),
+                    const Icon(Icons.arrow_forward_ios_rounded,size: Dimens.iconSize-4,)
+                  ],
+                ),
               ),
               const Divider(
                   height: Dimens.moduleDividing,

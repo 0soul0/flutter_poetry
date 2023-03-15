@@ -10,6 +10,7 @@ import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
 import '../item/catalogue_item.dart';
 import '../widget/backIconButton.dart';
+import '../widget/textUnitWidget.dart';
 
 class CatalogueFull extends StatefulWidget {
   const CatalogueFull({super.key});
@@ -34,46 +35,57 @@ class _CatalogueFull extends State<CatalogueFull>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(Dimens.bannerHeight),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: AppColor.backgroundColor,
-          title: TabBar(
-            controller: _tabController,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: AppColor.mainColor,
-            indicatorPadding: const EdgeInsets.all(10),
-            tabs: MainController.category.map((item) {
-              return Tab(
-                child: Text(
-                  item.name.tr,
-                  style: Styles.tabStyle,
-                ),
-              );
-            }).toList(),
-          ),
-        ),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(Dimens.bannerHeight),
+        child: Text(""),
       ),
+
       body: Stack(
         children: [
-          TabBarView(
-            controller: _tabController,
-            children: MainController.category.map((item) {
-              return Container(
-                padding: const EdgeInsets.fromLTRB(
-                    Dimens.backgroundMarginLeft,
-                    Dimens.textSpace,
-                    Dimens.backgroundMarginRight,
-                    Dimens.textSpace),
-                width: MediaQuery.of(context).size.width,
-                child: FutureBuilder<List<CatalogueModel>>(
-                  future: controller.queryAllCatalogue(int.parse(item.id)),
-                  builder: (context, snapshot) {
-                    return _catalogueList(snapshot);
-                  },
-                ));
-            }).toList(),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TabBar(
+                isScrollable: true,
+                labelPadding: const EdgeInsets.only(
+                    right: Dimens.space, left: Dimens.space),
+                padding: EdgeInsets.zero,
+                controller: _tabController,
+                unselectedLabelColor: AppColor.helperColor,
+                indicatorSize: TabBarIndicatorSize.label,
+                labelColor: AppColor.mainColor,
+                indicatorColor: AppColor.mainColor,
+                indicatorPadding: const EdgeInsets.all(10),
+                tabs: MainController.category.map((item) {
+                  return Tab(
+                    child: TextUnitWidget(
+                      item.name.tr,
+                    ),
+                  );
+                }).toList(),
+              ),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: MainController.category.map((item) {
+                    return Container(
+                        padding: const EdgeInsets.fromLTRB(
+                            Dimens.backgroundMarginLeft,
+                            0,
+                            Dimens.backgroundMarginRight,
+                            0),
+                        width: MediaQuery.of(context).size.width,
+                        child: FutureBuilder<List<CatalogueModel>>(
+                          future:
+                              controller.queryAllCatalogue(int.parse(item.id)),
+                          builder: (context, snapshot) {
+                            return _catalogueList(snapshot);
+                          },
+                        ));
+                  }).toList(),
+                ),
+              ),
+            ],
           ),
           const BackIconButton()
         ],
@@ -83,6 +95,7 @@ class _CatalogueFull extends State<CatalogueFull>
 
   _catalogueList(AsyncSnapshot<List<CatalogueModel>> snapshot) {
     return MasonryGridView.count(
+      padding: EdgeInsets.zero,
       scrollDirection: Axis.vertical,
       crossAxisCount: 3,
       crossAxisSpacing: Dimens.itemSpace,

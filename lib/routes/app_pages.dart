@@ -10,7 +10,7 @@ import 'package:flutter_poetry/presentation/views/search/search_fragment.dart';
 import 'package:get/get.dart';
 
 import '../presentation/views/poetry/poetrySpectrum.dart';
-import '../presentation/views/search/catalogueFull.dart';
+import '../presentation/views/search/catalogue_full_page.dart';
 import '../presentation/views/search/search_all_fragment.dart';
 import 'app_routes.dart';
 import 'my_binding.dart';

@@ -144,7 +144,6 @@ class _SearchFragment extends State<SearchFragment>
           style: Styles.helperStyle,
         ),
         TextField(
-          controller: controller.textController,
           readOnly: true,
           textAlign: TextAlign.left,
           onTap: () {
