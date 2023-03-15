@@ -11,11 +11,18 @@ import 'package:get/get.dart';
 
 import '../presentation/views/poetry/poetrySpectrum.dart';
 import '../presentation/views/search/catalogueFull.dart';
+import '../presentation/views/search/search_all_fragment.dart';
 import 'app_routes.dart';
 import 'my_binding.dart';
 
 class AppPages {
   static final pages = [
+    GetPage(
+        name: AppRoutes.searchAllFragment,
+        page: () => SearchAllFragment(),
+        binding: MyBinding(() {
+          Get.lazyPut(() => SearchController());
+        })),
     GetPage(
         name: AppRoutes.poetryDetail,
         page: () => const PoetryDetail(),

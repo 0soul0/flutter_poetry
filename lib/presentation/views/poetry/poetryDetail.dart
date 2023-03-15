@@ -230,7 +230,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   }
 
   _poetry() {
-    return Obx(() => SelectableText(
+    return Obx(() => SelectTableWidget(
       controller.strItems.value,
       style: Styles.textStyleBlack,
       textAlign: TextAlign.left,
@@ -275,7 +275,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                 "retain".tr,
                 style: Styles.textStyleBlack,
               ),
-              SelectableText(controller.refrain.trim().toString(),
+              SelectTableWidget(controller.refrain.trim().toString(),
                   style: Styles.textStyleBlack, textAlign: TextAlign.left),
               const Divider(
                 color: Colors.grey,

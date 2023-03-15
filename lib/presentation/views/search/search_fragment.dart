@@ -11,6 +11,7 @@ import '../../../domain/fxDataBaseManager.dart';
 import '../../../main_controller.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
+import '../../../routes/app_routes.dart';
 import '../item/utils/moduleUnit.dart';
 import '../widget/bannerWidget.dart';
 import '../widget/textUnitWidget.dart';
@@ -50,8 +51,9 @@ class _SearchFragment extends State<SearchFragment>
           children: [
             const BannerWidget(),
             TabBar(
-              isScrollable:true,
-              labelPadding:const EdgeInsets.only(right: Dimens.space,left: Dimens.space),
+              isScrollable: true,
+              labelPadding: const EdgeInsets.only(
+                  right: Dimens.space, left: Dimens.space),
               padding: EdgeInsets.zero,
               controller: tabController,
               unselectedLabelColor: AppColor.helperColor,
@@ -76,8 +78,9 @@ class _SearchFragment extends State<SearchFragment>
                           Dimens.backgroundMarginLeft,
                           0,
                           Dimens.backgroundMarginRight,
-                          0),key: Key(item.id),
-                      child: ListPage(item.id));
+                          0),
+                      key: Key(item.id),
+                      child: ListPage(item.id, ListType.list));
                 }).toList(),
               ),
             ),
@@ -105,10 +108,6 @@ class _SearchFragment extends State<SearchFragment>
     return await dao.queryAllByDbType(PoetryDao.tableName);
   }
 
-  /// search data
-  int page = 1;
-  String searchVal = "";
-
   _search(BuildContext context) {
     return Stack(
       children: [
@@ -118,13 +117,16 @@ class _SearchFragment extends State<SearchFragment>
         ),
         TextField(
           controller: controller.textController,
-          focusNode: controller.commentFocus,
+          readOnly: true,
           textAlign: TextAlign.left,
-          onChanged: (value) {
-            searchVal = value;
-            page = 1;
-            controller.search(value);
+          onTap: () {
+            Get.toNamed(AppRoutes.searchAllFragment);
           },
+          // onChanged: (value) {
+          //   searchVal = value;
+          //   page = 1;
+          //   controller.search(value);
+          // },
           decoration: InputDecoration(
               filled: true,
               fillColor: AppColor.backgroundColor,
@@ -151,5 +153,4 @@ class _SearchFragment extends State<SearchFragment>
       ],
     );
   }
-
 }

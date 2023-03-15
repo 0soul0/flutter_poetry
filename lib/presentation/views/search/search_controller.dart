@@ -34,6 +34,7 @@ class SearchController extends BaseController {
   late CatalogueDao _catalogueDao;
   late RecordDao _recordDao;
   late final TextEditingController textController = TextEditingController();
+  String searchVal="";
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
   RxList<FileModel> types = List<FileModel>.from([]).obs;
   RxList<PoetryModel> poetrySearchItems = List<PoetryModel>.from([]).obs;
@@ -64,7 +65,7 @@ class SearchController extends BaseController {
   initData() async {
     Singleton.getEventBusInstance().on<MsgEvent>().listen((event) {
       loadingProgress.value = event;
-      search("");
+      // search("");
     });
     // search("");
 
@@ -147,7 +148,7 @@ class SearchController extends BaseController {
   search(String search,
       {int? id, int page = 0, int count = SettingParameters.pageCount}) async {
     page = page * count;
-
+    searchVal=search;
     List<PoetryModel> items = [];
     //過濾數字搜尋到段落
 
