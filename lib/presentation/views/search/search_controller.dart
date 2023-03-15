@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_poetry/data/settingParameters.dart';
 import 'package:flutter_poetry/domain/dao/fileDao.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
@@ -8,12 +9,14 @@ import 'package:flutter_poetry/domain/fxDataBaseManager.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
 import 'package:flutter_poetry/domain/model/recordModel.dart';
+import 'package:flutter_poetry/tool/extension.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../domain/dao/catalogueDao.dart';
 import '../../../domain/dao/recordDao.dart';
+import '../../../domain/model/fileModel.dart';
 import '../../../domain/model/poetryModel.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/singleton.dart';
@@ -22,18 +25,19 @@ import '../item/utils/moduleUnit.dart';
 
 ///  search controller
 class SearchController extends BaseController {
+
   static const searchCatalogueKey = "c";
   static const split = "://";
 
   late PoetryDao _poetryDao;
-  late FileDao _fileDao;
+  late FileDao fileDao;
   late CatalogueDao _catalogueDao;
   late RecordDao _recordDao;
   late final TextEditingController textController = TextEditingController();
-  final RefreshController refreshController =
-      RefreshController(initialRefresh: false);
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
-  RxList<PoetryModel> poetryItems = List<PoetryModel>.from([]).obs;
+  RxList<FileModel> types = List<FileModel>.from([]).obs;
+  RxList<PoetryModel> poetrySearchItems = List<PoetryModel>.from([]).obs;
+  RxMap poetryItemsMap = {}.obs;
   Rx<MsgEvent> loadingProgress =
       MsgEvent("loading", map: {"total": 0, "number": 0, "progress": 0}).obs;
 
@@ -45,7 +49,7 @@ class SearchController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     await init();
-    initData();
+    await initData();
   }
 
   /// init class
@@ -53,7 +57,7 @@ class SearchController extends BaseController {
     _poetryDao = await FxDataBaseManager.poetryDao();
     _catalogueDao = await FxDataBaseManager.categoryDao();
     _recordDao = await FxDataBaseManager.recordDao();
-    _fileDao =  await FxDataBaseManager.fileDao();
+    fileDao = await FxDataBaseManager.fileDao();
   }
 
   /// init default data
@@ -62,13 +66,40 @@ class SearchController extends BaseController {
       loadingProgress.value = event;
       search("");
     });
-    search("");
+    // search("");
 
     scrollController.addListener(() {
       if (commentFocus.hasFocus) {
         commentFocus.unfocus();
       }
     });
+  }
+
+  queryAllById(String id,
+      {int page = 0, int count = SettingParameters.pageCount}) async{
+    page = page * count;
+
+    List<PoetryModel> items = [];
+    items = await _poetryDao.searchType(int.parse(id), page, count);
+
+    for (int i = 0; i < items.length; i++) {
+      items[i] = PoetryModel.fromMap(setDescription("", items[i].toMap()));
+      if (page != 0 || (i != 0 && items[i - 1].type == items[i].type)) {
+        items[i].itemType = ModuleUtils.poetryModel;
+      } else {
+        items[i].itemType = ModuleUtils.poetryModelWithType;
+      }
+    }
+
+    if (page == 0) {
+      poetryItemsMap[id] = items;
+      return;
+    }
+    var data = poetryItemsMap[id];
+    if (items.isNotEmpty) {
+      data.addAll(items);
+    }
+    poetryItemsMap[id]=data;
   }
 
   @override
@@ -114,28 +145,34 @@ class SearchController extends BaseController {
   ///
   /// @param search needed search text
   search(String search,
-      {int page = 0, int count = SettingParameters.pageCount}) async {
+      {int? id, int page = 0, int count = SettingParameters.pageCount}) async {
     page = page * count;
 
     List<PoetryModel> items = [];
     //過濾數字搜尋到段落
 
-    var file=await _fileDao.findFileByNameWithDbType(search,PoetryDao.tableName);
-    if(file!=null){ //詩歌 補沖本
-      items = await _poetryDao.searchType(int.parse(file.id), page, count);
-    } else if (search.contains(searchCatalogueKey + split)) {
-      search = search.split(split)[1];
-      items = await _poetryDao.searchCategory(search, page, count);
-    } else if (int.tryParse(search) == null) {
-      items = await _poetryDao.search("%$search%", page, count);
+    if (id != null) {
+      items = await _poetryDao.searchType(id, page, count);
     } else {
-      if (page == 0) {
-        items = await _poetryDao.searchNumber(search);
-      }
+      var file =
+          await fileDao.findFileByNameWithDbType(search, PoetryDao.tableName);
+      if (file != null) {
+        //詩歌 補沖本
+        items = await _poetryDao.searchType(int.parse(file.id), page, count);
+      } else if (search.contains(searchCatalogueKey + split)) {
+        search = search.split(split)[1];
+        items = await _poetryDao.searchCategory(search, page, count);
+      } else if (int.tryParse(search) == null) {
+        items = await _poetryDao.search("%$search%", page, count);
+      } else {
+        if (page == 0) {
+          items = await _poetryDao.searchNumber(search);
+        }
 
-      var itemAll =
-          await _poetryDao.searchNoContent(search, "%$search%", page, count);
-      items.addAll(itemAll);
+        var itemAll =
+            await _poetryDao.searchNoContent(search, "%$search%", page, count);
+        items.addAll(itemAll);
+      }
     }
 
     for (int i = 0; i < items.length; i++) {
@@ -148,12 +185,12 @@ class SearchController extends BaseController {
     }
 
     if (page == 0) {
-      poetryItems.value = items;
+      poetrySearchItems.value = items;
       return;
     }
 
     if (items.isNotEmpty) {
-      poetryItems.addAll(items);
+      poetrySearchItems.addAll(items);
     }
   }
 

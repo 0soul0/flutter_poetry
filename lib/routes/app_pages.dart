@@ -5,7 +5,8 @@ import 'package:flutter_poetry/presentation/views/mine/setting/languageFragment.
 import 'package:flutter_poetry/presentation/views/mine/setting/poetryListFragment.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetail.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
-import 'package:flutter_poetry/presentation/views/search/searchController.dart';
+import 'package:flutter_poetry/presentation/views/search/search_controller.dart';
+import 'package:flutter_poetry/presentation/views/search/search_fragment.dart';
 import 'package:get/get.dart';
 
 import '../presentation/views/poetry/poetrySpectrum.dart';

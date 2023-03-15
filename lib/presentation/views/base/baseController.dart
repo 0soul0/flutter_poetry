@@ -2,7 +2,7 @@ import 'package:flutter_poetry/tool/extension.dart';
 import 'package:get/get.dart';
 
 abstract class BaseController<T> extends FullLifeCycleController
-    with FullLifeCycleMixin {
+    with FullLifeCycleMixin{
   @override
   void onDetached() {
     myLog("onDetached");

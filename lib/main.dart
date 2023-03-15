@@ -21,7 +21,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'firebase_options.dart';
 import 'presentation/views/mine/mineFragment.dart';
 import 'presentation/views/record/recordFragment.dart';
-import 'presentation/views/search/searchFragment.dart';
+import 'presentation/views/search/search_fragment.dart';
 import 'routes/app_pages.dart';
 
 late MainController controller;
@@ -122,6 +122,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => ScreenUtilInit(
         builder: (BuildContext context, Widget? child) {
           return GetMaterialApp(
+            theme: ThemeData(
+              scaffoldBackgroundColor: AppColor.backgroundColor,
+            ),
             translations: IntlMessages(),
             locale: const Locale('zh', 'CN'),
             fallbackLocale: const Locale('en', 'US'),

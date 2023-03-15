@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/main_controller.dart';
-import 'package:flutter_poetry/presentation/views/search/searchController.dart';
+import 'package:flutter_poetry/presentation/views/search/search_controller.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -42,7 +42,6 @@ class _CatalogueFull extends State<CatalogueFull>
           title: TabBar(
             controller: _tabController,
             indicatorSize: TabBarIndicatorSize.label,
-            //设置为Label宽度
             indicatorColor: AppColor.mainColor,
             indicatorPadding: const EdgeInsets.all(10),
             tabs: MainController.category.map((item) {
