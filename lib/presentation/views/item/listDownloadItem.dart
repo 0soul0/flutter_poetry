@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../../../resource/style.dart';
-import '../widget/textUnitWidget.dart';
-import '../widget/touchUnitWidget.dart';
+import '../widget/text_unit_widget.dart';
+import '../widget/touch_unit_widget.dart';
 
 class ListDownloadItem extends StatelessWidget {
   const ListDownloadItem(this.onTapFunction,

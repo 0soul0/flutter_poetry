@@ -1,8 +1,8 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
-import 'package:flutter_poetry/presentation/views/widget/backIconButton.dart';
-import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
+import 'package:flutter_poetry/presentation/views/widget/back_icon_button.dart';
+import 'package:flutter_poetry/presentation/views/widget/touch_unit_widget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,8 +11,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
-import '../widget/FloatFabWidget.dart';
-import '../widget/textUnitWidget.dart';
+import '../widget/float_fab_widget.dart';
+import '../widget/text_unit_widget.dart';
 
 class PoetrySpectrum extends StatefulWidget {
   const PoetrySpectrum({Key? key}) : super(key: key);

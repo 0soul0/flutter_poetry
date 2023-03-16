@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:flutter_poetry/data/settingParameters.dart';
+import 'package:flutter_poetry/data/cache_data.dart';
+import 'package:flutter_poetry/data/setting_config.dart';
 import 'package:flutter_poetry/domain/dao/fileDao.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
-import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
+import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,6 +28,7 @@ class MineController extends BaseController {
   RxBool seekValueShow = RxBool(false);
   RxList<ItemModel> items = List<ItemModel>.from([]).obs;
   RxList<ItemModel> contact = List<ItemModel>.from([]).obs;
+  RxList<ItemModel> version = List<ItemModel>.from([]).obs;
   RxList<ItemModel> language = List<ItemModel>.from([]).obs;
   RxList<ItemModel> hymn = List<ItemModel>.from([]).obs;
   List<String> selectLanguage = ["中文", "English", "French"];
@@ -86,6 +90,50 @@ class MineController extends BaseController {
           onTapFunction: () {
             Get.toNamed(AppRoutes.aboutFragment);
           }),
+      ItemModel(
+          id: 5,
+          title: "version".tr,
+          onTapFunction: () {
+            Get.toNamed(AppRoutes.versionFragment);
+          }),
+    });
+  }
+
+  bindVersionItem() {
+    version.clear();
+    var canUpdate = CacheData.statusVersion?.canUpdate??false;
+    version.addAll({
+      ItemModel(
+          id: 0,
+          title: "resVersion".tr,
+          value: CacheData.resVersion,
+          iconGif: "assets/icon_book.gif",
+          onTapFunction: () {}),
+      ItemModel(
+          id: 1,
+          title: "localVersion".tr,
+          text:  canUpdate?"update".tr:"",
+          value: CacheData.statusVersion?.localVersion ?? "1.0.0",
+          iconGif: Platform.isAndroid
+              ? "assets/icon_android.gif"
+              : "assets/icon_apple.gif",
+          onTapFunction: () {}),
+      // ItemModel(
+      //     id: 1,
+      //     title: "instagram",
+      //     value: SettingParameters.ig[0],
+      //     iconGif: "assets/icon_ig.gif",
+      //     onTapFunction: () {
+      //       _launchUrl(Uri.parse(SettingParameters.ig[1]));
+      //     }),
+      // ItemModel(
+      //     id: 2,
+      //     title: "facebook",
+      //     value: SettingParameters.facebook[0],
+      //     iconGif: "assets/icon_fb.gif",
+      //     onTapFunction: () {
+      //       _launchUrl(Uri.parse(SettingParameters.facebook[1]));
+      //     }),
     });
   }
 

@@ -2,7 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
-import 'package:flutter_poetry/presentation/views/widget/scrollToHideWidget.dart';
+import 'package:flutter_poetry/presentation/views/widget/scroll_to_hide_widget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -10,10 +10,10 @@ import 'package:get/get.dart';
 import '../../../resource/colors.dart';
 import '../../../resource/style.dart';
 import '../../../routes/app_routes.dart';
-import '../widget/backIconButton.dart';
+import '../widget/back_icon_button.dart';
 import '../widget/select_table_widget.dart';
-import '../widget/textUnitWidget.dart';
-import '../widget/touchUnitWidget.dart';
+import '../widget/text_unit_widget.dart';
+import '../widget/touch_unit_widget.dart';
 
 /// A class representing show detail of poetry
 class PoetryDetail extends GetView<PoetryDetailController> {

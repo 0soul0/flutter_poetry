@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../../../resource/style.dart';
-import '../widget/textUnitWidget.dart';
-import '../widget/touchUnitWidget.dart';
+import '../widget/text_unit_widget.dart';
+import '../widget/touch_unit_widget.dart';
 
 class ListMidItem extends StatelessWidget {
   const ListMidItem(this.onTapFunction,
       {this.iconGif = "",
       this.icon,
+      this.text,
       this.title = "",
       this.description = "",
       Key? key})
@@ -19,6 +20,7 @@ class ListMidItem extends StatelessWidget {
   final Function onTapFunction;
   final IconData? icon;
   final String iconGif;
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
@@ -74,23 +76,37 @@ class ListMidItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: Styles.textStyleBlack,
                 ),
-                SizedBox(
-                  width: 250,
-                  child: TextUnitWidget(
-                    description,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Styles.textStyleGray,
-                  ),
-                ),
+                TextUnitWidget(
+                  description,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Styles.textStyleGray,
+                )
               ],
             ),
             Expanded(child: Container()),
-            const Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: Dimens.smallIconSize,
-              color: AppColor.gray,
-            )
+            text == null
+                ? const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: Dimens.smallIconSize,
+                    color: AppColor.gray,
+                  )
+                : text!.isNotEmpty?TouchUnitWidget(
+                  child: Container(
+                    padding: const EdgeInsets.all(Dimens.space/1.5),
+                    decoration: BoxDecoration(
+                        color: AppColor.white,
+                        shape: BoxShape.rectangle,
+                        border: Border.all(color: AppColor.secondColor),
+                        borderRadius: BorderRadius.circular(Dimens.itemRadius / 3)),
+                    child: TextUnitWidget(
+                      text!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Styles.helperStyleSecond,
+                    ),
+                  ),
+                ):Container()
           ],
         ),
       ),

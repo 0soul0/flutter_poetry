@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import '../../../domain/model/itemModel.dart';
 import '../../../resource/dimens.dart';
-import '../widget/bannerWidget.dart';
+import '../widget/banner_widget.dart';
 
 class ListPage<T> extends StatelessWidget {
   const ListPage({this.controller, Key? key}) : super(key: key);

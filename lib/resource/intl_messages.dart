@@ -39,8 +39,11 @@ class IntlMessages extends Translations {
           "update":"更新",
           "maybeLater":"晚點",
           "localVersion":"目前版本",
-          "storeVersion":"新版本",
+          "storeVersion":"最新版本",
           "quickUpdate":"快去更新",
+          "version":"版本",
+          "resVersion":"資源版本",
+          "hasNewVersion":"有新版本"
         },
         'en_US': {
           'english': 'english',

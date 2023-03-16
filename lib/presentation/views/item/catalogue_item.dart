@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
+import 'package:flutter_poetry/presentation/views/widget/touch_unit_widget.dart';
 
 import '../../../../domain/model/catalogueModel.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../../../resource/style.dart';
-import '../widget/textUnitWidget.dart';
+import '../widget/text_unit_widget.dart';
 
 class CatalogueItem extends StatelessWidget {
   const CatalogueItem(this.itemData, this.onTapFunction, {Key? key})

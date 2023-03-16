@@ -5,8 +5,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:flutter_poetry/data/cache_data.dart';
 import 'package:flutter_poetry/main_controller.dart';
-import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
+import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/resource/intl_messages.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
@@ -180,7 +181,8 @@ class BottomNavigationControllerState
   advancedStatusCheck(NewVersionPlus newVersion) async {
     final status = await newVersion.getVersionStatus();
     if (status != null) {
-      if(status.canUpdate||true){
+      if(status.canUpdate&&controller.canCheckConfigDays(7)){
+        CacheData.statusVersion = status;
         newVersion.showUpdateDialog(
           context: context,
           versionStatus: status,

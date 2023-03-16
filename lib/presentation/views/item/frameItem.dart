@@ -3,7 +3,7 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
 import '../../../resource/style.dart';
-import '../widget/textUnitWidget.dart';
+import '../widget/text_unit_widget.dart';
 
 class FrameItem extends StatelessWidget {
   const FrameItem(this.onTapFunction,

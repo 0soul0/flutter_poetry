@@ -10,7 +10,7 @@ import '../../../domain/model/poetryModel.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
 import '../item/utils/moduleUnit.dart';
-import '../widget/textUnitWidget.dart';
+import '../widget/text_unit_widget.dart';
 import 'search_controller.dart';
 
 class ListPage extends StatelessWidget {

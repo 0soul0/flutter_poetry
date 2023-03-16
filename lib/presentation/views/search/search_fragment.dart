@@ -14,8 +14,8 @@ import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
 import '../../../routes/app_routes.dart';
 import '../item/utils/moduleUnit.dart';
-import '../widget/bannerWidget.dart';
-import '../widget/textUnitWidget.dart';
+import '../widget/banner_widget.dart';
+import '../widget/text_unit_widget.dart';
 import 'list_page.dart';
 
 class SearchFragment extends StatefulWidget {

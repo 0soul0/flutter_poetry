@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
+import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 
 class SelectTableWidget extends SelectableText {
 

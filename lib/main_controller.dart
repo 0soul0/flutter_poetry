@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poetry/data/cache_data.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
@@ -9,8 +10,8 @@ import 'package:flutter_poetry/domain/model/systemInfoModel.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/widget/small_button_widget.dart';
-import 'package:flutter_poetry/presentation/views/widget/textUnitWidget.dart';
-import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
+import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
+import 'package:flutter_poetry/presentation/views/widget/touch_unit_widget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/style.dart';
@@ -20,8 +21,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 
-import 'data/data_source/api.dart';
-import 'data/routeApi.dart';
+import 'data/network/api.dart';
+import 'data/route_api.dart';
 import 'domain/dao/catalogueDao.dart';
 import 'domain/dao/fileDao.dart';
 import 'domain/dao/subCategoryDao.dart';
@@ -69,10 +70,10 @@ class MainController extends BaseController {
   }
 
   /// can check config data from network
-  canCheckConfigOnceDay() async {
+  canCheckConfigDays(int day) async {
     var oldTime = await SharedPreferencesUnit().read(checkConfigTimeKey, '0');
-    var currentTime = DateTime.now().day;
-    if (currentTime != int.parse(oldTime)) {
+    var currentTime = DateTime.now().millisecondsSinceEpoch;
+    if ((currentTime - int.parse(oldTime)).abs() >= day * 86400000) {
       SharedPreferencesUnit().storage(checkConfigTimeKey, currentTime);
       return true;
     }
@@ -81,7 +82,7 @@ class MainController extends BaseController {
 
   /// Request information of config data
   requestConfig() async {
-    // if (!await canCheckConfigOnceDay()){
+    // if (!await canCheckConfigDays()){
     // Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
     // return;
     // }
@@ -107,9 +108,8 @@ class MainController extends BaseController {
   /// @param newConfig Need checked data
   checkConfigVersion(SystemInfoModel newConfig) async {
     List<SystemInfoModel> oldConfig = await _systemDao.queryAll();
-
-    if (
-        oldConfig.isEmpty ||
+    CacheData.resVersion = newConfig.appVersion;
+    if (oldConfig.isEmpty ||
         (int.parse(newConfig.appVersion.replaceAll(".", "")) >
             int.parse(oldConfig[0].appVersion.replaceAll(".", "")))) {
       showDialog(newConfig.updateContent);

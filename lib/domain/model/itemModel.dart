@@ -6,6 +6,7 @@ class ItemModel {
       this.title = "",
       this.value = "",
       this.iconGif = "",
+      this.text = "",
       this.hasNextPage = true,
       this.selected = false,
       this.module = ModuleUtils.listSmallModule,
@@ -13,6 +14,7 @@ class ItemModel {
 
   late int id;
   late String title;
+  late String text;
   late String value;
   late bool hasNextPage;
   late int module; //0 list_small_item 1:

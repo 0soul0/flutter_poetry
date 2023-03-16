@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../domain/model/poetryModel.dart';
 import '../../../resource/dimens.dart';
-import '../widget/textUnitWidget.dart';
+import '../widget/text_unit_widget.dart';
 
 /// A class represent controller of poetry
 class PoetryDetailController extends BaseController<PoetryModel> {

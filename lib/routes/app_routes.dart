@@ -11,4 +11,5 @@ abstract class AppRoutes {
   static const poetryListFragment = '/poetryListFragment';
   static const languageFragment = '/languageFragment';
   static const searchAllFragment = '/searchAllFragment';
+  static const versionFragment = '/versionFragment';
 }

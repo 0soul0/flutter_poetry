@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/search/search_controller.dart';
-import 'package:flutter_poetry/presentation/views/widget/backIconButton.dart';
-import 'package:flutter_poetry/presentation/views/widget/touchUnitWidget.dart';
+import 'package:flutter_poetry/presentation/views/widget/back_icon_button.dart';
+import 'package:flutter_poetry/presentation/views/widget/touch_unit_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
 import '../../../routes/app_routes.dart';
-import '../widget/bannerWidget.dart';
-import '../widget/textUnitWidget.dart';
+import '../widget/banner_widget.dart';
+import '../widget/text_unit_widget.dart';
 import 'list_page.dart';
 
 class SearchAllFragment extends GetView<SearchController> {

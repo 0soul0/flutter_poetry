@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poetry/domain/model/itemModel.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
-import '../../../../domain/model/itemModel.dart';
 import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
-import '../../item/selectedItem.dart';
-import '../../widget/backIconButton.dart';
+import '../../item/listMidItem.dart';
+import '../../widget/back_icon_button.dart';
+import '../../widget/banner_widget.dart';
 
-class LanguageFragment extends GetView<MineController> {
-  const LanguageFragment({Key? key}) : super(key: key);
+class VersionFragment extends GetView<MineController> {
+  const VersionFragment({Key? key}) : super(key: key);
 
-  init(BuildContext context) {
-    controller.bindLanguages(context);
+  init() {
+    controller.bindVersionItem();
   }
 
   @override
   Widget build(BuildContext context) {
-    init(context);
+    init();
     return Scaffold(
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(Dimens.bannerHeight),
+        child: BannerWidget(),
+      ),
       body: Stack(
         children: [
           Container(
@@ -44,24 +49,15 @@ class LanguageFragment extends GetView<MineController> {
           scrollDirection: Axis.vertical,
           crossAxisCount: 1,
           mainAxisSpacing: Dimens.space,
-          itemCount: controller.language.length,
+          itemCount: controller.version.length,
           itemBuilder: (context, index) {
-            ItemModel item = controller.language[index];
-            return SelectedItem(item);
+            ItemModel item = controller.version[index];
+            return ListMidItem(item.onTapFunction!,
+                iconGif: item.iconGif,
+                title: item.title,
+                text: item.text,
+                description: item.value);
           },
         ));
   }
-
-  // AlignedGridView.count(
-  // scrollDirection: Axis.vertical,
-  // crossAxisCount: 1,
-  // itemCount: snapshot.length,
-  // itemBuilder: (context, index) {
-  // var item = snapshot[index];
-  // return SelectedItem(() {
-  // controller.storage(MineController.constLanguageSelected, item.id);
-  // Get.back();
-  // }, item);
-  // },
-  // );
 }

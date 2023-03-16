@@ -9,8 +9,8 @@ import '../../../domain/model/catalogueModel.dart';
 import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
 import '../item/catalogue_item.dart';
-import '../widget/backIconButton.dart';
-import '../widget/textUnitWidget.dart';
+import '../widget/back_icon_button.dart';
+import '../widget/text_unit_widget.dart';
 
 class CatalogueFull extends StatefulWidget {
   const CatalogueFull({super.key});
