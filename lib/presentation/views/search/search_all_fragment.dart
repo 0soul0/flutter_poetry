@@ -67,7 +67,7 @@ class SearchAllFragment extends GetView<SearchController> {
                   thickness: Dimens.moduleDividing,
                   color: AppColor.dividerColor),
               Container(
-                height: 20*TextUnitWidget.textSizeTimes,
+                height: 24*TextUnitWidget.textSizeTimes,
                 decoration: const BoxDecoration(color: AppColor.dividerColor),
                 child: _search(context),
               ),
