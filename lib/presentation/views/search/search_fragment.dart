@@ -48,7 +48,7 @@ class _SearchFragment extends State<SearchFragment>
           thickness: Dimens.moduleDividing,
           color: AppColor.dividerColor),
       Container(
-        height: 32,
+        height: 20*TextUnitWidget.textSizeTimes,
         decoration: const BoxDecoration(color: AppColor.dividerColor),
         child: _search(context),
       ),
@@ -138,45 +138,51 @@ class _SearchFragment extends State<SearchFragment>
   }
 
   _search(BuildContext context) {
+    final mqData = MediaQuery.of(context);
+    final mqDataNew = mqData.copyWith(textScaleFactor:TextUnitWidget.textSizeTimes );
+    // return MediaQuery(data: mqDataNew, child: TextField());
     return Stack(
       children: [
         TextUnitWidget(
           "searchHelper".tr,
           style: Styles.helperStyle,
         ),
-        TextField(
-          readOnly: true,
-          textAlign: TextAlign.left,
-          onTap: () {
-            Get.toNamed(AppRoutes.searchAllFragment);
-          },
-          // onChanged: (value) {
-          //   searchVal = value;
-          //   page = 1;
-          //   controller.search(value);
-          // },
-          decoration: InputDecoration(
-              filled: true,
-              fillColor: AppColor.backgroundColor,
-              hintText: "searchHelper".tr,
-              hintStyle: Styles.helperStyle,
-              border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(Dimens.moduleRadius),
-                      bottomRight: Radius.circular(Dimens.moduleRadius))),
-              enabledBorder: const OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 0, color: AppColor.dividerColor),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(Dimens.moduleRadius),
-                      bottomRight: Radius.circular(Dimens.moduleRadius))),
-              focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: AppColor.secondColor),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(Dimens.moduleRadius),
-                      bottomRight: Radius.circular(Dimens.moduleRadius))),
-              contentPadding: const EdgeInsets.all(Dimens.itemPaddingSpace_4),
-              prefixIcon: const Icon(Icons.search)),
+        MediaQuery(
+          data: mqDataNew,
+          child: TextField(
+            readOnly: true,
+            textAlign: TextAlign.left,
+            onTap: () {
+              Get.toNamed(AppRoutes.searchAllFragment);
+            },
+            // onChanged: (value) {
+            //   searchVal = value;
+            //   page = 1;
+            //   controller.search(value);
+            // },
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: AppColor.backgroundColor,
+                hintText: "searchHelper".tr,
+                hintStyle: Styles.helperStyle,
+                border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(Dimens.moduleRadius),
+                        bottomRight: Radius.circular(Dimens.moduleRadius))),
+                enabledBorder: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 0, color: AppColor.dividerColor),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(Dimens.moduleRadius),
+                        bottomRight: Radius.circular(Dimens.moduleRadius))),
+                focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(width: 1, color: AppColor.secondColor),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(Dimens.moduleRadius),
+                        bottomRight: Radius.circular(Dimens.moduleRadius))),
+                contentPadding: const EdgeInsets.all(Dimens.itemPaddingSpace_4),
+                prefixIcon: const Icon(Icons.search)),
+          ),
         ),
       ],
     );

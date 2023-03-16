@@ -1,7 +1,7 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
-import 'package:flutter_poetry/presentation/views/widget/big_button.dart';
+import 'package:flutter_poetry/presentation/views/widget/big_button_widget.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:get/get.dart';
 
@@ -107,7 +107,7 @@ class FontFragment extends GetView<MineController> {
   _saveButton(BuildContext context) {
     return Obx(() => Visibility(
         visible: controller.seekValueShow.value,
-        child: BigButton(
+        child: BigButtonWidget(
           onPressed: () {
             TextUnitWidget.textSizeTimes = controller
                 .valueToValueTime(controller.seekValue.value.toDouble());

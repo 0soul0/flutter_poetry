@@ -67,24 +67,26 @@ class ListMidItem extends StatelessWidget {
             const SizedBox(
               width: Dimens.itemSpace,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextUnitWidget(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Styles.textStyleBlack,
-                ),
-                TextUnitWidget(
-                  description,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Styles.textStyleGray,
-                )
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextUnitWidget(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Styles.textStyleBlack,
+                  ),
+                  TextUnitWidget(
+                    description,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Styles.textStyleGray,
+                  )
+                ],
+              ),
             ),
-            Expanded(child: Container()),
+
             text == null
                 ? const Icon(
                     Icons.arrow_forward_ios_rounded,

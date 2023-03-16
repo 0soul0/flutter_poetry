@@ -34,6 +34,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
               SelectTableWidget(
                 controller.arguments.getTitle(),
                 style: Styles.subTextStyleBlack,
+                  maxLines:1
                 // overflow: TextOverflow.ellipsis,
               ),
               _spectrum()

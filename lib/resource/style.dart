@@ -32,6 +32,11 @@ class Styles {
       fontSize: Dimens.subTitleSize,
       color: AppColor.textColor);
 
+  static const TextStyle subTextStyleWhite = TextStyle(
+      fontWeight: fontSubTextWeight,
+      fontSize: Dimens.subTitleSize,
+      color: AppColor.white);
+
   static const TextStyle subTextStyleSecondColor = TextStyle(
       fontWeight: fontSubTextWeight,
       fontSize: Dimens.subTitleSize,

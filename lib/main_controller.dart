@@ -271,12 +271,12 @@ class MainController extends BaseController {
           style: Styles.textStyleBlack,
         ),
         actions: [
-          TouchUnitWidget(
-            onTapDelay: () {
-              Get.back();
-            },
-            child: Center(
-              child: SmallButtonWidget('current'.tr),
+          Center(
+            child: SmallButtonWidget(
+              'current'.tr,
+              onPressed: () {
+                Get.back();
+              },
             ),
           )
         ],
