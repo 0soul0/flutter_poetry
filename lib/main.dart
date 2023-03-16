@@ -181,8 +181,8 @@ class BottomNavigationControllerState
   advancedStatusCheck(NewVersionPlus newVersion) async {
     final status = await newVersion.getVersionStatus();
     if (status != null) {
+      CacheData.statusVersion = status;
       if(status.canUpdate&&controller.canCheckConfigDays(7)){
-        CacheData.statusVersion = status;
         newVersion.showUpdateDialog(
           context: context,
           versionStatus: status,

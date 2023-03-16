@@ -102,6 +102,7 @@ class MineController extends BaseController {
   bindVersionItem() {
     version.clear();
     var canUpdate = CacheData.statusVersion?.canUpdate??false;
+    var url = Uri.parse(CacheData.statusVersion?.appStoreLink??"");
     version.addAll({
       ItemModel(
           id: 0,
@@ -117,7 +118,12 @@ class MineController extends BaseController {
           iconGif: Platform.isAndroid
               ? "assets/icon_android.gif"
               : "assets/icon_apple.gif",
-          onTapFunction: () {}),
+          onTapFunction: () async {
+            if(!canUpdate) return;
+            if (await canLaunchUrl(url)) {
+              await launchUrl(url);
+            }
+          }),
       // ItemModel(
       //     id: 1,
       //     title: "instagram",

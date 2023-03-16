@@ -86,29 +86,34 @@ class ListMidItem extends StatelessWidget {
                 ],
               ),
             ),
-
             text == null
                 ? const Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: Dimens.smallIconSize,
                     color: AppColor.gray,
                   )
-                : text!.isNotEmpty?TouchUnitWidget(
-                  child: Container(
-                    padding: const EdgeInsets.all(Dimens.space/1.5),
-                    decoration: BoxDecoration(
-                        color: AppColor.white,
-                        shape: BoxShape.rectangle,
-                        border: Border.all(color: AppColor.secondColor),
-                        borderRadius: BorderRadius.circular(Dimens.itemRadius / 3)),
-                    child: TextUnitWidget(
-                      text!,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Styles.helperStyleSecond,
-                    ),
-                  ),
-                ):Container()
+                : text!.isNotEmpty
+                    ? TouchUnitWidget(
+                        onTapDelay: () {
+                          onTapFunction();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(Dimens.space / 1.5),
+                          decoration: BoxDecoration(
+                              color: AppColor.white,
+                              shape: BoxShape.rectangle,
+                              border: Border.all(color: AppColor.secondColor),
+                              borderRadius:
+                                  BorderRadius.circular(Dimens.itemRadius / 3)),
+                          child: TextUnitWidget(
+                            text!,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Styles.helperStyleSecond,
+                          ),
+                        ),
+                      )
+                    : Container()
           ],
         ),
       ),

@@ -81,8 +81,9 @@ flutter_native_splash:
 #flutter pub run flutter_launcher_icons
 flutter_icons:
   android: "lanuch_logo"
+  image_path_android: "assets/logo_radiu.png"
   ios: true
-  image_path: "assets/logo.png"
+  image_path_ios: "assets/logo.png"
 
 
 dev_dependencies:
