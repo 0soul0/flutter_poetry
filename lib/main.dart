@@ -16,6 +16,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lifecycle/lifecycle.dart';
+import 'package:new_version_plus/new_version_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'firebase_options.dart';
@@ -42,6 +43,8 @@ init() async {
   await registerNotification();
   await _initGoogleMobileAds();
 }
+
+
 
 Future<InitializationStatus> _initGoogleMobileAds() {
   return MobileAds.instance.initialize();
@@ -161,6 +164,36 @@ class BottomNavigationControllerState
   //目前選擇頁索引值
   int _currentIndex = 1; //預設值
   final pages = [RecordFragment(), SearchFragment(), MineFragment()];
+
+
+  @override
+  void initState() {
+    super.initState();
+    final newVersion = NewVersionPlus(
+      iOSId: 'com.hymn.flutterPoetry',
+      androidId: 'com.hymn.flutter_poetry',
+    );
+    advancedStatusCheck(newVersion);
+
+  }
+
+  advancedStatusCheck(NewVersionPlus newVersion) async {
+    final status = await newVersion.getVersionStatus();
+    if (status != null) {
+      if(status.canUpdate||true){
+        newVersion.showUpdateDialog(
+          context: context,
+          versionStatus: status,
+          updateButtonText:'update'.tr,
+          dismissButtonText:'maybeLater'.tr,
+          dialogTitle: "${'update'.tr}!!!",
+          dialogText: '${'localVersion'.tr}: ${status.localVersion} \n ${'storeVersion'.tr}: ${status.storeVersion} \n ${'quickUpdate'.tr}',
+        );
+      }
+
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -292,4 +325,6 @@ class BottomNavigationControllerState
                 ),
               ));
   }
-}
+
+  }
+

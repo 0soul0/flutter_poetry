@@ -4,6 +4,7 @@ import 'package:flutter_poetry/presentation/views/search/search_controller.dart'
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:new_version_plus/new_version_plus.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../domain/dao/poetryDao.dart';
@@ -36,8 +37,8 @@ class _SearchFragment extends State<SearchFragment>
     controller = Get.put(SearchController());
     pageController = PageController(initialPage: 1);
     super.initState();
-  }
 
+  }
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: [
@@ -180,4 +181,5 @@ class _SearchFragment extends State<SearchFragment>
       ],
     );
   }
+
 }

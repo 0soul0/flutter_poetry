@@ -58,6 +58,7 @@ dependencies:
   material_dialogs: ^1.1.4
   # sqlite
   floor: ^1.4.1
+  new_version_plus: ^0.0.9
 
 
   # Use with the CupertinoIcons class for iOS style icons.

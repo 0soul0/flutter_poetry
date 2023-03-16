@@ -35,7 +35,12 @@ class IntlMessages extends Translations {
           "updateTitle": "更新內容",
           "current": "確定",
           "sheetMusic": "樂譜",
-          "noSheet":"無音樂"
+          "noSheet":"無音樂",
+          "update":"更新",
+          "maybeLater":"晚點",
+          "localVersion":"目前版本",
+          "storeVersion":"新版本",
+          "quickUpdate":"快去更新",
         },
         'en_US': {
           'english': 'english',
