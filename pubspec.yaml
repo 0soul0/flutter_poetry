@@ -37,6 +37,7 @@ dependencies:
   sqflite: ^2.2.0+3
   shared_preferences: ^2.0.15
   flutter_neumorphic: ^3.0.3
+  image_picker: ^0.8.7
   dio: ^4.0.6
   pretty_dio_logger: ^1.1.1
   storage_view: ^0.1.0-dev.1
@@ -59,7 +60,6 @@ dependencies:
   # sqlite
   floor: ^1.4.1
   new_version_plus: ^0.0.9
-
 
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

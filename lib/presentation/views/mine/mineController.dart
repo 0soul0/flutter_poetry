@@ -9,6 +9,7 @@ import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../domain/dao/poetryDao.dart';
@@ -23,6 +24,7 @@ import '../../../routes/singleton.dart';
 class MineController extends BaseController {
   static const String constLanguageSelected = "constLanguageSelected";
   static const String constSeekValue = "constSeekValue";
+  static const String constImg = "constImg";
 
   Rx<int> seekValue = Dimens.textSize.toInt().obs;
   RxBool seekValueShow = RxBool(false);
@@ -30,6 +32,7 @@ class MineController extends BaseController {
   RxList<ItemModel> contact = List<ItemModel>.from([]).obs;
   RxList<ItemModel> version = List<ItemModel>.from([]).obs;
   RxList<ItemModel> language = List<ItemModel>.from([]).obs;
+  Rx<String> imgFilePath = "".obs;
   RxList<ItemModel> hymn = List<ItemModel>.from([]).obs;
   List<String> selectLanguage = ["中文", "English", "French"];
   int languageIndex = 0;
@@ -41,6 +44,7 @@ class MineController extends BaseController {
     await init();
     await defaultSeekValue();
     await initList();
+    initImg();
   }
 
   init() async {
@@ -173,6 +177,20 @@ class MineController extends BaseController {
     });
   }
 
+  initImg() async {
+    String path =await read(constImg, "");
+    imgFilePath.value = path;
+  }
+
+  Future getImage() async {
+    final pickedFile =await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(pickedFile==null){
+      return;
+    }
+    imgFilePath.value = pickedFile.path;
+    storage(constImg, pickedFile.path);
+  }
+
   bindLanguages(BuildContext context) async {
     language.clear();
     language.addAll([
@@ -284,4 +302,7 @@ class MineController extends BaseController {
   read(String key, String defaultValue) async {
     return await SharedPreferencesUnit().read(key, defaultValue);
   }
+
+
+
 }

@@ -48,7 +48,8 @@ http://lshymn.net/Info/?ID=4&Page=1
 新版本提醒 v
 新歌頌詠 v
 兒童詩歌 v
-SEO
+上傳大頭照 v
+APP ASO
 
 16. 降key 升key v2
 17. 分享樂譜 v2

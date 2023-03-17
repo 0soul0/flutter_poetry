@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poetry/presentation/views/mine/listPage.dart';
+import 'package:flutter_poetry/presentation/views/mine/list_page.dart';
 import 'package:get/get.dart';
 
 import 'mineController.dart';
