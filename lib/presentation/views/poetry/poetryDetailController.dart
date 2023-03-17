@@ -28,7 +28,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   PageController pageController = PageController(initialPage: 0);
   double screenWidth = ScreenUtil.defaultSize.width;
   double times = 4 / 5;
-  late AudioPlayer selectPlayer;
+  AudioPlayer selectPlayer=AudioPlayer();
   var lastSplitIndex = 0;
   final scrollController = ScrollController();
   final GlobalKey keyRefrain = GlobalKey();

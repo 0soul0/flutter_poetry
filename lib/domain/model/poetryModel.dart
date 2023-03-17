@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:floor/floor.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../presentation/views/item/utils/moduleUnit.dart';
 import '../../tool/is_check.dart';
@@ -65,23 +66,23 @@ class PoetryModel {
     List<SpectrumModel> list = [];
     if (singMedia.isNotEmpty) {
       list.add(SpectrumModel(
-          index: 0, name: "歌唱", media: singMedia, spectrum: "", nameV: "歌\n唱"));
+          index: 0, name: "sing".tr, media: singMedia, spectrum: "", nameV: "singV".tr));
     }
     if (guitarMedia.isNotEmpty || guitarSpectrum.isNotEmpty) {
       list.add(SpectrumModel(
           index: 1,
-          name: "吉他",
+          name: "guitar".tr,
           media: guitarMedia,
           spectrum: guitarSpectrum,
-          nameV: "吉\n他"));
+          nameV: "guitarV".tr));
     }
     if (getPianoMedia().isNotEmpty || pianoSpectrum.isNotEmpty) {
       list.add(SpectrumModel(
           index: 2,
-          name: "鋼琴",
+          name: "piano".tr,
           media: getPianoMedia(),
           spectrum: pianoSpectrum,
-          nameV: "鋼\n琴"));
+          nameV: "sheetV".tr));
     }
     return list;
   }

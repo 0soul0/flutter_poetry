@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
 import '../widget/float_fab_widget.dart';
+import '../widget/image_unit_widget.dart';
 import '../widget/text_unit_widget.dart';
 
 class PoetrySpectrum extends StatefulWidget {
@@ -44,7 +45,7 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
       children: [
         Row(
           children: [
-            SizedBox(width: 40, child: _spectrumTab()),
+            SizedBox(width: 45, child: _spectrumTab()),
             Expanded(child: _getSpectrum())
           ],
         ),
@@ -62,6 +63,7 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
 
   _spectrumTab() {
     return Obx(() => AlignedGridView.count(
+        padding: EdgeInsets.zero,
         scrollDirection: Axis.horizontal,
         crossAxisCount: 3,
         crossAxisSpacing: Dimens.itemSpace,
@@ -69,7 +71,6 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
         itemCount: controller.spectrum.length,
         itemBuilder: (context, index) {
           var item = controller.spectrum[index];
-
           return TouchUnitWidget(
             onTapDelay: () {
               controller.selectMusicPlayer(item.index);
@@ -112,9 +113,9 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
-                  child: SvgPicture.network(
+                  child: ImageUnitWidget(
                     controller.selectSpectrum.value.spectrum,
-                    width: ScreenUtil.defaultSize.height,
+                    ScreenUtil.defaultSize.height,
                   ),
                 ),
               ],

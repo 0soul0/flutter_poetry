@@ -43,7 +43,14 @@ class IntlMessages extends Translations {
           "quickUpdate":"快去更新",
           "version":"版本",
           "resVersion":"資源版本",
-          "hasNewVersion":"有新版本"
+          "hasNewVersion":"有新版本",
+          "sheet":"樂譜",
+          "sheetV":"樂\n譜",
+          "piano":"鋼琴",
+          "guitar":"吉他",
+          "guitarV":"吉\n他",
+          "sing":"歌唱",
+          "singV":"歌\n唱"
         },
         'en_US': {
           'english': 'english',
