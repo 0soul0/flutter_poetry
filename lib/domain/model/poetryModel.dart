@@ -3,6 +3,7 @@ import 'package:floor/floor.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../presentation/views/item/utils/moduleUnit.dart';
+import '../../tool/is_check.dart';
 
 @entity
 class PoetryModel {
@@ -108,8 +109,22 @@ class PoetryModel {
 
   PoetryModel.fromMap(Map<String, dynamic> map) {
     id = map["id"] ?? "";
-    number = map["number"] ?? 0;
-    type = map["type"] ?? 0;
+
+    if (map["number"] != null) {
+      var cNumber = map["number"];
+      if (!IsCheck.isInteger(map["number"])) {
+        cNumber = int.parse(map["number"]);
+      }
+      number = cNumber;
+    } else {
+      number = 0;
+    }
+
+    var cType = map["type"];
+    if (!IsCheck.isInteger(map["type"])) {
+      cType = int.parse(map["type"]);
+    }
+    type = cType;
     title = map["title"] ?? "";
     content = map["content"] ?? "";
     refrain = map["refrain"] ?? "";
@@ -135,6 +150,7 @@ class SpectrumModel {
       this.name = "",
       this.nameV = "",
       this.pic});
+
   late int index;
   late String spectrum;
   late String media;

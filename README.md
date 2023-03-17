@@ -22,12 +22,12 @@ https://www.churchinmontereypark.org/Docs/Hymn/HymnIndex.html
     2. 詩歌附
     3. 補充本
     
-12. 下載進度 v
-13. 一天檢查一次config檔 v
-14. 更新內容 v
-15. 換真廣告 v
-16. 開啟lunch page v
-17. logo v
+13. 下載進度 v
+14. 一天檢查一次config檔 v
+15. 更新內容 v
+16. 換真廣告 v
+17. 開啟lunch page v
+18. logo v
 
 Bug 改變字體 詩歌 v
 Bug 音樂切換 v
@@ -44,10 +44,10 @@ Bug 目錄 v
 分頁List v
 搜尋補充本 v
 搜尋頁面 v
-
+http://lshymn.net/Info/?ID=4&Page=1
 新版本提醒 v
-新歌頌詠
-兒童詩歌
+新歌頌詠 v
+兒童詩歌 v
 SEO
 
 16. 降key 升key v2

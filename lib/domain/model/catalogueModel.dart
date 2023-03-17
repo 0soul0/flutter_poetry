@@ -1,5 +1,7 @@
 import 'package:floor/floor.dart';
 
+import '../../tool/is_check.dart';
+
 @entity
 class CatalogueModel {
   CatalogueModel(
@@ -32,6 +34,11 @@ class CatalogueModel {
     id = map["id"];
     selectedStatus = map["selectedStatus"] ?? "0";
     category = map["category"] ?? "";
-    type = map["type"] ?? 0;
+
+    var cType = map["type"];
+    if (!IsCheck.isInteger(map["type"])) {
+      cType = int.parse(map["type"]);
+    }
+    type = cType;
   }
 }
