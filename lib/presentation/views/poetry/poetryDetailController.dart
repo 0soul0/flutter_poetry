@@ -246,7 +246,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
       }
     }
     if (str.isNotEmpty) strList+="$str\n";
-    return strList.replaceAll("－", "");
+    return strList.replaceAll("－", "").replaceAll("\n.", "。");
   }
 
   whichClearPivot(String str1, String str2) {
