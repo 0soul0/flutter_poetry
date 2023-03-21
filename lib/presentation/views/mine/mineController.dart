@@ -7,9 +7,11 @@ import 'package:flutter_poetry/data/setting_config.dart';
 import 'package:flutter_poetry/domain/dao/fileDao.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
+import 'package:flutter_poetry/tool/permission.dart';
 import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../domain/dao/poetryDao.dart';
@@ -105,8 +107,8 @@ class MineController extends BaseController {
 
   bindVersionItem() {
     version.clear();
-    var canUpdate = CacheData.statusVersion?.canUpdate??false;
-    var url = Uri.parse(CacheData.statusVersion?.appStoreLink??"");
+    var canUpdate = CacheData.statusVersion?.canUpdate ?? false;
+    var url = Uri.parse(CacheData.statusVersion?.appStoreLink ?? "");
     version.addAll({
       ItemModel(
           id: 0,
@@ -117,13 +119,13 @@ class MineController extends BaseController {
       ItemModel(
           id: 1,
           title: "localVersion".tr,
-          text:  canUpdate?"update".tr:"",
+          text: canUpdate ? "update".tr : "",
           value: CacheData.statusVersion?.localVersion ?? "1.0.0",
           iconGif: Platform.isAndroid
               ? "assets/icon_android.gif"
               : "assets/icon_apple.gif",
           onTapFunction: () async {
-            if(!canUpdate) return;
+            if (!canUpdate) return;
             if (await canLaunchUrl(url)) {
               await launchUrl(url);
             }
@@ -178,17 +180,23 @@ class MineController extends BaseController {
   }
 
   initImg() async {
-    String path =await read(constImg, "");
+    String path = await read(constImg, "");
     imgFilePath.value = path;
   }
 
   Future getImage() async {
-    final pickedFile =await ImagePicker().pickImage(source: ImageSource.gallery);
-    if(pickedFile==null){
+    var b = await PermissionUtils.requestPermission();
+    if (!b) return;
+
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile == null) {
       return;
     }
     imgFilePath.value = pickedFile.path;
-    storage(constImg, pickedFile.path);
+    final path = (await getApplicationDocumentsDirectory()).path;
+    await File(pickedFile.path).copy('$path/image.png');
+    storage(constImg, '$path/image.png');
   }
 
   bindLanguages(BuildContext context) async {
@@ -239,6 +247,7 @@ class MineController extends BaseController {
             id: int.parse(item.id),
             title: item.name.tr,
             value: item.dataUpdateDone.toString(),
+            text: item.dataVersion,
             onTapFunction: () {})
       });
     }
@@ -302,7 +311,4 @@ class MineController extends BaseController {
   read(String key, String defaultValue) async {
     return await SharedPreferencesUnit().read(key, defaultValue);
   }
-
-
-
 }

@@ -532,6 +532,13 @@ class _$PoetryDao extends PoetryDao {
   }
 
   @override
+  Future<void> deleteByType(int type) async {
+    await _queryAdapter.queryNoReturn(
+        'DELETE FROM PoetryModel WHERE type == ?1',
+        arguments: [type]);
+  }
+
+  @override
   Future<void> insertItem(PoetryModel item) async {
     await _poetryModelInsertionAdapter.insert(item, OnConflictStrategy.replace);
   }
@@ -597,6 +604,13 @@ class _$CatalogueDao extends CatalogueDao {
             category: row['category'] as String,
             selectedStatus: row['selectedStatus'] as String,
             type: row['type'] as int),
+        arguments: [type]);
+  }
+
+  @override
+  Future<void> deleteByType(int type) async {
+    await _queryAdapter.queryNoReturn(
+        'DELETE FROM CatalogueModel WHERE type == ?1',
         arguments: [type]);
   }
 
@@ -670,6 +684,11 @@ class _$SubCategoryDao extends SubCategoryDao {
             subcategory: row['subcategory'] as String,
             startVerseNumber: row['startVerseNumber'] as int,
             endVerseNumber: row['endVerseNumber'] as int));
+  }
+
+  @override
+  Future<void> deleteAll() async {
+    await _queryAdapter.queryNoReturn('DELETE FROM SubCategoryModel');
   }
 
   @override

@@ -13,6 +13,7 @@ class ListDownloadItem extends StatelessWidget {
       this.done = true,
       this.title = "",
       this.description = "",
+      this.text = "",
       Key? key})
       : super(key: key);
   final String title;
@@ -21,6 +22,7 @@ class ListDownloadItem extends StatelessWidget {
   final IconData? icon;
   final String iconGif;
   final bool done;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +78,17 @@ class ListDownloadItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: Styles.textStyleBlack,
                 ),
+                text.isNotEmpty
+                    ? TextUnitWidget(
+                        text,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Styles.helperStyle,
+                      )
+                    : const SizedBox(
+                        width: 0,
+                        height: 0,
+                      ),
               ],
             ),
             Expanded(child: Container()),

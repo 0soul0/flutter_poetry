@@ -58,10 +58,12 @@ class PoetryListFragment extends GetView<MineController> {
                 iconGif: item.iconGif,
                 title: item.title,
                 done: item.value == FileModel.keyUpdateDone.toString(),
+                text: "${item.text}.0.0",
                 description: item.value == FileModel.keyUpdateDone.toString()
                     ? "downloadDone".tr
                     : "downloadUnDone".tr);
           },
         ));
   }
+
 }

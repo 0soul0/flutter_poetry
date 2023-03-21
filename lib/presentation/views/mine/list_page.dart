@@ -44,9 +44,9 @@ class ListPage<T> extends StatelessWidget {
             },
             child: CircleAvatar(
               backgroundColor: AppColor.gray,
-              backgroundImage: FileImage(File(controller!.imgFilePath.value)),
+              backgroundImage: controller!.imgFilePath.value.isNotEmpty?FileImage(File(controller!.imgFilePath.value)):null,
               radius: ScreenUtil.defaultSize.width / 7,
-              child: controller!.imgFilePath.isNotEmpty
+              child: controller!.imgFilePath.value.isNotEmpty
                   ? Container()
                   : const Icon(
                       Icons.camera_alt_outlined,

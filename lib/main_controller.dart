@@ -151,18 +151,21 @@ class MainController extends BaseController {
         switch (newFile.dbType) {
           case PoetryDao.tableName:
             {
+              await _poetryDao.deleteByType(items[0]["type"]);
               await _poetryDao.insertItems(List.generate(
                   items.length, (index) => PoetryModel.fromMap(items[index])));
               break;
             }
           case CatalogueDao.tableName:
             {
+              await _categoryDao.deleteByType(items[0]["type"]);
               await _categoryDao.insertItems(List.generate(items.length,
                   (index) => CatalogueModel.fromMap(items[index])));
               break;
             }
           case SubCategoryDao.tableName:
             {
+              await _subCategoryDao.deleteAll();
               await _subCategoryDao.insertItems(List.generate(items.length,
                   (index) => SubCategoryModel.fromMap(items[index])));
               break;

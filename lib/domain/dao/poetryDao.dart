@@ -47,4 +47,8 @@ abstract class PoetryDao extends BaseDao<PoetryModel> {
   @Query("SELECT * FROM $tableName WHERE number == :str "
       "ORDER BY type ASC, number ASC ")
   Future<List<PoetryModel>> searchNumber(String str);
+
+  @Query("DELETE FROM $tableName WHERE type == :type")
+  Future<void> deleteByType(int type);
+
 }

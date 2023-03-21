@@ -8,4 +8,7 @@ abstract class SubCategoryDao extends BaseDao<SubCategoryModel> {
   static const tableName = "SubCategoryModel";
   @Query('SELECT * FROM $tableName')
   Future<List<SubCategoryModel>> queryAll();
+
+  @Query("DELETE FROM $tableName")
+  Future<void> deleteAll();
 }
