@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:permission_handler/permission_handler.dart';
 
 class PermissionUtils {
@@ -5,6 +7,7 @@ class PermissionUtils {
     Map<Permission, PermissionStatus> permission =
         await [Permission.photos, Permission.storage].request();
 
+    if (Platform.isAndroid) return true;
 
     if (!await Permission.photos.isGranted) {
       openAppSettings();

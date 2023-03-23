@@ -19,6 +19,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lifecycle/lifecycle.dart';
 import 'package:new_version_plus/new_version_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:version/version.dart';
 
 import 'firebase_options.dart';
 import 'presentation/views/mine/mineFragment.dart';
@@ -30,6 +31,7 @@ late MainController controller;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  version();
   init();
   //啟動launch page
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +47,10 @@ init() async {
   await _initGoogleMobileAds();
 }
 
-
+void version() {
+  // final Version currentVersion = Version(1, 0, 0);
+  // final Version latestVersion = Version.parse("1.2.0");
+}
 
 Future<InitializationStatus> _initGoogleMobileAds() {
   return MobileAds.instance.initialize();
@@ -164,7 +169,7 @@ class BottomNavigationControllerState
     extends State<BottomNavigationController> {
   //目前選擇頁索引值
   int _currentIndex = 1; //預設值
-  final pages = [RecordFragment(), SearchFragment(), MineFragment()];
+  final pages = [RecordFragment(), const SearchFragment(), MineFragment()];
 
 
   @override
