@@ -6,7 +6,6 @@ import 'package:flutter_poetry/presentation/views/mine/setting/poetry_list_fragm
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetail.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
 import 'package:flutter_poetry/presentation/views/search/search_controller.dart';
-import 'package:flutter_poetry/presentation/views/search/search_fragment.dart';
 import 'package:get/get.dart';
 
 import '../presentation/views/mine/setting/version_fragment.dart';

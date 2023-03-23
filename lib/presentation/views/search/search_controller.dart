@@ -9,14 +9,11 @@ import 'package:flutter_poetry/domain/fxDataBaseManager.dart';
 import 'package:flutter_poetry/domain/model/catalogueModel.dart';
 import 'package:flutter_poetry/domain/model/event/msgEvent.dart';
 import 'package:flutter_poetry/domain/model/recordModel.dart';
-import 'package:flutter_poetry/tool/extension.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../domain/dao/catalogueDao.dart';
 import '../../../domain/dao/recordDao.dart';
-import '../../../domain/model/fileModel.dart';
 import '../../../domain/model/poetryModel.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/singleton.dart';

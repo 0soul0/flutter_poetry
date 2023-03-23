@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/presentation/views/widget/touch_unit_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';

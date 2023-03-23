@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_poetry/domain/model/fileModel.dart';
 import 'package:flutter_poetry/presentation/views/search/search_controller.dart';
 import 'package:flutter_poetry/resource/colors.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:new_version_plus/new_version_plus.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../domain/dao/poetryDao.dart';
 import '../../../domain/fxDataBaseManager.dart';
-import '../../../main_controller.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
 import '../../../routes/app_routes.dart';

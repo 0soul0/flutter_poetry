@@ -8,7 +8,6 @@ import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../../domain/model/itemModel.dart';
 import '../../../resource/dimens.dart';

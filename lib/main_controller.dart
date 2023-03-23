@@ -11,15 +11,11 @@ import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/widget/small_button_widget.dart';
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
-import 'package:flutter_poetry/presentation/views/widget/touch_unit_widget.dart';
-import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_poetry/routes/singleton.dart';
 import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 
 import 'data/network/api.dart';
 import 'data/route_api.dart';

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/main_controller.dart';
-import 'package:flutter_poetry/resource/colors.dart';
-import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../domain/model/poetryModel.dart';
 import '../../../resource/dimens.dart';
-import '../../../resource/style.dart';
 import '../item/utils/moduleUnit.dart';
-import '../widget/text_unit_widget.dart';
 import 'search_controller.dart';
 
 class ListPage extends StatelessWidget {

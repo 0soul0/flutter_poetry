@@ -8,9 +8,9 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/data/cache_data.dart';
 import 'package:flutter_poetry/main_controller.dart';
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
-import 'package:flutter_poetry/resource/intl_messages.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
+import 'package:flutter_poetry/resource/intl_messages.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +19,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lifecycle/lifecycle.dart';
 import 'package:new_version_plus/new_version_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:version/version.dart';
 
 import 'firebase_options.dart';
 import 'presentation/views/mine/mineFragment.dart';
