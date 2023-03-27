@@ -49,7 +49,18 @@ http://lshymn.net/Info/?ID=4&Page=1
 新歌頌詠 v
 兒童詩歌 v
 上傳大頭照 v
-APP ASO
+APP ASO v
+
+樂譜直的 自行橫的
+換譜
+英文詩歌
+Page 加粗 加大
+監控app 流量
+英文版
+iPad
+
+資源版本變整個資源更新
+
 
 16. 降key 升key v2
 17. 分享樂譜 v2

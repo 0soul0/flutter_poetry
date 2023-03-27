@@ -1,5 +1,7 @@
 class RouteApi {
   static String baseUrl =
       "https://raw.githubusercontent.com/0soul0/JsonData/main/";
-  static const systemInfo = "systemInfo.json";
+  static const publish = "systemInfo.json";
+  static const test = "systemInfo_test.json";
+  static const systemInfo = test;
 }

@@ -32,8 +32,8 @@ class _SearchFragment extends State<SearchFragment>
     controller = Get.put(SearchController());
     pageController = PageController(initialPage: 1);
     super.initState();
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: [
@@ -43,7 +43,7 @@ class _SearchFragment extends State<SearchFragment>
           thickness: Dimens.moduleDividing,
           color: AppColor.dividerColor),
       Container(
-        height: 24*TextUnitWidget.textSizeTimes,
+        height: 24 * TextUnitWidget.textSizeTimes,
         decoration: const BoxDecoration(color: AppColor.dividerColor),
         child: _search(context),
       ),
@@ -78,6 +78,10 @@ class _SearchFragment extends State<SearchFragment>
                     indicatorSize: TabBarIndicatorSize.label,
                     labelColor: AppColor.mainColor,
                     indicatorColor: AppColor.mainColor,
+                    labelStyle: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: Dimens.textSize16,
+                    ),
                     indicatorPadding: const EdgeInsets.all(10),
                     tabs: types.map((item) {
                       return Tab(
@@ -134,7 +138,8 @@ class _SearchFragment extends State<SearchFragment>
 
   _search(BuildContext context) {
     final mqData = MediaQuery.of(context);
-    final mqDataNew = mqData.copyWith(textScaleFactor:TextUnitWidget.textSizeTimes );
+    final mqDataNew =
+        mqData.copyWith(textScaleFactor: TextUnitWidget.textSizeTimes);
     // return MediaQuery(data: mqDataNew, child: TextField());
     return Stack(
       children: [
@@ -171,7 +176,8 @@ class _SearchFragment extends State<SearchFragment>
                         bottomLeft: Radius.circular(Dimens.moduleRadius),
                         bottomRight: Radius.circular(Dimens.moduleRadius))),
                 focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: AppColor.secondColor),
+                    borderSide:
+                        BorderSide(width: 1, color: AppColor.secondColor),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(Dimens.moduleRadius),
                         bottomRight: Radius.circular(Dimens.moduleRadius))),
@@ -182,5 +188,4 @@ class _SearchFragment extends State<SearchFragment>
       ],
     );
   }
-
 }

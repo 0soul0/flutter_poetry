@@ -16,6 +16,7 @@ class Dimens {
   static const double titleSize = 22;
   static const double subTitleSize = 20;
   static const double textSize = 18;
+  static const double textSize16 = 16;
   static const double toolbarHeight = 48;
   static const double helperSize = 14;
   static const double homeSize = 12;
