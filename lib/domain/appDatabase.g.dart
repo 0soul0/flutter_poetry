@@ -785,17 +785,17 @@ class _$RecordDao extends RecordDao {
   Future<List<RecordModel>> queryPage(
     int page,
     int count,
-    String orderBy,
   ) async {
     return _queryAdapter.queryList(
-        'SELECT * FROM RecordModel ORDER BY ?3 LIMIT ?1,?2',
+        'SELECT * FROM RecordModel ORDER BY createTime DESC LIMIT ?1,?2',
         mapper: (Map<String, Object?> row) => RecordModel(
             row['sourceId'] as String,
             id: row['id'] as String,
             title: row['title'] as String,
             number: row['number'] as int,
-            description: row['description'] as String),
-        arguments: [page, count, orderBy]);
+            description: row['description'] as String,
+            createTime: row['createTime'] as String),
+        arguments: [page, count]);
   }
 
   @override
@@ -806,7 +806,8 @@ class _$RecordDao extends RecordDao {
             id: row['id'] as String,
             title: row['title'] as String,
             number: row['number'] as int,
-            description: row['description'] as String),
+            description: row['description'] as String,
+            createTime: row['createTime'] as String),
         arguments: [sourceId]);
   }
 

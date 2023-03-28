@@ -7,15 +7,12 @@ class RecordModel extends PoetryModel {
       {String id = "",
       String title = "",
       int number = -1,
-      String description = ""})
+      String description = "",
+      this.createTime = ""})
       : super(id: id, number: number, title: title, description: description);
 
   late String sourceId; //foreign key Poetry
-  String createTime = DateTime.now().toString();
-
-  updateCreateTime() {
-    createTime = DateTime.now().toString();
-  }
+  late String createTime;
 
   Map<String, dynamic> toMap() {
     return {

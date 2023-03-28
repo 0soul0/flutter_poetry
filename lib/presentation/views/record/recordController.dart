@@ -48,7 +48,7 @@ class RecordController extends BaseController {
   /// query data by page
   loadData({int page = 0, int count = 20}) async {
     page = page * count;
-    var items = await _recordDao.queryPage(page, count, "createTime DESC");
+    var items = await _recordDao.queryPage(page, count);
 
     if (page == 0) {
       recordItems.value = items;
@@ -71,7 +71,7 @@ class RecordController extends BaseController {
 
   /// insert data to recordDb
   insertRecordDb(RecordModel item) async {
-    item.updateCreateTime();
+    item.createTime = DateTime.now().toString();
     await _recordDao.updateItem(item);
     Singleton.getEventBusInstance().fire(RecordModel(""));
   }

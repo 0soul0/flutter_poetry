@@ -22,7 +22,6 @@ import '../item/utils/moduleUnit.dart';
 
 ///  search controller
 class SearchController extends BaseController {
-
   static const searchCatalogueKey = "c";
   static const split = "://";
 
@@ -31,7 +30,7 @@ class SearchController extends BaseController {
   late CatalogueDao _catalogueDao;
   late RecordDao _recordDao;
   late final TextEditingController textController = TextEditingController();
-  String searchVal="";
+  String searchVal = "";
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
   RxList<PoetryModel> poetrySearchItems = List<PoetryModel>.from([]).obs;
   RxMap poetryItemsMap = {}.obs;
@@ -74,7 +73,7 @@ class SearchController extends BaseController {
   }
 
   queryAllById(String id,
-      {int page = 0, int count = SettingParameters.pageCount}) async{
+      {int page = 0, int count = SettingParameters.pageCount}) async {
     page = page * count;
 
     List<PoetryModel> items = [];
@@ -97,7 +96,7 @@ class SearchController extends BaseController {
     if (items.isNotEmpty) {
       data.addAll(items);
     }
-    poetryItemsMap[id]=data;
+    poetryItemsMap[id] = data;
   }
 
   @override
@@ -145,7 +144,7 @@ class SearchController extends BaseController {
   search(String search,
       {int? id, int page = 0, int count = SettingParameters.pageCount}) async {
     page = page * count;
-    searchVal=search;
+    searchVal = search;
     List<PoetryModel> items = [];
     //過濾數字搜尋到段落
 
@@ -288,7 +287,7 @@ class SearchController extends BaseController {
   void runMyIsolate(PoetryModel item) async {
     var data = await _recordDao.queryBySourceId(item.id);
     if (data != null) {
-      data.updateCreateTime();
+      data.createTime = DateTime.now().toString();
       await _recordDao.updateItem(data);
       return;
     }
@@ -297,6 +296,7 @@ class SearchController extends BaseController {
         id: const Uuid().v4(),
         title: item.title,
         number: item.number,
-        description: item.description));
+        description: item.description,
+        createTime: DateTime.now().toString()));
   }
 }
