@@ -280,8 +280,9 @@ class SearchController extends BaseController {
   ///
   /// @param item poetryModel of data
   onTapPoetry(PoetryModel item) {
-    runMyIsolate(item);
     Get.toNamed(AppRoutes.poetryDetail, arguments: item);
+    runMyIsolate(item);
+
   }
 
   void runMyIsolate(PoetryModel item) async {
