@@ -14,13 +14,14 @@ import 'list_page.dart';
 
 class SearchAllFragment extends GetView<SearchController> {
   SearchAllFragment({Key? key}) : super(key: key);
-  bool b =true;
+  bool b = true;
+
   @override
   Widget build(BuildContext context) {
-    if(b){
-      b=false;
+    if (b) {
+      b = false;
       Future.delayed(Duration.zero,
-              () => FocusScope.of(context).requestFocus(controller.commentFocus));
+          () => FocusScope.of(context).requestFocus(controller.commentFocus));
     }
 
     return Scaffold(
@@ -31,7 +32,8 @@ class SearchAllFragment extends GetView<SearchController> {
             children: [
               const BannerWidget(),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Dimens.itemSpace*2),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: Dimens.itemSpace * 2),
                 child: Row(
                   children: [
                     TextUnitWidget(
@@ -40,12 +42,18 @@ class SearchAllFragment extends GetView<SearchController> {
                     ),
                     Expanded(child: Container()),
                     TouchUnitWidget(
-                      onTapDelay: (){
-                          Get.toNamed(AppRoutes.catalogueFull);
+                      onTapDelay: () {
+                        Get.toNamed(AppRoutes.catalogueFull);
                       },
-                      child: TextUnitWidget('catalogue'.tr,style: Styles.subTitleStyleBlack,),
+                      child: TextUnitWidget(
+                        'catalogue'.tr,
+                        style: Styles.subTitleStyleBlack,
+                      ),
                     ),
-                    const Icon(Icons.arrow_forward_ios_rounded,size: Dimens.iconSize-4,)
+                    const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: Dimens.iconSize - 4,
+                    )
                   ],
                 ),
               ),
@@ -67,7 +75,7 @@ class SearchAllFragment extends GetView<SearchController> {
                   thickness: Dimens.moduleDividing,
                   color: AppColor.dividerColor),
               Container(
-                height: 24*TextUnitWidget.textSizeTimes,
+                height: 32 * TextUnitWidget.textSizeTimes,
                 decoration: const BoxDecoration(color: AppColor.dividerColor),
                 child: _search(context),
               ),
@@ -77,7 +85,9 @@ class SearchAllFragment extends GetView<SearchController> {
                   color: AppColor.dividerColor),
             ],
           ),
-          const BackIconButton( opacity: 0.6,)
+          const BackIconButton(
+            opacity: 0.6,
+          )
         ],
       ),
     );
@@ -86,7 +96,8 @@ class SearchAllFragment extends GetView<SearchController> {
   /// search data
   _search(BuildContext context) {
     final mqData = MediaQuery.of(context);
-    final mqDataNew = mqData.copyWith(textScaleFactor:TextUnitWidget.textSizeTimes );
+    final mqDataNew =
+        mqData.copyWith(textScaleFactor: TextUnitWidget.textSizeTimes);
     return Stack(
       children: [
         TextUnitWidget(
@@ -123,7 +134,8 @@ class SearchAllFragment extends GetView<SearchController> {
                         bottomLeft: Radius.circular(Dimens.moduleRadius),
                         bottomRight: Radius.circular(Dimens.moduleRadius))),
                 focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: AppColor.secondColor),
+                    borderSide:
+                        BorderSide(width: 1, color: AppColor.secondColor),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(Dimens.moduleRadius),
                         bottomRight: Radius.circular(Dimens.moduleRadius))),

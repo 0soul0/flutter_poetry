@@ -43,7 +43,7 @@ class _SearchFragment extends State<SearchFragment>
           thickness: Dimens.moduleDividing,
           color: AppColor.dividerColor),
       Container(
-        height: 24 * TextUnitWidget.textSizeTimes,
+        height: 32 * TextUnitWidget.textSizeTimes,
         decoration: const BoxDecoration(color: AppColor.dividerColor),
         child: _search(context),
       ),
