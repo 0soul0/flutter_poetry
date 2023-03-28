@@ -10,6 +10,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
+import '../../../tool/is_check.dart';
 import '../widget/float_fab_widget.dart';
 import '../widget/image_unit_widget.dart';
 import '../widget/text_unit_widget.dart';
@@ -32,32 +33,72 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
     // 建立 TabController，vsync 接受的型態是 TickerProvider
     tabController = TabController(length: 3, vsync: this);
     controller = Get.find<PoetryDetailController>();
-    controller.setHorizontalScreen();
+    // controller.setHorizontalScreen();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     controller.selectMusicPlayer(controller.spectrum[0].index);
-    return Scaffold(
-        body: Stack(
-      children: [
-        Row(
-          children: [
-            SizedBox(width: 45, child: _spectrumTab()),
-            Expanded(child: _getSpectrum())
-          ],
-        ),
-        const BackIconButton(direction: directionHorizontal),
-        // _play(),
-      ],
-    ));
+    return IsCheck.isHorizontalScreen(context)
+        ? Scaffold(
+            body: Stack(
+            children: [
+              Row(
+                children: [
+                  SizedBox(width: 45, child: _spectrumTab()),
+                  Expanded(child: _getSpectrum())
+                ],
+              ),
+              const BackIconButton(direction: directionHorizontal),
+              // _play(),
+            ],
+          ))
+        : Scaffold(
+            body: Stack(
+              children: [
+                Expanded(child: _getSpectrum()),
+                const BackIconButton(),
+              ],
+            ),
+            bottomNavigationBar: Container(
+              height: Dimens.iconSize + Dimens.itemSpace,
+              padding: const EdgeInsets.symmetric(horizontal: Dimens.space),
+              margin: const EdgeInsets.only(bottom: Dimens.itemSpace),
+              child: _bottom(),
+            ),
+          );
   }
 
   @override
   void dispose() {
     super.dispose();
-    controller.setVerticalScreen();
+    // controller.setVerticalScreen();
+  }
+
+  _bottom() {
+    return Obx(() => DefaultTabController(
+        length: controller.spectrum.length,
+        child: TabBar(
+          onTap: (index) {
+            var item = controller.spectrum[index];
+            controller.selectMusicPlayer(item.index);
+            controller.spectrum.refresh();
+          },
+          unselectedLabelColor: AppColor.helperColor,
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicator: BoxDecoration(
+            color: AppColor.secondColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          tabs: controller.spectrum.map((item) {
+            return Tab(
+              child: TextUnitWidget(
+                item.name.tr,
+              ),
+            );
+          }).toList(),
+        )));
   }
 
   _spectrumTab() {
