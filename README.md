@@ -72,3 +72,7 @@ firebase ay 監控app 流量
 
 20. 下載media
 21. 詩歌背景下載？ 
+
+
+// 上架 切正式url
+//  DB 更新問題

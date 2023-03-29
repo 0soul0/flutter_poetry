@@ -10,6 +10,10 @@ abstract class PoetryDao extends BaseDao<PoetryModel> {
   @Query("SELECT * FROM $tableName")
   Future<List<PoetryModel>> queryAll();
 
+  @Query("SELECT * FROM $tableName WHERE url LIKE :url")
+  Future<List<PoetryModel>> queryByUrl(String url);
+
+
   @Query("SELECT * FROM $tableName WHERE id = :id")
   Future<PoetryModel?> query(String id);
 

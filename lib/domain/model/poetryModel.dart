@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:floor/floor.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,24 +10,26 @@ import '../../tool/is_check.dart';
 
 @entity
 class PoetryModel {
-  PoetryModel(
-      {this.id = "",
-      this.number = -1,
-      this.type = 0,
-      this.title = "",
-      this.content = "",
-      this.refrain = "",
-      this.author = "",
-      this.category = "",
-      this.subCategory = "",
-      this.url = "",
-      this.pianoSpectrum = "",
-      this.guitarSpectrum = "",
-      this.pianoMedia = "",
-      this.pianoMedia2 = "",
-      this.singMedia = "",
-      this.guitarMedia = "",
-      this.description = ""});
+  PoetryModel({
+    this.id = "",
+    this.number = -1,
+    this.type = 0,
+    this.title = "",
+    this.content = "",
+    this.refrain = "",
+    this.author = "",
+    this.category = "",
+    this.subCategory = "",
+    this.url = "",
+    this.pianoSpectrum = "",
+    this.guitarSpectrum = "",
+    this.pianoMedia = "",
+    this.pianoMedia2 = "",
+    this.singMedia = "",
+    this.guitarMedia = "",
+    this.description = "",
+    this.languageUrl =""
+  });
 
   @primaryKey
   late String id;
@@ -44,6 +48,7 @@ class PoetryModel {
   late String pianoMedia2;
   late String singMedia;
   late String guitarMedia;
+  late String languageUrl;
 
   /// locate used
   String description = ""; //搜尋結果的歌詞描述
@@ -66,7 +71,11 @@ class PoetryModel {
     List<SpectrumModel> list = [];
     if (singMedia.isNotEmpty) {
       list.add(SpectrumModel(
-          index: 0, name: "sing".tr, media: singMedia, spectrum: "", nameV: "singV".tr));
+          index: 0,
+          name: "sing".tr,
+          media: singMedia,
+          spectrum: "",
+          nameV: "singV".tr));
     }
     if (guitarMedia.isNotEmpty || guitarSpectrum.isNotEmpty) {
       list.add(SpectrumModel(
@@ -105,6 +114,7 @@ class PoetryModel {
       'pianoMedia2': pianoMedia2,
       'singMedia': singMedia,
       'description': description,
+      'languageUrl': languageUrl,
     };
   }
 
@@ -140,6 +150,11 @@ class PoetryModel {
     singMedia = map["singMedia"] ?? "";
     guitarMedia = map["guitarMedia"] ?? "";
     description = map["description"] ?? "";
+    // List<LanguageUrlModel> list=[];
+    // for(var item in map["languageUrl"]){
+    //   list.add(LanguageUrlModel(language: item[0],url:item[1]));
+    // }
+    languageUrl = json.encode(map["languageUrl"]);
   }
 }
 
@@ -160,4 +175,15 @@ class SpectrumModel {
   AudioPlayer play = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
 
   SvgPicture? pic; //垂直顯示
+}
+
+class LanguageUrlModel {
+  LanguageUrlModel(
+    this.item,{
+    this.language = "",
+  });
+
+  late String language;
+  PoetryModel item;
+
 }

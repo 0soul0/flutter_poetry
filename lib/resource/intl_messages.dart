@@ -6,6 +6,7 @@ class IntlMessages extends Translations {
   Map<String, Map<String, String>> get keys => {
         'zh_CN': {
           'english': '英文',
+          'chinese':'中文',
           "helloWorld": "你好",
           "banner": "廣告",
           "record": "紀錄",
@@ -50,7 +51,7 @@ class IntlMessages extends Translations {
           "guitar":"吉他",
           "guitarV":"吉\n他",
           "sing":"歌唱",
-          "singV":"歌\n唱"
+          "singV":"歌\n唱",
         },
         'en_US': {
           'english': 'English',

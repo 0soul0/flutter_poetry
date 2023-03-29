@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,18 +7,24 @@ import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../domain/dao/poetryDao.dart';
+import '../../../domain/fxDataBaseManager.dart';
 import '../../../domain/model/poetryModel.dart';
 import '../../../resource/dimens.dart';
 import '../widget/text_unit_widget.dart';
 
 /// A class represent controller of poetry
 class PoetryDetailController extends BaseController<PoetryModel> {
+  late PoetryDao _poetryDao;
+
   RxList<String> items = List<String>.from([]).obs;
-  Rx<String> strItems ="".obs;
+  Rx<String> strItems = "".obs;
   Rx<String> refrain = "".obs;
+  Rx<String> title = "".obs;
   RxList<SpectrumModel> spectrumAndMedia = List<SpectrumModel>.from([]).obs;
   RxList<SpectrumModel> media = List<SpectrumModel>.from([]).obs;
   RxList<SpectrumModel> spectrum = List<SpectrumModel>.from([]).obs;
+  RxList<LanguageUrlModel> languageUrl = List<LanguageUrlModel>.from([]).obs;
   Rx<SpectrumModel> selectSpectrum = SpectrumModel().obs;
   Rx<Duration> duration = const Duration(seconds: 0).obs;
   RxBool loadFinish = false.obs;
@@ -27,7 +35,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   PageController pageController = PageController(initialPage: 0);
   double screenWidth = ScreenUtil.defaultSize.width;
   double times = 4 / 5;
-  AudioPlayer selectPlayer=AudioPlayer();
+  AudioPlayer selectPlayer = AudioPlayer();
   var lastSplitIndex = 0;
   final scrollController = ScrollController();
   final GlobalKey keyRefrain = GlobalKey();
@@ -35,14 +43,10 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   int fake = 0;
 
   @override
-  onInit() {
+  onInit() async {
     super.onInit();
-    setPoetryItemToList(arguments);
-    setRefrain(arguments);
-    initMusicPlayer();
-    if (media.isNotEmpty) {
-      selectMusicPlayer(media[0].index);
-    }
+    await init();
+    initState();
   }
 
   @override
@@ -59,6 +63,26 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     }
 
     setVerticalScreen();
+  }
+
+  @override
+  refresh() {
+    initState();
+  }
+
+  initState() {
+    title.value =arguments.getTitle();
+    setPoetryItemToList(arguments);
+    setRefrain(arguments);
+    setHrefToOtherLanguageHymns(arguments);
+    initMusicPlayer();
+    if (media.isNotEmpty) {
+      selectMusicPlayer(media[0].index);
+    }
+  }
+
+  init() async {
+    _poetryDao = await FxDataBaseManager.poetryDao();
   }
 
   /// toggle play status
@@ -98,12 +122,14 @@ class PoetryDetailController extends BaseController<PoetryModel> {
             .setSourceUrl(spectrumAndMedia[sIndex].media);
       }
       selectPlayer = spectrumAndMedia[sIndex].play;
-      position.value=(await selectPlayer.getCurrentPosition())??const Duration(seconds: 0);
-      duration.value=(await selectPlayer.getDuration())??const Duration(seconds: 0);
+      position.value = (await selectPlayer.getCurrentPosition()) ??
+          const Duration(seconds: 0);
+      duration.value =
+          (await selectPlayer.getDuration()) ?? const Duration(seconds: 0);
       selectPlayer.onPositionChanged.listen((d) => position.value = d);
-      selectPlayer.onDurationChanged.listen((d){
-        if(!loadFinish.value){
-          loadFinish.value=true;
+      selectPlayer.onDurationChanged.listen((d) {
+        if (!loadFinish.value) {
+          loadFinish.value = true;
         }
         duration.value = d;
       });
@@ -177,7 +203,6 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     strItems.value = splitContent(item.content);
   }
 
-
   // /// split content of poetry to list
   // ///
   // /// @param content data of poetry
@@ -215,21 +240,21 @@ class PoetryDetailController extends BaseController<PoetryModel> {
 
   String splitContent(String content) {
     String strList = "";
-    var contents = content.trim();
+    var contents = content;
     var str = "";
 
     for (int i = 0; i < contents.length; i++) {
       if (isNumeric(contents[i])) {
         if (str.isNotEmpty) {
           var arr = whichClearPivot(str, str.substring(lastSplitIndex));
-          if(arr[0]!="") {
-            strList+="${arr[0]}";
+          if (arr[0] != "") {
+            strList += "${arr[0]}";
           }
-          strList+="${arr[1]}\n";
+          strList += "${arr[1]}\n";
           str = "";
           lastSplitIndex = 0;
         }
-        strList+="${contents[i]}\n";
+        strList += "${contents[i]}\n";
         continue;
       }
 
@@ -238,23 +263,23 @@ class PoetryDetailController extends BaseController<PoetryModel> {
       if (isSymbols(contents[i])) {
         if (isMoreLong(str)) {
           var data = whichClearPivot(str, str.substring(0, lastSplitIndex));
-          strList+="${data[1]}\n";
+          strList += "${data[1]}\n";
           str = data[0];
         }
         lastSplitIndex = str.length;
       }
     }
-    if (str.isNotEmpty) strList+="$str\n";
-    return strList.replaceAll("－", "").replaceAll("\n.", "。");
+    if (str.isNotEmpty) strList += "$str\n";
+    return strList.replaceAll("－", "").replaceAll("\n.", ".");
   }
 
   whichClearPivot(String str1, String str2) {
     double len = str1.length * Dimens.textSize * TextUnitWidget.textSizeTimes;
-    if (str2==""&&len>(screenWidth)){
-      double dd =(1/(len/(screenWidth * times)));
-      int d=(str1.length*dd).round();
-      str2=str1.substring(0, d);
-      lastSplitIndex=d;
+    if (str2 == "" && len > (screenWidth)) {
+      double dd = (1 / (len / (screenWidth * times)));
+      int d = (str1.length * dd).round();
+      str2 = str1.substring(0, d);
+      lastSplitIndex = d;
     }
     double textWidth1 = (len - screenWidth * times).abs();
     double textWidth2 =
@@ -268,8 +293,13 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   }
 
   isMoreLong(String str) {
+    var time = 1;
+    if (RegExp("[a-zA-Z]+").hasMatch(str)) {
+      time = 2;
+    }
+
     double textWidth =
-        str.length * Dimens.textSize * TextUnitWidget.textSizeTimes;
+        str.length * Dimens.textSize * TextUnitWidget.textSizeTimes / time;
     return textWidth > screenWidth * times;
   }
 
@@ -287,7 +317,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   /// @param str String
   /// @return Is symbols
   isSymbols(String str) {
-    final symbolsRegex = RegExp(r'^[,.，─：；;、。:？『』！]+$');
+    final symbolsRegex = RegExp(r'^[,.，─：；;、。:？『』！“]+$');
     return symbolsRegex.hasMatch(str);
   }
 
@@ -303,5 +333,26 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  }
+
+  /// set href to other language hymns
+  setHrefToOtherLanguageHymns(PoetryModel item) async {
+    List<LanguageUrlModel> list = [];
+    var maps = [];
+    try {
+      maps = json.decode(json.decode(item.languageUrl));
+    } catch (error) {
+      maps = json.decode(item.languageUrl);
+    }
+    for (var i = 0; i < maps.length; i++) {
+      Map<String, dynamic> map = maps[i];
+      for (var key in map.keys) {
+        var poetryItem = await _poetryDao.queryByUrl("%${map[key]}");
+        if (poetryItem.isNotEmpty) {
+          list.add(LanguageUrlModel(poetryItem[0], language: key));
+        }
+      }
+    }
+    languageUrl.value = list;
   }
 }

@@ -30,14 +30,22 @@ class PoetryDetail extends GetView<PoetryDetailController> {
         title: Center(
           child: Column(
             children: [
-              SelectTableWidget(controller.arguments.getTitle(),
-                  style: Styles.subTextStyleBlack, maxLines: 1
-                  // overflow: TextOverflow.ellipsis,
-                  ),
-              _spectrum(() {
-                controller.selectPlayer.pause();
-                Get.toNamed(AppRoutes.poetrySpectrum);
-              }, Icons.queue_music_outlined, 'sheetMusic'.tr)
+               title(),
+              Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _spectrum(() {
+                      controller.selectPlayer.pause();
+                      Get.toNamed(AppRoutes.poetrySpectrum);
+                    }, Icons.queue_music_outlined, 'sheetMusic'.tr),
+                    const SizedBox(
+                      width: Dimens.itemSpace,
+                    ),
+                    _languageUrl()
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -72,28 +80,38 @@ class PoetryDetail extends GetView<PoetryDetailController> {
     );
   }
 
-  _language() {
-    return Obx(() => AlignedGridView.count(
-          controller: controller.scrollController,
-          scrollDirection: Axis.horizontal,
-          crossAxisCount: 1,
-          crossAxisSpacing: Dimens.itemSpace,
-          mainAxisSpacing: Dimens.itemSpace,
-          itemCount: 100,
-          itemBuilder: (context, index) {
-            //
-            // return _buttonItem();
-          },
-        ));
+  _languageUrl() {
+    return Obx(() => controller.languageUrl.isNotEmpty
+        ? _buttonItem(() {
+            controller.arguments = controller.languageUrl[0].item;
+            controller.refresh();
+
+          }, Icons.language, controller.languageUrl[0].language.tr)
+        : const SizedBox(
+            width: 0,
+            height: 0,
+          ));
+    // return Obx(() => AlignedGridView.count(
+    //       controller: controller.scrollController,
+    //       scrollDirection: Axis.horizontal,
+    //       crossAxisCount: 1,
+    //       crossAxisSpacing: Dimens.itemSpace,
+    //       mainAxisSpacing: Dimens.itemSpace,
+    //       itemCount: controller.languageUrl.length,
+    //       itemBuilder: (context, index) {
+    //         var item = controller.languageUrl[index];
+    //         return _buttonItem(() {}, Icons.language, item.language);
+    //       },
+    //     ));
   }
 
   _spectrum(Function onTap, IconData iconData, String text) {
-    return controller.spectrum.isNotEmpty
-        ? _buttonItem(onTap,iconData,text)
-        : Container();
+    return Obx(() => controller.spectrum.isNotEmpty
+        ? _buttonItem(onTap, iconData, text)
+        : Container());
   }
 
-  _buttonItem(Function onTap, IconData iconData, String text){
+  _buttonItem(Function onTap, IconData iconData, String text) {
     return Column(
       children: [
         TouchUnitWidget(
@@ -101,8 +119,8 @@ class PoetryDetail extends GetView<PoetryDetailController> {
               onTap();
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Dimens.itemSpace / 4),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: Dimens.itemSpace / 4),
               decoration: BoxDecoration(
                 border: Border.all(color: AppColor.secondColor),
                 borderRadius: BorderRadius.circular(Dimens.itemSpace),
@@ -125,7 +143,6 @@ class PoetryDetail extends GetView<PoetryDetailController> {
       ],
     );
   }
-
 
   _bottom() {
     return Obx(() => controller.media.isNotEmpty
@@ -311,5 +328,12 @@ class PoetryDetail extends GetView<PoetryDetailController> {
             ],
           ),
         ));
+  }
+
+  title() {
+    return Obx(() => SelectTableWidget(controller.title.value,
+        style: Styles.subTextStyleBlack, maxLines: 1
+      // overflow: TextOverflow.ellipsis,
+    ));
   }
 }
