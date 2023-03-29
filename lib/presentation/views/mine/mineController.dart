@@ -58,8 +58,6 @@ class MineController extends BaseController {
     Singleton.getEventBusInstance().on<ItemModel>().listen((event) {
       items.replaceRange(event.id, event.id + 1, [event]);
     });
-    SettingParameters.languageIndex =
-        int.parse(await read(MineController.constLanguageSelected, "0"));
     bindMineItem();
   }
 
@@ -81,7 +79,7 @@ class MineController extends BaseController {
       ItemModel(
           id: 2,
           title: "language".tr,
-          value: SettingParameters.selectLanguage[SettingParameters.languageIndex],
+          value: SettingParameters.selectLanguage[CacheData.languageIndex],
           onTapFunction: () {
             Get.to(() => const LanguageFragment());
           }),
@@ -206,14 +204,14 @@ class MineController extends BaseController {
       ItemModel(
           id: 0,
           title: "中文",
-          selected: SettingParameters.languageIndex == 0,
+          selected: CacheData.languageIndex == 0,
           onTapFunction: () {
 
             var locale = const Locale('zh', 'CN');
             Get.updateLocale(locale);
-            SettingParameters.languageIndex = 0;
-            items[1].value = SettingParameters.selectLanguage[SettingParameters.languageIndex];
-            storage(MineController.constLanguageSelected, SettingParameters.languageIndex);
+            CacheData.languageIndex = 0;
+            items[1].value = SettingParameters.selectLanguage[CacheData.languageIndex];
+            storage(MineController.constLanguageSelected, CacheData.languageIndex);
             storage(constLanguageSelectedText, 'zh_CN');
             bindMineItem();
             Get.back();
@@ -224,13 +222,13 @@ class MineController extends BaseController {
       ItemModel(
           id: 1,
           title: "English",
-          selected: SettingParameters.languageIndex == 1,
+          selected: CacheData.languageIndex == 1,
           onTapFunction: () {
             var locale = const Locale('en', 'US');
             Get.updateLocale(locale);
-            SettingParameters.languageIndex=1;
-            items[1].value = SettingParameters.selectLanguage[SettingParameters.languageIndex];
-            storage(MineController.constLanguageSelected, SettingParameters.languageIndex);
+            CacheData.languageIndex=1;
+            items[1].value = SettingParameters.selectLanguage[CacheData.languageIndex];
+            storage(MineController.constLanguageSelected, CacheData.languageIndex);
             storage(constLanguageSelectedText, 'en_US');
             bindMineItem();
             Get.back();

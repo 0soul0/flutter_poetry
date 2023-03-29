@@ -5,6 +5,6 @@ class SettingParameters {
   static const facebook = ["facebook_id", "facebook_url"];
   static const ig = ["ig_id", "ig_url"];
   static const int pageCount = 50;
-  static int languageIndex = 0;
-  static List<String> selectLanguage = ["中文", "English", "French"];
+  static const List<String> selectLanguage = ["中文", "English", "French"];
+
 }

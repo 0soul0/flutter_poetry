@@ -56,14 +56,14 @@ APP ASO v
 英文詩歌 v 
 Page 加粗 加大 v
 
-英文版
-iPad
+英文版 v 90%翻譯文檔
+iPad v
 優化光告 v
 跳頁慢 v
 firebase ay 監控app 流量
 
-資源版本變整個資源更新
-
+資源版本變整個資源更新 v
+換版本強制更新資源
 
 16. 降key 升key v2
 17. 分享樂譜 v2

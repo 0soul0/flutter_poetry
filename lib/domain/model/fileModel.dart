@@ -2,6 +2,7 @@ import 'package:floor/floor.dart';
 import 'package:flutter_poetry/domain/model/source/baseModel.dart';
 import 'package:get/get.dart';
 
+import '../../data/cache_data.dart';
 import '../../data/setting_config.dart';
 import '../dao/poetryDao.dart';
 
@@ -39,7 +40,7 @@ class FileModel extends BaseModel {
   getName() {
     var names = name.split(",");
     if (names.length == 1) return names[0];
-    return name.split(",")[SettingParameters.languageIndex];
+    return name.split(",")[CacheData.languageIndex];
   }
 
   factory FileModel.fromMap(Map<String, dynamic> json) {

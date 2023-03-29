@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/data/cache_data.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
@@ -16,9 +18,11 @@ import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_poetry/routes/singleton.dart';
 import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'data/network/api.dart';
 import 'data/route_api.dart';
+import 'data/setting_config.dart';
 import 'domain/dao/catalogueDao.dart';
 import 'domain/dao/fileDao.dart';
 import 'domain/dao/subCategoryDao.dart';
@@ -28,6 +32,7 @@ import 'domain/fxDataBaseManager.dart';
 /// MainController class representing a init setting of application
 class MainController extends BaseController {
   static const String checkConfigTimeKey = "checkConfigTimeKey";
+  static const String checkAppVersionKey = "checkAppVersionKey";
 
   static List<FileModel> allFiles = [];
   static List<FileModel> category = [];
@@ -61,6 +66,9 @@ class MainController extends BaseController {
   }
 
   initCache() async {
+    CacheData.languageIndex = int.parse(await SharedPreferencesUnit()
+        .read(MineController.constLanguageSelected, "0"));
+
     allFiles = await _fileDao.queryAll();
     category = allFiles
         .where((element) => element.dbType == CatalogueDao.tableName)
@@ -93,12 +101,26 @@ class MainController extends BaseController {
     }
     final systemInfo = SystemInfoModel.fromMap(item);
     RouteApi.baseUrl = systemInfo.baseUrl;
+    // 檢查app版本
+    await checkApplicationVersion();
     //檢查config版本
     await checkConfigVersion(systemInfo);
     //檢查檔案版本
     await checkAndUpdateFilesVersion(systemInfo);
 
     Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
+  }
+
+  checkApplicationVersion() async {
+    //app版本更新,強制更新資料
+    var oldversion =
+        await SharedPreferencesUnit().read(checkAppVersionKey, '1.0.0');
+    final info = await PackageInfo.fromPlatform();
+    String appVersion = info.version;
+    if (appVersion != oldversion) {
+      updateAllSource = true;
+      SharedPreferencesUnit().storage(checkAppVersionKey, appVersion);
+    }
   }
 
   /// check version of config
@@ -110,7 +132,7 @@ class MainController extends BaseController {
     if (oldConfig.isEmpty ||
         (int.parse(newConfig.appVersion.replaceAll(".", "")) >
             int.parse(oldConfig[0].appVersion.replaceAll(".", "")))) {
-      updateAllSource=true;
+      updateAllSource = true;
       showDialog(newConfig.updateContent);
       _systemDao.insertItem(newConfig);
     }
@@ -133,7 +155,8 @@ class MainController extends BaseController {
       var dataUpdateDone = fileMap?.dataUpdateDone ?? FileModel.keyUpdateUnDone;
 
       if (isFileVersionUpdate(oldV, newFile.dataVersion, newFile) ||
-          dataUpdateDone == FileModel.keyUpdateUnDone||updateAllSource) {
+          dataUpdateDone == FileModel.keyUpdateUnDone ||
+          updateAllSource) {
         //更新資料庫版本和是否更新完成設定為false
         await updateFileDownloadStatus(FileModel.keyUpdateUnDone, newFile);
 
