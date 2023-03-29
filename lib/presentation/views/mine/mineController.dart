@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -26,6 +27,7 @@ import '../../../routes/singleton.dart';
 
 class MineController extends BaseController {
   static const String constLanguageSelected = "constLanguageSelected";
+  static const String constLanguageSelectedText = "constLanguageSelectedText";
   static const String constSeekValue = "constSeekValue";
   static const String constImg = "constImg";
 
@@ -37,8 +39,6 @@ class MineController extends BaseController {
   RxList<ItemModel> language = List<ItemModel>.from([]).obs;
   Rx<String> imgFilePath = "".obs;
   RxList<ItemModel> hymn = List<ItemModel>.from([]).obs;
-  List<String> selectLanguage = ["中文", "English", "French"];
-  int languageIndex = 0;
   late FileDao _fileDao;
 
   @override
@@ -58,7 +58,7 @@ class MineController extends BaseController {
     Singleton.getEventBusInstance().on<ItemModel>().listen((event) {
       items.replaceRange(event.id, event.id + 1, [event]);
     });
-    languageIndex =
+    SettingParameters.languageIndex =
         int.parse(await read(MineController.constLanguageSelected, "0"));
     bindMineItem();
   }
@@ -81,7 +81,7 @@ class MineController extends BaseController {
       ItemModel(
           id: 2,
           title: "language".tr,
-          value: selectLanguage[languageIndex],
+          value: SettingParameters.selectLanguage[SettingParameters.languageIndex],
           onTapFunction: () {
             Get.to(() => const LanguageFragment());
           }),
@@ -206,33 +206,46 @@ class MineController extends BaseController {
       ItemModel(
           id: 0,
           title: "中文",
-          selected: languageIndex == 0,
+          selected: SettingParameters.languageIndex == 0,
           onTapFunction: () {
-            storage(MineController.constLanguageSelected, 0);
-            items[2].value = selectLanguage[0];
-            Phoenix.rebirth(context);
+
+            var locale = const Locale('zh', 'CN');
+            Get.updateLocale(locale);
+            SettingParameters.languageIndex = 0;
+            items[1].value = SettingParameters.selectLanguage[SettingParameters.languageIndex];
+            storage(MineController.constLanguageSelected, SettingParameters.languageIndex);
+            storage(constLanguageSelectedText, 'zh_CN');
+            bindMineItem();
             Get.back();
+
+            // Phoenix.rebirth(context);
+
           }),
       ItemModel(
           id: 1,
           title: "English",
-          selected: languageIndex == 1,
+          selected: SettingParameters.languageIndex == 1,
           onTapFunction: () {
-            storage(MineController.constLanguageSelected, 1);
-            items[2].value = selectLanguage[1];
-            Phoenix.rebirth(context);
+            var locale = const Locale('en', 'US');
+            Get.updateLocale(locale);
+            SettingParameters.languageIndex=1;
+            items[1].value = SettingParameters.selectLanguage[SettingParameters.languageIndex];
+            storage(MineController.constLanguageSelected, SettingParameters.languageIndex);
+            storage(constLanguageSelectedText, 'en_US');
+            bindMineItem();
             Get.back();
+
           }),
-      ItemModel(
-          id: 2,
-          title: "French",
-          selected: languageIndex == 2,
-          onTapFunction: () {
-            storage(MineController.constLanguageSelected, 2);
-            items[2].value = selectLanguage[2];
-            Phoenix.rebirth(context);
-            Get.back();
-          }),
+      // ItemModel(
+      //     id: 2,
+      //     title: "French",
+      //     selected: languageIndex == 2,
+      //     onTapFunction: () {
+      //       storage(MineController.constLanguageSelected, 2);
+      //       items[2].value = selectLanguage[2];
+      //       Phoenix.rebirth(context);
+      //       Get.back();
+      //     }),
     ]);
   }
 
@@ -246,7 +259,7 @@ class MineController extends BaseController {
       hymn.addAll({
         ItemModel(
             id: int.parse(item.id),
-            title: item.name.tr,
+            title: item.getName(),
             value: item.dataUpdateDone.toString(),
             text: item.dataVersion,
             onTapFunction: () {})

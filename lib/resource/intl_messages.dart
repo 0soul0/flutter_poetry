@@ -55,6 +55,7 @@ class IntlMessages extends Translations {
         },
         'en_US': {
           'english': 'English',
+          'chinese':'Chinese',
           "helloWorld": "HelloWorld",
           "banner": "Banner",
           "record": "Record",

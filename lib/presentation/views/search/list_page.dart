@@ -74,7 +74,7 @@ class ListPage extends StatelessWidget {
                     .where((element) => element.id == item.type.toString())
                     .toList();
                 if (files.isNotEmpty) {
-                  title = files[0].name.tr;
+                  title = files[0].getName();
                 }
 
                 return ModuleUtils.bindPoetryItemByModel(item, type,

@@ -7,12 +7,14 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/data/cache_data.dart';
 import 'package:flutter_poetry/main_controller.dart';
+import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/intl_messages.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
 import 'package:flutter_poetry/resource/style.dart';
+import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -127,14 +129,29 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => ScreenUtilInit(
-        builder: (BuildContext context, Widget? child) {
+  Widget build(BuildContext context) {
+    // await SharedPreferencesUnit().read(MineController.constLanguageSelectedText, 'zh_CN');
+    // FutureBuilder<List<CatalogueModel>>(
+    //   future:
+    //   controller.queryAllCatalogue(int.parse(item.id)),
+    //   builder: (context, snapshot) {
+    //     return _catalogueList(snapshot);
+    //   },
+    // ));
+    return ScreenUtilInit(
+      builder: (BuildContext context, Widget? child) {
+        return FutureBuilder(
+            future: SharedPreferencesUnit().read(MineController.constLanguageSelectedText, 'zh_CN'),
+            builder: (context,snapshot){
+              if(snapshot.data==null) return const CircularProgressIndicator();
+              var snap = snapshot.data.toString().split("_");
+              var locale = Locale(snap[0], snap[1]);
           return GetMaterialApp(
             theme: ThemeData(
               scaffoldBackgroundColor: AppColor.backgroundColor,
             ),
             translations: IntlMessages(),
-            locale: const Locale('zh', 'CN'),
+            locale: locale,
             fallbackLocale: const Locale('en', 'US'),
             navigatorObservers: [defaultLifecycleObserver],
             localizationsDelegates: const [
@@ -147,13 +164,18 @@ class MyApp extends StatelessWidget {
             getPages: AppPages.pages,
             home: child,
           );
-        },
-        child: const Scaffold(
-          body: BottomNavigationController(
-            key: Key('main_bottom'),
-          ),
+        });
+
+
+
+      },
+      child: const Scaffold(
+        body: BottomNavigationController(
+          key: Key('main_bottom'),
         ),
-      );
+      ),
+    );
+  }
 }
 
 class BottomNavigationController extends StatefulWidget {
@@ -170,7 +192,6 @@ class BottomNavigationControllerState
   int _currentIndex = 1; //預設值
   final pages = [RecordFragment(), const SearchFragment(), MineFragment()];
 
-
   @override
   void initState() {
     super.initState();
@@ -179,27 +200,25 @@ class BottomNavigationControllerState
       androidId: 'com.hymn.flutter_poetry',
     );
     advancedStatusCheck(newVersion);
-
   }
 
   advancedStatusCheck(NewVersionPlus newVersion) async {
     final status = await newVersion.getVersionStatus();
     if (status != null) {
       CacheData.statusVersion = status;
-      if(status.canUpdate&&controller.canCheckConfigDays(7)){
+      if (status.canUpdate && controller.canCheckConfigDays(7)) {
         newVersion.showUpdateDialog(
           context: context,
           versionStatus: status,
-          updateButtonText:'update'.tr,
-          dismissButtonText:'maybeLater'.tr,
+          updateButtonText: 'update'.tr,
+          dismissButtonText: 'maybeLater'.tr,
           dialogTitle: "${'update'.tr}!!!",
-          dialogText: '${'localVersion'.tr}: ${status.localVersion} \n ${'storeVersion'.tr}: ${status.storeVersion} \n ${'quickUpdate'.tr}',
+          dialogText:
+              '${'localVersion'.tr}: ${status.localVersion} \n ${'storeVersion'.tr}: ${status.storeVersion} \n ${'quickUpdate'.tr}',
         );
       }
-
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +226,7 @@ class BottomNavigationControllerState
       body: pages[_currentIndex],
       bottomNavigationBar: Container(
         color: AppColor.white,
-        margin: const EdgeInsets.only(bottom: Dimens.space*2),
+        margin: const EdgeInsets.only(bottom: Dimens.space * 2),
         height: 56 + TextUnitWidget.textSizeTimes * 3,
         child: Row(
           children: [
@@ -331,6 +350,4 @@ class BottomNavigationControllerState
                 ),
               ));
   }
-
-  }
-
+}

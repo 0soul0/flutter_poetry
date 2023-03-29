@@ -1,6 +1,8 @@
 import 'package:floor/floor.dart';
 import 'package:flutter_poetry/domain/model/source/baseModel.dart';
+import 'package:get/get.dart';
 
+import '../../data/setting_config.dart';
 import '../dao/poetryDao.dart';
 
 @entity
@@ -33,6 +35,12 @@ class FileModel extends BaseModel {
   late String dbType;
   late String name;
   late int dataUpdateDone;
+
+  getName() {
+    var names = name.split(",");
+    if (names.length == 1) return names[0];
+    return name.split(",")[SettingParameters.languageIndex];
+  }
 
   factory FileModel.fromMap(Map<String, dynamic> json) {
     return FileModel(

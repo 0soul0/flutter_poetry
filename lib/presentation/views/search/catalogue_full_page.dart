@@ -58,7 +58,7 @@ class _CatalogueFull extends State<CatalogueFull>
                 tabs: MainController.category.map((item) {
                   return Tab(
                     child: TextUnitWidget(
-                      item.name.tr,
+                      item.getName(),
                     ),
                   );
                 }).toList(),

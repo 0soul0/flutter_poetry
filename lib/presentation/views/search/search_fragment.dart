@@ -86,7 +86,7 @@ class _SearchFragment extends State<SearchFragment>
                     tabs: types.map((item) {
                       return Tab(
                         child: TextUnitWidget(
-                          item.name.tr,
+                          item.getName(),
                         ),
                       );
                     }).toList(),
