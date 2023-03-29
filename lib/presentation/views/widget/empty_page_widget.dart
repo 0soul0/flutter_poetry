@@ -3,6 +3,7 @@ import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class EmptyPageWidget extends StatelessWidget {
   const EmptyPageWidget({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class EmptyPageWidget extends StatelessWidget {
               height: ScreenUtil.defaultSize.width / 3,
               color: AppColor.helperColor,
             ),
-            const TextUnitWidget("無數據", style: Styles.textStyleGray)
+            TextUnitWidget("noData".tr, style: Styles.textStyleGray)
           ],
         ),
       ),

@@ -52,6 +52,7 @@ class IntlMessages extends Translations {
           "guitarV":"吉\n他",
           "sing":"歌唱",
           "singV":"歌\n唱",
+          "noData":"無數據"
         },
         'en_US': {
           'english': 'English',
@@ -107,7 +108,8 @@ class IntlMessages extends Translations {
           "guitar":"Guitar",
           "guitarV":"Guitar",
           "sing":"Sing",
-          "singV":"Sing"
+          "singV":"Sing",
+          "noData":"No Data"
         },
       };
 }

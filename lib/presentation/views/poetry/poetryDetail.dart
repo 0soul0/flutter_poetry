@@ -83,6 +83,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   _languageUrl() {
     return Obx(() => controller.languageUrl.isNotEmpty
         ? _buttonItem(() {
+            controller.selectPlayer.pause();
             controller.arguments = controller.languageUrl[0].item;
             controller.refresh();
 
