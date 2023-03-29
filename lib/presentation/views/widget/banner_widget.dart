@@ -13,7 +13,7 @@ class BannerWidget extends StatefulWidget {
 class _BannerWidgetState extends State<BannerWidget> {
   static final _kAdIndex = 4;
 
-  BannerAd? _ad;
+  static BannerAd? _ad;
   bool isShowBanner = false;
 
   @override

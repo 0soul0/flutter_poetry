@@ -38,6 +38,8 @@ class MainController extends BaseController {
   late CatalogueDao _categoryDao;
   late SubCategoryDao _subCategoryDao;
 
+  bool updateAllSource = false;
+
   @override
   Future onInit() async {
     super.onInit();
@@ -91,10 +93,10 @@ class MainController extends BaseController {
     }
     final systemInfo = SystemInfoModel.fromMap(item);
     RouteApi.baseUrl = systemInfo.baseUrl;
-    //檢查檔案版本
-    await checkAndUpdateFilesVersion(systemInfo);
     //檢查config版本
     await checkConfigVersion(systemInfo);
+    //檢查檔案版本
+    await checkAndUpdateFilesVersion(systemInfo);
 
     Singleton.getEventBusInstance().fire(MsgEvent("loadingDone"));
   }
@@ -108,6 +110,7 @@ class MainController extends BaseController {
     if (oldConfig.isEmpty ||
         (int.parse(newConfig.appVersion.replaceAll(".", "")) >
             int.parse(oldConfig[0].appVersion.replaceAll(".", "")))) {
+      updateAllSource=true;
       showDialog(newConfig.updateContent);
       _systemDao.insertItem(newConfig);
     }
@@ -130,7 +133,7 @@ class MainController extends BaseController {
       var dataUpdateDone = fileMap?.dataUpdateDone ?? FileModel.keyUpdateUnDone;
 
       if (isFileVersionUpdate(oldV, newFile.dataVersion, newFile) ||
-          dataUpdateDone == FileModel.keyUpdateUnDone) {
+          dataUpdateDone == FileModel.keyUpdateUnDone||updateAllSource) {
         //更新資料庫版本和是否更新完成設定為false
         await updateFileDownloadStatus(FileModel.keyUpdateUnDone, newFile);
 

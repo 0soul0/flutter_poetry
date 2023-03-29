@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
 import 'package:flutter_poetry/presentation/views/widget/scroll_to_hide_widget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
@@ -29,13 +30,14 @@ class PoetryDetail extends GetView<PoetryDetailController> {
         title: Center(
           child: Column(
             children: [
-              SelectTableWidget(
-                controller.arguments.getTitle(),
-                style: Styles.subTextStyleBlack,
-                  maxLines:1
-                // overflow: TextOverflow.ellipsis,
-              ),
-              _spectrum()
+              SelectTableWidget(controller.arguments.getTitle(),
+                  style: Styles.subTextStyleBlack, maxLines: 1
+                  // overflow: TextOverflow.ellipsis,
+                  ),
+              _spectrum(() {
+                controller.selectPlayer.pause();
+                Get.toNamed(AppRoutes.poetrySpectrum);
+              }, Icons.queue_music_outlined, 'sheetMusic'.tr)
             ],
           ),
         ),
@@ -70,41 +72,60 @@ class PoetryDetail extends GetView<PoetryDetailController> {
     );
   }
 
-  _spectrum() {
+  _language() {
+    return Obx(() => AlignedGridView.count(
+          controller: controller.scrollController,
+          scrollDirection: Axis.horizontal,
+          crossAxisCount: 1,
+          crossAxisSpacing: Dimens.itemSpace,
+          mainAxisSpacing: Dimens.itemSpace,
+          itemCount: 100,
+          itemBuilder: (context, index) {
+            //
+            // return _buttonItem();
+          },
+        ));
+  }
+
+  _spectrum(Function onTap, IconData iconData, String text) {
     return controller.spectrum.isNotEmpty
-        ? Column(
-            children: [
-              TouchUnitWidget(
-                  onTapDelay: () {
-                    controller.selectPlayer.pause();
-                    Get.toNamed(AppRoutes.poetrySpectrum);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: Dimens.itemSpace / 4),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColor.secondColor),
-                      borderRadius: BorderRadius.circular(Dimens.itemSpace),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.queue_music_outlined,
-                          color: AppColor.secondColor,
-                          size: Dimens.iconSize * 1,
-                        ),
-                        TextUnitWidget(
-                          'sheetMusic'.tr,
-                          style: Styles.helperStyleSecond,
-                        ),
-                      ],
-                    ),
-                  )),
-            ],
-          )
+        ? _buttonItem(onTap,iconData,text)
         : Container();
   }
+
+  _buttonItem(Function onTap, IconData iconData, String text){
+    return Column(
+      children: [
+        TouchUnitWidget(
+            onTapDelay: () {
+              onTap();
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Dimens.itemSpace / 4),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColor.secondColor),
+                borderRadius: BorderRadius.circular(Dimens.itemSpace),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    iconData,
+                    color: AppColor.secondColor,
+                    size: Dimens.iconSize * 1,
+                  ),
+                  TextUnitWidget(
+                    text,
+                    style: Styles.helperStyleSecond,
+                  ),
+                ],
+              ),
+            )),
+      ],
+    );
+  }
+
 
   _bottom() {
     return Obx(() => controller.media.isNotEmpty
@@ -129,7 +150,14 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                 ],
               )
             : const LinearProgressIndicator()
-        : SizedBox(height: 50,child: Center(child: TextUnitWidget("noSheet".tr,style: Styles.textStyleGray,)),));
+        : SizedBox(
+            height: 50,
+            child: Center(
+                child: TextUnitWidget(
+              "noSheet".tr,
+              style: Styles.textStyleGray,
+            )),
+          ));
   }
 
   _changeSheet() {
@@ -230,10 +258,10 @@ class PoetryDetail extends GetView<PoetryDetailController> {
 
   _poetry() {
     return Obx(() => SelectTableWidget(
-      controller.strItems.value,
-      style: Styles.textStyleBlack,
-      textAlign: TextAlign.left,
-    ));
+          controller.strItems.value,
+          style: Styles.textStyleBlack,
+          textAlign: TextAlign.left,
+        ));
 
     // return Obx(() => AlignedGridView.count(
     //       controller: controller.scrollController,

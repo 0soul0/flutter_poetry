@@ -6,6 +6,7 @@ import 'package:flutter_poetry/data/cache_data.dart';
 import 'package:flutter_poetry/data/setting_config.dart';
 import 'package:flutter_poetry/domain/dao/fileDao.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
+import 'package:flutter_poetry/presentation/views/mine/setting/language_fragment.dart';
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/tool/permission.dart';
 import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
@@ -77,13 +78,13 @@ class MineController extends BaseController {
           onTapFunction: () {
             Get.toNamed(AppRoutes.fontFragment);
           }),
-      // ItemModel(
-      //     id: 2,
-      //     title: "language".tr,
-      //     value: selectLanguage[languageIndex],
-      //     onTapFunction: () {
-      //       Get.to(() => const LanguageFragment());
-      //     }),
+      ItemModel(
+          id: 2,
+          title: "language".tr,
+          value: selectLanguage[languageIndex],
+          onTapFunction: () {
+            Get.to(() => const LanguageFragment());
+          }),
       ItemModel(
           id: 3,
           title: "poetryList".tr,

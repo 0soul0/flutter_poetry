@@ -53,16 +53,59 @@ class IntlMessages extends Translations {
           "singV":"歌\n唱"
         },
         'en_US': {
-          'english': 'english',
-          "poetry": "Poetry",
+          'english': 'English',
+          "helloWorld": "HelloWorld",
           "banner": "Banner",
           "record": "Record",
           "search": "Search",
           "mine": "Mine",
-          "searchHelper": "input number/title/content/ of poetry",
-          "seeMore": "more",
-          "catalogue": "catalogue",
-          "denote": "denote"
+          "poetry": "Hymn",
+          "searchHelper": "Input the Hymn of number/title/content/category",
+          "seeMore": "View more",
+          "catalogue": "Catalogue",
+          "denote": "Denote",
+          "textSize": "TextSize",
+          "language": "Language",
+          "textSizeSample":
+          "Praise Him! praise Him! Jesus, our blessed Redeemer\n\Praise Him! praise Him! Jesus, our blessed Redeemer!"
+              "\nSing, ye saints! His wonderful love proclaim!"
+              "\nHail Him! hail Him! mightiest angels in glory;"
+              "\nStrength and honor give to His holy name!"
+              "\nLike a shepherd, Jesus will feed His people,"
+              "\nIn His arms He carries them all day long;"
+              "\nO ye saints that live in the light of His presence,"
+              "\n Praise Him! praise Him! ever in joyful song!",
+          "contactUs": "Contact us",
+          "poetryList": "Included hymn",
+          "saveSuccess": "Save successful",
+          "retain": "Chorus",
+          "詩歌本": "(CN)Hymns",
+          "詩歌本(附)": "(CN)Hymns(Appx.)",
+          "詩歌本(分類)": "(CN)Hymns(Class.)",
+          "詩歌本(子分類)": "(CN)Hymns(Subc.)",
+          "補充本": "補充本",
+          "補充本(附)": "補充本(Appx.)",
+          "downloadDone": "Included",
+          "downloadUnDone": "Not downloaded",
+          "updateTitle": "Update content",
+          "current": "current",
+          "sheetMusic": "Sheet music",
+          "noSheet":"No music",
+          "update":"update",
+          "maybeLater":"Later",
+          "localVersion":"Current version",
+          "storeVersion":"Latest version",
+          "quickUpdate":"Please update soon",
+          "version":"Version",
+          "resVersion":"Resource version",
+          "hasNewVersion":"There is a new version",
+          "sheet":"Sheet music",
+          "sheetV":"Sheet\nmusic",
+          "piano":"Piano",
+          "guitar":"Guitar",
+          "guitarV":"Guitar",
+          "sing":"Sing",
+          "singV":"Sing"
         },
       };
 }
