@@ -78,7 +78,7 @@ class IntlMessages extends Translations {
               "\nO ye saints that live in the light of His presence,"
               "\n Praise Him! praise Him! ever in joyful song!",
           "contactUs": "Contact us",
-          "poetryList": "Included hymn",
+          "poetryList": "Included hymns",
           "saveSuccess": "Save successful",
           "retain": "Chorus",
           "詩歌本": "(CN)Hymns",
