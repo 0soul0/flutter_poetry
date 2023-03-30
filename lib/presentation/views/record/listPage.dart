@@ -20,7 +20,7 @@ class ListPage<T> extends StatelessWidget {
     return Container(
       color: AppColor.backgroundColor,
       child: Column(children: [
-        const BannerWidget(),
+        // const BannerWidget(),
         SubIconTitle("record".tr, Icons.receipt),
         const Divider(
             height: Dimens.moduleDividing,

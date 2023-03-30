@@ -67,7 +67,7 @@ class _SearchFragment extends State<SearchFragment>
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const BannerWidget(),
+                  // const BannerWidget(),
                   TabBar(
                     isScrollable: true,
                     labelPadding: const EdgeInsets.only(

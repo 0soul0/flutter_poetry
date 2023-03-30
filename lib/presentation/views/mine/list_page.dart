@@ -26,7 +26,7 @@ class ListPage<T> extends StatelessWidget {
           const EdgeInsets.symmetric(horizontal: Dimens.backgroundMarginRight),
       color: AppColor.backgroundColor,
       child: Column(children: [
-        const BannerWidget(),
+        // const BannerWidget(),
         _showImg(),
         Expanded(
           child: _mineList(),

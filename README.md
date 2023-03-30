@@ -51,16 +51,17 @@ http://lshymn.net/Info/?ID=4&Page=1
 上傳大頭照 v
 APP ASO v
 
-樂譜直的 自行橫的 90% 測音樂
-換譜 v
+樂譜直的 自行橫的 v
+
 英文詩歌 v 
 Page 加粗 加大 v
+換譜
 
 英文版 v 90%翻譯文檔
 iPad v
 跳頁慢 v
 firebase ay 監控app 流量
-優化光告
+優化光告 v
 
 資源版本變整個資源更新 v
 換版本強制更新資源 v

@@ -8,6 +8,7 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/data/cache_data.dart';
 import 'package:flutter_poetry/main_controller.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
+import 'package:flutter_poetry/presentation/views/widget/banner_widget.dart';
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
@@ -223,6 +224,10 @@ class BottomNavigationControllerState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(Dimens.bannerHeight),
+        child: BannerWidget(),
+      ),
       body: pages[_currentIndex],
       bottomNavigationBar: Container(
         color: AppColor.white,
