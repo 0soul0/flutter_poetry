@@ -5,31 +5,32 @@ import 'package:floor/floor.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../data/route_api.dart';
 import '../../presentation/views/item/utils/moduleUnit.dart';
 import '../../tool/is_check.dart';
 
 @entity
 class PoetryModel {
-  PoetryModel({
-    this.id = "",
-    this.number = -1,
-    this.type = 0,
-    this.title = "",
-    this.content = "",
-    this.refrain = "",
-    this.author = "",
-    this.category = "",
-    this.subCategory = "",
-    this.url = "",
-    this.pianoSpectrum = "",
-    this.guitarSpectrum = "",
-    this.pianoMedia = "",
-    this.pianoMedia2 = "",
-    this.singMedia = "",
-    this.guitarMedia = "",
-    this.description = "",
-    this.languageUrl =""
-  });
+  PoetryModel(
+      {this.id = "",
+      this.number = -1,
+      this.type = 0,
+      this.title = "",
+      this.content = "",
+      this.refrain = "",
+      this.author = "",
+      this.category = "",
+      this.subCategory = "",
+      this.url = "",
+      this.pianoSpectrum = "",
+      this.guitarSpectrum = "",
+      this.pianoMedia = "",
+      this.pianoMedia2 = "",
+      this.singMedia = "",
+      this.guitarMedia = "",
+      this.description = "",
+      this.languageUrl = "",
+      this.notationSpectrum = ""});
 
   @primaryKey
   late String id;
@@ -48,7 +49,8 @@ class PoetryModel {
   late String pianoMedia2;
   late String singMedia;
   late String guitarMedia;
-  late String languageUrl;
+  late String languageUrl; // new column
+  late String notationSpectrum; // column
 
   /// locate used
   String description = ""; //搜尋結果的歌詞描述
@@ -93,6 +95,15 @@ class PoetryModel {
           spectrum: pianoSpectrum,
           nameV: "sheetV".tr));
     }
+    if ( notationSpectrum.isNotEmpty) {
+      list.add(SpectrumModel(
+          index: 3,
+          name: "notation".tr,
+          media: "",
+          spectrum: RouteApi.imgUrl+notationSpectrum,
+          nameV: "sheetV".tr));
+    }
+
     return list;
   }
 
@@ -115,6 +126,7 @@ class PoetryModel {
       'singMedia': singMedia,
       'description': description,
       'languageUrl': languageUrl,
+      'notationSpectrum': notationSpectrum
     };
   }
 
@@ -154,6 +166,7 @@ class PoetryModel {
     // for(var item in map["languageUrl"]){
     //   list.add(LanguageUrlModel(language: item[0],url:item[1]));
     // }
+    notationSpectrum = map["notationSpectrum"]??"";
     languageUrl = json.encode(map["languageUrl"]);
   }
 }
@@ -179,11 +192,10 @@ class SpectrumModel {
 
 class LanguageUrlModel {
   LanguageUrlModel(
-    this.item,{
+    this.item, {
     this.language = "",
   });
 
   late String language;
   PoetryModel item;
-
 }

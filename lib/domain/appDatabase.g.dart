@@ -99,13 +99,13 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `SystemInfoModel` (`id` TEXT NOT NULL, `appVersion` TEXT NOT NULL, `baseUrl` TEXT NOT NULL, `updateContent` TEXT NOT NULL, `status` TEXT, PRIMARY KEY (`id`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `PoetryModel` (`id` TEXT NOT NULL, `number` INTEGER NOT NULL, `type` INTEGER NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `refrain` TEXT NOT NULL, `author` TEXT NOT NULL, `category` TEXT NOT NULL, `subCategory` TEXT NOT NULL, `url` TEXT NOT NULL, `pianoSpectrum` TEXT NOT NULL, `guitarSpectrum` TEXT NOT NULL, `pianoMedia` TEXT NOT NULL, `pianoMedia2` TEXT NOT NULL, `singMedia` TEXT NOT NULL, `guitarMedia` TEXT NOT NULL, `languageUrl` TEXT NOT NULL, `description` TEXT NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `PoetryModel` (`id` TEXT NOT NULL, `number` INTEGER NOT NULL, `type` INTEGER NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `refrain` TEXT NOT NULL, `author` TEXT NOT NULL, `category` TEXT NOT NULL, `subCategory` TEXT NOT NULL, `url` TEXT NOT NULL, `pianoSpectrum` TEXT NOT NULL, `guitarSpectrum` TEXT NOT NULL, `pianoMedia` TEXT NOT NULL, `pianoMedia2` TEXT NOT NULL, `singMedia` TEXT NOT NULL, `guitarMedia` TEXT NOT NULL, `languageUrl` TEXT NOT NULL, `notationSpectrum` TEXT NOT NULL, `description` TEXT NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `CatalogueModel` (`id` TEXT NOT NULL, `category` TEXT NOT NULL, `selectedStatus` TEXT NOT NULL, `type` INTEGER NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `SubCategoryModel` (`id` TEXT NOT NULL, `categoryID` TEXT NOT NULL, `subcategory` TEXT NOT NULL, `startVerseNumber` INTEGER NOT NULL, `endVerseNumber` INTEGER NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `RecordModel` (`sourceId` TEXT NOT NULL, `createTime` TEXT NOT NULL, `id` TEXT NOT NULL, `number` INTEGER NOT NULL, `type` INTEGER NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `refrain` TEXT NOT NULL, `author` TEXT NOT NULL, `category` TEXT NOT NULL, `subCategory` TEXT NOT NULL, `url` TEXT NOT NULL, `pianoSpectrum` TEXT NOT NULL, `guitarSpectrum` TEXT NOT NULL, `pianoMedia` TEXT NOT NULL, `pianoMedia2` TEXT NOT NULL, `singMedia` TEXT NOT NULL, `guitarMedia` TEXT NOT NULL, `languageUrl` TEXT NOT NULL, `description` TEXT NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `RecordModel` (`sourceId` TEXT NOT NULL, `createTime` TEXT NOT NULL, `id` TEXT NOT NULL, `number` INTEGER NOT NULL, `type` INTEGER NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `refrain` TEXT NOT NULL, `author` TEXT NOT NULL, `category` TEXT NOT NULL, `subCategory` TEXT NOT NULL, `url` TEXT NOT NULL, `pianoSpectrum` TEXT NOT NULL, `guitarSpectrum` TEXT NOT NULL, `pianoMedia` TEXT NOT NULL, `pianoMedia2` TEXT NOT NULL, `singMedia` TEXT NOT NULL, `guitarMedia` TEXT NOT NULL, `languageUrl` TEXT NOT NULL, `notationSpectrum` TEXT NOT NULL, `description` TEXT NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -392,6 +392,7 @@ class _$PoetryDao extends PoetryDao {
                   'singMedia': item.singMedia,
                   'guitarMedia': item.guitarMedia,
                   'languageUrl': item.languageUrl,
+                  'notationSpectrum': item.notationSpectrum,
                   'description': item.description
                 }),
         _poetryModelUpdateAdapter = UpdateAdapter(
@@ -416,6 +417,7 @@ class _$PoetryDao extends PoetryDao {
                   'singMedia': item.singMedia,
                   'guitarMedia': item.guitarMedia,
                   'languageUrl': item.languageUrl,
+                  'notationSpectrum': item.notationSpectrum,
                   'description': item.description
                 });
 
@@ -450,7 +452,8 @@ class _$PoetryDao extends PoetryDao {
             singMedia: row['singMedia'] as String,
             guitarMedia: row['guitarMedia'] as String,
             description: row['description'] as String,
-            languageUrl: row['languageUrl'] as String));
+            languageUrl: row['languageUrl'] as String,
+            notationSpectrum: row['notationSpectrum'] as String));
   }
 
   @override
@@ -475,7 +478,8 @@ class _$PoetryDao extends PoetryDao {
             singMedia: row['singMedia'] as String,
             guitarMedia: row['guitarMedia'] as String,
             description: row['description'] as String,
-            languageUrl: row['languageUrl'] as String),
+            languageUrl: row['languageUrl'] as String,
+            notationSpectrum: row['notationSpectrum'] as String),
         arguments: [url]);
   }
 
@@ -500,7 +504,8 @@ class _$PoetryDao extends PoetryDao {
             singMedia: row['singMedia'] as String,
             guitarMedia: row['guitarMedia'] as String,
             description: row['description'] as String,
-            languageUrl: row['languageUrl'] as String),
+            languageUrl: row['languageUrl'] as String,
+            notationSpectrum: row['notationSpectrum'] as String),
         arguments: [id]);
   }
 
@@ -512,7 +517,7 @@ class _$PoetryDao extends PoetryDao {
   ) async {
     return _queryAdapter.queryList(
         'SELECT * FROM PoetryModel WHERE number LIKE ?1 OR title LIKE ?1 OR content LIKE ?1 OR refrain LIKE ?1 OR author LIKE ?1 OR category LIKE ?1 OR subCategory LIKE ?1 ORDER BY type ASC, number ASC LIMIT ?2,?3',
-        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String, languageUrl: row['languageUrl'] as String),
+        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String, languageUrl: row['languageUrl'] as String, notationSpectrum: row['notationSpectrum'] as String),
         arguments: [str, page, count]);
   }
 
@@ -525,7 +530,7 @@ class _$PoetryDao extends PoetryDao {
   ) async {
     return _queryAdapter.queryList(
         'SELECT * FROM PoetryModel WHERE number != ?1 AND number LIKE ?2 OR title LIKE ?2 OR author LIKE ?2 OR category LIKE ?2 OR subCategory LIKE ?2 ORDER BY type ASC, number ASC LIMIT ?3,?4',
-        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String, languageUrl: row['languageUrl'] as String),
+        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String, languageUrl: row['languageUrl'] as String, notationSpectrum: row['notationSpectrum'] as String),
         arguments: [number, str, page, count]);
   }
 
@@ -537,7 +542,7 @@ class _$PoetryDao extends PoetryDao {
   ) async {
     return _queryAdapter.queryList(
         'SELECT * FROM PoetryModel WHERE category LIKE ?1 OR subCategory LIKE ?1 ORDER BY type ASC, number ASC LIMIT ?2,?3',
-        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String, languageUrl: row['languageUrl'] as String),
+        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String, languageUrl: row['languageUrl'] as String, notationSpectrum: row['notationSpectrum'] as String),
         arguments: [str, page, count]);
   }
 
@@ -549,7 +554,7 @@ class _$PoetryDao extends PoetryDao {
   ) async {
     return _queryAdapter.queryList(
         'SELECT * FROM PoetryModel WHERE type = ?1 ORDER BY type ASC, number ASC LIMIT ?2,?3',
-        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String, languageUrl: row['languageUrl'] as String),
+        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String, languageUrl: row['languageUrl'] as String, notationSpectrum: row['notationSpectrum'] as String),
         arguments: [type, page, count]);
   }
 
@@ -557,7 +562,7 @@ class _$PoetryDao extends PoetryDao {
   Future<List<PoetryModel>> searchNumber(String str) async {
     return _queryAdapter.queryList(
         'SELECT * FROM PoetryModel WHERE number == ?1 ORDER BY type ASC, number ASC',
-        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String, languageUrl: row['languageUrl'] as String),
+        mapper: (Map<String, Object?> row) => PoetryModel(id: row['id'] as String, number: row['number'] as int, type: row['type'] as int, title: row['title'] as String, content: row['content'] as String, refrain: row['refrain'] as String, author: row['author'] as String, category: row['category'] as String, subCategory: row['subCategory'] as String, url: row['url'] as String, pianoSpectrum: row['pianoSpectrum'] as String, guitarSpectrum: row['guitarSpectrum'] as String, pianoMedia: row['pianoMedia'] as String, pianoMedia2: row['pianoMedia2'] as String, singMedia: row['singMedia'] as String, guitarMedia: row['guitarMedia'] as String, description: row['description'] as String, languageUrl: row['languageUrl'] as String, notationSpectrum: row['notationSpectrum'] as String),
         arguments: [str]);
   }
 
@@ -774,6 +779,7 @@ class _$RecordDao extends RecordDao {
                   'singMedia': item.singMedia,
                   'guitarMedia': item.guitarMedia,
                   'languageUrl': item.languageUrl,
+                  'notationSpectrum': item.notationSpectrum,
                   'description': item.description
                 }),
         _recordModelUpdateAdapter = UpdateAdapter(
@@ -800,6 +806,7 @@ class _$RecordDao extends RecordDao {
                   'singMedia': item.singMedia,
                   'guitarMedia': item.guitarMedia,
                   'languageUrl': item.languageUrl,
+                  'notationSpectrum': item.notationSpectrum,
                   'description': item.description
                 });
 

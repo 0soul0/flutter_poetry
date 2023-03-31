@@ -77,3 +77,5 @@ firebase ay 監控app 流量
 
 // 上架 切正式url
 //  DB 更新問題
+
+測試手機許旋轉
