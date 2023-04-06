@@ -44,6 +44,9 @@ class _CatalogueFull extends State<CatalogueFull>
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              const SizedBox(
+                height: Dimens.bottomMargin,
+              ),
               TabBar(
                 isScrollable: true,
                 labelPadding: const EdgeInsets.only(
@@ -54,6 +57,10 @@ class _CatalogueFull extends State<CatalogueFull>
                 indicatorSize: TabBarIndicatorSize.label,
                 labelColor: AppColor.mainColor,
                 indicatorColor: AppColor.mainColor,
+                labelStyle: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: Dimens.textSize16,
+                ),
                 indicatorPadding: const EdgeInsets.all(10),
                 tabs: MainController.category.map((item) {
                   return Tab(
