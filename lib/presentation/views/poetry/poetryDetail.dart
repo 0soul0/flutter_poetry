@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
+import 'package:flutter_poetry/presentation/views/widget/banner_widget.dart';
 import 'package:flutter_poetry/presentation/views/widget/scroll_to_hide_widget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -21,32 +22,76 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: Dimens.toolbarHeight +
-            Dimens.itemSpace * 3 * TextUnitWidget.textSizeTimes,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Center(
-          child: Column(
-            children: [
-               title(),
-              Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _spectrum(() {
-                      controller.selectPlayer.pause();
-                      Get.toNamed(AppRoutes.poetrySpectrum);
-                    }, Icons.queue_music_outlined, 'sheetMusic'.tr),
-                    const SizedBox(
-                      width: Dimens.itemSpace,
-                    ),
-                    _languageUrl()
-                  ],
-                ),
-              )
-            ],
+      // appBar: AppBar(
+      //   centerTitle:true,
+      //   backgroundColor:Colors.green,
+      //   toolbarHeight: Dimens.toolbarHeight*3 * TextUnitWidget.textSizeTimes,
+      //   automaticallyImplyLeading: false,
+      //   elevation: 0,
+      //   // backgroundColor: Colors.transparent,
+      //   title: Container(
+      //     color: Colors.amber,
+      //     margin: EdgeInsets.zero,
+      //     padding: EdgeInsets.zero,
+      //     child: Container(
+      //       margin: EdgeInsets.zero,
+      //       padding: EdgeInsets.zero,
+      //       child: Column(
+      //         children: [
+      //           const BannerWidget(),
+      //           const SizedBox(height: Dimens.space,),
+      //           title(),
+      //           Center(
+      //             child: Row(
+      //               mainAxisSize: MainAxisSize.min,
+      //               children: [
+      //                 _spectrum(() {
+      //                   controller.selectPlayer.pause();
+      //                   Get.toNamed(AppRoutes.poetrySpectrum);
+      //                 }, Icons.queue_music_outlined, 'sheetMusic'.tr),
+      //                 const SizedBox(
+      //                   width: Dimens.itemSpace,
+      //                 ),
+      //                 _languageUrl()
+      //               ],
+      //             ),
+      //           )
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(Dimens.toolbarHeight*2 * TextUnitWidget.textSizeTimes),
+        child: Container(
+          color: Colors.transparent,
+          margin: EdgeInsets.zero,
+          padding: EdgeInsets.zero,
+          child: Container(
+            margin: EdgeInsets.zero,
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                const BannerWidget(),
+                const SizedBox(height: Dimens.space,),
+                title(),
+                Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _spectrum(() {
+                        controller.selectPlayer.pause();
+                        Get.toNamed(AppRoutes.poetrySpectrum);
+                      }, Icons.queue_music_outlined, 'sheetMusic'.tr),
+                      const SizedBox(
+                        width: Dimens.itemSpace,
+                      ),
+                      _languageUrl()
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -87,7 +132,6 @@ class PoetryDetail extends GetView<PoetryDetailController> {
             controller.selectPlayer.pause();
             controller.arguments = controller.languageUrl[0].item;
             controller.refresh();
-
           }, Icons.language, controller.languageUrl[0].language.tr)
         : const SizedBox(
             width: 0,
@@ -121,8 +165,9 @@ class PoetryDetail extends GetView<PoetryDetailController> {
               onTap();
             },
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: Dimens.itemSpace / 2,vertical: Dimens.itemSpace / 4),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Dimens.itemSpace / 2,
+                  vertical: Dimens.itemSpace / 4),
               decoration: BoxDecoration(
                 border: Border.all(color: AppColor.secondColor),
                 borderRadius: BorderRadius.circular(Dimens.itemSpace),
@@ -335,7 +380,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   title() {
     return Obx(() => SelectTableWidget(controller.title.value,
         style: Styles.subTextStyleBlack, maxLines: 1
-      // overflow: TextOverflow.ellipsis,
-    ));
+        // overflow: TextOverflow.ellipsis,
+        ));
   }
 }
