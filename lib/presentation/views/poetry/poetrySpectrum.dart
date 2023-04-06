@@ -72,7 +72,7 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
             bottomNavigationBar: Container(
               height: Dimens.iconSize + Dimens.itemSpace,
               padding: const EdgeInsets.symmetric(horizontal: Dimens.space),
-              margin: const EdgeInsets.only(bottom: Dimens.itemSpace),
+              margin: const EdgeInsets.only(bottom: Dimens.bottomMargin),
               child: _bottom(),
             ),
           );

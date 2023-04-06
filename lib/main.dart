@@ -231,7 +231,7 @@ class BottomNavigationControllerState
       body: pages[_currentIndex],
       bottomNavigationBar: Container(
         color: AppColor.white,
-        margin: const EdgeInsets.only(bottom: Dimens.space * 2),
+        margin: const EdgeInsets.only(bottom: Dimens.bottomMargin),
         height: 56 + TextUnitWidget.textSizeTimes * 3,
         child: Row(
           children: [

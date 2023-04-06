@@ -73,8 +73,9 @@ class PoetryDetail extends GetView<PoetryDetailController> {
           ),
         ],
       ),
-      bottomNavigationBar: Padding(
+      bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.space * 2),
+        margin: const EdgeInsets.only(bottom: Dimens.bottomMargin),
         child: _bottom(),
       ),
     );
