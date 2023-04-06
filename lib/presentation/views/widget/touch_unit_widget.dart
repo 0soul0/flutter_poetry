@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// The class was used to manger touch event
-class TouchUnitWidget extends InkWell {
+class TouchUnitWidget extends GestureDetector {
   TouchUnitWidget({
     super.key,
     super.child,
@@ -11,25 +11,8 @@ class TouchUnitWidget extends InkWell {
     super.onTapDown,
     super.onTapUp,
     super.onTapCancel,
-    super.onHighlightChanged,
-    super.onHover,
-    super.mouseCursor,
-    super.focusColor,
-    super.hoverColor,
-    super.highlightColor,
-    super.overlayColor,
-    super.splashColor,
-    super.splashFactory,
-    super.radius,
-    super.borderRadius,
-    super.customBorder,
     bool? enableFeedback = true,
     super.excludeFromSemantics,
-    super.focusNode,
-    super.canRequestFocus,
-    super.onFocusChange,
-    super.autofocus,
-    super.statesController,
   });
 
   final GestureTapCallback? onTapDelay;

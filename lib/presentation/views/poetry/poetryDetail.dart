@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
 import 'package:flutter_poetry/presentation/views/widget/banner_widget.dart';
 import 'package:flutter_poetry/presentation/views/widget/scroll_to_hide_widget.dart';
@@ -321,11 +322,16 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   }
 
   _poetry() {
-    return Obx(() => SelectTableWidget(
-          controller.strItems.value,
-          style: Styles.textStyleBlack,
-          textAlign: TextAlign.left,
-        ));
+    return Obx(() => TouchUnitWidget(
+      onLongPress:(){
+        HapticFeedback.vibrate();
+      },
+      child: SelectTableWidget(
+            controller.strItems.value,
+            style: Styles.textStyleBlack,
+            textAlign: TextAlign.left,
+          ),
+    ));
 
     // return Obx(() => AlignedGridView.count(
     //       controller: controller.scrollController,
@@ -366,8 +372,13 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                 "retain".tr,
                 style: Styles.textStyleBlack,
               ),
-              SelectTableWidget(controller.refrain.trim().toString(),
-                  style: Styles.textStyleBlack, textAlign: TextAlign.left),
+              TouchUnitWidget(
+                onLongPress:(){
+                  HapticFeedback.vibrate();
+                },
+                child: SelectTableWidget(controller.refrain.trim().toString(),
+                    style: Styles.textStyleBlack, textAlign: TextAlign.left),
+              ),
               const Divider(
                 color: Colors.grey,
                 height: 0.5,
