@@ -105,7 +105,7 @@ class SearchAllFragment extends GetView<SearchController> {
       children: [
         TextUnitWidget(
           "searchHelper".tr,
-          style: Styles.helperStyle,
+          style: Styles.helperStyle16,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -125,7 +125,7 @@ class SearchAllFragment extends GetView<SearchController> {
                 filled: true,
                 fillColor: AppColor.backgroundColor,
                 hintText: "searchHelper".tr,
-                hintStyle: Styles.helperStyle,
+                hintStyle: Styles.helperStyle16,
                 border: const OutlineInputBorder(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(Dimens.moduleRadius),

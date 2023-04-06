@@ -145,7 +145,7 @@ class _SearchFragment extends State<SearchFragment>
       children: [
         TextUnitWidget(
           "searchHelper".tr,
-          style: Styles.helperStyle,
+          style: Styles.helperStyle16,
         ),
         MediaQuery(
           data: mqDataNew,
@@ -164,7 +164,7 @@ class _SearchFragment extends State<SearchFragment>
                 filled: true,
                 fillColor: AppColor.backgroundColor,
                 hintText: "searchHelper".tr,
-                hintStyle: Styles.helperStyle,
+                hintStyle: Styles.helperStyle16,
                 border: const OutlineInputBorder(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(Dimens.moduleRadius),

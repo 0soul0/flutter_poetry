@@ -67,6 +67,11 @@ class Styles {
       fontSize: Dimens.helperSize,
       color: AppColor.helperColor);
 
+  static const TextStyle helperStyle16 = TextStyle(
+      fontWeight: fontHelperWeight,
+      fontSize: Dimens.helperSize,
+      color: AppColor.helperColor);
+
   static const TextStyle helperStyleWhite = TextStyle(
       fontWeight: fontHelperWeight,
       fontSize: Dimens.helperSize,
