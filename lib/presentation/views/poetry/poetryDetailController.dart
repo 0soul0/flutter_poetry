@@ -14,6 +14,8 @@ import '../../../domain/dao/poetryDao.dart';
 import '../../../domain/fxDataBaseManager.dart';
 import '../../../domain/model/poetryModel.dart';
 import '../../../resource/dimens.dart';
+import '../../../resource/style.dart';
+import '../../../tool/is_check.dart';
 import '../widget/text_unit_widget.dart';
 
 /// A class represent controller of poetry
@@ -278,58 +280,57 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   //   return strList;
   // }
 
-  String splitContent(String content) {
-    String strList = "";
-    var contents = content;
+  String splitContent(String contents) {
+    var strList = [];
     var str = "";
-
+    var result ="";
+    var paragraphWidth = stringWidth(contents)/((stringWidth(contents)/screenWidth).ceil());
+    contents=contents.replaceAll("－", "");
+    // 判斷分割點
     for (int i = 0; i < contents.length; i++) {
-      if (isNumeric(contents[i])) {
-        if (str.isNotEmpty) {
-          var arr = whichClearPivot(str, str.substring(lastSplitIndex));
-          if (arr[0] != "") {
-            strList += "${arr[0]}";
-          }
-          strList += "${arr[1]}\n";
-          str = "";
-          lastSplitIndex = 0;
+      if (isNumeric(contents[i]) || isSymbols(contents[i])) {
+        strList.add(str+contents[i]);
+        str = "";
+        continue;
+      }
+      str += contents[i];
+    }
+    strList.add(str);
+    // 判斷字段長度 超過螢幕跳行or 數字分段
+    str="";
+    for(int i=0;i<strList.length;i++){
+      if(isNumeric(strList[i])){
+        if(result.isEmpty){
+          result = strList[i];
+          str="";
+          continue;
         }
-        strList += "${contents[i]}\n";
+        result += "\n$str\n${strList[i]}";
+        str="";
         continue;
       }
 
-      str += contents[i];
-
-      if (isSymbols(contents[i])) {
-        if (isMoreLong(str)) {
-          var data = whichClearPivot(str, str.substring(0, lastSplitIndex));
-          strList += "${data[1]}\n";
-          str = data[0];
-        }
-        lastSplitIndex = str.length;
+      if(stringWidthLongThanScreen(str,strList[i],customWidth: paragraphWidth)&&str.isNotEmpty){
+        result += "\n$str";
+        str = strList[i];
+        continue;
       }
+      str+=strList[i];
     }
-    if (str.isNotEmpty) strList += "$str\n";
-    return strList.replaceAll("－", "").replaceAll("\n.", ".");
+    result += "\n$str";
+    return result;
   }
 
-  whichClearPivot(String str1, String str2) {
-    double len = str1.length * Dimens.textSize * TextUnitWidget.textSizeTimes;
-    if (str2 == "" && len > (screenWidth)) {
-      double dd = (1 / (len / (screenWidth * times)));
-      int d = (str1.length * dd).round();
-      str2 = str1.substring(0, d);
-      lastSplitIndex = d;
-    }
-    double textWidth1 = (len - screenWidth * times).abs();
-    double textWidth2 =
-    (str2.length * Dimens.textSize * TextUnitWidget.textSizeTimes -
-        screenWidth * times)
-        .abs();
-    if (textWidth1 > textWidth2) {
-      return [str1.replaceAll(str2, ""), str2];
-    }
-    return ["", str1];
+  stringWidthLongThanScreen(String str, String subStr,{double? customWidth}) {
+    final text = str+subStr;
+    final width = customWidth??screenWidth;
+    return stringWidth(text) > width;
+  }
+
+  stringWidth(String str){
+    final style = TextStyle(fontSize: Dimens.textSize*TextUnitWidget.textSizeTimes);
+    final textWidth = IsCheck.measureText(str, style).width;
+    return textWidth;
   }
 
   isMoreLong(String str) {
