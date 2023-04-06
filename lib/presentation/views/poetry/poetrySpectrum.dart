@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
 import '../../../tool/is_check.dart';
+import '../widget/banner_widget.dart';
 import '../widget/float_fab_widget.dart';
 import '../widget/image_unit_widget.dart';
 import '../widget/text_unit_widget.dart';
@@ -47,7 +48,10 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
               Row(
                 children: [
                   SizedBox(width: 45, child: _spectrumTab()),
-                  Expanded(child: _getSpectrum())
+                  Expanded(
+                      child: ListView(children: [
+                    _getSpectrum(ScreenUtil.defaultSize.height)
+                  ]))
                 ],
               ),
               const BackIconButton(direction: directionHorizontal),
@@ -55,9 +59,13 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
             ],
           ))
         : Scaffold(
+            appBar: const PreferredSize(
+              preferredSize: Size.fromHeight(Dimens.bannerHeight),
+              child: BannerWidget(),
+            ),
             body: Stack(
               children: [
-                Expanded(child: _getSpectrum()),
+                Expanded(child: _getSpectrum(ScreenUtil.defaultSize.width)),
                 const BackIconButton(),
               ],
             ),
@@ -146,20 +154,16 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
         }));
   }
 
-  _getSpectrum() {
-    return Obx(() => ListView(
+  _getSpectrum(width) {
+    return Obx(() => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: ImageUnitWidget(
-                    controller.selectSpectrum.value.spectrum,
-                    ScreenUtil.defaultSize.height,
-                  ),
-                ),
-              ],
-            )
+            Center(
+              child: ImageUnitWidget(
+                controller.selectSpectrum.value.spectrum,
+                width,
+              ),
+            ),
           ],
         ));
   }
