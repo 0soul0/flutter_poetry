@@ -1,6 +1,9 @@
 import 'dart:convert';
-
+import 'dart:isolate';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:easy_isolate/easy_isolate.dart' as isolate;
+import 'package:easy_isolate/easy_isolate.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
@@ -71,14 +74,12 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   }
 
   initState() {
-    title.value =arguments.getTitle();
+    title.value = arguments.getTitle();
     setPoetryItemToList(arguments);
     setRefrain(arguments);
     setHrefToOtherLanguageHymns(arguments);
+
     initMusicPlayer();
-    if (media.isNotEmpty) {
-      selectMusicPlayer(media[0].index);
-    }
   }
 
   init() async {
@@ -98,6 +99,52 @@ class PoetryDetailController extends BaseController<PoetryModel> {
       spectrum.value =
           spectrumAndMedia.where((p0) => p0.spectrum != "").toList();
     }
+    downloadMusic();
+    //
+    // final mainPort = ReceivePort();
+    // await Isolate.spawn((mainSendPort) {
+    //   final newPort = ReceivePort();
+    //   mainSendPort.send(newPort.sendPort);
+    //   newPort.listen((message) async {
+    //     List<SpectrumModel> list = message;
+    //     for (var i = 0; i < list.length; i++) {
+    //       if (list[i].play.source == null && list[i].media.isNotEmpty) {
+    //         await list[i].play.setSourceUrl(list[i].media);
+    //       }
+    //     }
+    //     mainSendPort.send(1);
+    //   });
+    // }, mainPort.sendPort);
+    //
+    //
+    // mainPort.listen((message) async{
+    //   if (message is SendPort) {
+    //     message.send(arguments.getMedia());
+    //   } else {
+    //
+    //     // for (var i = 0; i < spectrumAndMedia.length; i++) {
+    //     //   if (spectrumAndMedia[i].play.source == null && spectrumAndMedia[i].media.isNotEmpty) {
+    //     //     await spectrumAndMedia[i].play.setSourceUrl(spectrumAndMedia[i].media);
+    //     //   }
+    //     // }
+    //     spectrumAndMedia.value = message;
+    //     if (media.isNotEmpty) {
+    //       selectMusicPlayer(media[0].index);
+    //     }
+    //   }
+    // });
+  }
+
+  downloadMusic() async {
+    for (var i = 0; i < spectrumAndMedia.length; i++) {
+      if (spectrumAndMedia[i].play.source == null &&
+          spectrumAndMedia[i].media.isNotEmpty) {
+        await spectrumAndMedia[i].play.setSourceUrl(spectrumAndMedia[i].media);
+      }
+    }
+    if (media.isNotEmpty) {
+      selectMusicPlayer(media[0].index);
+    }
   }
 
   /// select music which need to play
@@ -116,24 +163,17 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     }
 
     if (spectrumAndMedia[sIndex].media.isNotEmpty) {
-      if (spectrumAndMedia[sIndex].play.source == null) {
-        spectrumAndMedia[sIndex]
-            .play
-            .setSourceUrl(spectrumAndMedia[sIndex].media);
-      }
       selectPlayer = spectrumAndMedia[sIndex].play;
       position.value = (await selectPlayer.getCurrentPosition()) ??
           const Duration(seconds: 0);
       duration.value =
           (await selectPlayer.getDuration()) ?? const Duration(seconds: 0);
       selectPlayer.onPositionChanged.listen((d) => position.value = d);
-      selectPlayer.onDurationChanged.listen((d) {
-        if (!loadFinish.value) {
-          loadFinish.value = true;
-        }
-        duration.value = d;
-      });
+      selectPlayer.onDurationChanged.listen((d) => duration.value = d);
       selectPlayer.onPlayerStateChanged.listen((d) => playState.value = d);
+      if (!loadFinish.value) {
+        loadFinish.value = true;
+      }
     }
   }
 
@@ -283,9 +323,9 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     }
     double textWidth1 = (len - screenWidth * times).abs();
     double textWidth2 =
-        (str2.length * Dimens.textSize * TextUnitWidget.textSizeTimes -
-                screenWidth * times)
-            .abs();
+    (str2.length * Dimens.textSize * TextUnitWidget.textSizeTimes -
+        screenWidth * times)
+        .abs();
     if (textWidth1 > textWidth2) {
       return [str1.replaceAll(str2, ""), str2];
     }
