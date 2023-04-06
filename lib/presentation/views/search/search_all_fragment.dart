@@ -27,63 +27,66 @@ class SearchAllFragment extends GetView<SearchController> {
     return Scaffold(
       body: Stack(
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const BannerWidget(),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: Dimens.itemSpace * 2),
-                child: Row(
-                  children: [
-                    TextUnitWidget(
-                      'search'.tr,
-                      style: Styles.subTitleStyleBlack,
-                    ),
-                    Expanded(child: Container()),
-                    TouchUnitWidget(
-                      onTapDelay: () {
-                        Get.toNamed(AppRoutes.catalogueFull);
-                      },
-                      child: TextUnitWidget(
-                        'catalogue'.tr,
+          Container(
+            margin: const EdgeInsets.only(bottom: Dimens.bottomMargin),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const BannerWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: Dimens.itemSpace * 2),
+                  child: Row(
+                    children: [
+                      TextUnitWidget(
+                        'search'.tr,
                         style: Styles.subTitleStyleBlack,
                       ),
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: Dimens.iconSize - 4,
-                    )
-                  ],
+                      Expanded(child: Container()),
+                      TouchUnitWidget(
+                        onTapDelay: () {
+                          Get.toNamed(AppRoutes.catalogueFull);
+                        },
+                        child: TextUnitWidget(
+                          'catalogue'.tr,
+                          style: Styles.subTitleStyleBlack,
+                        ),
+                      ),
+                      const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: Dimens.iconSize - 4,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              const Divider(
-                  height: Dimens.moduleDividing,
-                  thickness: Dimens.moduleDividing,
-                  color: AppColor.dividerColor),
-              Expanded(
-                child: Container(
-                    padding: const EdgeInsets.fromLTRB(
-                        Dimens.backgroundMarginLeft,
-                        0,
-                        Dimens.backgroundMarginRight,
-                        0),
-                    child: ListPage("", ListType.search)),
-              ),
-              const Divider(
-                  height: Dimens.moduleDividing,
-                  thickness: Dimens.moduleDividing,
-                  color: AppColor.dividerColor),
-              Container(
-                height: 32 * TextUnitWidget.textSizeTimes,
-                decoration: const BoxDecoration(color: AppColor.dividerColor),
-                child: _search(context),
-              ),
-              const Divider(
-                  height: Dimens.moduleDividing,
-                  thickness: Dimens.moduleDividing,
-                  color: AppColor.dividerColor),
-            ],
+                const Divider(
+                    height: Dimens.moduleDividing,
+                    thickness: Dimens.moduleDividing,
+                    color: AppColor.dividerColor),
+                Expanded(
+                  child: Container(
+                      padding: const EdgeInsets.fromLTRB(
+                          Dimens.backgroundMarginLeft,
+                          0,
+                          Dimens.backgroundMarginRight,
+                          0),
+                      child: ListPage("", ListType.search)),
+                ),
+                const Divider(
+                    height: Dimens.moduleDividing,
+                    thickness: Dimens.moduleDividing,
+                    color: AppColor.dividerColor),
+                Container(
+                  height: 32 * TextUnitWidget.textSizeTimes,
+                  decoration: const BoxDecoration(color: AppColor.dividerColor),
+                  child: _search(context),
+                ),
+                const Divider(
+                    height: Dimens.moduleDividing,
+                    thickness: Dimens.moduleDividing,
+                    color: AppColor.dividerColor),
+              ],
+            ),
           ),
           const BackIconButton(
             opacity: 0.6,
