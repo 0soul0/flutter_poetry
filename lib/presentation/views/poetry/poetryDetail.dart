@@ -83,7 +83,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
 
   _languageUrl() {
     return Obx(() => controller.languageUrl.isNotEmpty
-        ? _buttonItem(() {
+        ? _featureItem(() {
             controller.selectPlayer.pause();
             controller.arguments = controller.languageUrl[0].item;
             controller.refresh();
@@ -109,11 +109,11 @@ class PoetryDetail extends GetView<PoetryDetailController> {
 
   _spectrum(Function onTap, IconData iconData, String text) {
     return Obx(() => controller.spectrum.isNotEmpty
-        ? _buttonItem(onTap, iconData, text)
+        ? _featureItem(onTap, iconData, text)
         : Container());
   }
 
-  _buttonItem(Function onTap, IconData iconData, String text) {
+  _featureItem(Function onTap, IconData iconData, String text) {
     return Column(
       children: [
         TouchUnitWidget(
@@ -122,7 +122,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
             },
             child: Container(
               padding:
-                  const EdgeInsets.symmetric(horizontal: Dimens.itemSpace / 4),
+                  const EdgeInsets.symmetric(horizontal: Dimens.itemSpace / 2,vertical: Dimens.itemSpace / 4),
               decoration: BoxDecoration(
                 border: Border.all(color: AppColor.secondColor),
                 borderRadius: BorderRadius.circular(Dimens.itemSpace),
@@ -137,7 +137,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                   ),
                   TextUnitWidget(
                     text,
-                    style: Styles.helperStyleSecond,
+                    style: Styles.textStyleSecond,
                   ),
                 ],
               ),

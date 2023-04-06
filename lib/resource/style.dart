@@ -22,6 +22,11 @@ class Styles {
       fontSize: Dimens.helperSize,
       color: AppColor.secondColor);
 
+  static const TextStyle textStyleSecond = TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: Dimens.textSize,
+      color: AppColor.secondColor);
+
   static const TextStyle tabStyle = TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: Dimens.textSize,
