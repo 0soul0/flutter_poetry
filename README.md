@@ -126,6 +126,8 @@ Ipad
 手機自動判斷旋轉 ??
 Search到的字變色 v3
 
+歌珊之約
+
 
 
 Hymns for life 
