@@ -71,6 +71,10 @@ class PoetryModel {
 
   getMedia() {
     List<SpectrumModel> list = [];
+
+    // 過濾svg
+    removeSvg();
+
     if (singMedia.isNotEmpty) {
       list.add(SpectrumModel(
           index: 0,
@@ -95,16 +99,30 @@ class PoetryModel {
           spectrum: pianoSpectrum,
           nameV: "sheetV".tr));
     }
-    if ( notationSpectrum.isNotEmpty) {
+    if (notationSpectrum.isNotEmpty) {
       list.add(SpectrumModel(
           index: 3,
           name: "notation".tr,
           media: "",
-          spectrum: RouteApi.imgUrl+notationSpectrum,
+          spectrum: RouteApi.imgUrl + notationSpectrum,
           nameV: "sheetV".tr));
     }
 
     return list;
+  }
+
+  removeSvg() {
+    if (guitarSpectrum.contains(".svg")) {
+      guitarSpectrum = "";
+    }
+
+    if (notationSpectrum.contains(".svg")) {
+      notationSpectrum = "";
+    }
+
+    if (pianoSpectrum.contains(".svg")) {
+      pianoSpectrum = "";
+    }
   }
 
   Map<String, dynamic> toMap() {
@@ -166,7 +184,7 @@ class PoetryModel {
     // for(var item in map["languageUrl"]){
     //   list.add(LanguageUrlModel(language: item[0],url:item[1]));
     // }
-    notationSpectrum = map["notationSpectrum"]??"";
+    notationSpectrum = map["notationSpectrum"] ?? "";
     languageUrl = json.encode(map["languageUrl"]);
   }
 }

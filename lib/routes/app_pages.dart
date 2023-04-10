@@ -34,13 +34,13 @@ class AppPages {
         name: AppRoutes.catalogueFull,
         page: () => const CatalogueFull(),
         binding: MyBinding(() {
-          Get.lazyPut(() => SearchController());
+          Get.lazyPut(() => MySearchController());
         })),
     GetPage(
         name: AppRoutes.searchAllFragment,
         page: () => SearchAllFragment(),
         binding: MyBinding(() {
-          Get.lazyPut(() => SearchController());
+          Get.lazyPut(() => MySearchController());
         })),
 
     GetPage(

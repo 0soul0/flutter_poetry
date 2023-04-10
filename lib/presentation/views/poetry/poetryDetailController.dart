@@ -9,6 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:share_extend/share_extend.dart';
 
 import '../../../domain/dao/poetryDao.dart';
 import '../../../domain/fxDataBaseManager.dart';
@@ -44,6 +46,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   var lastSplitIndex = 0;
   final scrollController = ScrollController();
   final GlobalKey keyRefrain = GlobalKey();
+  Rx<String> imagePath ="".obs;
 
   int fake = 0;
 
@@ -396,4 +399,9 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     }
     languageUrl.value = list;
   }
+
+  shareImage(String imagePath) async {
+    await ShareExtend.share(imagePath, "image");
+  }
+
 }

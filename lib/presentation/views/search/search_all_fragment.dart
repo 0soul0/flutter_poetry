@@ -12,7 +12,7 @@ import '../widget/banner_widget.dart';
 import '../widget/text_unit_widget.dart';
 import 'list_page.dart';
 
-class SearchAllFragment extends GetView<SearchController> {
+class SearchAllFragment extends GetView<MySearchController> {
   SearchAllFragment({Key? key}) : super(key: key);
   bool b = true;
 

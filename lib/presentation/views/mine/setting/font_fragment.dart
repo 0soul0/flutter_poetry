@@ -1,4 +1,4 @@
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/widget/big_button_widget.dart';
@@ -89,15 +89,15 @@ class FontFragment extends GetView<MineController> {
             const SizedBox(
               height: Dimens.space,
             ),
-            NeumorphicSlider(
-              min: 8,
-              max: 30,
-              value: controller.seekValue.value.toDouble(),
-              onChanged: (value) {
-                controller.setSeekValue(value.toInt());
-                controller.seekValueShow.value = true;
-              },
-            ),
+            // NeumorphicSlider(
+            //   min: 8,
+            //   max: 30,
+            //   value: controller.seekValue.value.toDouble(),
+            //   onChanged: (value) {
+            //     controller.setSeekValue(value.toInt());
+            //     controller.seekValueShow.value = true;
+            //   },
+            // ),
           ],
         ),
       ),

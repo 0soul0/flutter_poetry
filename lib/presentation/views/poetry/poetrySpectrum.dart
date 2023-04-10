@@ -1,3 +1,8 @@
+import 'dart:async';
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
@@ -8,6 +13,7 @@ import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../resource/colors.dart';
 import '../../../tool/is_check.dart';
@@ -67,6 +73,18 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
               children: [
                 Expanded(child: _getSpectrum(ScreenUtil.defaultSize.width)),
                 const BackIconButton(),
+                Obx(() =>controller.imagePath.value.isNotEmpty?Positioned(
+                  bottom: Dimens.backIconPositionBottom,
+                  right: Dimens.backIconPositionRight,
+                  child: TouchUnitWidget(
+                    onTapDelay: () {
+                      controller.shareImage(controller.imagePath.value);
+                    },
+                    child: const Icon(Icons.share_outlined,
+                        color: AppColor.black, size: Dimens.iconSize),
+                  ),
+                ):const SizedBox(width: 0,height: 0,))
+
               ],
             ),
             bottomNavigationBar: Container(
@@ -162,6 +180,9 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
               child: ImageUnitWidget(
                 controller.selectSpectrum.value.spectrum,
                 width,
+                callBack: (path) {
+                  controller.imagePath.value = path;
+                },
               ),
             ),
           ],
@@ -218,4 +239,5 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
           )
         : Container());
   }
+//
 }

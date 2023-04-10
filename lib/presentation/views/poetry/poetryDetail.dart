@@ -63,7 +63,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
       //   ),
       // ),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(Dimens.toolbarHeight*2 * TextUnitWidget.textSizeTimes),
+        preferredSize: Size.fromHeight(Dimens.toolbarHeight*3 * TextUnitWidget.textSizeTimes),
         child: Container(
           color: Colors.transparent,
           margin: EdgeInsets.zero,

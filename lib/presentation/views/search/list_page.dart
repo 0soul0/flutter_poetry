@@ -16,7 +16,7 @@ class ListPage extends StatelessWidget {
   late String id;
   late ListType listType;
   int page = 1;
-  final SearchController controller = Get.put(SearchController());
+  final MySearchController controller = Get.put(MySearchController());
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
 

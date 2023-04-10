@@ -21,12 +21,12 @@ class CatalogueFull extends StatefulWidget {
 class _CatalogueFull extends State<CatalogueFull>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  late SearchController controller;
+  late MySearchController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = Get.find<SearchController>();
+    controller = Get.find<MySearchController>();
     _tabController =
         TabController(vsync: this, length: MainController.category.length);
   }
@@ -117,7 +117,7 @@ class _CatalogueFull extends State<CatalogueFull>
 
           //change search text
           controller.setSearchText(
-              "${SearchController.searchCatalogueKey}${SearchController.split}${item?.category}");
+              "${MySearchController.searchCatalogueKey}${MySearchController.split}${item?.category}");
 
           Get.back();
         });

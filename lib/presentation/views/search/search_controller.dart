@@ -21,7 +21,7 @@ import '../base/baseController.dart';
 import '../item/utils/moduleUnit.dart';
 
 ///  search controller
-class SearchController extends BaseController {
+class MySearchController extends BaseController {
   static const searchCatalogueKey = "c";
   static const split = "://";
 

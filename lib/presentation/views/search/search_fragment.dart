@@ -22,14 +22,14 @@ class SearchFragment extends StatefulWidget {
 
 class _SearchFragment extends State<SearchFragment>
     with SingleTickerProviderStateMixin {
-  late SearchController controller;
+  late MySearchController controller;
   late PageController pageController;
   TabController? tabController;
   late List<FileModel> types;
 
   @override
   void initState() {
-    controller = Get.put(SearchController());
+    controller = Get.put(MySearchController());
     pageController = PageController(initialPage: 1);
     super.initState();
   }
