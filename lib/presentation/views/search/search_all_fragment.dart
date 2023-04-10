@@ -25,6 +25,7 @@ class SearchAllFragment extends GetView<MySearchController> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
           Container(

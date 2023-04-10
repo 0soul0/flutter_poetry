@@ -110,7 +110,7 @@ db update
 返回鍵左間距多一點 v
 優化 詩歌本 v
 
-App store search 頁面圖片
+
 
 分享樂譜圖片 v
 
@@ -118,16 +118,16 @@ App store search 頁面圖片
 兒童詩歌檔案114 副歌跑版 沒有樂譜  標明 v
 字體縮放bug v
 
-英文目錄bug
+英文目錄bug v
 
+
+search 頁面有問題 鍵盤出不來 還會卡卡的
 資料庫update
 fcm 分新
 Ipad
 手機自動判斷旋轉 ??
-Search到的字變色 v3
-
 歌珊之約
-
-
-
 Hymns for life 
+App store search 頁面圖片
+
+Search到的字變色 v3
