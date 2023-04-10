@@ -26,7 +26,7 @@ class BackIconButton extends StatelessWidget {
       bottom: direction == directionVertical
           ? Dimens.backIconPositionBottom + tuneHeight
           : Dimens.backIconPositionBottom / 4 + tuneHeight,
-      left: direction == directionVertical ? 0 : Dimens.backIconPositionRight,
+      left:  Dimens.backIconPositionRight,
       child: TouchUnitWidget(
           onTapDelay: () {
             Get.back();
