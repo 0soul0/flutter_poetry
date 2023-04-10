@@ -224,14 +224,14 @@ class BottomNavigationControllerState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(Dimens.bannerHeight),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(Dimens.bannerHeight),
         child: BannerWidget(),
       ),
       body: pages[_currentIndex],
       bottomNavigationBar: Container(
         color: AppColor.white,
-        margin: const EdgeInsets.only(bottom: Dimens.bottomMargin),
+        margin: const EdgeInsets.only(bottom: Dimens.space * 2),
         height: 56 + TextUnitWidget.textSizeTimes * 3,
         child: Row(
           children: [

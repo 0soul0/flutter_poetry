@@ -53,7 +53,9 @@ class IntlMessages extends Translations {
           "sing":"歌唱",
           "singV":"歌\n唱",
           "noData":"無數據",
-          "notation":"簡譜"
+          "notation":"簡譜",
+          "restartAppText":"將會重新啟動軟體",
+          "cancel":"取消"
         },
         'en_US': {
           'english': 'English',
@@ -111,7 +113,9 @@ class IntlMessages extends Translations {
           "sing":"Sing",
           "singV":"Sing",
           "noData":"No Data",
-          "notation":"Notation"
+          "notation":"Notation",
+          "restartAppText":"The software will restart",
+          "cancel":"cancel"
         },
       };
 }

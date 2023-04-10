@@ -111,17 +111,19 @@ db update
 優化 詩歌本 v
 
 App store search 頁面圖片
-Ipad
+
 分享樂譜圖片 v
-手機自動判斷旋轉 ??
+
 
 兒童詩歌檔案114 副歌跑版 沒有樂譜  標明 v
-
+字體縮放bug v
 
 英文目錄bug
-字體縮放bug
-資料庫update
 
+資料庫update
+fcm 分新
+Ipad
+手機自動判斷旋轉 ??
 Search到的字變色 v3
 
 
