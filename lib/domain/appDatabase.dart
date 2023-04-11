@@ -18,10 +18,11 @@ import 'model/subCategoryModel.dart';
 
 part 'appDatabase.g.dart';
 
-//create: flutter packages pub run build_runner build
 //clear: flutter packages pub run build_runner watch
 
 //參考: https://www.jianshu.com/p/dbf5e2115fe5
+
+
 @Database(version: 2, entities: [
   FileModel,
   SystemInfoModel,
@@ -44,3 +45,4 @@ abstract class AppDatabase extends FloorDatabase {
   RecordDao get recordDao;
 
 }
+

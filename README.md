@@ -121,8 +121,8 @@ db update
 英文目錄bug v
 
 
-search 頁面有問題 鍵盤出不來 還會卡卡的
-資料庫update
+search 頁面有問題 鍵盤出不來 還會卡卡的 v
+資料庫update v
 fcm 分新
 Ipad
 手機自動判斷旋轉 ??
