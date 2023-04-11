@@ -123,7 +123,7 @@ db update
 
 search 頁面有問題 鍵盤出不來 還會卡卡的 v
 資料庫update v
-fcm 分新
+fcm 分新 v
 Ipad
 手機自動判斷旋轉 ??
 歌珊之約

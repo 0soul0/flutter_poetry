@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ late MainController controller;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   version();
+  initAsync();
   init();
   //啟動launch page
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -42,11 +44,20 @@ Future<void> main() async {
   FlutterNativeSplash.remove();
 }
 
-init() async {
+init(){
+
+}
+
+initAsync() async {
   // checkPermission();
   controller = Get.put(MainController());
   await registerNotification();
   await _initGoogleMobileAds();
+
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 void version() {

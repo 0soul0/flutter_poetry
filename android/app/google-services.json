@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "917056923195",
-    "project_id": "fcmflutterpoetry-95547",
-    "storage_bucket": "fcmflutterpoetry-95547.appspot.com"
+    "project_number": "319607339404",
+    "project_id": "poetry-735b0",
+    "storage_bucket": "poetry-735b0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:917056923195:android:a8d2f61bb06af13149de1e",
+        "mobilesdk_app_id": "1:319607339404:android:2ca9e9bf2bfe18d8f3fea9",
         "android_client_info": {
           "package_name": "com.hymn.flutter_poetry"
         }
       },
       "oauth_client": [
         {
-          "client_id": "917056923195-u2b93tdgpddqs3c4786efi4cm0so2khi.apps.googleusercontent.com",
+          "client_id": "319607339404-lob9akhb3d28rtksbji6g3mfmhisue8r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAdHIRDF2g6ZQoazgluPy7SNtUh-R79Dy0"
+          "current_key": "AIzaSyB-NOky84GluJN5dBsLr8yo7N0cPGhOJQU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "917056923195-u2b93tdgpddqs3c4786efi4cm0so2khi.apps.googleusercontent.com",
+              "client_id": "319607339404-lob9akhb3d28rtksbji6g3mfmhisue8r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

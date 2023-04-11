@@ -44,42 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDKu69_W8xSQ4WjBcejlLzMvWeaPWF4l_g',
-    appId: '1:917056923195:web:7f022e1a87d7322b49de1e',
-    messagingSenderId: '917056923195',
-    projectId: 'fcmflutterpoetry-95547',
-    authDomain: 'fcmflutterpoetry-95547.firebaseapp.com',
-    storageBucket: 'fcmflutterpoetry-95547.appspot.com',
-    measurementId: 'G-W791JBES5Q',
+    apiKey: 'AIzaSyC4Xx8bpTNCR8kDfrQWee4bn3wnlDo5RJ8',
+    appId: '1:319607339404:web:b1fc391b6f28dbeaf3fea9',
+    messagingSenderId: '319607339404',
+    projectId: 'poetry-735b0',
+    authDomain: 'poetry-735b0.firebaseapp.com',
+    storageBucket: 'poetry-735b0.appspot.com',
+    measurementId: 'G-JRZCH9H35Y',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAdHIRDF2g6ZQoazgluPy7SNtUh-R79Dy0',
-    appId: '1:917056923195:android:a8d2f61bb06af13149de1e',
-    messagingSenderId: '917056923195',
-    projectId: 'fcmflutterpoetry-95547',
-    storageBucket: 'fcmflutterpoetry-95547.appspot.com',
+    apiKey: 'AIzaSyB-NOky84GluJN5dBsLr8yo7N0cPGhOJQU',
+    appId: '1:319607339404:android:2ca9e9bf2bfe18d8f3fea9',
+    messagingSenderId: '319607339404',
+    projectId: 'poetry-735b0',
+    storageBucket: 'poetry-735b0.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB8yA7dp-ztvVwRMWVAXz_ODnJKMMbjx_4',
-    appId: '1:917056923195:ios:6357fcfaefdcd48749de1e',
-    messagingSenderId: '917056923195',
-    projectId: 'fcmflutterpoetry-95547',
-    storageBucket: 'fcmflutterpoetry-95547.appspot.com',
-    iosClientId:
-        '917056923195-504t4s1es6i0r2g88eo6dmefo7ms3ika.apps.googleusercontent.com',
-    iosBundleId: 'com.example.flutterPoetry',
+    apiKey: 'AIzaSyAU8Nl9uVr6P6ELWciMvb_HTOSUCaBZkkI',
+    appId: '1:319607339404:ios:7efaff12813cd089f3fea9',
+    messagingSenderId: '319607339404',
+    projectId: 'poetry-735b0',
+    storageBucket: 'poetry-735b0.appspot.com',
+    iosClientId: '319607339404-ogd8jf54kr0dnidum3tnhpl0764ego3j.apps.googleusercontent.com',
+    iosBundleId: 'com.hymn.flutterPoetry',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB8yA7dp-ztvVwRMWVAXz_ODnJKMMbjx_4',
-    appId: '1:917056923195:ios:6357fcfaefdcd48749de1e',
-    messagingSenderId: '917056923195',
-    projectId: 'fcmflutterpoetry-95547',
-    storageBucket: 'fcmflutterpoetry-95547.appspot.com',
-    iosClientId:
-        '917056923195-504t4s1es6i0r2g88eo6dmefo7ms3ika.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAU8Nl9uVr6P6ELWciMvb_HTOSUCaBZkkI',
+    appId: '1:319607339404:ios:b89aa9647f85a890f3fea9',
+    messagingSenderId: '319607339404',
+    projectId: 'poetry-735b0',
+    storageBucket: 'poetry-735b0.appspot.com',
+    iosClientId: '319607339404-ft34mr6gc6ra51os8641ap3ghgeunk9m.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterPoetry',
   );
 }
