@@ -116,8 +116,7 @@ class _CatalogueFull extends State<CatalogueFull>
           // controller.updateCatalogue(index, item, false);
 
           //change search text
-          controller.setSearchText(
-              "${MySearchController.searchCatalogueKey}${MySearchController.split}${item?.category}");
+          controller.setSearchText("${MySearchController.searchCatalogueKey}${MySearchController.split}${item?.category}");
 
           Get.back();
         });

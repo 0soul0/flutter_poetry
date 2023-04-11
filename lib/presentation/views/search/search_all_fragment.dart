@@ -13,19 +13,11 @@ import '../widget/text_unit_widget.dart';
 import 'list_page.dart';
 
 class SearchAllFragment extends GetView<MySearchController> {
-  SearchAllFragment({Key? key}) : super(key: key);
-  bool b = true;
+  const SearchAllFragment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (b) {
-      b = false;
-      Future.delayed(Duration.zero,
-          () => FocusScope.of(context).requestFocus(controller.commentFocus));
-    }
-
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
           Container(
@@ -33,7 +25,20 @@ class SearchAllFragment extends GetView<MySearchController> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const BannerWidget(),
+                // const BannerWidget(),
+                const Divider(
+                    height: Dimens.toolbarHeight,
+                    thickness: Dimens.moduleDividing,
+                    color: AppColor.white),
+                Container(
+                  height: 32 * TextUnitWidget.textSizeTimes,
+                  decoration: const BoxDecoration(color: AppColor.dividerColor),
+                  child: _search(context),
+                ),
+                const Divider(
+                    height: Dimens.moduleDividing,
+                    thickness: Dimens.moduleDividing,
+                    color: AppColor.dividerColor),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: Dimens.itemSpace * 2),
@@ -60,10 +65,6 @@ class SearchAllFragment extends GetView<MySearchController> {
                     ],
                   ),
                 ),
-                const Divider(
-                    height: Dimens.moduleDividing,
-                    thickness: Dimens.moduleDividing,
-                    color: AppColor.dividerColor),
                 Expanded(
                   child: Container(
                       padding: const EdgeInsets.fromLTRB(
@@ -77,15 +78,7 @@ class SearchAllFragment extends GetView<MySearchController> {
                     height: Dimens.moduleDividing,
                     thickness: Dimens.moduleDividing,
                     color: AppColor.dividerColor),
-                Container(
-                  height: 32 * TextUnitWidget.textSizeTimes,
-                  decoration: const BoxDecoration(color: AppColor.dividerColor),
-                  child: _search(context),
-                ),
-                const Divider(
-                    height: Dimens.moduleDividing,
-                    thickness: Dimens.moduleDividing,
-                    color: AppColor.dividerColor),
+
               ],
             ),
           ),
@@ -113,6 +106,7 @@ class SearchAllFragment extends GetView<MySearchController> {
         MediaQuery(
           data: mqDataNew,
           child: TextField(
+            autofocus: true,
             controller: controller.textController,
             focusNode: controller.commentFocus,
             textAlign: TextAlign.left,
@@ -128,21 +122,24 @@ class SearchAllFragment extends GetView<MySearchController> {
                 hintText: "searchHelper".tr,
                 hintStyle: Styles.helperStyle16,
                 border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(Dimens.moduleRadius),
-                        bottomRight: Radius.circular(Dimens.moduleRadius))),
+                    // borderRadius: BorderRadius.only(
+                    //     bottomLeft: Radius.circular(Dimens.moduleRadius),
+                    //     bottomRight: Radius.circular(Dimens.moduleRadius))
+                ),
                 enabledBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 0, color: AppColor.dividerColor),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(Dimens.moduleRadius),
-                        bottomRight: Radius.circular(Dimens.moduleRadius))),
+                    // borderRadius: BorderRadius.only(
+                    //     bottomLeft: Radius.circular(Dimens.moduleRadius),
+                    //     bottomRight: Radius.circular(Dimens.moduleRadius))
+                ),
                 focusedBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 1, color: AppColor.secondColor),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(Dimens.moduleRadius),
-                        bottomRight: Radius.circular(Dimens.moduleRadius))),
+                    // borderRadius: BorderRadius.only(
+                    //     bottomLeft: Radius.circular(Dimens.moduleRadius),
+                    //     bottomRight: Radius.circular(Dimens.moduleRadius))
+                ),
                 contentPadding: const EdgeInsets.all(Dimens.itemPaddingSpace_4),
                 prefixIcon: const Icon(Icons.search)),
           ),
