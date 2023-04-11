@@ -124,10 +124,15 @@ db update
 search 頁面有問題 鍵盤出不來 還會卡卡的 v
 資料庫update v
 fcm 分新 v
-Ipad
-手機自動判斷旋轉 ??
-歌珊之約
+Ipad v
+手機自動判斷旋轉 v
+svg image
 Hymns for life 
 App store search 頁面圖片
+
+歌珊之約
+青少年系列
+英文詩歌重新整理 顯示歌譜和歌本排序
+測試
 
 Search到的字變色 v3

@@ -40,7 +40,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   RxBool playerUIStatus = false.obs;
   RxDouble ddd = 0.0.obs;
   PageController pageController = PageController(initialPage: 0);
-  double screenWidth = ScreenUtil.defaultSize.width;
+  double screenWidth = ScreenUtil().screenWidth;
   double times = 4 / 5;
   AudioPlayer selectPlayer = AudioPlayer();
   var lastSplitIndex = 0;
@@ -53,7 +53,8 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   @override
   onInit() async {
     super.onInit();
-    await init();
+    init();
+    await initAsync();
     initState();
   }
 
@@ -78,6 +79,12 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     initState();
   }
 
+  init(){
+    if(screenWidth>600){
+      screenWidth=600;
+    }
+  }
+
   initState() {
     title.value = arguments.getTitle();
     setPoetryItemToList(arguments);
@@ -87,7 +94,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     initMusicPlayer();
   }
 
-  init() async {
+  initAsync() async {
     _poetryDao = await FxDataBaseManager.poetryDao();
   }
 
@@ -361,7 +368,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   /// @param str String
   /// @return Is symbols
   isSymbols(String str) {
-    final symbolsRegex = RegExp(r'^[,.，─：；;、。:？『』！“]+$');
+    final symbolsRegex = RegExp(r'^[,.，─：；;、。:？『』！!“]+$');
     return symbolsRegex.hasMatch(str);
   }
 
