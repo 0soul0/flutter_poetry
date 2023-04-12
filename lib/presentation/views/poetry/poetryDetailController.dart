@@ -390,6 +390,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   setHrefToOtherLanguageHymns(PoetryModel item) async {
     List<LanguageUrlModel> list = [];
     var maps = [];
+    if(item.languageUrl.isEmpty) return;
     try {
       maps = json.decode(json.decode(item.languageUrl));
     } catch (error) {

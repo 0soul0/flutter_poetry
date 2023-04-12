@@ -6,7 +6,7 @@ import 'baseDao.dart';
 @dao
 abstract class FileDao extends BaseDao<FileModel> {
   static const tableName = "FileModel";
-  @Query('SELECT * FROM $tableName')
+  @Query('SELECT * FROM $tableName ORDER BY id ASC')
   Future<List<FileModel>> queryAll();
 
   @Query('SELECT * FROM $tableName WHERE id = :id')
