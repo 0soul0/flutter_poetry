@@ -368,7 +368,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   /// @param str String
   /// @return Is symbols
   isSymbols(String str) {
-    final symbolsRegex = RegExp(r'^[,.，─：；;、。:？『』！!“]+$');
+    final symbolsRegex = RegExp(r'^[,.，─：；;、()。:？『』！!“]+$');
     return symbolsRegex.hasMatch(str);
   }
 

@@ -95,7 +95,7 @@ db update
 樂譜上面間距 v
 優化詩歌譜 異步 v
 優化下載音樂 異步 主要慢的原因 新歌頌詠？無法讀取 v
-音樂聲音很小
+音樂聲音很小 v
 底下歌詞向上調整一點 v
 樂譜字體大p 2 v
 
@@ -126,12 +126,12 @@ search 頁面有問題 鍵盤出不來 還會卡卡的 v
 fcm 分新 v
 Ipad v
 手機自動判斷旋轉 v
-svg image
+svg image v
 Hymns for life 
 App store search 頁面圖片
 
 歌珊之約
-青少年系列
+青少年系列 v
 英文詩歌重新整理 顯示歌譜和歌本排序
 測試
 

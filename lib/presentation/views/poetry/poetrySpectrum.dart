@@ -71,20 +71,24 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
             ),
             body: Stack(
               children: [
-                Expanded(child: _getSpectrum(ScreenUtil.defaultSize.width)),
+                _getSpectrum(ScreenUtil().screenWidth),
                 const BackIconButton(),
-                Obx(() =>controller.imagePath.value.isNotEmpty?Positioned(
-                  bottom: Dimens.backIconPositionBottom,
-                  right: Dimens.backIconPositionRight,
-                  child: TouchUnitWidget(
-                    onTapDelay: () {
-                      controller.shareImage(controller.imagePath.value);
-                    },
-                    child: const Icon(Icons.share_outlined,
-                        color: AppColor.black, size: Dimens.iconSize),
-                  ),
-                ):const SizedBox(width: 0,height: 0,))
-
+                Obx(() => controller.imagePath.value.isNotEmpty
+                    ? Positioned(
+                        bottom: Dimens.backIconPositionBottom,
+                        right: Dimens.backIconPositionRight,
+                        child: TouchUnitWidget(
+                          onTapDelay: () {
+                            controller.shareImage(controller.imagePath.value);
+                          },
+                          child: const Icon(Icons.share_outlined,
+                              color: AppColor.black, size: Dimens.iconSize),
+                        ),
+                      )
+                    : const SizedBox(
+                        width: 0,
+                        height: 0,
+                      ))
               ],
             ),
             bottomNavigationBar: Container(
@@ -173,20 +177,22 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   }
 
   _getSpectrum(width) {
-    return Obx(() => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: ImageUnitWidget(
-                controller.selectSpectrum.value.spectrum,
-                width,
-                callBack: (path) {
-                  controller.imagePath.value = path;
-                },
-              ),
+    return Obx(
+      () => Center(
+        child: Flex(
+          direction: Axis.vertical,
+          children:[ Expanded(
+            child: ImageUnitWidget(
+              controller.selectSpectrum.value.spectrum,
+              width,
+              callBack: (path) {
+                controller.imagePath.value = path;
+              },
             ),
-          ],
-        ));
+          ),]
+        ),
+      ),
+    );
   }
 
   _play() {

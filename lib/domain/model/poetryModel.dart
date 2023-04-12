@@ -73,7 +73,7 @@ class PoetryModel {
     List<SpectrumModel> list = [];
 
     // 過濾svg
-    removeSvg();
+    // removeSvg();
 
     if (singMedia.isNotEmpty) {
       list.add(SpectrumModel(

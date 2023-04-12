@@ -7,6 +7,7 @@ class IntlMessages extends Translations {
         'zh_CN': {
           'english': '英文',
           'chinese':'中文',
+          'chineseTs':'中文',
           "helloWorld": "你好",
           "banner": "廣告",
           "record": "紀錄",
@@ -60,6 +61,7 @@ class IntlMessages extends Translations {
         'en_US': {
           'english': 'English',
           'chinese':'Chinese',
+          'chineseTs':'Chinese',
           "helloWorld": "HelloWorld",
           "banner": "Banner",
           "record": "Record",

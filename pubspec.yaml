@@ -44,7 +44,8 @@ dependencies:
   storage_view: ^0.1.0-dev.1
   audioplayers: ^2.0.0
   flutter_screenutil: ^5.6.0
-  flutter_svg: ^2.0.0
+  flutter_svg: ^1.1.6
+  widgets_to_image: ^0.0.2
   uuid: ^3.0.6
   event_bus: ^2.0.0
   lifecycle: ^0.6.0
