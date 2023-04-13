@@ -7,7 +7,7 @@
         android:name="${applicationName}"
         android:icon="@mipmap/lanuch_logo"
         android:usesCleartextTraffic="true"
-        android:label="hymnLife">
+        android:label="Hymns for life">
         <activity
             android:name="com.hymn.flutter_poetry.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

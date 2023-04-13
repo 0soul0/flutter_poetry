@@ -114,7 +114,9 @@ class MineController extends BaseController {
           title: "resVersion".tr,
           value: CacheData.resVersion,
           iconGif: "assets/icon_book.gif",
-          onTapFunction: () {}),
+          onTapFunction: () {
+
+          }),
       ItemModel(
           id: 1,
           title: "localVersion".tr,
