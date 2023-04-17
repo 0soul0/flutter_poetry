@@ -62,47 +62,74 @@ class PoetryDetail extends GetView<PoetryDetailController> {
       //     ),
       //   ),
       // ),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(Dimens.toolbarHeight*2.7 * TextUnitWidget.textSizeTimes),
-        child: Container(
-          color: Colors.transparent,
-          margin: EdgeInsets.zero,
-          padding: EdgeInsets.zero,
-          child: Container(
-            margin: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
-            child: Column(
-              children: [
-                const BannerWidget(),
-                const SizedBox(height: Dimens.space,),
-                title(context),
-                Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _spectrum(() {
-                        controller.selectPlayer.pause();
-                        Get.toNamed(AppRoutes.poetrySpectrum);
-                      }, Icons.queue_music_outlined, 'sheetMusic'.tr),
-                      const SizedBox(
-                        width: Dimens.itemSpace,
-                      ),
-                      _languageUrl()
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-      body: Stack(
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(),
+      //   child: Container(
+      //     color: Colors.transparent,
+      //     margin: EdgeInsets.zero,
+      //     padding: EdgeInsets.zero,
+      //     child: Container(
+      //       margin: EdgeInsets.zero,
+      //       padding: EdgeInsets.zero,
+      //       child: Column(
+      //         children: [
+      //           const BannerWidget(),
+      //           const SizedBox(height: Dimens.space,),
+      //           title(context),
+      //           Center(
+      //             child: Row(
+      //               mainAxisSize: MainAxisSize.min,
+      //               children: [
+      //                 _spectrum(() {
+      //                   controller.selectPlayer.pause();
+      //                   Get.toNamed(AppRoutes.poetrySpectrum);
+      //                 }, Icons.queue_music_outlined, 'sheetMusic'.tr),
+      //                 const SizedBox(
+      //                   width: Dimens.itemSpace,
+      //                 ),
+      //                 _languageUrl()
+      //               ],
+      //             ),
+      //           )
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
+      body:Stack(
         children: [
           Container(
             margin:
-                const EdgeInsets.symmetric(horizontal: Dimens.textSpace * 2),
+            const EdgeInsets.symmetric(horizontal: Dimens.textSpace * 2),
             child: Column(
               children: [
+                Container(
+                  color: Colors.transparent,
+                  margin: EdgeInsets.zero,
+                  padding: EdgeInsets.zero,
+                  child: Column(
+                    children: [
+                      const BannerWidget(),
+                      const SizedBox(height: Dimens.space,),
+                      title(context),
+                      Center(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            _spectrum(() {
+                              controller.selectPlayer.pause();
+                              Get.toNamed(AppRoutes.poetrySpectrum);
+                            }, Icons.queue_music_outlined, 'sheetMusic'.tr),
+                            const SizedBox(
+                              width: Dimens.itemSpace,
+                            ),
+                            _languageUrl()
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ) ,
                 Expanded(
                   child: _poetry(context),
                 ),
@@ -355,11 +382,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
   }
 
   _refrain(BuildContext context) {
-    if (controller.refrain.isEmpty) {
-      return Container();
-    }
-
-    return Obx(() => Container(
+    return Obx(() =>controller.refrain.isEmpty?Container():Container(
           margin: const EdgeInsets.only(left: Dimens.textSpace * 1),
           padding: const EdgeInsets.symmetric(vertical: Dimens.itemSpace),
           child: Column(
