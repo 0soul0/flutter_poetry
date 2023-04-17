@@ -7,6 +7,7 @@ class Themes {
   final darkTheme = ThemeData.dark().copyWith(
       canvasColor: AppColor.white ,
       textTheme: const TextTheme(
+        displayLarge:Styles.subTextStyleWhite,
           displayMedium:Styles.textStyleWhite,
           bodyMedium: Styles.textStyleShowWhite,
           displaySmall: Styles.helperStyleShowWhite,
@@ -19,6 +20,7 @@ class Themes {
   final lightTheme = ThemeData.light().copyWith(
       canvasColor: AppColor.black ,
       textTheme: const TextTheme(
+        displayLarge:Styles.subTextStyleBlack,
           displayMedium:Styles.textStyleBlack,
         displaySmall: Styles.helperStyle,
         bodyMedium: Styles.textStyleGray,

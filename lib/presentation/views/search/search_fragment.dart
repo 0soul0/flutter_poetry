@@ -153,6 +153,7 @@ class _SearchFragment extends State<SearchFragment>
             readOnly: true,
             textAlign: TextAlign.left,
             onTap: () {
+              controller.page.value="search";
               Get.toNamed(AppRoutes.searchAllFragment);
             },
             // onChanged: (value) {

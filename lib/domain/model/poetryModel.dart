@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:floor/floor.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../../data/route_api.dart';
 import '../../presentation/views/item/utils/moduleUnit.dart';
@@ -203,7 +203,7 @@ class SpectrumModel {
   late String media;
   late String name;
   late String nameV;
-  AudioPlayer play = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
+  AudioPlayer? play;
 
   SvgPicture? pic; //垂直顯示
 }

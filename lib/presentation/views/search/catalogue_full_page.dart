@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../domain/model/catalogueModel.dart';
 import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
+import '../../../routes/app_routes.dart';
 import '../item/catalogue_item.dart';
 import '../widget/back_icon_button.dart';
 import '../widget/text_unit_widget.dart';
@@ -34,19 +35,19 @@ class _CatalogueFull extends State<CatalogueFull>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(Dimens.bannerHeight),
-        child: Text(""),
-      ),
+      // appBar: const PreferredSize(
+      //   preferredSize: Size.fromHeight(Dimens.bannerHeight),
+      //   child: Text(""),
+      // ),
 
       body: Stack(
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(
-                height: Dimens.bottomMargin,
-              ),
+              // const SizedBox(
+              //   height: Dimens.bottomMargin,
+              // ),
               TabBar(
                 isScrollable: true,
                 labelPadding: const EdgeInsets.only(
@@ -93,7 +94,7 @@ class _CatalogueFull extends State<CatalogueFull>
               ),
             ],
           ),
-          const BackIconButton()
+          // const BackIconButton()
         ],
       ),
     );
@@ -117,8 +118,9 @@ class _CatalogueFull extends State<CatalogueFull>
 
           //change search text
           controller.setSearchText("${MySearchController.searchCatalogueKey}${MySearchController.split}${item?.category}");
-
-          Get.back();
+          controller.page.value="category";
+          Get.toNamed(AppRoutes.searchAllFragment,);
+          // Get.back();
         });
       },
     );

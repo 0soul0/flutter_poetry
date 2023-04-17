@@ -42,7 +42,8 @@ dependencies:
   dio: ^4.0.6
   pretty_dio_logger: ^1.1.1
   storage_view: ^0.1.0-dev.1
-  audioplayers: ^2.0.0
+#  audioplayers: ^2.0.0
+  just_audio: ^0.9.32
   flutter_screenutil: ^5.6.0
   flutter_svg: ^1.1.6
   widgets_to_image: ^0.0.2

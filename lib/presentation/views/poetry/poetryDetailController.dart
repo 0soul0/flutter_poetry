@@ -1,15 +1,17 @@
 import 'dart:convert';
 import 'dart:isolate';
-import 'package:audioplayers/audioplayers.dart';
+import 'dart:math';
 import 'package:easy_isolate/easy_isolate.dart' as isolate;
 import 'package:easy_isolate/easy_isolate.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
+import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:share_extend/share_extend.dart';
 
 import '../../../domain/dao/poetryDao.dart';
@@ -36,7 +38,8 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   Rx<Duration> duration = const Duration(seconds: 0).obs;
   RxBool loadFinish = false.obs;
   Rx<Duration> position = const Duration(seconds: 0).obs;
-  Rx<PlayerState> playState = PlayerState.stopped.obs;
+
+  RxBool playing = false.obs;
   RxBool playerUIStatus = false.obs;
   RxDouble ddd = 0.0.obs;
   PageController pageController = PageController(initialPage: 0);
@@ -46,7 +49,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   var lastSplitIndex = 0;
   final scrollController = ScrollController();
   final GlobalKey keyRefrain = GlobalKey();
-  Rx<String> imagePath ="".obs;
+  Rx<String> imagePath = "".obs;
 
   int fake = 0;
 
@@ -68,7 +71,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   void onClose() {
     super.onClose();
     for (var element in spectrumAndMedia) {
-      element.play.release();
+      element.play?.stop();
     }
 
     setVerticalScreen();
@@ -79,9 +82,9 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     initState();
   }
 
-  init(){
-    if(screenWidth>600){
-      screenWidth=600;
+  init() {
+    if (screenWidth > 600) {
+      screenWidth = 600;
     }
   }
 
@@ -149,9 +152,10 @@ class PoetryDetailController extends BaseController<PoetryModel> {
 
   downloadMusic() async {
     for (var i = 0; i < spectrumAndMedia.length; i++) {
-      if (spectrumAndMedia[i].play.source == null &&
+      if (spectrumAndMedia[i].play == null &&
           spectrumAndMedia[i].media.isNotEmpty) {
-        await spectrumAndMedia[i].play.setSourceUrl(spectrumAndMedia[i].media);
+        spectrumAndMedia[i].play = AudioPlayer();
+        await spectrumAndMedia[i].play?.setUrl(spectrumAndMedia[i].media);
       }
     }
     if (media.isNotEmpty) {
@@ -175,14 +179,18 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     }
 
     if (spectrumAndMedia[sIndex].media.isNotEmpty) {
-      selectPlayer = spectrumAndMedia[sIndex].play;
-      position.value = (await selectPlayer.getCurrentPosition()) ??
-          const Duration(seconds: 0);
-      duration.value =
-          (await selectPlayer.getDuration()) ?? const Duration(seconds: 0);
-      selectPlayer.onPositionChanged.listen((d) => position.value = d);
-      selectPlayer.onDurationChanged.listen((d) => duration.value = d);
-      selectPlayer.onPlayerStateChanged.listen((d) => playState.value = d);
+      selectPlayer = spectrumAndMedia[sIndex].play!;
+      position.value = (selectPlayer.position);
+      duration.value = (selectPlayer.duration) ?? const Duration(seconds: 0);
+      selectPlayer.positionStream.listen((event) {
+        position.value = event;
+      });
+      selectPlayer.durationStream.listen((event) {
+        duration.value = event!;
+      });
+      selectPlayer.playbackEventStream.listen((state) {
+        playing.value=selectPlayer.playing;
+      });
       if (!loadFinish.value) {
         loadFinish.value = true;
       }
@@ -205,12 +213,12 @@ class PoetryDetailController extends BaseController<PoetryModel> {
 
   /// play music
   toggleSMusicStatus() async {
-    if (selectPlayer.state == PlayerState.paused ||
-        selectPlayer.state == PlayerState.stopped) {
-      await selectPlayer.resume();
+    if (!selectPlayer.playing) {
+      await selectPlayer.play();
       return;
     }
     await selectPlayer.pause();
+    myLog(selectPlayer.playerState);
   }
 
   /// forward or replay music
@@ -243,6 +251,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   ///
   /// @param item data of poetry
   setRefrain(PoetryModel item) {
+    if(item.refrain.isEmpty)return;
     refrain.value = splitContent(item.refrain);
   }
 
@@ -293,13 +302,14 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   String splitContent(String contents) {
     var strList = [];
     var str = "";
-    var result ="";
-    var paragraphWidth = stringWidth(contents)/((stringWidth(contents)/screenWidth).ceil());
-    contents=contents.replaceAll("－", "");
+    var result = "";
+    var paragraphWidth =
+        stringWidth(contents) / ((stringWidth(contents) / screenWidth).ceil());
+    contents = contents.replaceAll("－", "");
     // 判斷分割點
     for (int i = 0; i < contents.length; i++) {
       if (isNumeric(contents[i]) || isSymbols(contents[i])) {
-        strList.add(str+contents[i]);
+        strList.add(str + contents[i]);
         str = "";
         continue;
       }
@@ -307,38 +317,41 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     }
     strList.add(str);
     // 判斷字段長度 超過螢幕跳行or 數字分段
-    str="";
-    for(int i=0;i<strList.length;i++){
-      if(isNumeric(strList[i])){
-        if(result.isEmpty){
+    str = "";
+    for (int i = 0; i < strList.length; i++) {
+      if (isNumeric(strList[i])) {
+        if (result.isEmpty) {
           result = strList[i];
-          str="";
+          str = "";
           continue;
         }
         result += "\n$str\n${strList[i]}";
-        str="";
+        str = "";
         continue;
       }
 
-      if(stringWidthLongThanScreen(str,strList[i],customWidth: paragraphWidth)&&str.isNotEmpty){
+      if (stringWidthLongThanScreen(str, strList[i],
+              customWidth: paragraphWidth) &&
+          str.isNotEmpty) {
         result += "\n$str";
         str = strList[i];
         continue;
       }
-      str+=strList[i];
+      str += strList[i];
     }
     result += "\n$str";
     return result;
   }
 
-  stringWidthLongThanScreen(String str, String subStr,{double? customWidth}) {
-    final text = str+subStr;
-    final width = customWidth??screenWidth;
+  stringWidthLongThanScreen(String str, String subStr, {double? customWidth}) {
+    final text = str + subStr;
+    final width = customWidth ?? screenWidth;
     return stringWidth(text) > width;
   }
 
-  stringWidth(String str){
-    final style = TextStyle(fontSize: Dimens.textSize*TextUnitWidget.textSizeTimes);
+  stringWidth(String str) {
+    final style =
+        TextStyle(fontSize: Dimens.textSize * TextUnitWidget.textSizeTimes);
     final textWidth = IsCheck.measureText(str, style).width;
     return textWidth;
   }
@@ -390,7 +403,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   setHrefToOtherLanguageHymns(PoetryModel item) async {
     List<LanguageUrlModel> list = [];
     var maps = [];
-    if(item.languageUrl.isEmpty) return;
+    if (item.languageUrl.isEmpty) return;
     try {
       maps = json.decode(json.decode(item.languageUrl));
     } catch (error) {
@@ -411,5 +424,4 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   shareImage(String imagePath) async {
     await ShareExtend.share(imagePath, "image");
   }
-
 }

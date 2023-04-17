@@ -34,6 +34,7 @@ class MySearchController extends BaseController {
   RxList<CatalogueModel> catalogueItems = List<CatalogueModel>.from([]).obs;
   RxList<PoetryModel> poetrySearchItems = List<PoetryModel>.from([]).obs;
   RxMap poetryItemsMap = {}.obs;
+  RxString page = "category".obs;
   Rx<MsgEvent> loadingProgress =
       MsgEvent("loading", map: {"total": 0, "number": 0, "progress": 0}).obs;
 

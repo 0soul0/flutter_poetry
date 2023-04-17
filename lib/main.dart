@@ -9,6 +9,7 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/data/cache_data.dart';
 import 'package:flutter_poetry/main_controller.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
+import 'package:flutter_poetry/presentation/views/search/catalogue_full_page.dart';
 import 'package:flutter_poetry/presentation/views/widget/banner_widget.dart';
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/resource/colors.dart';
@@ -209,7 +210,7 @@ class BottomNavigationControllerState
     extends State<BottomNavigationController> {
   //目前選擇頁索引值
   int _currentIndex = 1; //預設值
-  final pages = [RecordFragment(), const SearchFragment(), MineFragment()];
+  final pages = [RecordFragment(), const SearchFragment(), MineFragment(),const CatalogueFull()];
 
   @override
   void initState() {
@@ -253,6 +254,9 @@ class BottomNavigationControllerState
         height: 56 + TextUnitWidget.textSizeTimes * 3,
         child: Row(
           children: [
+            Expanded(
+                child:
+                _bottomNavigationItem('catalogue'.tr, 3, Icons.category_rounded)),
             Expanded(
                 child:
                     _bottomNavigationItem("record".tr, 0, Icons.history_edu)),

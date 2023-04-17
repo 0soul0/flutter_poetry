@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
@@ -256,8 +255,8 @@ class PoetryDetail extends GetView<PoetryDetailController> {
     return Obx(() => DefaultTabController(
         length: controller.media.length,
         child: TabBar(
-          onTap: (index) {
-            controller.selectPlayer.pause();
+          onTap: (index) async {
+            await controller.selectPlayer.pause();
             controller.selectMusicPlayer(controller.media[index].index);
           },
           unselectedLabelColor: AppColor.helperColor,
@@ -297,7 +296,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                     controller.toggleSMusicStatus();
                   },
                   child: Icon(
-                    controller.playState.value == PlayerState.playing
+                    controller.playing==true
                         ? Icons.pause
                         : Icons.play_arrow_rounded,
                     color: Theme.of(context).canvasColor,

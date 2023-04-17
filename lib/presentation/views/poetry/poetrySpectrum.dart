@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
 import 'package:flutter_poetry/presentation/views/widget/back_icon_button.dart';
@@ -195,55 +194,55 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
     );
   }
 
-  _play() {
-    return Obx(() => controller.media.isNotEmpty
-        ? Stack(
-            children: [
-              FloatFabWidget(
-                Icons.music_note_outlined,
-                const [
-                  0,
-                  Dimens.backIconPositionBottom / 4,
-                  0,
-                  Dimens.backgroundMarginRight * 2
-                ],
-                () {
-                  controller.togglePlayerUI();
-                },
-                true,
-                size: Dimens.iconSize * 1.2,
-              ),
-              FloatFabWidget(Icons.replay_10, const [
-                0,
-                Dimens.backIconPositionBottom / 4 + 42,
-                0,
-                Dimens.backgroundMarginRight * 2
-              ], () {
-                controller.seekMusic(-10 * 1000);
-              }, controller.playerUIStatus.value),
-              FloatFabWidget(
-                  controller.playState.value == PlayerState.playing
-                      ? Icons.pause
-                      : Icons.play_arrow_rounded,
-                  const [
-                    0,
-                    Dimens.backIconPositionBottom / 4 + 30,
-                    0,
-                    Dimens.backgroundMarginRight * 2 + 30
-                  ], () {
-                controller.toggleSMusicStatus();
-              }, controller.playerUIStatus.value),
-              FloatFabWidget(Icons.forward_10, const [
-                0,
-                Dimens.backIconPositionBottom / 4,
-                0,
-                Dimens.backgroundMarginRight * 2 + 42
-              ], () {
-                controller.seekMusic(10 * 1000);
-              }, controller.playerUIStatus.value),
-            ],
-          )
-        : Container());
-  }
+  // _play() {
+  //   return Obx(() => controller.media.isNotEmpty
+  //       ? Stack(
+  //           children: [
+  //             FloatFabWidget(
+  //               Icons.music_note_outlined,
+  //               const [
+  //                 0,
+  //                 Dimens.backIconPositionBottom / 4,
+  //                 0,
+  //                 Dimens.backgroundMarginRight * 2
+  //               ],
+  //               () {
+  //                 controller.togglePlayerUI();
+  //               },
+  //               true,
+  //               size: Dimens.iconSize * 1.2,
+  //             ),
+  //             FloatFabWidget(Icons.replay_10, const [
+  //               0,
+  //               Dimens.backIconPositionBottom / 4 + 42,
+  //               0,
+  //               Dimens.backgroundMarginRight * 2
+  //             ], () {
+  //               controller.seekMusic(-10 * 1000);
+  //             }, controller.playerUIStatus.value),
+  //             FloatFabWidget(
+  //                 controller.playState.value == PlayerState.playing
+  //                     ? Icons.pause
+  //                     : Icons.play_arrow_rounded,
+  //                 const [
+  //                   0,
+  //                   Dimens.backIconPositionBottom / 4 + 30,
+  //                   0,
+  //                   Dimens.backgroundMarginRight * 2 + 30
+  //                 ], () {
+  //               controller.toggleSMusicStatus();
+  //             }, controller.playerUIStatus.value),
+  //             FloatFabWidget(Icons.forward_10, const [
+  //               0,
+  //               Dimens.backIconPositionBottom / 4,
+  //               0,
+  //               Dimens.backgroundMarginRight * 2 + 42
+  //             ], () {
+  //               controller.seekMusic(10 * 1000);
+  //             }, controller.playerUIStatus.value),
+  //           ],
+  //         )
+  //       : Container());
+  // }
 //
 }
