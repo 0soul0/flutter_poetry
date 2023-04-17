@@ -123,7 +123,7 @@ class _SearchFragment extends State<SearchFragment>
                   ),
                   TextUnitWidget(
                     "${controller.loadingProgress.value.map?["number"]}/${controller.loadingProgress.value.map?["total"]}",
-                    style: Styles.helperStyleBlack,
+                    style: Theme.of(context).textTheme.displayMedium,
                   )
                 ],
               ),
@@ -145,7 +145,7 @@ class _SearchFragment extends State<SearchFragment>
       children: [
         TextUnitWidget(
           "searchHelper".tr,
-          style: Styles.helperStyle16,
+          style: Theme.of(context).textTheme.displaySmall,
         ),
         MediaQuery(
           data: mqDataNew,
@@ -162,9 +162,9 @@ class _SearchFragment extends State<SearchFragment>
             // },
             decoration: InputDecoration(
                 filled: true,
-                fillColor: AppColor.backgroundColor,
+                fillColor: Theme.of(context).colorScheme.background,
                 hintText: "searchHelper".tr,
-                hintStyle: Styles.helperStyle16,
+                hintStyle: Theme.of(context).textTheme.displaySmall,
                 border: const OutlineInputBorder(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(Dimens.moduleRadius),

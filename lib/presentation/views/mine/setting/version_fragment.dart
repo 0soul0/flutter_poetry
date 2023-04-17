@@ -33,7 +33,7 @@ class VersionFragment extends GetView<MineController> {
                 Dimens.backgroundMarginTop,
                 Dimens.backgroundMarginRight,
                 Dimens.space),
-            color: AppColor.backgroundColor,
+            color: Theme.of(context).colorScheme.background,
             child: Column(children: [
               Expanded(child: Container(child: _list())),
             ]),

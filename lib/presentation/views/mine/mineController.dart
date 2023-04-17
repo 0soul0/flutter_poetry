@@ -29,6 +29,7 @@ class MineController extends BaseController {
   static const String constLanguageSelected = "constLanguageSelected";
   static const String constLanguageSelectedText = "constLanguageSelectedText";
   static const String constSeekValue = "constSeekValue";
+  static const String constDarkModel = "constDarkModel";
   static const String constImg = "constImg";
 
   Rx<int> seekValue = Dimens.textSize.toInt().obs;
@@ -38,6 +39,7 @@ class MineController extends BaseController {
   RxList<ItemModel> version = List<ItemModel>.from([]).obs;
   RxList<ItemModel> language = List<ItemModel>.from([]).obs;
   Rx<String> imgFilePath = "".obs;
+  RxBool displayModel = false.obs;
   RxList<ItemModel> hymn = List<ItemModel>.from([]).obs;
   late FileDao _fileDao;
 
@@ -52,6 +54,7 @@ class MineController extends BaseController {
 
   init() async {
     _fileDao = await FxDataBaseManager.fileDao();
+    displayModel.value = await read(constDarkModel, "false") =='true';
   }
 
   initList() async {

@@ -18,8 +18,8 @@ class FontFragment extends GetView<MineController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(Dimens.bannerHeight),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(Dimens.bannerHeight),
         child: BannerWidget(),
       ),
       body: Stack(children: [
@@ -34,7 +34,7 @@ class FontFragment extends GetView<MineController> {
             const SizedBox(
               height: Dimens.space * 3,
             ),
-            _seekbar(),
+            _seekbar(context),
             const SizedBox(
               height: Dimens.space * 3,
             ),
@@ -61,12 +61,12 @@ class FontFragment extends GetView<MineController> {
                     "textSizeSample".tr,
                     textScaleFactor: controller.valueToValueTime(
                         controller.seekValue.value.toDouble()),
-                    style: Styles.textStyleBlack,
+                    style:  Theme.of(context).textTheme.displayMedium,
                   ))),
         ));
   }
 
-  _seekbar() {
+  _seekbar(BuildContext context) {
     return Obx(
       () => Container(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.itemSpace),
@@ -76,14 +76,14 @@ class FontFragment extends GetView<MineController> {
               children: [
                 TextUnitWidget(
                   "textSize".tr,
-                  style: Styles.textStyleBlack,
+                  style:  Theme.of(context).textTheme.displayMedium,
                 ),
                 const SizedBox(
                   width: Dimens.space,
                 ),
                 TextUnitWidget(
                   controller.seekValue.value.toString(),
-                  style: Styles.textStyleBlack,
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
               ],
             ),
@@ -129,7 +129,7 @@ class FontFragment extends GetView<MineController> {
           title: const Icon(Icons.refresh,size: Dimens.iconSize*3,),
           content: TextUnitWidget(
             "restartAppText".tr,
-            style: Styles.textStyleBlack,
+            style:  Theme.of(context).textTheme.displayMedium,
           ),
           actions: [
             Center(

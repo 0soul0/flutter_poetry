@@ -16,6 +16,7 @@ import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/intl_messages.dart';
 import 'package:flutter_poetry/resource/l10n/l10n.dart';
 import 'package:flutter_poetry/resource/style.dart';
+import 'package:flutter_poetry/resource/themes.dart';
 import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -44,9 +45,7 @@ Future<void> main() async {
   FlutterNativeSplash.remove();
 }
 
-init(){
-
-}
+init() {}
 
 initAsync() async {
   // checkPermission();
@@ -140,6 +139,16 @@ registerNotification() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  Future<String> language() async {
+    return await SharedPreferencesUnit()
+        .read(MineController.constLanguageSelectedText, 'zh_CN');
+  }
+
+  Future<String> darkModel() async {
+    return await SharedPreferencesUnit()
+        .read(MineController.constDarkModel, 'false');
+  }
+
   @override
   Widget build(BuildContext context) {
     // await SharedPreferencesUnit().read(MineController.constLanguageSelectedText, 'zh_CN');
@@ -153,33 +162,31 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (BuildContext context, Widget? child) {
         return FutureBuilder(
-            future: SharedPreferencesUnit().read(MineController.constLanguageSelectedText, 'zh_CN'),
-            builder: (context,snapshot){
-              if(snapshot.data==null) return const CircularProgressIndicator();
-              var snap = snapshot.data.toString().split("_");
+            future: Future.wait([language(),darkModel()]),
+            builder: (context, snapshot) {
+              if (snapshot.data == null) {
+                return const CircularProgressIndicator();
+              }
+              var snap = snapshot.data![0].toString().split("_");
               var locale = Locale(snap[0], snap[1]);
-          return GetMaterialApp(
-            theme: ThemeData(
-              scaffoldBackgroundColor: AppColor.backgroundColor,
-            ),
-            translations: IntlMessages(),
-            locale: locale,
-            fallbackLocale: const Locale('en', 'US'),
-            navigatorObservers: [defaultLifecycleObserver],
-            localizationsDelegates: const [
-              AppLocalizations.delegate, // Add this line
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: L10n.all,
-            getPages: AppPages.pages,
-            home: child,
-          );
-        });
-
-
-
+              var theme = snapshot.data![1]=="true"?Themes().darkTheme:Themes().lightTheme;
+              return GetMaterialApp(
+                theme: theme,
+                translations: IntlMessages(),
+                locale: locale,
+                fallbackLocale: const Locale('en', 'US'),
+                navigatorObservers: [defaultLifecycleObserver],
+                localizationsDelegates: const [
+                  AppLocalizations.delegate, // Add this line
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: L10n.all,
+                getPages: AppPages.pages,
+                home: child,
+              );
+            });
       },
       child: const Scaffold(
         body: BottomNavigationController(
@@ -241,7 +248,7 @@ class BottomNavigationControllerState
       ),
       body: pages[_currentIndex],
       bottomNavigationBar: Container(
-        color: AppColor.white,
+        // color: Theme.of(context).colorScheme.background,
         margin: const EdgeInsets.only(bottom: Dimens.space * 2),
         height: 56 + TextUnitWidget.textSizeTimes * 3,
         child: Row(
@@ -321,10 +328,10 @@ class BottomNavigationControllerState
         child: _currentIndex == index
             ? Container(
                 margin: const EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                    color: AppColor.white,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
                     shape: BoxShape.circle,
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                           color: AppColor.mainColor,
                           blurRadius: 4,
@@ -344,10 +351,10 @@ class BottomNavigationControllerState
               )
             : Container(
                 margin: const EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                    color: AppColor.white,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
                     shape: BoxShape.circle,
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                           color: AppColor.gray,
                           blurRadius: 4,

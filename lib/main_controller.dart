@@ -15,6 +15,7 @@ import 'package:flutter_poetry/presentation/views/widget/small_button_widget.dar
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/style.dart';
+import 'package:flutter_poetry/resource/themes.dart';
 import 'package:flutter_poetry/routes/singleton.dart';
 import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
 import 'package:get/get.dart';
@@ -73,6 +74,12 @@ class MainController extends BaseController {
     category = allFiles
         .where((element) => element.dbType == CatalogueDao.tableName)
         .toList();
+
+    // if(await SharedPreferencesUnit().read(MineController.constDarkModel, "false")=='true'){
+    //   Get.changeTheme (Themes().darkTheme);
+    // }else{
+    //   Get.changeTheme (Themes().lightTheme);
+    // }
   }
 
   /// can check config data from network

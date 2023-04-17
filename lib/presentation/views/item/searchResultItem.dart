@@ -25,7 +25,7 @@ class SearchResultItem extends StatelessWidget {
             const EdgeInsets.fromLTRB(Dimens.itemSpace, 2, Dimens.itemSpace, 2),
         padding: const EdgeInsets.all(Dimens.itemSpace),
         decoration: BoxDecoration(
-            color: AppColor.white,
+            color: Theme.of(context).colorScheme.background,
             boxShadow: const [
               BoxShadow(
                 color: AppColor.gray,
@@ -41,13 +41,13 @@ class SearchResultItem extends StatelessWidget {
               title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: Styles.textStyleBlack,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
             TextUnitWidget(
               description,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: Styles.helperStyle,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
           ],
         ),

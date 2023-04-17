@@ -56,7 +56,8 @@ class IntlMessages extends Translations {
           "noData":"無數據",
           "notation":"簡譜",
           "restartAppText":"將會重新啟動軟體",
-          "cancel":"取消"
+          "cancel":"取消",
+          "darkModel":"深色模式"
         },
         'en_US': {
           'english': 'English',
@@ -117,7 +118,8 @@ class IntlMessages extends Translations {
           "noData":"No Data",
           "notation":"Notation",
           "restartAppText":"The software will restart",
-          "cancel":"cancel"
+          "cancel":"cancel",
+          "darkModel":"Dark mode"
         },
       };
 }

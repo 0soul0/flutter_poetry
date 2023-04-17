@@ -17,7 +17,7 @@ class SelectedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var color = item.selected ? AppColor.secondColor : AppColor.dividerColor;
     var textStyle =
-        item.selected ? Styles.subTextStyleSecondColor : Styles.textStyleBlack;
+        item.selected ? Styles.subTextStyleSecondColor : Theme.of(context).textTheme.displayMedium;
     var lineWidth =
         item.selected ? Dimens.lineDividing * 4 : Dimens.lineDividing;
     return TouchUnitWidget(

@@ -11,7 +11,9 @@ import 'package:get/get.dart';
 
 import '../../../domain/model/itemModel.dart';
 import '../../../resource/dimens.dart';
+import '../../../resource/themes.dart';
 import '../widget/banner_widget.dart';
+import '../widget/text_unit_widget.dart';
 
 class ListPage<T> extends StatelessWidget {
   const ListPage({this.controller, Key? key}) : super(key: key);
@@ -24,10 +26,37 @@ class ListPage<T> extends StatelessWidget {
     return Container(
       padding:
           const EdgeInsets.symmetric(horizontal: Dimens.backgroundMarginRight),
-      color: AppColor.backgroundColor,
-      child: Column(children: [
-        // const BannerWidget(),
+      color: Theme.of(context).colorScheme.background,
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
         _showImg(),
+        Container(
+            padding: const EdgeInsets.symmetric(
+                vertical: Dimens.itemSpace, horizontal: Dimens.itemSpace),
+            decoration: const BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+                        width: Dimens.lineDividing,
+                        color: AppColor.dividerColor))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TextUnitWidget("darkModel".tr,
+                    style: Theme.of(context).textTheme.displayMedium),
+                Expanded(child: Container()),
+                Obx(() => Switch(
+                    value: controller!.displayModel.value,
+                    onChanged: (bool value) {
+                      controller!.displayModel.value = value;
+                      controller?.storage(MineController.constDarkModel, value);
+                      if(value){
+                        Get.changeTheme (Themes().darkTheme);
+                      }else{
+                        Get.changeTheme (Themes().lightTheme) ;
+                      }
+                    }))
+              ],
+            )),
         Expanded(
           child: _mineList(),
         ),
@@ -43,7 +72,9 @@ class ListPage<T> extends StatelessWidget {
             },
             child: CircleAvatar(
               backgroundColor: AppColor.gray,
-              backgroundImage: controller!.imgFilePath.value.isNotEmpty?FileImage(File(controller!.imgFilePath.value)):null,
+              backgroundImage: controller!.imgFilePath.value.isNotEmpty
+                  ? FileImage(File(controller!.imgFilePath.value))
+                  : null,
               radius: ScreenUtil.defaultSize.width / 7,
               child: controller!.imgFilePath.value.isNotEmpty
                   ? Container()

@@ -75,7 +75,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
               children: [
                 const BannerWidget(),
                 const SizedBox(height: Dimens.space,),
-                title(),
+                title(context),
                 Center(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -104,11 +104,11 @@ class PoetryDetail extends GetView<PoetryDetailController> {
             child: Column(
               children: [
                 Expanded(
-                  child: _poetry(),
+                  child: _poetry(context),
                 ),
                 ScrollToHideWidget(
                   controller: controller.scrollController,
-                  child: _refrain(),
+                  child: _refrain(context),
                 ),
               ],
             ),
@@ -122,7 +122,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.space * 2),
         margin: const EdgeInsets.only(bottom: Dimens.bottomMargin),
-        child: _bottom(),
+        child: _bottom(context),
       ),
     );
   }
@@ -192,7 +192,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
     );
   }
 
-  _bottom() {
+  _bottom(BuildContext context) {
     return Obx(() => controller.media.isNotEmpty
         ? controller.loadFinish.value
             ? Column(
@@ -209,7 +209,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                           ),
                         ),
                       ),
-                      _play()
+                      _play(context)
                     ],
                   )
                 ],
@@ -249,7 +249,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
         )));
   }
 
-  _play() {
+  _play(BuildContext context) {
     return Obx(() => controller.media.isNotEmpty
         ? Row(
             children: [
@@ -257,9 +257,9 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                 onTapDelay: () {
                   controller.seekMusic(-10 * 1000);
                 },
-                child: const Icon(
+                child: Icon(
                   Icons.replay_10,
-                  color: AppColor.black,
+                  color: Theme.of(context).canvasColor,
                   size: Dimens.iconSize * 1.5,
                 ),
               ),
@@ -273,7 +273,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                     controller.playState.value == PlayerState.playing
                         ? Icons.pause
                         : Icons.play_arrow_rounded,
-                    color: AppColor.black,
+                    color: Theme.of(context).canvasColor,
                     size: Dimens.iconSize * 1.5,
                   ),
                 ),
@@ -282,9 +282,9 @@ class PoetryDetail extends GetView<PoetryDetailController> {
                 onTapDelay: () {
                   controller.seekMusic(10 * 1000);
                 },
-                child: const Icon(
+                child:  Icon(
                   Icons.forward_10,
-                  color: AppColor.black,
+                  color: Theme.of(context).canvasColor,
                   size: Dimens.iconSize * 1.5,
                 ),
               ),
@@ -321,14 +321,14 @@ class PoetryDetail extends GetView<PoetryDetailController> {
         : Container());
   }
 
-  _poetry() {
+  _poetry(BuildContext context) {
     return Obx(() => TouchUnitWidget(
       onLongPress:(){
         HapticFeedback.vibrate();
       },
       child: SelectTableWidget(
             controller.strItems.value,
-            style: Styles.textStyleBlack,
+            style: Theme.of(context).textTheme.displayMedium,
             textAlign: TextAlign.left,
           ),
     ));
@@ -354,7 +354,7 @@ class PoetryDetail extends GetView<PoetryDetailController> {
     //     ));
   }
 
-  _refrain() {
+  _refrain(BuildContext context) {
     if (controller.refrain.isEmpty) {
       return Container();
     }
@@ -370,14 +370,14 @@ class PoetryDetail extends GetView<PoetryDetailController> {
               ),
               TextUnitWidget(
                 "retain".tr,
-                style: Styles.textStyleBlack,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
               TouchUnitWidget(
                 onLongPress:(){
                   HapticFeedback.vibrate();
                 },
                 child: SelectTableWidget(controller.refrain.trim().toString(),
-                    style: Styles.textStyleBlack, textAlign: TextAlign.left),
+                    style: Theme.of(context).textTheme.displayMedium, textAlign: TextAlign.left),
               ),
               const Divider(
                 color: Colors.grey,
@@ -388,9 +388,9 @@ class PoetryDetail extends GetView<PoetryDetailController> {
         ));
   }
 
-  title() {
+  title(BuildContext context) {
     return Obx(() => SelectTableWidget(controller.title.value,
-        style: Styles.subTextStyleBlack, maxLines: 1
+        style: Theme.of(context).textTheme.titleMedium, maxLines: 1
         // overflow: TextOverflow.ellipsis,
         ));
   }

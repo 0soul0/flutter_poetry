@@ -18,10 +18,10 @@ class ListPage<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColor.backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       child: Column(children: [
         // const BannerWidget(),
-        SubIconTitle("record".tr, Icons.receipt),
+        SubIconTitle("record".tr, Icons.receipt,style: Theme.of(context).textTheme.titleMedium,),
         const Divider(
             height: Dimens.moduleDividing,
             thickness: Dimens.moduleDividing,

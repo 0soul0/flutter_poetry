@@ -17,37 +17,35 @@ class ListSmallItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TouchUnitWidget(
-        onTapDelay: () {
-          onTapFunction();
-        },
-        child: Container(
-            padding: const EdgeInsets.symmetric(
-                vertical: Dimens.itemSpace * 2, horizontal: Dimens.itemSpace),
-            decoration: const BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-                        width: Dimens.lineDividing,
-                        color: AppColor.dividerColor))),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TextUnitWidget(title, style: Styles.textStyleBlack),
-                Expanded(child: Container()),
-                TextUnitWidget(value, style: Styles.textStyleBlack),
-                const SizedBox(
-                  width: Dimens.space,
-                ),
-                const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: Dimens.smallIconSize,
-                  color: AppColor.gray,
-                )
-              ],
-            )),
-      ),
+    return TouchUnitWidget(
+      onTapDelay: () {
+        onTapFunction();
+      },
+      child: Container(
+          padding: const EdgeInsets.symmetric(
+              vertical: Dimens.itemSpace * 2, horizontal: Dimens.itemSpace),
+          decoration: const BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+                      width: Dimens.lineDividing,
+                      color: AppColor.dividerColor))),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextUnitWidget(title, style: Theme.of(context).textTheme.displayMedium),
+              Expanded(child: Container()),
+              TextUnitWidget(value, style: Theme.of(context).textTheme.displayMedium),
+              const SizedBox(
+                width: Dimens.space,
+              ),
+              const Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: Dimens.smallIconSize,
+                color: AppColor.gray,
+              )
+            ],
+          )),
     );
   }
 }
