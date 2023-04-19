@@ -31,10 +31,6 @@ class ListPage<T> extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: Dimens.itemSpace),
           child: _recordResult(),
         )),
-        const Divider(
-            height: Dimens.moduleDividing,
-            thickness: Dimens.moduleDividing,
-            color: AppColor.dividerColor),
       ]),
     );
   }

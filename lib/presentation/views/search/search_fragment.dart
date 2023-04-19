@@ -47,10 +47,6 @@ class _SearchFragment extends State<SearchFragment>
         decoration: const BoxDecoration(color: AppColor.dividerColor),
         child: _search(context),
       ),
-      const Divider(
-          height: Dimens.moduleDividing,
-          thickness: Dimens.moduleDividing,
-          color: AppColor.dividerColor),
     ]);
   }
 

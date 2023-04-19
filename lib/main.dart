@@ -251,21 +251,32 @@ class BottomNavigationControllerState
       bottomNavigationBar: Container(
         // color: Theme.of(context).colorScheme.background,
         margin: const EdgeInsets.only(bottom: Dimens.space * 2),
-        height: 56 + TextUnitWidget.textSizeTimes * 3,
-        child: Row(
+        height: 60 + TextUnitWidget.textSizeTimes * 3,
+        child: Column(
           children: [
-            Expanded(
-                child:
-                _bottomNavigationItem('catalogue'.tr, 3, Icons.category_rounded)),
-            Expanded(
-                child:
-                    _bottomNavigationItem("record".tr, 0, Icons.history_edu)),
-            Expanded(
-                child:
-                    _bottomNavigationItemCenter("search".tr, 1, Icons.search)),
-            Expanded(
-                child:
-                    _bottomNavigationItem("mine".tr, 2, Icons.account_circle)),
+            const Divider(
+                height: Dimens.moduleDividing,
+                thickness: Dimens.moduleDividing,
+                color: AppColor.dividerColor),
+            Divider(
+                color: Theme.of(context).colorScheme.background,
+                height: Dimens.space),
+            Row(
+              children: [
+                Expanded(
+                    child:
+                    _bottomNavigationItem('catalogue'.tr, 3, Icons.category_rounded)),
+                Expanded(
+                    child:
+                        _bottomNavigationItem("record".tr, 0, Icons.history_edu)),
+                Expanded(
+                    child:
+                        _bottomNavigationItemCenter("search".tr, 1, Icons.search)),
+                Expanded(
+                    child:
+                        _bottomNavigationItem("mine".tr, 2, Icons.account_circle)),
+              ],
+            ),
           ],
         ),
       ),
