@@ -194,7 +194,8 @@ class _$FileDao extends FileDao {
 
   @override
   Future<List<FileModel>> queryAll() async {
-    return _queryAdapter.queryList('SELECT * FROM FileModel',
+    return _queryAdapter.queryList(
+        'SELECT * FROM FileModel ORDER BY CAST(id AS INTEGER)',
         mapper: (Map<String, Object?> row) => FileModel(
             id: row['id'] as String,
             fileName: row['fileName'] as String,
@@ -245,17 +246,9 @@ class _$FileDao extends FileDao {
 
   @override
   Future<List<FileModel>> queryAllByDbType(String dbType) async {
-    return _queryAdapter.queryList('SELECT * FROM FileModel WHERE dbType = ?1',
-        mapper: (Map<String, Object?> row) => FileModel(
-            id: row['id'] as String,
-            fileName: row['fileName'] as String,
-            dataVersion: row['dataVersion'] as String,
-            url: row['url'] as String,
-            name: row['name'] as String,
-            updateDate: row['updateDate'] as String,
-            updates: row['updates'] as String,
-            dbType: row['dbType'] as String,
-            dataUpdateDone: row['dataUpdateDone'] as int),
+    return _queryAdapter.queryList(
+        'SELECT * FROM FileModel WHERE dbType = ?1 ORDER BY CAST(id AS INTEGER)',
+        mapper: (Map<String, Object?> row) => FileModel(id: row['id'] as String, fileName: row['fileName'] as String, dataVersion: row['dataVersion'] as String, url: row['url'] as String, name: row['name'] as String, updateDate: row['updateDate'] as String, updates: row['updates'] as String, dbType: row['dbType'] as String, dataUpdateDone: row['dataUpdateDone'] as int),
         arguments: [dbType]);
   }
 

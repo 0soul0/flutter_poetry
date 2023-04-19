@@ -17,8 +17,8 @@ import 'model/poetryModel.dart';
 import 'model/subCategoryModel.dart';
 
 part 'appDatabase.g.dart';
-
-//clear: flutter packages pub run build_runner watch
+//create: flutter packages pub run build_runner build
+//clear: dart run packages pub run build_runner watch
 
 //參考: https://www.jianshu.com/p/dbf5e2115fe5
 

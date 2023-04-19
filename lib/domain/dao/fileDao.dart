@@ -6,7 +6,7 @@ import 'baseDao.dart';
 @dao
 abstract class FileDao extends BaseDao<FileModel> {
   static const tableName = "FileModel";
-  @Query('SELECT * FROM $tableName ORDER BY id ASC')
+  @Query('SELECT * FROM $tableName ORDER BY CAST(id AS INTEGER)')
   Future<List<FileModel>> queryAll();
 
   @Query('SELECT * FROM $tableName WHERE id = :id')
@@ -16,7 +16,7 @@ abstract class FileDao extends BaseDao<FileModel> {
   Future<FileModel?> findFileByNameWithDbType(String name,String dbType);
 
 
-  @Query('SELECT * FROM $tableName WHERE dbType = :dbType')
+  @Query('SELECT * FROM $tableName WHERE dbType = :dbType ORDER BY CAST(id AS INTEGER)')
   Future<List<FileModel>> queryAllByDbType(String dbType);
 
 }
