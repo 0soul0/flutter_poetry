@@ -104,7 +104,7 @@ class PoetryModel {
           index: 3,
           name: "notation".tr,
           media: "",
-          spectrum: RouteApi.imgUrl + notationSpectrum,
+          spectrum: notationSpectrum,
           nameV: "sheetV".tr));
     }
 

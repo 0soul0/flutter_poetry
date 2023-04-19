@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_poetry/presentation/views/search/search_controller.dart';
 import 'package:flutter_poetry/presentation/views/widget/back_icon_button.dart';
 import 'package:flutter_poetry/presentation/views/widget/touch_unit_widget.dart';
+import 'package:flutter_poetry/tool/extension.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
@@ -12,106 +15,104 @@ import '../widget/banner_widget.dart';
 import '../widget/text_unit_widget.dart';
 import 'list_page.dart';
 
-class SearchAllFragment extends GetView<MySearchController> {
-  SearchAllFragment({Key? key}) : super(key: key);
-  int _counter = 0;
+class SearchAllFragment extends StatefulWidget {
+  const SearchAllFragment({Key? key}) : super(key: key);
+
+  @override
+  State<SearchAllFragment> createState() => _SearchAllFragmentState();
+}
+
+class _SearchAllFragmentState extends State<SearchAllFragment>
+    with WidgetsBindingObserver {
+  final controller = Get.find<MySearchController>();
+
+  @override
+  void initState() {
+    super.initState();
+    if (controller.page.value == "search") {
+      controller.poetrySearchItems.clear();
+      controller.textController.text = "";
+    }
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeMetrics() {
+    setState(() {
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text("SSSS"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('$_counter'),
-            TextField(),
+      body: Container(
+        height: MediaQuery.of(context).size.height-MediaQueryData.fromView(View.of(context)).viewInsets.bottom,
+        child:  Stack(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(bottom: Dimens.bottomMargin),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Divider(
+                      height: Dimens.toolbarHeight,
+                      thickness: Dimens.moduleDividing,
+                      color: Theme.of(context).colorScheme.background),
+                  controller.page.value == "category"
+                      ? TextUnitWidget(
+                      controller.textController.text
+                          .replaceAll("c://", ""),
+                      style: Theme.of(context).textTheme.displayLarge)
+                      : const SizedBox(
+                    width: 0,
+                    height: 0,
+                  ),
+                  const Divider(
+                      height: Dimens.moduleDividing,
+                      thickness: Dimens.moduleDividing,
+                      color: AppColor.dividerColor),
+                  Expanded(
+                    child: Container(
+                        padding: const EdgeInsets.fromLTRB(
+                            Dimens.backgroundMarginLeft,
+                            0,
+                            Dimens.backgroundMarginRight,
+                            0),
+                        child: ListPage("", ListType.search)),
+                  ),
+                  const Divider(
+                      height: Dimens.moduleDividing,
+                      thickness: Dimens.moduleDividing,
+                      color: AppColor.dividerColor),
+                  controller.page.value == "category"
+                      ? const SizedBox(
+                    width: 0,
+                    height: 0,
+                  )
+                      : _search(context),
+                  const Divider(
+                      height: Dimens.moduleDividing,
+                      thickness: Dimens.moduleDividing,
+                      color: AppColor.dividerColor),
+                ],
+              ),
+            ),
+            const BackIconButton(
+              opacity: 0.6,
+            )
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        )
       ),
     );
   }
-  final myController = TextEditingController();
-  // @override
-  // Widget build(BuildContext context) {
-  //   if (controller.page.value == "search") {
-  //     controller.poetrySearchItems.clear();
-  //     controller.textController.text = "";
-  //   }
-  //   return Column(
-  //     children: [
-  //       Container(height: 300,),
-  //       TextField(controller: myController,)
-  //     ],
-  //   );
-  //
-  //
-  //   // return Scaffold(
-  //   //   body: Stack(
-  //   //     children: [
-  //   //       Container(
-  //   //         margin: const EdgeInsets.only(bottom: Dimens.bottomMargin),
-  //   //         child: Column(
-  //   //           mainAxisSize: MainAxisSize.min,
-  //   //           children: [
-  //   //             Divider(
-  //   //                 height: Dimens.toolbarHeight,
-  //   //                 thickness: Dimens.moduleDividing,
-  //   //                 color: Theme.of(context).colorScheme.background),
-  //   //             controller.page.value == "category"
-  //   //                 ? TextUnitWidget(
-  //   //                     controller.textController.text.replaceAll("c://", ""),
-  //   //                     style: Theme.of(context).textTheme.displayLarge)
-  //   //                 : const SizedBox(
-  //   //                     width: 0,
-  //   //                     height: 0,
-  //   //                   ),
-  //   //             const Divider(
-  //   //                 height: Dimens.moduleDividing,
-  //   //                 thickness: Dimens.moduleDividing,
-  //   //                 color: AppColor.dividerColor),
-  //   //             Expanded(
-  //   //               child: Container(
-  //   //                   padding: const EdgeInsets.fromLTRB(
-  //   //                       Dimens.backgroundMarginLeft,
-  //   //                       0,
-  //   //                       Dimens.backgroundMarginRight,
-  //   //                       0),
-  //   //                   child: ListPage("", ListType.search)),
-  //   //             ),
-  //   //             const Divider(
-  //   //                 height: Dimens.moduleDividing,
-  //   //                 thickness: Dimens.moduleDividing,
-  //   //                 color: AppColor.dividerColor),
-  //   //             controller.page.value == "category"
-  //   //                 ? const SizedBox(
-  //   //               width: 0,
-  //   //               height: 0,
-  //   //             )
-  //   //                 : _search(context),
-  //   //             const Divider(
-  //   //                 height: Dimens.moduleDividing,
-  //   //                 thickness: Dimens.moduleDividing,
-  //   //                 color: AppColor.dividerColor),
-  //   //           ],
-  //   //         ),
-  //   //       ),
-  //   //       const BackIconButton(
-  //   //         opacity: 0.6,
-  //   //       )
-  //   //     ],
-  //   //   ),
-  //   // );
-  // }
+
+  // ${MediaQueryData.fromView(View.of(context)).viewInsets.bottom}
 
   /// search data
   _search(BuildContext context) {
@@ -170,3 +171,60 @@ class SearchAllFragment extends GetView<MySearchController> {
     );
   }
 }
+
+
+// Stack(
+// children: [
+// Container(
+// margin: const EdgeInsets.only(bottom: Dimens.bottomMargin),
+// child: Column(
+// mainAxisSize: MainAxisSize.min,
+// children: [
+// Divider(
+// height: Dimens.toolbarHeight,
+// thickness: Dimens.moduleDividing,
+// color: Theme.of(context).colorScheme.background),
+// controller.page.value == "category"
+// ? TextUnitWidget(
+// controller.textController.text
+//     .replaceAll("c://", ""),
+// style: Theme.of(context).textTheme.displayLarge)
+// : const SizedBox(
+// width: 0,
+// height: 0,
+// ),
+// const Divider(
+// height: Dimens.moduleDividing,
+// thickness: Dimens.moduleDividing,
+// color: AppColor.dividerColor),
+// Expanded(
+// child: Container(
+// padding: const EdgeInsets.fromLTRB(
+// Dimens.backgroundMarginLeft,
+// 0,
+// Dimens.backgroundMarginRight,
+// 0),
+// child: ListPage("", ListType.search)),
+// ),
+// const Divider(
+// height: Dimens.moduleDividing,
+// thickness: Dimens.moduleDividing,
+// color: AppColor.dividerColor),
+// controller.page.value == "category"
+// ? const SizedBox(
+// width: 0,
+// height: 0,
+// )
+// : _search(context),
+// const Divider(
+// height: Dimens.moduleDividing,
+// thickness: Dimens.moduleDividing,
+// color: AppColor.dividerColor),
+// ],
+// ),
+// ),
+// const BackIconButton(
+// opacity: 0.6,
+// )
+// ],
+// )
