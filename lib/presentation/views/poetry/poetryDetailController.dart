@@ -24,13 +24,11 @@ import '../widget/text_unit_widget.dart';
 /// A class represent controller of poetry
 class PoetryDetailController extends BaseController<PoetryModel> {
   late PoetryDao _poetryDao;
-
-  RxList<File> fileSpectrum = List<File>.from([]).obs;
-
   RxList<String> items = List<String>.from([]).obs;
   Rx<String> strItems = "".obs;
   Rx<String> refrain = "".obs;
   Rx<String> title = "".obs;
+  Rx<bool> imgShow = false.obs;
   RxList<SpectrumModel> spectrumAndMedia = List<SpectrumModel>.from([]).obs;
   RxList<SpectrumModel> media = List<SpectrumModel>.from([]).obs;
   RxList<SpectrumModel> spectrum = List<SpectrumModel>.from([]).obs;
@@ -75,9 +73,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     for (var i=0; i<spectrumAndMedia.length;i++) {
       spectrumAndMedia[i].play?.stop();
     }
-    for (var i=0; i<fileSpectrum.length;i++) {
-      fileSpectrum[i].deleteSync();
-    }
+
     setVerticalScreen();
   }
 
@@ -93,16 +89,12 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   }
 
   initImg() async {
-    for (SpectrumModel item in arguments.getMedia()) {
+    for (SpectrumModel item in spectrum) {
       if (item.spectrum.isEmpty) continue;
-      try{
-        await download(item.spectrum);
-      }catch (e){
-        myLog("error $e");
-      }
+        download(item.spectrum);
     }
   }
-
+  int fileCount=0;
   Future<void> download(String url) async {
     ImageStream imageStream = Image(image: NetworkImage(url)).image.resolve(ImageConfiguration.empty);
     final Completer completer = Completer<void>();
@@ -112,9 +104,17 @@ class PoetryDetailController extends BaseController<PoetryModel> {
           await image.image.toByteData(format: ImageByteFormat.png);
       if (imageData != null) {
         final Directory tempDir = await getTemporaryDirectory();
-        final File file = File('${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}${url.substring(url.length-9,url.length-4)}.png');
+        final File file = File('${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}}.png');
         await file.writeAsBytes(imageData.buffer.asUint8List(), flush: true);
-        fileSpectrum.add(file);
+        for(int i=0;i<spectrum.length;i++){
+          if(spectrum[i].spectrum==image.debugLabel){
+            spectrum[i].file=file;
+            fileCount++;
+          }
+        }
+        if(fileCount==spectrum.length){
+          spectrum.refresh();
+        }
       }
     }));
     await completer.future;

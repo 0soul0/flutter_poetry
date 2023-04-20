@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:floor/floor.dart';
 import 'package:flutter_svg/svg.dart';
@@ -195,6 +196,7 @@ class SpectrumModel {
       this.media = "",
       this.name = "",
       this.nameV = "",
+        this.file,
       this.pic});
 
   late int index;
@@ -203,6 +205,7 @@ class SpectrumModel {
   late String name;
   late String nameV;
   AudioPlayer? play;
+  File? file;
 
   SvgPicture? pic; //垂直顯示
 }

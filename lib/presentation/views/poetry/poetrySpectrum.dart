@@ -40,30 +40,25 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   Widget build(BuildContext context) {
     // controller.selectMusicPlayer(controller.spectrum[0].index);
     return Scaffold(
-            appBar: const PreferredSize(
-              preferredSize: Size.fromHeight(Dimens.bannerHeight),
-              child: BannerWidget(),
-            ),
+            // appBar: const PreferredSize(
+            //   preferredSize: Size.fromHeight(Dimens.bannerHeight),
+            //   child: BannerWidget(),
+            // ),
             body: Stack(
               children: [
                 _getSpectrum(ScreenUtil().screenHeight),
                 const BackIconButton(),
-                Obx(() => controller.imagePath.value.isNotEmpty
-                    ? Positioned(
-                        bottom: Dimens.backIconPositionBottom,
-                        right: Dimens.backIconPositionRight,
-                        child: TouchUnitWidget(
-                          onTapDelay: () {
-                            controller.shareImage(controller.imagePath.value);
-                          },
-                          child: const Icon(Icons.share_outlined,
-                              color: AppColor.black, size: Dimens.iconSize),
-                        ),
-                      )
-                    : const SizedBox(
-                        width: 0,
-                        height: 0,
-                      ))
+                Positioned(
+                  bottom: Dimens.backIconPositionBottom,
+                  right: Dimens.backIconPositionRight,
+                  child: TouchUnitWidget(
+                    onTapDelay: () {
+                      controller.shareImage(controller.imagePath.value);
+                    },
+                    child: const Icon(Icons.share_outlined,
+                        color: AppColor.black, size: Dimens.iconSize),
+                  ),
+                ),
               ],
             ),
             bottomNavigationBar: Container(
@@ -81,8 +76,8 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
     return TabBar(
       controller: tabController,
       onTap: (index) {
-        var item = controller.fileSpectrum[index];
-        controller.imagePath.value = item.path;
+        var item = controller.spectrum[index];
+        controller.imagePath.value = item.file!.path;
         // controller.SelectSpectrumIndex.value=item.index;
         // controller.selectMusicPlayer(item.index);
         // controller.spectrum.refresh();
@@ -149,13 +144,14 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   }
 
   _getSpectrum(width) {
-    return Obx(() => controller.fileSpectrum.length==controller.spectrum.length
+    return Obx(() => controller.spectrum[0].file!=null
         ? TabBarView(
             controller: tabController,
-            children: controller.fileSpectrum.map((item) {
+            children: controller.spectrum.map((item) {
               return ImageUnitWidget(
-                item,
+                item.spectrum,
                 width,
+                file: item.file,
                 callBack: (path) {
                   controller.imagePath.value = path;
                 },
@@ -163,40 +159,13 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
             }).toList(),
           )
         : Positioned(
-          left: ScreenUtil().screenWidth-10,
-          right: ScreenUtil().screenWidth-10,
-          top:ScreenUtil().screenHeight-10,
-          bottom:ScreenUtil().screenHeight-10,
-          child: const Center(
-          child: SizedBox(
+          top: ScreenUtil().screenHeight/2-10,
+          left: ScreenUtil().screenWidth/2-10,
+          child: const SizedBox(
               width: 20.0,
               height: 20.0,
-              child: CircularProgressIndicator())),
+              child: CircularProgressIndicator()),
         ));
-
-    // return Obx(() => AlignedGridView.count(
-    //     padding: EdgeInsets.zero,
-    //     scrollDirection: Axis.horizontal,
-    //     crossAxisCount: 3,
-    //     crossAxisSpacing: Dimens.itemSpace,
-    //     mainAxisSpacing: Dimens.itemSpace,
-    //     itemCount: controller.spectrum.length,
-    //     itemBuilder: (context, index) {
-    //       var item = controller.spectrum[index];
-    //       return Center(
-    //         child: Flex(direction: Axis.vertical, children: [
-    //           Expanded(
-    //             child: ImageUnitWidget(
-    //               item.spectrum,
-    //               width,
-    //               callBack: (path) {
-    //                 controller.imagePath.value = path;
-    //               },
-    //             ),
-    //           ),
-    //         ]),
-    //       );
-    //     }));
   }
 
 // _play() {

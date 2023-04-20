@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
 class ImageUnitWidget extends StatefulWidget {
-  const ImageUnitWidget(this.file, this.width, {Key? key, this.callBack})
+  const ImageUnitWidget(this.url, this.width, {Key? key,this.file, this.callBack})
       : super(key: key);
-  final File file;
+  final String url;
+  final File? file;
   final double width;
   final Function? callBack;
 
@@ -15,7 +16,6 @@ class ImageUnitWidget extends StatefulWidget {
 }
 
 class _ImageUnitWidgetState extends State<ImageUnitWidget> {
-  Map<String, File> cachePath = {};
 
   @override
   void initState() {
@@ -40,7 +40,7 @@ class _ImageUnitWidgetState extends State<ImageUnitWidget> {
     // }else{
     //   widget.callBack!(cachePath[widget.url]?.path);
     // }
-
+    widget.callBack!(widget.file?.path);
     return img(context);
   }
 
@@ -67,7 +67,7 @@ class _ImageUnitWidgetState extends State<ImageUnitWidget> {
   ) => SizedBox(
         height: MediaQuery.of(context).size.height - 200,
         child: PhotoView(
-          imageProvider: FileImage(widget.file),
+          imageProvider: NetworkImage(widget.url),
           basePosition: Alignment.center,
           backgroundDecoration: const BoxDecoration(color: Colors.white),
           loadingBuilder: (context, progress) => const Center(

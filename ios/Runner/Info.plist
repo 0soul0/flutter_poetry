@@ -35,6 +35,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>用於使用者上傳自創的音樂</string>
+	<key>NSRemoteNotificationUsageDescription</key>
+    <string>此 App 需要使用推送通知功能，以便能夠及時接收到最新的消息和提醒。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>用於上傳使用者大頭照</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
