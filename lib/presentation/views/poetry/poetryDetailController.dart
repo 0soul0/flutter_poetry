@@ -58,7 +58,6 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     init();
     await initAsync();
     initState();
-    initImg();
   }
 
   @override
@@ -73,7 +72,6 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     for (var i=0; i<spectrumAndMedia.length;i++) {
       spectrumAndMedia[i].play?.stop();
     }
-
     setVerticalScreen();
   }
 
@@ -88,14 +86,14 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     }
   }
 
-  initImg() async {
-    for (SpectrumModel item in spectrum) {
-      if (item.spectrum.isEmpty) continue;
-        download(item.spectrum);
-    }
-  }
+  // initImg() async {
+  //   for (SpectrumModel item in spectrum) {
+  //     if (item.spectrum.isEmpty) continue;
+  //       download(item.spectrum);
+  //   }
+  // }
   int fileCount=0;
-  Future<void> download(String url) async {
+  Future<void> download(String url,callback) async {
     ImageStream imageStream = Image(image: NetworkImage(url)).image.resolve(ImageConfiguration.empty);
     final Completer completer = Completer<void>();
    imageStream.addListener(ImageStreamListener((image, synchronousCall) async {
@@ -104,17 +102,18 @@ class PoetryDetailController extends BaseController<PoetryModel> {
           await image.image.toByteData(format: ImageByteFormat.png);
       if (imageData != null) {
         final Directory tempDir = await getTemporaryDirectory();
-        final File file = File('${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}}.png');
+        final File file = File('${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}.png');
         await file.writeAsBytes(imageData.buffer.asUint8List(), flush: true);
-        for(int i=0;i<spectrum.length;i++){
-          if(spectrum[i].spectrum==image.debugLabel){
-            spectrum[i].file=file;
-            fileCount++;
-          }
-        }
-        if(fileCount==spectrum.length){
-          spectrum.refresh();
-        }
+        callback(file.path);
+        // for(int i=0;i<spectrum.length;i++){
+        //   if(spectrum[i].spectrum==image.debugLabel){
+        //     spectrum[i].file=file;
+        //     fileCount++;
+        //   }
+        // }
+        // if(fileCount==spectrum.length){
+        //   spectrum.refresh();
+        // }
       }
     }));
     await completer.future;

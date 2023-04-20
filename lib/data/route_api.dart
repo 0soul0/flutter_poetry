@@ -4,5 +4,5 @@ class RouteApi {
   static String imgUrl = "${baseUrl}/img/";
   static const publish = "/systemInfo.json";
   static const test = "/systemInfo_test.json";
-  static const systemInfo = test;
+  static const systemInfo = publish;
 }

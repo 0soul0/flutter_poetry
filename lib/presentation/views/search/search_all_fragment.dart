@@ -113,55 +113,60 @@ class _SearchAllFragmentState extends State<SearchAllFragment>
     final mqData = MediaQuery.of(context);
     final mqDataNew =
         mqData.copyWith(textScaleFactor: TextUnitWidget.textSizeTimes);
-    return Stack(
-      children: [
-        TextUnitWidget(
-          "searchHelper".tr,
-          style: Styles.helperStyle16,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        MediaQuery(
-          data: mqDataNew,
-          child: TextField(
-            autofocus: true,
-            controller: controller.textController,
-            focusNode: controller.commentFocus,
-            textAlign: TextAlign.left,
-            onChanged: (value) {
-              if (value.isEmpty) {
-                value = "!!!!!!!!!!!!!!!!!";
-              }
-              controller.search(value);
-            },
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Theme.of(context).colorScheme.background,
-                hintText: "searchHelper".tr,
-                hintStyle: Styles.helperStyle16,
-                border: const OutlineInputBorder(
+    return SizedBox(
+      height: 40 * TextUnitWidget.textSizeTimes,
+      child: Stack(
+        children: [
+          TextUnitWidget(
+            "searchHelper".tr,
+            style: Styles.helperStyle16,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          MediaQuery(
+            data: mqDataNew,
+            child: TextField(
+              autofocus: true,
+              controller: controller.textController,
+              focusNode: controller.commentFocus,
+              textAlign: TextAlign.left,
+              onChanged: (value) {
+                if (value.isEmpty) {
+                  value = "!!!!!!!!!!!!!!!!!";
+                }
+                controller.search(value);
+              },
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Theme.of(context).colorScheme.background,
+                  hintText: "searchHelper".tr,
+                  hintStyle: Theme.of(context).textTheme.displaySmall,
+                  border: const OutlineInputBorder(
+                    borderSide:
+                    BorderSide(width: 0, color: AppColor.dividerColor),
+                      // borderRadius: BorderRadius.only(
+                      //     bottomLeft: Radius.circular(Dimens.moduleRadius),
+                      //     bottomRight: Radius.circular(Dimens.moduleRadius))
+                      ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 0, color: AppColor.dividerColor),
                     // borderRadius: BorderRadius.only(
                     //     bottomLeft: Radius.circular(Dimens.moduleRadius),
                     //     bottomRight: Radius.circular(Dimens.moduleRadius))
-                    ),
-                enabledBorder: const OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 0, color: AppColor.dividerColor),
-                  // borderRadius: BorderRadius.only(
-                  //     bottomLeft: Radius.circular(Dimens.moduleRadius),
-                  //     bottomRight: Radius.circular(Dimens.moduleRadius))
-                ),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: AppColor.secondColor),
-                  // borderRadius: BorderRadius.only(
-                  //     bottomLeft: Radius.circular(Dimens.moduleRadius),
-                  //     bottomRight: Radius.circular(Dimens.moduleRadius))
-                ),
-                contentPadding: const EdgeInsets.all(Dimens.itemPaddingSpace_4),
-                prefixIcon: const Icon(Icons.search)),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(width: 1, color: AppColor.secondColor),
+                    // borderRadius: BorderRadius.only(
+                    //     bottomLeft: Radius.circular(Dimens.moduleRadius),
+                    //     bottomRight: Radius.circular(Dimens.moduleRadius))
+                  ),
+                  contentPadding: const EdgeInsets.all(Dimens.itemPaddingSpace_4),
+                  prefixIcon: const Icon(Icons.search)),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

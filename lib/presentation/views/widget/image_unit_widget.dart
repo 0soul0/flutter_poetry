@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
 class ImageUnitWidget extends StatefulWidget {
-  const ImageUnitWidget(this.url, this.width, {Key? key,this.file, this.callBack})
+  const ImageUnitWidget(this.url, this.width,
+      {Key? key, this.file, this.callBack})
       : super(key: key);
   final String url;
   final File? file;
@@ -17,6 +18,9 @@ class ImageUnitWidget extends StatefulWidget {
 
 class _ImageUnitWidgetState extends State<ImageUnitWidget> {
 
+
+  GlobalKey photoViewKey = GlobalKey();
+
   @override
   void initState() {
     super.initState();
@@ -24,8 +28,18 @@ class _ImageUnitWidgetState extends State<ImageUnitWidget> {
 
   @override
   void dispose() {
+    removePhotoView();
     super.dispose();
   }
+
+  void removePhotoView() {
+    if (photoViewKey.currentState != null) {
+      photoViewKey.currentState!.dispose();
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +54,9 @@ class _ImageUnitWidgetState extends State<ImageUnitWidget> {
     // }else{
     //   widget.callBack!(cachePath[widget.url]?.path);
     // }
-    widget.callBack!(widget.file?.path);
+    if (widget.callBack != null) {
+      widget.callBack!(widget.file?.path);
+    }
     return img(context);
   }
 
@@ -61,10 +77,10 @@ class _ImageUnitWidgetState extends State<ImageUnitWidget> {
   //   }));
   //   await completer.future;
   // }
-
   img(
     context,
-  ) => SizedBox(
+  ) =>
+      SizedBox(
         height: MediaQuery.of(context).size.height - 200,
         child: PhotoView(
           imageProvider: NetworkImage(widget.url),
@@ -77,14 +93,15 @@ class _ImageUnitWidgetState extends State<ImageUnitWidget> {
               child: CircularProgressIndicator(),
             ),
           ),
+          key: photoViewKey,
         ),
       );
 
-  // svgImage() => SvgPicture.network(
-  //       widget.url,
-  //       width: widget.width,
-  //       placeholderBuilder: (BuildContext context) => Container(
-  //           padding: EdgeInsets.zero,
-  //           child: const Center(child: CircularProgressIndicator())),
-  //     );
+// svgImage() => SvgPicture.network(
+//       widget.url,
+//       width: widget.width,
+//       placeholderBuilder: (BuildContext context) => Container(
+//           padding: EdgeInsets.zero,
+//           child: const Center(child: CircularProgressIndicator())),
+//     );
 }

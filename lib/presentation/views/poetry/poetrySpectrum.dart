@@ -25,15 +25,30 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   // 宣告 TabController
   late TabController tabController;
   late PoetryDetailController controller;
-
+  var url = "";
   @override
   void initState() {
     controller = Get.find<PoetryDetailController>();
     // 建立 TabController，vsync 接受的型態是 TickerProvider
     tabController =
         TabController(length: controller.spectrum.length, vsync: this);
+    tabController.addListener(() {
+      url=controller.spectrum[tabController.index].spectrum;
+    });
     // controller.setHorizontalScreen();
+    // controller.initImg();
+    url=controller.spectrum[0].spectrum;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    for(int i=0;i<controller.spectrum.length;i++){
+      controller.spectrum[i].file?.deleteSync();
+      controller.spectrum[i].file=null;
+    }
+    tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -53,7 +68,9 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
                   right: Dimens.backIconPositionRight,
                   child: TouchUnitWidget(
                     onTapDelay: () {
-                      controller.shareImage(controller.imagePath.value);
+                      controller.download(url,(path){
+                        controller.shareImage(path);
+                      });
                     },
                     child: const Icon(Icons.share_outlined,
                         color: AppColor.black, size: Dimens.iconSize),
@@ -77,7 +94,7 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
       controller: tabController,
       onTap: (index) {
         var item = controller.spectrum[index];
-        controller.imagePath.value = item.file!.path;
+        url = item.spectrum;
         // controller.SelectSpectrumIndex.value=item.index;
         // controller.selectMusicPlayer(item.index);
         // controller.spectrum.refresh();
@@ -144,17 +161,17 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   }
 
   _getSpectrum(width) {
-    return Obx(() => controller.spectrum[0].file!=null
+    return Obx(() => controller.spectrum.isNotEmpty
         ? TabBarView(
             controller: tabController,
             children: controller.spectrum.map((item) {
               return ImageUnitWidget(
                 item.spectrum,
                 width,
-                file: item.file,
-                callBack: (path) {
-                  controller.imagePath.value = path;
-                },
+                // file: item.file,
+                // callBack: (path) {
+                //   controller.imagePath.value = path;
+                // },
               );
             }).toList(),
           )

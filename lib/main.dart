@@ -241,6 +241,12 @@ class BottomNavigationControllerState
 
   @override
   Widget build(BuildContext context) {
+    var height = 68*TextUnitWidget.textSizeTimes;
+    if(TextUnitWidget.textSizeTimes<1){
+      height = 60;
+    }else if(TextUnitWidget.textSizeTimes>1){
+      height = 68*TextUnitWidget.textSizeTimes/1.3;
+    }
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(Dimens.bannerHeight),
@@ -250,7 +256,7 @@ class BottomNavigationControllerState
       bottomNavigationBar: Container(
         // color: Theme.of(context).colorScheme.background,
         margin: const EdgeInsets.only(bottom: Dimens.space * 2),
-        height: 60 + TextUnitWidget.textSizeTimes * 3,
+        height: height,
         child: Column(
           children: [
             const Divider(
