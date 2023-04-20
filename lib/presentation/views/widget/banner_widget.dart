@@ -24,7 +24,7 @@ class _BannerWidgetState extends State<BannerWidget> {
         size: AdSize.banner,
         request: const AdRequest(),
         listener: BannerAdListener(
-          onAdLoaded: (ad) {
+          onAdLoaded: (ad) async{
             setState(() {
               isShowBanner = true;
               _ad = ad as BannerAd;

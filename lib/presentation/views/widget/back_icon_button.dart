@@ -6,7 +6,7 @@ import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
 
 const int directionVertical = 0;
-const int directionHorizontal = 1;
+// const int directionHorizontal = 1;
 
 class BackIconButton extends StatelessWidget {
   const BackIconButton(

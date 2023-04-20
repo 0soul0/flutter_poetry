@@ -3,7 +3,6 @@ import 'package:flutter_poetry/presentation/views/widget/touch_unit_widget.dart'
 import 'package:flutter_poetry/resource/colors.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 
-import '../../../resource/style.dart';
 import '../widget/text_unit_widget.dart';
 
 class ListSmallItem extends StatelessWidget {

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/data/cache_data.dart';
 import 'package:flutter_poetry/domain/dao/poetryDao.dart';
@@ -15,7 +13,6 @@ import 'package:flutter_poetry/presentation/views/widget/small_button_widget.dar
 import 'package:flutter_poetry/presentation/views/widget/text_unit_widget.dart';
 import 'package:flutter_poetry/resource/dimens.dart';
 import 'package:flutter_poetry/resource/style.dart';
-import 'package:flutter_poetry/resource/themes.dart';
 import 'package:flutter_poetry/routes/singleton.dart';
 import 'package:flutter_poetry/tool/shared_preferences_unit.dart';
 import 'package:get/get.dart';
@@ -23,7 +20,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import 'data/network/api.dart';
 import 'data/route_api.dart';
-import 'data/setting_config.dart';
 import 'domain/dao/catalogueDao.dart';
 import 'domain/dao/fileDao.dart';
 import 'domain/dao/subCategoryDao.dart';
@@ -167,8 +163,7 @@ class MainController extends BaseController {
         //更新資料庫版本和是否更新完成設定為false
         await updateFileDownloadStatus(FileModel.keyUpdateUnDone, newFile);
 
-        var items = await Api.getInstance().getArrayReturn(newFile.url,
-            progress: (progress) {
+        var items = await Api.getInstance().getArrayReturn(newFile.url, (progress) {
           Singleton.getEventBusInstance().fire(MsgEvent("loading", map: {
             "total": len,
             "number": i + 1,

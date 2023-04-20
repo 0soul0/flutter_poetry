@@ -1,8 +1,3 @@
-import 'dart:async';
-import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_poetry/presentation/views/poetry/poetryDetailController.dart';
 import 'package:flutter_poetry/presentation/views/widget/back_icon_button.dart';
@@ -12,12 +7,9 @@ import 'package:flutter_poetry/resource/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../../../resource/colors.dart';
-import '../../../tool/is_check.dart';
 import '../widget/banner_widget.dart';
-import '../widget/float_fab_widget.dart';
 import '../widget/image_unit_widget.dart';
 import '../widget/text_unit_widget.dart';
 
@@ -36,41 +28,25 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
 
   @override
   void initState() {
-    // 建立 TabController，vsync 接受的型態是 TickerProvider
-    tabController = TabController(length: 3, vsync: this);
     controller = Get.find<PoetryDetailController>();
+    // 建立 TabController，vsync 接受的型態是 TickerProvider
+    tabController =
+        TabController(length: controller.spectrum.length, vsync: this);
     // controller.setHorizontalScreen();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    controller.selectMusicPlayer(controller.spectrum[0].index);
-    return IsCheck.isHorizontalScreen(context)
-        ? Scaffold(
-            body: Stack(
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 45, child: _spectrumTab()),
-                  Expanded(
-                      child: ListView(children: [
-                    _getSpectrum(ScreenUtil.defaultSize.height)
-                  ]))
-                ],
-              ),
-              const BackIconButton(direction: directionHorizontal),
-              // _play(),
-            ],
-          ))
-        : Scaffold(
+    // controller.selectMusicPlayer(controller.spectrum[0].index);
+    return Scaffold(
             appBar: const PreferredSize(
               preferredSize: Size.fromHeight(Dimens.bannerHeight),
               child: BannerWidget(),
             ),
             body: Stack(
               children: [
-                _getSpectrum(ScreenUtil().screenWidth),
+                _getSpectrum(ScreenUtil().screenHeight),
                 const BackIconButton(),
                 Obx(() => controller.imagePath.value.isNotEmpty
                     ? Positioned(
@@ -99,35 +75,32 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
           );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    // controller.setVerticalScreen();
-  }
+  // _getSpectrum(ScreenUtil().screenWidth)
 
   _bottom() {
-    return Obx(() => DefaultTabController(
-        length: controller.spectrum.length,
-        child: TabBar(
-          onTap: (index) {
-            var item = controller.spectrum[index];
-            controller.selectMusicPlayer(item.index);
-            controller.spectrum.refresh();
-          },
-          unselectedLabelColor: AppColor.helperColor,
-          indicatorSize: TabBarIndicatorSize.tab,
-          indicator: BoxDecoration(
-            color: AppColor.secondColor,
-            borderRadius: BorderRadius.circular(10),
+    return TabBar(
+      controller: tabController,
+      onTap: (index) {
+        var item = controller.fileSpectrum[index];
+        controller.imagePath.value = item.path;
+        // controller.SelectSpectrumIndex.value=item.index;
+        // controller.selectMusicPlayer(item.index);
+        // controller.spectrum.refresh();
+      },
+      unselectedLabelColor: AppColor.helperColor,
+      indicatorSize: TabBarIndicatorSize.tab,
+      indicator: BoxDecoration(
+        color: AppColor.secondColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      tabs: controller.spectrum.map((item) {
+        return Tab(
+          child: TextUnitWidget(
+            item.name.tr,
           ),
-          tabs: controller.spectrum.map((item) {
-            return Tab(
-              child: TextUnitWidget(
-                item.name.tr,
-              ),
-            );
-          }).toList(),
-        )));
+        );
+      }).toList(),
+    );
   }
 
   _spectrumTab() {
@@ -142,8 +115,8 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
           var item = controller.spectrum[index];
           return TouchUnitWidget(
             onTapDelay: () {
-              controller.selectMusicPlayer(item.index);
-              controller.spectrum.refresh();
+              // controller.selectMusicPlayer(item.index);
+              // controller.spectrum.refresh();
             },
             child: Container(
               alignment: Alignment.center,
@@ -176,73 +149,124 @@ class _PoetrySpectrumState extends State<PoetrySpectrum>
   }
 
   _getSpectrum(width) {
-    return Obx(
-      () => Center(
-        child: Flex(
-          direction: Axis.vertical,
-          children:[ Expanded(
-            child: ImageUnitWidget(
-              controller.selectSpectrum.value.spectrum,
-              width,
-              callBack: (path) {
-                controller.imagePath.value = path;
-              },
-            ),
-          ),]
-        ),
-      ),
-    );
+    return Obx(() => controller.fileSpectrum.length==controller.spectrum.length
+        ? TabBarView(
+            controller: tabController,
+            children: controller.fileSpectrum.map((item) {
+              return ImageUnitWidget(
+                item,
+                width,
+                callBack: (path) {
+                  controller.imagePath.value = path;
+                },
+              );
+            }).toList(),
+          )
+        : Positioned(
+          left: ScreenUtil().screenWidth-10,
+          right: ScreenUtil().screenWidth-10,
+          top:ScreenUtil().screenHeight-10,
+          bottom:ScreenUtil().screenHeight-10,
+          child: const Center(
+          child: SizedBox(
+              width: 20.0,
+              height: 20.0,
+              child: CircularProgressIndicator())),
+        ));
+
+    // return Obx(() => AlignedGridView.count(
+    //     padding: EdgeInsets.zero,
+    //     scrollDirection: Axis.horizontal,
+    //     crossAxisCount: 3,
+    //     crossAxisSpacing: Dimens.itemSpace,
+    //     mainAxisSpacing: Dimens.itemSpace,
+    //     itemCount: controller.spectrum.length,
+    //     itemBuilder: (context, index) {
+    //       var item = controller.spectrum[index];
+    //       return Center(
+    //         child: Flex(direction: Axis.vertical, children: [
+    //           Expanded(
+    //             child: ImageUnitWidget(
+    //               item.spectrum,
+    //               width,
+    //               callBack: (path) {
+    //                 controller.imagePath.value = path;
+    //               },
+    //             ),
+    //           ),
+    //         ]),
+    //       );
+    //     }));
   }
 
-  // _play() {
-  //   return Obx(() => controller.media.isNotEmpty
-  //       ? Stack(
-  //           children: [
-  //             FloatFabWidget(
-  //               Icons.music_note_outlined,
-  //               const [
-  //                 0,
-  //                 Dimens.backIconPositionBottom / 4,
-  //                 0,
-  //                 Dimens.backgroundMarginRight * 2
-  //               ],
-  //               () {
-  //                 controller.togglePlayerUI();
-  //               },
-  //               true,
-  //               size: Dimens.iconSize * 1.2,
-  //             ),
-  //             FloatFabWidget(Icons.replay_10, const [
-  //               0,
-  //               Dimens.backIconPositionBottom / 4 + 42,
-  //               0,
-  //               Dimens.backgroundMarginRight * 2
-  //             ], () {
-  //               controller.seekMusic(-10 * 1000);
-  //             }, controller.playerUIStatus.value),
-  //             FloatFabWidget(
-  //                 controller.playState.value == PlayerState.playing
-  //                     ? Icons.pause
-  //                     : Icons.play_arrow_rounded,
-  //                 const [
-  //                   0,
-  //                   Dimens.backIconPositionBottom / 4 + 30,
-  //                   0,
-  //                   Dimens.backgroundMarginRight * 2 + 30
-  //                 ], () {
-  //               controller.toggleSMusicStatus();
-  //             }, controller.playerUIStatus.value),
-  //             FloatFabWidget(Icons.forward_10, const [
-  //               0,
-  //               Dimens.backIconPositionBottom / 4,
-  //               0,
-  //               Dimens.backgroundMarginRight * 2 + 42
-  //             ], () {
-  //               controller.seekMusic(10 * 1000);
-  //             }, controller.playerUIStatus.value),
-  //           ],
-  //         )
-  //       : Container());
-  // }
+// _play() {
+//   return Obx(() => controller.media.isNotEmpty
+//       ? Stack(
+//           children: [
+//             FloatFabWidget(
+//               Icons.music_note_outlined,
+//               const [
+//                 0,
+//                 Dimens.backIconPositionBottom / 4,
+//                 0,
+//                 Dimens.backgroundMarginRight * 2
+//               ],
+//               () {
+//                 controller.togglePlayerUI();
+//               },
+//               true,
+//               size: Dimens.iconSize * 1.2,
+//             ),
+//             FloatFabWidget(Icons.replay_10, const [
+//               0,
+//               Dimens.backIconPositionBottom / 4 + 42,
+//               0,
+//               Dimens.backgroundMarginRight * 2
+//             ], () {
+//               controller.seekMusic(-10 * 1000);
+//             }, controller.playerUIStatus.value),
+//             FloatFabWidget(
+//                 controller.playState.value == PlayerState.playing
+//                     ? Icons.pause
+//                     : Icons.play_arrow_rounded,
+//                 const [
+//                   0,
+//                   Dimens.backIconPositionBottom / 4 + 30,
+//                   0,
+//                   Dimens.backgroundMarginRight * 2 + 30
+//                 ], () {
+//               controller.toggleSMusicStatus();
+//             }, controller.playerUIStatus.value),
+//             FloatFabWidget(Icons.forward_10, const [
+//               0,
+//               Dimens.backIconPositionBottom / 4,
+//               0,
+//               Dimens.backgroundMarginRight * 2 + 42
+//             ], () {
+//               controller.seekMusic(10 * 1000);
+//             }, controller.playerUIStatus.value),
+//           ],
+//         )
+//       : Container());
+// }
 //
 }
+
+// _getSpectrum(ScreenUtil.defaultSize.height)
+
+//
+// IsCheck.isHorizontalScreen(context)
+// ? Scaffold(
+// body: Stack(
+// children: [
+// Row(
+// children: [
+// SizedBox(width: 45, child: _spectrumTab()),
+// ],
+// ),
+// _getSpectrum(ScreenUtil().screenWidth),
+// const BackIconButton(direction: directionHorizontal),
+// ],
+//
+// ))
+// :

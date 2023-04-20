@@ -4,7 +4,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../../../domain/model/itemModel.dart';
-import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../item/selectedItem.dart';
 import '../../widget/back_icon_button.dart';

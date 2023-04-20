@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 
-import '../../data/route_api.dart';
 import '../../presentation/views/item/utils/moduleUnit.dart';
 import '../../tool/is_check.dart';
 

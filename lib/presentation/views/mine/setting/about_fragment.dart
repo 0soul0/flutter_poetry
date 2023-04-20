@@ -4,7 +4,6 @@ import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
-import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../item/listMidItem.dart';
 import '../../widget/back_icon_button.dart';

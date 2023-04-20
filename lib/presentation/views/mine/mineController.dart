@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/data/cache_data.dart';
 import 'package:flutter_poetry/data/setting_config.dart';
 import 'package:flutter_poetry/domain/dao/fileDao.dart';

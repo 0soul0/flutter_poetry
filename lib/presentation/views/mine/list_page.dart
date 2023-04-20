@@ -12,7 +12,6 @@ import 'package:get/get.dart';
 import '../../../domain/model/itemModel.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/themes.dart';
-import '../widget/banner_widget.dart';
 import '../widget/text_unit_widget.dart';
 
 class ListPage<T> extends StatelessWidget {

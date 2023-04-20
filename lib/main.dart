@@ -24,7 +24,6 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lifecycle/lifecycle.dart';
 import 'package:new_version_plus/new_version_plus.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import 'firebase_options.dart';
 import 'presentation/views/mine/mineFragment.dart';
@@ -108,12 +107,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 //       ));
 // }
 
-checkPermission() async {
-  var status = await Permission.notification.status;
-  if (status.isDenied) {
-    // openAppSettings();
-  }
-}
+// checkPermission() async {
+//   var status = await Permission.notification.status;
+//   if (status.isDenied) {
+//     // openAppSettings();
+//   }
+// }
 
 registerNotification() async {
   await Firebase.initializeApp(

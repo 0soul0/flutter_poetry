@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../../../../domain/model/fileModel.dart';
 import '../../../../domain/model/itemModel.dart';
-import '../../../../resource/colors.dart';
 import '../../../../resource/dimens.dart';
 import '../../widget/back_icon_button.dart';
 import '../../widget/banner_widget.dart';

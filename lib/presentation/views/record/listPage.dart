@@ -7,7 +7,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../resource/dimens.dart';
 import '../item/utils/moduleUnit.dart';
-import '../widget/banner_widget.dart';
 import '../widget/empty_page_widget.dart';
 import '../widget/subIconTitle.dart';
 

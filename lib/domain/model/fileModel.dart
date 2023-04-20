@@ -1,9 +1,7 @@
 import 'package:floor/floor.dart';
 import 'package:flutter_poetry/domain/model/source/baseModel.dart';
-import 'package:get/get.dart';
 
 import '../../data/cache_data.dart';
-import '../../data/setting_config.dart';
 import '../dao/poetryDao.dart';
 
 @entity

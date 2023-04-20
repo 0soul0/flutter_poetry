@@ -8,7 +8,7 @@ import '../../../resource/colors.dart';
 import '../../../resource/style.dart';
 
 class BigButtonWidget extends StatelessWidget {
-  const BigButtonWidget({this.onPressed, this.title = "儲存", Key? key})
+  const BigButtonWidget(this.onPressed,{this.title = "儲存", Key? key})
       : super(key: key);
 
   final String title;

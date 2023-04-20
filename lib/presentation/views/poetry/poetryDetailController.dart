@@ -1,30 +1,31 @@
+import 'dart:async';
 import 'dart:convert';
-import 'dart:isolate';
-import 'dart:math';
-import 'package:easy_isolate/easy_isolate.dart' as isolate;
-import 'package:easy_isolate/easy_isolate.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:io';
+import 'dart:ui';
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_poetry/presentation/views/base/baseController.dart';
 import 'package:flutter_poetry/tool/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:share_extend/share_extend.dart';
 
 import '../../../domain/dao/poetryDao.dart';
 import '../../../domain/fxDataBaseManager.dart';
 import '../../../domain/model/poetryModel.dart';
 import '../../../resource/dimens.dart';
-import '../../../resource/style.dart';
 import '../../../tool/is_check.dart';
 import '../widget/text_unit_widget.dart';
 
 /// A class represent controller of poetry
 class PoetryDetailController extends BaseController<PoetryModel> {
   late PoetryDao _poetryDao;
+
+  RxList<File> fileSpectrum = List<File>.from([]).obs;
 
   RxList<String> items = List<String>.from([]).obs;
   Rx<String> strItems = "".obs;
@@ -59,6 +60,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     init();
     await initAsync();
     initState();
+    initImg();
   }
 
   @override
@@ -70,10 +72,12 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   @override
   void onClose() {
     super.onClose();
-    for (var element in spectrumAndMedia) {
-      element.play?.stop();
+    for (var i=0; i<spectrumAndMedia.length;i++) {
+      spectrumAndMedia[i].play?.stop();
     }
-
+    for (var i=0; i<fileSpectrum.length;i++) {
+      fileSpectrum[i].deleteSync();
+    }
     setVerticalScreen();
   }
 
@@ -86,6 +90,34 @@ class PoetryDetailController extends BaseController<PoetryModel> {
     if (screenWidth > 600) {
       screenWidth = 600;
     }
+  }
+
+  initImg() async {
+    for (SpectrumModel item in arguments.getMedia()) {
+      if (item.spectrum.isEmpty) continue;
+      try{
+        await download(item.spectrum);
+      }catch (e){
+        myLog("error $e");
+      }
+    }
+  }
+
+  Future<void> download(String url) async {
+    ImageStream imageStream = Image(image: NetworkImage(url)).image.resolve(ImageConfiguration.empty);
+    final Completer completer = Completer<void>();
+   imageStream.addListener(ImageStreamListener((image, synchronousCall) async {
+      completer.complete();
+      final ByteData? imageData =
+          await image.image.toByteData(format: ImageByteFormat.png);
+      if (imageData != null) {
+        final Directory tempDir = await getTemporaryDirectory();
+        final File file = File('${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}${url.substring(url.length-9,url.length-4)}.png');
+        await file.writeAsBytes(imageData.buffer.asUint8List(), flush: true);
+        fileSpectrum.add(file);
+      }
+    }));
+    await completer.future;
   }
 
   initState() {
@@ -189,7 +221,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
         duration.value = event!;
       });
       selectPlayer.playbackEventStream.listen((state) {
-        playing.value=selectPlayer.playing;
+        playing.value = selectPlayer.playing;
       });
       if (!loadFinish.value) {
         loadFinish.value = true;
@@ -251,7 +283,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   ///
   /// @param item data of poetry
   setRefrain(PoetryModel item) {
-    if(item.refrain.isEmpty)return;
+    if (item.refrain.isEmpty) return;
     refrain.value = splitContent(item.refrain);
   }
 

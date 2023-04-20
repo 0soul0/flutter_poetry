@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_poetry/presentation/views/search/search_controller.dart';
 import 'package:flutter_poetry/presentation/views/widget/back_icon_button.dart';
-import 'package:flutter_poetry/presentation/views/widget/touch_unit_widget.dart';
-import 'package:flutter_poetry/tool/extension.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../resource/colors.dart';
 import '../../../resource/dimens.dart';
 import '../../../resource/style.dart';
-import '../../../routes/app_routes.dart';
-import '../widget/banner_widget.dart';
 import '../widget/text_unit_widget.dart';
 import 'list_page.dart';
 

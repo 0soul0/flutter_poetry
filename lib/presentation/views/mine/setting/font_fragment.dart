@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_poetry/presentation/views/mine/mineController.dart';
 import 'package:flutter_poetry/presentation/views/widget/big_button_widget.dart';
-import 'package:flutter_poetry/resource/style.dart';
 import 'package:get/get.dart';
 
 import '../../../../resource/colors.dart';
@@ -109,7 +108,7 @@ class FontFragment extends GetView<MineController> {
     return Obx(() => Visibility(
         visible: controller.seekValueShow.value,
         child: BigButtonWidget(
-          onPressed: () {
+          () {
             _showMyDialog(context);
             // Get.snackbar("saveSuccess".tr, "",
             //     duration: const Duration(milliseconds: 1200),

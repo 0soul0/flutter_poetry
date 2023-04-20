@@ -64,8 +64,8 @@ class Api {
     }
   }
 
-  getArrayReturn<T>(String url,
-      {Function(Object)? error, Function(Object)? progress}) async {
+  getArrayReturn<T>(String url,Function(Object) progress,
+      {Function(Object)? error}) async {
     try {
       var response =
           await dio().get(url, onReceiveProgress: (receivedBytes, totalBytes) {

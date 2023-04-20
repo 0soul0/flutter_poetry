@@ -29,7 +29,7 @@ class CatalogueItem extends StatelessWidget {
               Dimens.itemPaddingSpace,
               Dimens.itemPaddingSpace_4),
           decoration: BoxDecoration(
-              color: item.selected ? AppColor.mainColor : AppColor.white,
+              color: Theme.of(context).colorScheme.background,
               border: item.selected
                   ? Border.all(color: AppColor.mainColor)
                   : Border.all(color: AppColor.gray),
