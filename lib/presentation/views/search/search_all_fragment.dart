@@ -136,7 +136,7 @@ class _SearchAllFragmentState extends State<SearchAllFragment>
             },
             decoration: InputDecoration(
                 filled: true,
-                fillColor: AppColor.backgroundColor,
+                fillColor: Theme.of(context).colorScheme.background,
                 hintText: "searchHelper".tr,
                 hintStyle: Styles.helperStyle16,
                 border: const OutlineInputBorder(
