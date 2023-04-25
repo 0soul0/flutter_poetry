@@ -159,7 +159,7 @@ class MySearchController extends BaseController {
         items = await _poetryDao.searchType(int.parse(file.id), page, count);
       } else if (search.contains(searchCatalogueKey + split)) {
         search = search.split(split)[1];
-        items = await _poetryDao.searchCategory(search, page, count);
+        items = await _poetryDao.searchCategory("%$search%", page, count);
       } else if (int.tryParse(search) == null) {
         items = await _poetryDao.search("%$search%", page, count);
       } else {

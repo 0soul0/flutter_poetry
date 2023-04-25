@@ -69,7 +69,7 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   @override
   void onClose() {
     super.onClose();
-    for (var i=0; i<spectrumAndMedia.length;i++) {
+    for (var i = 0; i < spectrumAndMedia.length; i++) {
       spectrumAndMedia[i].play?.stop();
     }
     setVerticalScreen();
@@ -92,17 +92,20 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   //       download(item.spectrum);
   //   }
   // }
-  int fileCount=0;
-  Future<void> download(String url,callback) async {
-    ImageStream imageStream = Image(image: NetworkImage(url)).image.resolve(ImageConfiguration.empty);
+  int fileCount = 0;
+
+  Future<void> download(String url, callback) async {
+    ImageStream imageStream =
+        Image(image: NetworkImage(url)).image.resolve(ImageConfiguration.empty);
     final Completer completer = Completer<void>();
-   imageStream.addListener(ImageStreamListener((image, synchronousCall) async {
+    imageStream.addListener(ImageStreamListener((image, synchronousCall) async {
       completer.complete();
       final ByteData? imageData =
           await image.image.toByteData(format: ImageByteFormat.png);
       if (imageData != null) {
         final Directory tempDir = await getTemporaryDirectory();
-        final File file = File('${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}.png');
+        final File file = File(
+            '${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}.png');
         await file.writeAsBytes(imageData.buffer.asUint8List(), flush: true);
         callback(file.path);
         // for(int i=0;i<spectrum.length;i++){
@@ -230,8 +233,17 @@ class PoetryDetailController extends BaseController<PoetryModel> {
 
   /// set position of sliver
   setPosition(double value) {
+    var playing=selectPlayer.playing;
+    if (playing) {
+      selectPlayer.pause();
+    }
+
     int sec = ((value - getPosition()) * duration.value.inMilliseconds).round();
     seekMusic(sec);
+
+    if(playing){
+      selectPlayer.play();
+    }
   }
 
   /// get position of sliver
