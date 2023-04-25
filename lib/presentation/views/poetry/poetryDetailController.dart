@@ -251,7 +251,8 @@ class PoetryDetailController extends BaseController<PoetryModel> {
   /// @return position
   getPosition() {
     if (duration.value.inMilliseconds == 0) return 0.0;
-    return position.value.inMilliseconds / (duration.value.inMilliseconds);
+    var d = position.value.inMilliseconds / (duration.value.inMilliseconds);
+    return d>1?1:d;
   }
 
   /// play music
